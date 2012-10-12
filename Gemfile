@@ -3,7 +3,7 @@ source 'http://rubygems.org'
 gem 'rails', '3.0.1'
 
 group :development, :test do
-  gem 'sqlite3'
+  gem 'sqlite3','1.3.3'
   gem 'rspec-rails', '2.0.1'
   
   #leaving out annotate gem, it could not be found in sources

@@ -61,5 +61,6 @@ describe User do
   it "should not accept mismatched passwords" do
     mismatched_pwd_user = User.new(@attr.merge(:password_confirmation => "not the same"))
     mismatched_pwd_user.should_not be_valid
+  end
 
 end

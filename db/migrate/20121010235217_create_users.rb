@@ -1,17 +1,17 @@
 class CreateUsers < ActiveRecord::Migration
   def self.up
     create_table :users do |t|
-      t.integer :user_id, :unique
+      t.integer :user_id
       t.string :first_name
       t.string :last_name
-      t.string :email, :unique
+      t.string :email
       t.string :phone
-      t.string :password, :ssl_enabled
+      t.string :password
       t.string :display_name
-      t.boolean :member, :default => true
-      t.boolean :coordinator, :default => false
-      t.boolean :farmer, :default => false
-      t.boolean :admin, :default => false
+      t.boolean :member
+      t.boolean :coordinator
+      t.boolean :farmer
+      t.boolean :admin
 
       t.timestamps
     end

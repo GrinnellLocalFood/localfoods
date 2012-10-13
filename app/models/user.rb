@@ -1,8 +1,11 @@
 class User < ActiveRecord::Base
-  validates :email, :presence => true
+  validates :email, :presence => true,
+                    :uniqueness =>  { :case_sensitive => false }
   validates :first_name, :presence => true
   validates :last_name, :presence => true
-
+  validates :password, :presence => true
+  validates_length_of :password, :minimum => 6
+  validates_length_of :password, :maximum => 40
   before_save :encrypt_password
 
   private

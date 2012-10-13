@@ -16,10 +16,14 @@ class User < ActiveRecord::Base
   validates :password, 
             :presence => true,
             :length => { :within => 6..40 }
-  before_save :encrypt_password
+
+  before_save :encrypt_password, :default_values
 
   private
 
+    def default_values
+      self.display_name ||= self.first_name + " " + self.last_name
+    end
     def encrypt_password
       self.salt = make_salt
       self.password = encrypt(password)

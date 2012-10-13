@@ -53,6 +53,11 @@ describe User do
     user_with_duplicate_email.should_not be_valid
   end
 
-
+  it "should accept blank display name and replace with 'first last'"
+    no_display_name_user = User.create!(@attr.merge(:display_name => ""))
+    no_display_name_user.display_name.should eq(no_display_name_user.first_name 
+                                                + " " 
+                                                + no_display_name_user.last_name)
+  end
 
 end

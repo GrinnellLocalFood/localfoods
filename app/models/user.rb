@@ -15,7 +15,10 @@ class User < ActiveRecord::Base
   validates :last_name, :presence => true
   validates :password, 
             :presence => true,
+          #  :confirmation => true,
             :length => { :within => 6..40 }
+
+      
 
   before_save :encrypt_password, :default_values
 
@@ -26,7 +29,7 @@ class User < ActiveRecord::Base
         self.display_name = self.first_name + " " + self.last_name
       end
     end
-    
+
     def encrypt_password
       self.salt = make_salt
       self.password = encrypt(password)

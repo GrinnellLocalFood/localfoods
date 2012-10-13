@@ -12,15 +12,15 @@
   <% end %>
 
   <div class="field">
-    <%= f.label :first_name %><br />
+    <%= f.label (:first_name, "First Name") %> *<br />
     <%= f.text_field :first_name %>
   </div>
   <div class="field">
-    <%= f.label :last_name %><br />
+    <%= f.label (:last_name, "Last Name") %> *<br />
     <%= f.text_field :last_name %>
   </div>
   <div class="field">
-    <%= f.label :email %><br />
+    <%= f.label :email %> *<br />
     <%= f.text_field :email %>
   </div>
   <div class="field">
@@ -28,19 +28,21 @@
     <%= f.text_field :phone %>
   </div>
   <div class="field">
-    <%= f.label :password %><br />
+    <%= f.label :password %> *<br />
     <%= f.password_field :password %>
   </div>
     <div class="field">
-    <%= f.label :password_confirmation %><br />
+    <%= f.label (:password_confirmation, "Confirm Password") %> *<br />
     <%= f.password_field :password_confirmation %>
   </div>
   <div class="field">
-    <%= f.label :display_name %><br />
+    <%= f.label (:display_name, "Display Name") %><br />
     <%= f.text_field :display_name %>
   </div>
 
   <div class="actions">
-    <%= f.submit %>
+    <%= f.submit "Sign up!" %>
   </div>
+
+  <br />* Denotes required field<br />
 <% end %>

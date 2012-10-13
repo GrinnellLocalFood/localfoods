@@ -22,8 +22,11 @@ class User < ActiveRecord::Base
   private
 
     def default_values
-      self.display_name ||= self.first_name + " " + self.last_name
+      if self.display_name == ""
+        self.display_name = self.first_name + " " + self.last_name
+      end
     end
+    
     def encrypt_password
       self.salt = make_salt
       self.password = encrypt(password)

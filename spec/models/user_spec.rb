@@ -2,7 +2,12 @@ require 'spec_helper'
 
 describe User do
   before(:each) do
-    @attr = { :user_id => -1, :first_name => "Example", :last_name => "User", :email => "user@example.com", :password => "password"}
+    @attr = { :user_id => -1, 
+              :first_name => "Example", 
+              :last_name => "User", 
+              :email => "user@example.com", 
+              :password => "password",
+              :password_confirmation => "password"}
   end
 
   it "should create a new instance given valid attributes" do
@@ -47,5 +52,7 @@ describe User do
     user_with_duplicate_email = User.new(@attr)
     user_with_duplicate_email.should_not be_valid
   end
+
+
 
 end

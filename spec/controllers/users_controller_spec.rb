@@ -2,6 +2,8 @@ require 'spec_helper'
 
 describe UsersController do
 
+
+
   def mock_user(stubs={})
     (@mock_user ||= mock_model(User).as_null_object).tap do |user|
       user.stub(stubs) unless stubs.empty?
@@ -42,6 +44,15 @@ describe UsersController do
 
   describe "POST create" do
 
+    before(:each) do
+      @attr = { :user_id => -1, 
+        :first_name => "Example", 
+        :last_name => "User", 
+        :email => "user@example.com", 
+        :password => "password",
+        :password_confirmation => "password"}
+    end
+
     describe "with valid params" do
       it "assigns a newly created user as @user" do
         User.stub(:new).with({'these' => 'params'}) { mock_user(:save => true) }
@@ -67,6 +78,13 @@ describe UsersController do
         User.stub(:new) { mock_user(:save => false) }
         post :create, :user => {}
         response.should render_template("new")
+      end
+    end
+
+    describe "success" do
+      it "should sign the user in" do
+        post :create, :user => @attr
+        controller.should be_signed_in
       end
     end
 

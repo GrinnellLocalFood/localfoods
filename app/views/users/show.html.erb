@@ -1,55 +1,24 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <b>User:</b>
-  <%= @user.id %>
+<p>Hello <%= @user.first_name %>!</p>
+
+<p>You are a
+<% if @user.farmer %>
+farmer
+<% end %>
+
+<% if @user.member %>
+member
+<% end %>
+
+<% if @user.coordinator %>
+coordinator
+<% end %>
+
+<% if @user.admin %>
+admin
+<% end %>
 </p>
 
-<p>
-  <b>First name:</b>
-  <%= @user.first_name %>
-</p>
-
-<p>
-  <b>Last name:</b>
-  <%= @user.last_name %>
-</p>
-
-<p>
-  <b>Email:</b>
-  <%= @user.email %>
-</p>
-
-<p>
-  <b>Phone:</b>
-  <%= @user.phone %>
-</p>
-
-<p>
-  <b>Display name:</b>
-  <%= @user.display_name %>
-</p>
-
-<p>
-  <b>Member:</b>
-  <%= @user.member %>
-</p>
-
-<p>
-  <b>Coordinator:</b>
-  <%= @user.coordinator %>
-</p>
-
-<p>
-  <b>Farmer:</b>
-  <%= @user.farmer %>
-</p>
-
-<p>
-  <b>Admin:</b>
-  <%= @user.admin %>
-</p>
-
-
-<%= link_to 'Edit', edit_user_path(@user) %> |
-<%= link_to 'Back', users_path %>
+<%= link_to 'Edit Account Information', edit_user_path(@user) %> |
+<%= link_to 'Back', root_path %>

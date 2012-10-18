@@ -8,9 +8,11 @@ Localfoods::Application.routes.draw do
   resources :users
   resources :sessions, :only => [:new, :create, :destroy]
 
-  match '/signup',  :to => 'users#new'
-  match '/signin',  :to => 'sessions#new'
-  match '/signout', :to => 'sessions#destroy'
+  match '/register',  :to => 'users#new'
+  match '/login',  :to => 'sessions#new'
+  match '/logout', :to => 'sessions#destroy'
+
+  root :to => 'pages#home'
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

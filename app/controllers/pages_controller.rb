@@ -4,6 +4,7 @@ class PagesController < ApplicationController
   end
 
   def register
+  	@title = "Register"
   end
 
 end

@@ -1,4 +1,4 @@
-<h1>Log in</h1>
+<h1>Log In</h1>
 <%= form_for(:session, :url => sessions_path) do |f| %>
   <div class="field">
     <%= f.label :email %><br />
@@ -13,4 +13,4 @@
   </div>
 <% end %>
 
-<p>New user? <%= link_to "Register!", signup_path %></p>
+<p>New user? <%= link_to "Register!", register_path %></p>

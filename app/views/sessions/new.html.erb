@@ -1,16 +1,18 @@
 <h1>Log In</h1>
 <%= form_for(:session, :url => sessions_path) do |f| %>
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.text_field :email %>
-  </div>
-  <div class="field">
-    <%= f.label :password %><br />
-    <%= f.password_field :password %>
-  </div>
-  <div class="actions">
-    <%= f.submit @title %>
-  </div>
+<% if flash[:error] -%>
+<p class='error'><%=h flash[:error] %></p>
+<% end -%>
+<div class="field">
+  <%= f.label :email %><br />
+  <%= f.text_field :email %>
+</div>
+<div class="field">
+  <%= f.label :password %><br />
+  <%= f.password_field :password %>
+</div>
+<div class="actions">
+  <%= f.submit @title %>
+</div>
 <% end %>
-
 <p>New user? <%= link_to "Register!", register_path %></p>

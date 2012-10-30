@@ -50,6 +50,9 @@ class UsersController < ApplicationController
         format.html { redirect_to @user }
         format.xml  { render :xml => @user, :status => :created, :location => @user }
       else
+        #resets password and confirmation fields
+        @user.password = ""
+        @user.password_confirmation = ""
         format.html { render :action => "new" }
         format.xml  { render :xml => @user.errors, :status => :unprocessable_entity }
       end

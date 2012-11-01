@@ -33,7 +33,10 @@ class User < ActiveRecord::Base
 
   private
 
-    #validate password
+    #validate password either if:
+    # => encrypted_password field is nil (i.e user has just registered) 
+    # or
+    # => if password field is nil (i.e user is submitting from account info edit form)
     def should_validate_password?
       self.encrypted_password.nil? || !self.password.nil?
     end
@@ -44,6 +47,7 @@ class User < ActiveRecord::Base
       end
     end
 
+    #encrypt password only if the password field has something in it
     def encrypt_password
       unless self.password.nil?
         self.salt = make_salt

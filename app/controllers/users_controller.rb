@@ -38,8 +38,8 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
   end
 
-  # GET /users/1/changepassword
-  def changepassword
+  # GET /users/1/editpassword
+  def editpassword
     @user = User.find(params[:id])
   end
 
@@ -82,6 +82,8 @@ class UsersController < ApplicationController
     end
   end
 
+  # PUT /users/1/updatepassword
+  # PUT /users/1.xml
   def updatepassword
     @user = User.find(params[:id])
 
@@ -92,7 +94,7 @@ class UsersController < ApplicationController
         format.xml  { head :ok }
       else
         sign_in @user
-        format.html { render :action => "changepassword" }
+        format.html { render :action => "editpassword" }
         format.xml  { render :xml => @user.errors, :status => :unprocessable_entity }
       end
     end

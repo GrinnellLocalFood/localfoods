@@ -14,13 +14,10 @@ class User < ActiveRecord::Base
   validates :first_name, :presence => true
   validates :last_name, :presence => true
   validates :password, 
-            #:unless => "password.empty?", #if password is empty, do not validate
+            :if => "should_validate_password?",
             :presence => true,
             :confirmation => true,
             :length => { :within => 6..40 }
-
-
-      
 
   before_save :encrypt_password, :default_values
 
@@ -36,6 +33,11 @@ class User < ActiveRecord::Base
 
   private
 
+    #validate password
+    def should_validate_password?
+      self.encrypted_password.nil? || !self.password.nil?
+    end
+
     def default_values
       if self.display_name == ""
         self.display_name = self.first_name + " " + self.last_name
@@ -43,8 +45,10 @@ class User < ActiveRecord::Base
     end
 
     def encrypt_password
-      self.salt = make_salt
-      self.encrypted_password = encrypt(password)
+      unless self.password.nil?
+        self.salt = make_salt
+        self.encrypted_password = encrypt(password)
+      end
     end
 
     def encrypt(string)

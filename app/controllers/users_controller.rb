@@ -38,6 +38,11 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
   end
 
+  # GET /users/1/changepassword
+  def changepassword
+    @user = User.find(params[:id])
+  end
+
   # POST /users
   # POST /users.xml
   def create
@@ -66,14 +71,32 @@ class UsersController < ApplicationController
 
     respond_to do |format|
       if @user.update_attributes(params[:user])
+        sign_in @user
         format.html { redirect_to(@user, :notice => 'User was successfully updated.') }
         format.xml  { head :ok }
       else
+        sign_in @user
         format.html { render :action => "edit" }
         format.xml  { render :xml => @user.errors, :status => :unprocessable_entity }
       end
     end
   end
+
+  def updatepassword
+    @user = User.find(params[:id])
+
+    respond_to do |format|
+      if @user.update_attributes(params[:user])
+        sign_in @user
+        format.html { redirect_to(@user, :notice => 'User was successfully updated.') }
+        format.xml  { head :ok }
+      else
+        sign_in @user
+        format.html { render :action => "changepassword" }
+        format.xml  { render :xml => @user.errors, :status => :unprocessable_entity }
+      end
+    end
+  end   
 
   # DELETE /users/1
   # DELETE /users/1.xml

@@ -5,7 +5,17 @@ Localfoods::Application.routes.draw do
 
   get "pages/register"
 
-  resources :users
+  resources :users do
+    member do
+      get 'changepassword'
+    end
+
+    member do
+      put 'updatepassword'
+    end
+
+  end
+
   resources :sessions, :only => [:new, :create, :destroy]
 
   match '/register',  :to => 'users#new'
@@ -13,6 +23,7 @@ Localfoods::Application.routes.draw do
   match '/logout', :to => 'sessions#destroy'
 
   root :to => 'pages#home'
+
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

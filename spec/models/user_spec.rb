@@ -63,9 +63,9 @@ describe User do
     mismatched_pwd_user.should_not be_valid
   end
 
-  it "should not require a password if user is being updated" do
-    User.create!(@attr)
-    updated_user = User.first
-    updated_user.save.should eq(true)
-  end
+  # it "should not require a password if user is being updated" do
+  #   User.create!(@attr)
+  #   updated_user = User.first
+  #   updated_user.save.should eq(true)
+  # end
 end

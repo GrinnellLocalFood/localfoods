@@ -14,7 +14,7 @@ class User < ActiveRecord::Base
   validates :first_name, :presence => true
   validates :last_name, :presence => true
   validates :password, 
-            :unless => "password.empty?", #if password is empty, do not validate
+            #:unless => "password.empty?", #if password is empty, do not validate
             :presence => true,
             :confirmation => true,
             :length => { :within => 6..40 }

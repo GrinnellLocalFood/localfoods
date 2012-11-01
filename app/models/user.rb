@@ -1,20 +1,20 @@
 class User < ActiveRecord::Base
 
-  attr_accessor :password_confirmation, :password2
+  attr_accessor :password_confirmation, :password
   attr_accessible :first_name,
                   :last_name,
                   :display_name, 
                   :email, 
                   :phone,
-                  :password2, #encrypted password
+                  :password, #user entered password
                   :password_confirmation
 
   validates :email, :presence => true,
                     :uniqueness =>  { :case_sensitive => false }
   validates :first_name, :presence => true
   validates :last_name, :presence => true
-  validates :password2, 
-            :unless => "password2.empty?",
+  validates :password, 
+            :unless => "password.empty?", #if password is empty, do not validate
             :presence => true,
             :confirmation => true,
             :length => { :within => 6..40 }
@@ -31,7 +31,7 @@ class User < ActiveRecord::Base
   end
 
   def has_password?(submitted_password)
-    password == encrypt(submitted_password) 
+    encrypted_password == encrypt(submitted_password) 
   end
 
   private
@@ -44,7 +44,7 @@ class User < ActiveRecord::Base
 
     def encrypt_password
       self.salt = make_salt
-      self.password = encrypt(password2)
+      self.encrypted_password = encrypt(password)
     end
 
     def encrypt(string)

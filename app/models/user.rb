@@ -18,6 +18,7 @@ class User < ActiveRecord::Base
             :presence => true,
             :confirmation => true,
             :length => { :within => 6..40 }
+
   validates_length_of :phone, :minimum => 10, :allow_blank => true
 
   before_save :encrypt_password, :default_values
@@ -51,7 +52,7 @@ class User < ActiveRecord::Base
     end
 
     def format_values
-      if self.phone != "" || !self.phone.nil?
+      if self.phone != "" && !self.phone.nil?
         self.phone = self.phone.gsub(/\D/,'');
       end
     end

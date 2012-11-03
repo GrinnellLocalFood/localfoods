@@ -66,7 +66,8 @@ describe User do
   it "should not require a password if user info is being updated" do
     User.create!(@attr)
     updated_user = User.first
-    updated_user.phone = 1231231231
+    updated_user.phone = "1231231231"
+    updated_user.first_name = "newfirstname"
     updated_user.save.should eq(true)
   end
 

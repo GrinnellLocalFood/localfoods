@@ -142,4 +142,49 @@ describe UsersController do
     end
   end
 
+  describe "GET editpassword" do
+    it "assigns the requested user as @user" do
+      User.stub(:find).with("37") { mock_user }
+      get :editpassword, :id => "37"
+      assigns(:user).should be(mock_user)
+    end
+  end
+
+ describe "PUT updatepassword" do
+
+    describe "with valid params" do
+      it "updates the requested user" do
+        User.should_receive(:find).with("37") { mock_user }
+        mock_user.should_receive(:update_attributes).with({'these' => 'params'})
+        put :updatepassword, :id => "37", :user => {'these' => 'params'}
+      end
+
+      it "assigns the requested user as @user" do
+        User.stub(:find) { mock_user(:update_attributes => true) }
+        put :updatepassword, :id => "1"
+        assigns(:user).should be(mock_user)
+      end
+
+      it "redirects to the user" do
+        User.stub(:find) { mock_user(:update_attributes => true) }
+        put :updatepassword, :id => "1"
+        response.should redirect_to(user_url(mock_user))
+      end
+    end
+
+    describe "with invalid params" do
+      it "assigns the user as @user" do
+        User.stub(:find) { mock_user(:update_attributes => false) }
+        put :update, :id => "1"
+        assigns(:user).should be(mock_user)
+      end
+
+      it "re-renders the 'editpassword' template" do
+        User.stub(:find) { mock_user(:update_attributes => false) }
+        put :updatepassword, :id => "1"
+        response.should render_template("editpassword")
+      end
+    end
+
+  end
 end

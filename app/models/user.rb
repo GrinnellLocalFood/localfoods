@@ -18,8 +18,11 @@ class User < ActiveRecord::Base
             :presence => true,
             :confirmation => true,
             :length => { :within => 6..40 }
+  validates_length_of :phone, :minimum => 10, :allow_blank => true
 
   before_save :encrypt_password, :default_values
+
+  before_validation :format_values
 
   def self.authenticate(email, submitted_password)
     user = find_by_email(email)
@@ -44,6 +47,12 @@ class User < ActiveRecord::Base
     def default_values
       if self.display_name == ""
         self.display_name = self.first_name + " " + self.last_name
+      end
+    end
+
+    def format_values
+      if self.phone != "" || !self.phone.nil?
+        self.phone = self.phone.gsub(/\D/,'');
       end
     end
 

@@ -71,8 +71,12 @@ class UsersController < ApplicationController
 
     respond_to do |format|
       if @user.update_attributes(params[:user])
-        sign_in @user
-        format.html { redirect_to(@user, :notice => 'User was successfully updated.') }
+        if current_user.admin
+          sign_in current_user
+        else
+          sign_in @user
+        end
+        format.html { redirect_to(current_user, :notice => 'User was successfully updated.') }
         format.xml  { head :ok }
       else
         sign_in @user
@@ -99,6 +103,15 @@ class UsersController < ApplicationController
       end
     end
   end   
+
+  # # GET /users/1/adduser
+  # def adduser
+  #   @user = User.find(params[:id])
+
+  #   respond_to do |format|
+  #     if @user.admin?
+  #       sign_in @user
+  #       format.html { redirect_to()}
 
   # DELETE /users/1
   # DELETE /users/1.xml

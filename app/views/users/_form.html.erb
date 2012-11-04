@@ -40,6 +40,23 @@
     <%= f.text_field :display_name %>
   </div>
 
+  <!-- admin specific options -->
+  <% if current_user.admin == true %>
+    <div class="field">
+     <%= f.label :admin %>
+     <%= f.check_box :admin %>
+    </div>
+    <div class="field">
+     <%= f.label :coordinator %>
+     <%= f.check_box :coordinator %>
+    </div>
+    <div class="field">
+     <%= f.label :farmer %>
+     <%= f.check_box :farmer %>
+    </div>
+  <% end %>
+
+
   <div class="actions">
     <%= f.submit "Save" %>
   </div>

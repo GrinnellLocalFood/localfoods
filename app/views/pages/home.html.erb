@@ -1,6 +1,7 @@
 <h1>Welcome to the Grinnell Local Foods Coop!</h1>
 <% if signed_in? %>
 <li><%= link_to "Log out", logout_path, :method => :delete %></li>
+<%= current_user.email %>
 <% else %>
 <li><%= link_to "Register", register_path %></li>
 <li><%= link_to "Log in", login_path %></li>

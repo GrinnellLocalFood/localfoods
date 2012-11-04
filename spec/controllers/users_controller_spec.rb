@@ -186,5 +186,11 @@ describe UsersController do
       end
     end
 
+  # describe "GET adduser" do
+
+  #   describe "called by admin" do
+  #     it "should have a page at /users/:id/adduser"
+      
+
   end
 end

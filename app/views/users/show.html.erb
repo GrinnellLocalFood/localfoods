@@ -20,6 +20,10 @@ admin
 <% end %>
 </p>
 
+
 <%= link_to 'Edit Account Information', edit_user_path(@user) %>
 <%= link_to 'Change Password', editpassword_user_path(@user) %>
+<% if @user.admin %>
+	<%= link_to 'Add user', new_user_path %>
+<% end %>
 <%= link_to 'Back', root_path %>

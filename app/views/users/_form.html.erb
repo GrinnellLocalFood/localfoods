@@ -12,31 +12,31 @@
   <% end %>
 
   <div class="field">
-    <%= f.label(:first_name, "First Name") %> *<br />
+    <%= f.label(:first_name, "First Name *") %>
     <%= f.text_field :first_name %>
   </div>
   <div class="field">
-    <%= f.label(:last_name, "Last Name") %> *<br />
+    <%= f.label(:last_name, "Last Name *") %>
     <%= f.text_field :last_name %>
   </div>
   <div class="field">
-    <%= f.label :email %> *<br />
+    <%= f.label (:email, "Email *") %>
     <%= f.text_field :email %>
   </div>
   <div class="field">
-    <%= f.label :phone %><br />
+    <%= f.label :phone %>
     <%= f.text_field :phone %>
   </div>
   <div class="field">
-    <%= f.label :password %> *<br />
+    <%= f.label (:password, "Password *") %>
     <%= f.password_field :password %>
   </div>
     <div class="field">
-    <%= f.label(:password_confirmation, "Confirm Password") %> *<br />
+    <%= f.label(:password_confirmation, "Confirm Password *") %>
     <%= f.password_field :password_confirmation %>
   </div>
   <div class="field">
-    <%= f.label(:display_name, "Display Name") %><br />
+    <%= f.label(:display_name, "Display Name") %>
     <%= f.text_field :display_name %>
   </div>
 

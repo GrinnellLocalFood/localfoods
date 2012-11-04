@@ -1,15 +1,16 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title><%= title %></title>
-  <%= notice %>
-  <%= alert %>
-  <%= stylesheet_link_tag :all %>
-  <%= javascript_include_tag :defaults %>
-  <%= csrf_meta_tag %>
+	<title><%= title %></title>
+	<%= notice %>
+	<%= alert %>
+	<%= stylesheet_link_tag '/stylesheets/bootstrap.css' %>	
+	<%= javascript_include_tag "bootstrap" %>
+	<%= csrf_meta_tag %>
 </head>
 <body>
-<%= render 'layouts/header' %>
-<%= yield %>
+	<%= render 'layouts/header' %>
+	<%= yield %>
+	<%= render 'layouts/footer' %>
 </body>
 </html>

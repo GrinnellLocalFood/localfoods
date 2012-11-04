@@ -51,7 +51,7 @@ class User < ActiveRecord::Base
     end
 
     def format_values
-      if self.phone != "" || !self.phone.nil?
+      if self.phone != "" && !self.phone.nil?
         self.phone = self.phone.gsub(/\D/,'');
       end
     end

@@ -21,7 +21,7 @@ describe "LayoutLinks" do
 		it "should have a login link" do
 			visit root_path
 			response.should have_selector("a", :href => login_path,
-				:content => "Log in")
+				:content => "Log In")
 		end
 	end
 
@@ -45,7 +45,7 @@ describe "LayoutLinks" do
 			it "should have a logout link" do
 				visit root_path
 				response.should have_selector("a", :href => logout_path,
-					:content => "Log out")
+					:content => "Log Out")
 			end
 
 		end

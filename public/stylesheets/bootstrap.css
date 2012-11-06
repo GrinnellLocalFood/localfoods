@@ -4408,6 +4408,11 @@ input[type="submit"].btn.btn-mini {
   margin-right: 0;
 }
 
+.navbar .nav.pull-left {
+  float: left;
+  margin-left: 0;
+}
+
 .navbar .nav > li {
   float: left;
 }

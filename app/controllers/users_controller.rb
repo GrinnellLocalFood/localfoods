@@ -2,18 +2,23 @@ class UsersController < ApplicationController
   # GET /users
   # GET /users.xml
   def index
-    @user = current_user
     @users = User.all
 
-    respond_to do |format|
-      format.html # index.html.erb
-      format.xml  { render :xml => @users }
+    if current_user.admin
+      respond_to do |format|
+        format.html # index.html.erb
+        format.xml  { render :xml => @users }
+      end
+    else
+      redirect_to current_user
     end
   end
+
 
   # GET /users/1
   # GET /users/1.xml
   def show
+    @title = "Account"
     @user = User.find(params[:id])
 
     respond_to do |format|
@@ -36,12 +41,27 @@ class UsersController < ApplicationController
 
   # GET /users/1/edit
   def edit
-    @user = User.find(params[:id])
+    @title = "Edit Account"
+    # @user = User.find(params[:id])
+
+    if current_user.admin
+      @user = User.find(params[:id])
+    else
+      @user = current_user
+    end
+
+    #   #admin automatically gets access. if not admin, checks to see if you're the right user
+    #   unless signed_in? || current_user.admin || current_user=@user
+    #     redirect_to :controller => "pages", :action => "home"
+    # end
+
+
   end
 
   # GET /users/1/editpassword
   def editpassword
-    @user = User.find(params[:id])
+    @title = "Change Password"
+    @user = current_user
   end
 
   # POST /users
@@ -104,15 +124,6 @@ class UsersController < ApplicationController
       end
     end
   end   
-
-  # # GET /users/1/adduser
-  # def adduser
-  #   @user = User.find(params[:id])
-
-  #   respond_to do |format|
-  #     if @user.admin?
-  #       sign_in @user
-  #       format.html { redirect_to()}
 
   # DELETE /users/1
   # DELETE /users/1.xml

@@ -7,7 +7,10 @@ class User < ActiveRecord::Base
                   :email, 
                   :phone,
                   :password, #user entered password
-                  :password_confirmation
+                  :password_confirmation,
+                  :admin,
+                  :coordinator,
+                  :farmer
 
   validates :email, :presence => true,
                     :uniqueness =>  { :case_sensitive => false }

@@ -41,8 +41,8 @@
   </div>
 
   <!-- admin specific options -->
-  <% if current_user.admin == true %>
-    <div class="field">
+ <% if current_user.admin == true %> 
+   <div class="field">
      <%= f.label :admin %>
      <%= f.check_box :admin %>
     </div>
@@ -53,9 +53,8 @@
     <div class="field">
      <%= f.label :farmer %>
      <%= f.check_box :farmer %>
-    </div>
+    </div> 
   <% end %>
-
 
   <div class="actions">
     <%= f.submit "Save" %>

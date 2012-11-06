@@ -63,9 +63,36 @@ describe User do
     mismatched_pwd_user.should_not be_valid
   end
 
-  # it "should not require a password if user is being updated" do
-  #   User.create!(@attr)
-  #   updated_user = User.first
-  #   updated_user.save.should eq(true)
-  # end
+  it "should not require a password if user info is being updated" do
+    User.create!(@attr)
+    updated_user = User.first
+    updated_user.phone = "1231231231"
+    updated_user.first_name = "newfirstname"
+    updated_user.save.should eq(true)
+  end
+
+  it "should allow the password to be changed" do
+    User.create!(@attr)
+    change_password_user = User.first
+    change_password_user.password = "newpassword"
+    change_password_user.password_confirmation = "newpassword"
+    change_password_user.save.should eq(true)
+  end
+
+  it "should not allow the password to be changed if the password is too short" do
+    User.create!(@attr)
+    change_password_user = User.first
+    change_password_user.password = "short"
+    change_password_user.password_confirmation = "short"
+    change_password_user.save.should eq(false)
+  end
+
+  it "should not allow the password to be changed if the password is too long" do
+    User.create!(@attr)
+    change_password_user = User.first
+    change_password_user.password = "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+    change_password_user.password_confirmation = "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+    change_password_user.save.should eq(false)
+  end
+
 end

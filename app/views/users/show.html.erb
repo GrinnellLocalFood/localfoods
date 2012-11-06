@@ -2,20 +2,23 @@
 
 <p>Hello <%= @user.first_name %>!</p>
 
-<p>You are a
+<p>Your Roles:
 <% if @user.farmer %>
-farmer
+</p> Farmer
 <% end %>
 
 <% if @user.member %>
-member
+</p> Member 
 <% end %>
 
 <% if @user.coordinator %>
-coordinator
+</p> Coordinator 
 <% end %>
 
 <% if @user.admin %>
-admin
+</p> Admin 
+<%= link_to 'Add user', new_user_path %>
+<%= link_to 'Show Users', users_path %>
 <% end %>
+
 </p>

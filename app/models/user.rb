@@ -7,7 +7,10 @@ class User < ActiveRecord::Base
                   :email, 
                   :phone,
                   :password, #user entered password
-                  :password_confirmation
+                  :password_confirmation,
+                  :admin,
+                  :coordinator,
+                  :farmer
 
   validates :email, :presence => true,
                     :uniqueness =>  { :case_sensitive => false }
@@ -18,6 +21,7 @@ class User < ActiveRecord::Base
             :presence => true,
             :confirmation => true,
             :length => { :within => 6..40 }
+
   validates_length_of :phone, :minimum => 10, :allow_blank => true
 
   before_save :encrypt_password, :default_values

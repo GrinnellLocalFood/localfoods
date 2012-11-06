@@ -1,18 +1,27 @@
 class UsersController < ApplicationController
+
   # GET /users
   # GET /users.xml
   def index
     @users = User.all
 
-    respond_to do |format|
-      format.html # index.html.erb
-      format.xml  { render :xml => @users }
+    if current_user == nil
+      redirect_to root_path
+    elsif current_user.admin
+      respond_to do |format|
+        format.html # index.html.erb
+        format.xml  { render :xml => @users }
+      end
+    else
+      redirect_to current_user
     end
   end
+
 
   # GET /users/1
   # GET /users/1.xml
   def show
+    @title = "Account"
     @user = User.find(params[:id])
 
     respond_to do |format|
@@ -35,12 +44,32 @@ class UsersController < ApplicationController
 
   # GET /users/1/edit
   def edit
-    @user = User.find(params[:id])
+    @title = "Edit Account"
+
+    if(current_user == nil)
+      @user = User.find(params[:id])
+    elsif current_user.admin
+      @user = User.find(params[:id])
+    else
+      @user = current_user
+    end
+
+    #   #admin automatically gets access. if not admin, checks to see if you're the right user
+    #   unless signed_in? || current_user.admin || current_user=@user
+    #     redirect_to :controller => "pages", :action => "home"
+    # end
+
+
   end
 
   # GET /users/1/editpassword
   def editpassword
-    @user = User.find(params[:id])
+    @title = "Change Password"
+    if(current_user == nil)
+      @user = User.find(params[:id])
+    else
+      @user = current_user
+    end
   end
 
   # POST /users
@@ -71,8 +100,12 @@ class UsersController < ApplicationController
 
     respond_to do |format|
       if @user.update_attributes(params[:user])
-        sign_in @user
-        format.html { redirect_to(@user, :notice => 'User was successfully updated.') }
+        if current_user != nil && current_user.admin
+          sign_in current_user
+        else
+          sign_in @user
+        end
+        format.html { redirect_to(current_user, :notice => 'User was successfully updated.') }
         format.xml  { head :ok }
       else
         sign_in @user

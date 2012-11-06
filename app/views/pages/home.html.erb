@@ -1,3 +1,6 @@
 <h1 class="center hero-unit">Welcome to the Grinnell Local Foods Coop!</h1>
+<% if !signed_in? %>
+		<li><%= link_to "Register", register_path %></li>
+		<% end %>
 
 

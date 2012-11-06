@@ -1,21 +1,22 @@
 <header class="navbar navbar-fixed-top">
   <div class="navbar-inner">
     <div class="container">
-      <%= link_to "LocalFoods", root_path %>
       <nav>
+        <%= link_to "Grinnell LocalFoods", root_path %>
         
         <ul class="nav pull-right">
           <li><%= link_to "Home", root_path %></li>
           <% if signed_in? %>
                 <li><%= link_to "Profile", current_user %></li>
                 <li><%= link_to "Change Password", editpassword_user_path(current_user) %></li>
-                <li><%= link_to "Settings", edit_user_path(current_user) %></li>
+                <li><%= link_to "Edit Account", edit_user_path(current_user) %></li>
                 <!--<li class="divider"></li>-->
                 <li>
                   <%= link_to "Log Out", logout_path, :method => :delete %>
                 </li>             
           <% else %>
             <li><%= link_to "Log In", login_path %></li>
+            <li><%= link_to "Register", register_path %></li>
           <% end %>
         </ul>
       </nav>

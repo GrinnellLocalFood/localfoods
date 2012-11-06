@@ -1,10 +1,13 @@
 class UsersController < ApplicationController
+
   # GET /users
   # GET /users.xml
   def index
     @users = User.all
 
-    if current_user.admin
+    if current_user == nil
+      redirect_to root_path
+    elsif current_user.admin
       respond_to do |format|
         format.html # index.html.erb
         format.xml  { render :xml => @users }
@@ -42,9 +45,10 @@ class UsersController < ApplicationController
   # GET /users/1/edit
   def edit
     @title = "Edit Account"
-    # @user = User.find(params[:id])
 
-    if current_user.admin
+    if(current_user == nil)
+      @user = User.find(params[:id])
+    elsif current_user.admin
       @user = User.find(params[:id])
     else
       @user = current_user
@@ -61,7 +65,11 @@ class UsersController < ApplicationController
   # GET /users/1/editpassword
   def editpassword
     @title = "Change Password"
-    @user = current_user
+    if(current_user == nil)
+      @user = User.find(params[:id])
+    else
+      @user = current_user
+    end
   end
 
   # POST /users
@@ -92,7 +100,7 @@ class UsersController < ApplicationController
 
     respond_to do |format|
       if @user.update_attributes(params[:user])
-        if current_user.admin
+        if current_user != nil && current_user.admin
           sign_in current_user
         else
           sign_in @user

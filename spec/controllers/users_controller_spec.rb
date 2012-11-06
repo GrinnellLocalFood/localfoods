@@ -3,7 +3,7 @@ require 'spec_helper'
 describe UsersController do
 
 
-
+  
   def mock_user(stubs={})
     (@mock_user ||= mock_model(User).as_null_object).tap do |user|
       user.stub(stubs) unless stubs.empty?
@@ -19,10 +19,10 @@ describe UsersController do
   end
 
   describe "GET show" do
-    it "assigns the requested user as @user" do
-      User.stub(:find).with("37") { mock_user }
+    it "gets page for current user" do
+      User.stub(:find).with("37") { mock_user }     
       get :show, :id => "37"
-      assigns(:user).should be(mock_user)
+      assigns(:user).should eq(mock_user)
     end
   end
 
@@ -30,7 +30,7 @@ describe UsersController do
     it "assigns a new user as @user" do
       User.stub(:new) { mock_user }
       get :new
-      assigns(:user).should be(mock_user)
+      assigns(:user).should eq(mock_user)
     end
   end
 

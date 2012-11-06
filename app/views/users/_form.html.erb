@@ -39,9 +39,10 @@
     <%= f.label(:display_name, "Display Name") %><br />
     <%= f.text_field :display_name %>
   </div>
+ 
 
   <!-- admin specific options -->
- <% if current_user.admin == true %> 
+ <% if current_user != nil && current_user.admin == true %> 
    <div class="field">
      <%= f.label :admin %>
      <%= f.check_box :admin %>

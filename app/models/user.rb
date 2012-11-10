@@ -22,7 +22,7 @@ class User < ActiveRecord::Base
             :confirmation => true,
             :length => { :within => 6..40 }
 
-  validates_length_of :phone, :minimum => 10, :allow_blank => true
+  validates_length_of :phone, :minimum => 10, :maximum => 15, :allow_blank => true
 
   before_save :encrypt_password, :default_values
 

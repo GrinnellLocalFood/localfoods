@@ -39,6 +39,16 @@ describe User do
       long_password_user.should_not be_valid
   end
 
+  it "should have a minimum phone length of 10" do
+    short_phone_user = User.new(@attr.merge(:phone => "123465aaaaaaaaaa"))
+    short_phone_user.should_not be_valid
+  end
+
+  it "should have a maximum phone length of 15" do
+    long_phone_user = User.new(@attr.merge(:phone => "123465671236234762346"))
+    long_phone_user.should_not be_valid
+  end
+
   it "should reject duplicate email addresses" do
     # Put a user with given email address into the database.
     User.create!(@attr)

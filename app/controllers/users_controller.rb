@@ -79,9 +79,12 @@ class UsersController < ApplicationController
 
     respond_to do |format|
       if @user.save
+        if(!current_user.nil?)
+          @user = current_user
+        end        
         sign_in @user
-        # format.html { redirect_to(@user, :notice => 'User was successfully created.') }
         format.html { redirect_to @user }
+        # format.html { redirect_to(@user, :notice => 'User was successfully created.') }
         format.xml  { render :xml => @user, :status => :created, :location => @user }
       else
         #resets password and confirmation fields

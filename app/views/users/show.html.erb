@@ -16,10 +16,13 @@
 <% end %>
 
 <% if @user.admin %>
-</p> Admin
-</p> 
+</p> Admin 
+<% end %>
+
+<% if current_user.admin %>
 <%= link_to 'Add user', new_user_path %>
 <%= link_to 'Show Users', users_path %>
+</p>
 <% end %>
 
 </p>

@@ -11,12 +11,36 @@ describe UsersController do
   end
 
   describe "GET index" do
-    it "assigns all users as @users" do
-      User.stub(:all) { [mock_user] }
+    describe "for non-signed-in users" do
+    
+    it "should deny access" do
       get :index
-      assigns(:users).should eq([mock_user])
+      response.should redirect_to(root_path)
     end
   end
+
+    describe "for signed_in users" do
+      before(:each) do
+      @user = test_sign_in(Factory(:user))
+    end
+
+    it "should redirect to user page" do 
+      get :index
+      response.should redirect_to(@user)
+    end
+  end
+
+  describe "for admin users" do
+    before(:each) do
+      @user = test_sign_in(Factory(:user,:admin => true))
+    end
+
+    it "should be successful" do 
+      get :index
+      response.should be_success
+    end
+  end
+end
 
   describe "GET show" do
     it "gets page for current user" do

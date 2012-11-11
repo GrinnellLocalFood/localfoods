@@ -1,14 +1,13 @@
 class UsersController < ApplicationController
 
+  skip_before_filter :require_login, :only => [:new, :create]
   # GET /users
   # GET /users.xml
   def index
     @users = User.all
 
-    if current_user == nil
-      redirect_to root_path
-    elsif current_user.admin
-      respond_to do |format|
+    if current_user.admin
+        respond_to do |format|
         format.html # index.html.erb
         format.xml  { render :xml => @users }
       end
@@ -46,9 +45,7 @@ class UsersController < ApplicationController
   def edit
     @title = "Edit Account"
 
-    if(current_user == nil)
-      @user = User.find(params[:id])
-    elsif current_user.admin
+   if current_user.admin
       @user = User.find(params[:id])
     else
       @user = current_user

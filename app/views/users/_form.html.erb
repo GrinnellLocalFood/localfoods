@@ -1,4 +1,4 @@
-<%= form_for(@user) do |f| %>
+<%= form_for(@user, :html=>{:class=>'form-horizontal'}) do |f| %>
   <% if @user.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</h2>
@@ -11,55 +11,104 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= f.label :first_name, "First Name *", :class=>'inline betaLabelTextField' %>
-    <%= f.text_field :first_name %>
+
+  <div class="control-group">
+    <label class="control-label">
+      <%= f.label :first_name, "First Name *" %>
+    </label>
+    <div class="controls">
+      <%= f.text_field :first_name, :placeholder=>"First Name" %>
+    </div>
   </div>
-  <div class="field">
-    <%= f.label :last_name, "Last Name *", :class=>'inline betaLabelTextField' %>
-    <%= f.text_field :last_name %>
+
+  <div class="control-group">
+    <label class="control-label">
+      <%= f.label :last_name, "Last Name *" %>
+    </label>
+    <div class="controls">
+      <%= f.text_field :last_name, :placeholder=>"Last Name" %>
+    </div>
   </div>
-  <div class="field">
-    <%= f.label :email, "Email *", :class=>'inline betaLabelTextField' %>
-    <%= f.text_field :email %>
+
+  <div class="control-group">
+    <label class="control-label">
+      <%= f.label :email, "Email *" %>
+    </label>
+    <div class="controls">
+      <%= f.text_field :email, :placeholder=>"Email" %>
+    </div>
   </div>
-  <div class="field">
-    <%= f.label :phone, :class=>'inline betaLabelTextField'%>
-    <%= f.text_field :phone %>
+
+  <div class="control-group">
+    <label class="control-label">
+      <%= f.label :phone %>
+    </label>
+    <div class="controls">
+      <%= f.text_field :phone, :placeholder=>"Phone" %>
+    </div>
   </div>
-  <div class="field">
-    <%= f.label :password, "Password *", :class=>'inline betaLabelTextField' %>
-    <%= f.password_field :password %>
+
+  <div class="control-group">
+    <label class="control-label">
+      <%= f.label :password, "Password *" %>
+    </label>
+    <div class="controls">
+      <%= f.password_field :password, :placeholder=>"Password" %>
+    </div>
   </div>
-    <div class="field">
-    <%= f.label :password_confirmation, "Confirm Password *", :class=>'inline betaLabelTextField' %>
-    <%= f.password_field :password_confirmation %>
+
+  <div class="control-group">
+    <label class="control-label">
+      <%= f.label :password_confirmation, "Confirm Password *" %>
+    </label>
+    <div class="controls">
+      <%= f.password_field :password_confirmation, :placeholder=>"Confirm Password" %>
+    </div>
   </div>
-  <div class="field">
-    <%= f.label:display_name, "Display Name", :class=>'inline betaLabelTextField' %>
-    <%= f.text_field :display_name %>
+
+  <div class="control-group">
+    <label class="control-label">
+      <%= f.label:display_name, "Display Name" %>
+    </label>
+    <div class="controls">
+      <%= f.text_field :display_name, :placeholder=>"Display Name" %>
+    </div>
   </div>
- 
+
+
 
   <!-- admin specific options -->
- <% if current_user != nil && current_user.admin == true %> 
-   <div class="field">
-     <%= f.label :admin %>
-     <%= f.check_box :admin %>
-    </div>
-    <div class="field">
-     <%= f.label :coordinator %>
-     <%= f.check_box :coordinator %>
-    </div>
-    <div class="field">
-     <%= f.label :farmer %>
+  <% if current_user != nil && current_user.admin == true %> 
+
+  <div class="controls">
+
+    <label class="checkbox inline">
+      Admin
+      <%= f.check_box :admin %>
+    </label>
+
+    <label class="checkbox inline">
+      Coordinator
+      <%= f.check_box :coordinator %>
+    </label>
+
+    <label class="checkbox inline">
+     Farmer
      <%= f.check_box :farmer %>
-    </div> 
-  <% end %>
+   </label> 
 
-  <div class="actions">
-    <%= f.submit "Save" %>
-  </div>
+ </div>
 
-  <br />* Denotes required field<br />
+ <% end %>
+
+ <br>
+ <div class="control-group controls">
+  <%= f.submit "Submit!", :class=>"btn-large btn-primary" %>
+</div>
+
+<div align="center">
+* Denotes required field
+</div>
+
+</form>
 <% end %>

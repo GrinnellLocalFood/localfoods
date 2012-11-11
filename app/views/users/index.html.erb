@@ -1,43 +1,51 @@
-<h1>Listing users</h1>
+<div class="container-fluid">
+    <div class="row-fluid">
+        <div class="span12">
 
-<table>
-  <tr>
-    <th>User</th>
-    <th>First name</th>
-    <th>Last name</th>
-    <th>Email</th>
-    <th>Phone</th>
-    <th>Display name</th>
-    <th>Member</th>
-    <th>Coordinator</th>
-    <th>Farmer</th>
-    <th>Admin</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
+            <h1>Listing users</h1>
 
-<% @users.each do |user| %>
-  <tr>
-    <td><%= user.id %></td>
-    <td><%= user.first_name %></td>
-    <td><%= user.last_name %></td>
-    <td><%= user.email %></td>
-    <td><%= user.phone %></td>
-    <td><%= user.display_name %></td>
-    <td><%= user.member %></td>
-    <td><%= user.coordinator %></td>
-    <td><%= user.farmer %></td>
-    <td><%= user.admin %></td>
-    <td><%= link_to 'Show', user %></td>
-    <td><%= link_to 'Edit', edit_user_path(user) %></td>
-    <td><%= link_to "Delete", user, :confirm => 'Are you sure?', :method=>:delete, :class=>:Destroy %></td>
+            <table class="table">
+              <tr>
+                <th>User</th>
+                <th>First name</th>
+                <th>Last name</th>
+                <th>Email</th>
+                <th>Phone</th>
+                <th>Display name</th>
+                <th>Member</th>
+                <th>Coordinator</th>
+                <th>Farmer</th>
+                <th>Admin</th>
+                <th></th>
+                <th></th>
+                <th></th>
+            </tr>
 
-  </tr>
-<% end %>
-</table>
+            <% @users.each do |user| %>
+            <tr>
+                <td><%= user.id %></td>
+                <td><%= user.first_name %></td>
+                <td><%= user.last_name %></td>
+                <td><%= user.email %></td>
+                <td><%= user.phone %></td>
+                <td><%= user.display_name %></td>
+                <td><%= user.member %></td>
+                <td><%= user.coordinator %></td>
+                <td><%= user.farmer %></td>
+                <td><%= user.admin %></td>
+                <td><%= link_to 'Show', user %></td>
+                <td><%= link_to 'Edit', edit_user_path(user) %></td>
+                <td><%= link_to "Delete", user, :confirm => 'Are you sure?', :method=>:delete, :class=>:Destroy %></td>
 
-<br />
+            </tr>
+            <% end %>
+        </table>
 
-<%= link_to 'New User', new_user_path %>
-<%= link_to 'Back', current_user %>
+        <br />
+
+        <%= link_to 'New User', new_user_path, :class=>"btn" %>
+        <%= link_to 'Back', current_user, :class=>"btn" %>
+
+    </div>
+</div>
+</div>

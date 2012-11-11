@@ -1,25 +1,32 @@
-<p id="notice"><%= notice %></p>
+<div class="container-fluid">
+	<div class="row-fluid">
+		<div class="span6 offset3">
 
-<p>Hello <%= @user.first_name %>!</p>
+			<h2>Hello <%= @user.first_name %>!</h2>
 
-<p>Your Roles:
-<% if @user.farmer %>
-</p> Farmer
-<% end %>
+			<strong>Your Roles:</strong>
+			<% if @user.farmer %>
+			<br><br>Farmer
+			<% end %>
 
-<% if @user.member %>
-</p> Member 
-<% end %>
+			<% if @user.member %>
+			<br><br>Member
+			<% end %>
 
-<% if @user.coordinator %>
-</p> Coordinator 
-<% end %>
+			<% if @user.coordinator %>
+			<br><br>Coordinator 
+			<% end %>
 
-<% if @user.admin %>
-</p> Admin
-</p> 
-<%= link_to 'Add user', new_user_path %>
-<%= link_to 'Show Users', users_path %>
-<% end %>
+			<% if @user.admin %>
+			<br><br>Admin
 
-</p>
+			<br><br>
+			<%= link_to 'Add user', new_user_path, 
+					:class=>"btn" %>
+			<%= link_to 'Show Users', users_path, 
+					:class=>"btn" %>
+			<% end %>
+			
+		</div>
+	</div>
+</div>

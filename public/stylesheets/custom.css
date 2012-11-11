@@ -29,8 +29,8 @@
   font-size: 12px;
   margin: -7px;
   margin-bottom: 0px;
-  background-color: #c00;
-  color: #fff;
+  background-color: red;
+  color: white;
 }
 
 #error_explanation ul li {

@@ -33,11 +33,12 @@
   </div>
 
   <!-- admin specific options -->
-  <% if current_user.admin == true %>
+  <% if current_user.admin %>
     <div class="field">
      <%= f.label :admin %>
      <%= f.check_box :admin %>
     </div>
+    <% if current_user.admin || current_user.coordinator %>
     <div class="field">
      <%= f.label :coordinator %>
      <%= f.check_box :coordinator %>
@@ -46,6 +47,7 @@
      <%= f.label :farmer %>
      <%= f.check_box :farmer %>
     </div>
+    <% end %>
   <% end %>
 
   <div class="actions">

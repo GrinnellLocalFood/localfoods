@@ -110,6 +110,13 @@ end
       response.should be_success
       assigns(:user).should eq(@another_user)
     end
+
+    # it "should be able to edit admin, coordinator,farmer status" do
+    #   @another_user = Factory(:user, :id => @user.id + 20, :email => "example20@example.com")
+    #   @another_user.save
+    #   visit @another_user
+    #   response.should have_selector('label', :for => "user_admin", :content => "Admin")
+    # end
   end
 end
 
@@ -364,9 +371,11 @@ end
         @attr = { :password => "password", :password_confirmation => "password"}
       end
       
-      it "should change the user's attributes" do
+      it "should change the user's password" do
+        @old_encrypted_password = @user.encrypted_password
         put :updatepassword, :id => @user, :user => @attr
         @user.reload
+        @user.encrypted_password.should_not == @old_encrypted_password
         response.should redirect_to(@user)
       end
     end

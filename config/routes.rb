@@ -13,6 +13,10 @@ Localfoods::Application.routes.draw do
     member do
       put 'updatepassword'
     end
+
+    member do
+      get 'edit'
+    end
   end
 
   resources :sessions, :only => [:new, :create, :destroy]

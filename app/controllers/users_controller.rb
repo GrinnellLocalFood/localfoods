@@ -115,8 +115,8 @@ class UsersController < ApplicationController
     end
   end
 
-  # PUT /users/1/updatepassword
-  # PUT /users/1.xml
+  #PUT /users/1/updatepassword
+  #PUT /users/1.xml
   def updatepassword
     @user = User.find(params[:id])
 

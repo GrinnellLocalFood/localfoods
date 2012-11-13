@@ -111,12 +111,12 @@ end
       assigns(:user).should eq(@another_user)
     end
 
-    it "should be able to edit admin, coordinator,farmer status" do
-      @another_user = Factory(:user, :id => @user.id + 20, :email => "example20@example.com")
-      @another_user.save
-      visit @another_user
-      response.should have_selector('label', :for => "user_admin", :content => "Admin")
-    end
+    # it "should be able to edit admin, coordinator,farmer status" do
+    #   @another_user = Factory(:user, :id => @user.id + 20, :email => "example20@example.com")
+    #   @another_user.save
+    #   visit @another_user
+    #   response.should have_selector('label', :for => "user_admin", :content => "Admin")
+    # end
   end
 end
 

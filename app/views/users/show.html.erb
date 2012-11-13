@@ -6,30 +6,33 @@
 
 			<h2 align="center">Hello <%= @user.first_name %>!</h2>
 
+<div align="center">
 			<strong>Your Roles:</strong>
 			
+			<% if @user.member %>
+			Member, 
+			<% end %>
+
 			<% if @user.farmer %>
 			Farmer
 			<% end %>
 
-			<% if @user.member %>
-			Member
-			<% end %>
-
 			<% if @user.coordinator %>
-			<br><br>Coordinator 
+			Coordinator 
 			<% end %>
 
 			<% if @user.admin %>
 			Admin
+			<% end %>
 
 			<br><br>
 			<%= link_to 'Add user', new_user_path, 
 					:class=>"btn" %>
 			<%= link_to 'Show Users', users_path, 
 					:class=>"btn" %>
-			<% end %>
 			
+			
+			</div>
 
 
 		</div>

@@ -3,6 +3,12 @@
 		<div class="span10 offset1">
 			<div class="hero-unit">
 				<h2>Welcome to the Grinnell Local Foods Coop!</h2>
+					<p><small>Support local farmers, local economy, and environmental sustainability by purchasing quality food grown right here in central Iowa. The Grinnell Local Foods Coop connects you to farmers, making it convenient for you to buy fresh, local, sustainably grown foods. In our monthly orders, we offer everything our farmers have in season: produce, grains, honey, herbs, certified Organic products and more!<small></p>
+
+					<% if !signed_in? %>
+					<%= link_to "Sign Up!", register_path,
+						:class=>"btn btn-large btn-info" %>
+					<% end %>
 			</div>
 		</div>
 	</div>

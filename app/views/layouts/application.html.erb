@@ -6,16 +6,16 @@
 	<%= alert %>
 	<%= stylesheet_link_tag '/stylesheets/custom.css' %>
 	<%= stylesheet_link_tag '/stylesheets/bootstrap.css' %>	
-	<%= javascript_include_tag :defaults %>
+	<%= javascript_include_tag :defaults, 'jquery.js', 'bootstrap.js' %>
 	<%= csrf_meta_tag %>
 </head>
 <body>
 	<%= render 'layouts/header' %>
-	<div class="row-fluid">
+	
 		
 	<%= yield %>
 
-	</div>
+
 	<%= render 'layouts/footer' %>
 </body>
 </html>

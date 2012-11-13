@@ -1,7 +1,7 @@
 <%= form_for(@user, :html=>{:class=>'form-horizontal'}) do |f| %>
   <% if @user.errors.any? %>
     <!-- <div id="error_explanation"> -->
-    <div class="alert">
+    <div class="alert alert-error">
       <h4><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</h4>
 
       <br><ul>
@@ -102,7 +102,7 @@
 
  <% end %>
 
-
+<br>
  <div class="control-group controls">
   <%= f.submit "Submit!", :class=>"btn-large btn-primary" %>
 </div>

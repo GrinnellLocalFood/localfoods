@@ -1,6 +1,7 @@
 require 'spec_helper'
 
 describe UsersController do
+  render_views
 
   describe "GET index" do
     describe "for non-signed-in users" do
@@ -111,12 +112,14 @@ end
       assigns(:user).should eq(@another_user)
     end
 
-    # it "should be able to edit admin, coordinator,farmer status" do
-    #   @another_user = Factory(:user, :id => @user.id + 20, :email => "example20@example.com")
-    #   @another_user.save
-    #   visit @another_user
-    #   response.should have_selector('label', :for => "user_admin", :content => "Admin")
-    # end
+    it "should be able to edit admin, coordinator,farmer status" do
+      @another_user = Factory(:user, :id => @user.id + 20, :email => "example20@example.com")
+      @another_user.save
+      get :edit, :id => @user.id + 20
+      response.should have_selector('label', :for => "user_admin", :content => "Admin")
+      response.should have_selector('label', :for => "user_farmer", :content => "Farmer")
+      response.should have_selector('label', :for => "user_coordinator", :content => "Coordinator")
+    end
   end
 end
 

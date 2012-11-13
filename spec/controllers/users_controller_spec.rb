@@ -2,14 +2,6 @@ require 'spec_helper'
 
 describe UsersController do
 
-
-  
-  def mock_user(stubs={})
-    (@mock_user ||= mock_model(User).as_null_object).tap do |user|
-      user.stub(stubs) unless stubs.empty?
-    end
-  end
-
   describe "GET index" do
     describe "for non-signed-in users" do
     
@@ -273,62 +265,114 @@ end
   end
 
   describe "DELETE destroy" do
-    it "destroys the requested user" do
-      User.should_receive(:find).with("37") { mock_user }
-      mock_user.should_receive(:destroy)
-      delete :destroy, :id => "37"
+
+    before(:each) do
+      @user = Factory(:user)
     end
 
-    it "redirects to the users list" do
-      User.stub(:find) { mock_user }
-      delete :destroy, :id => "1"
-      response.should redirect_to(users_url)
+    describe "for admins" do
+
+    before(:each) do
+        @admin = Factory(:user, :email => "admin@example.com", :admin => true)
+        test_sign_in(@admin)
+      end
+
+      it "should destroy the user" do
+        lambda do
+          delete :destroy, :id => @user
+        end.should change(User, :count).by(-1)
+      end
+      
+      it "should redirect to the users page" do
+        delete :destroy, :id => @user
+        response.should redirect_to(users_path)
+      end
+  end
+
+  describe "as a non-signed-in user" do
+      it "should deny access" do
+        delete :destroy, :id => @user
+        response.should redirect_to(login_path)
+      end
+    end
+    
+    describe "as non-admin user" do
+      it "should protect the action" do
+        test_sign_in(@user)
+        delete :destroy, :id => @user
+        response.should redirect_to(@user)
+      end
+    end
+end
+
+  describe "GET editpassword" do
+    describe "for non-signed-in users" do
+    
+    it "should deny access" do
+      @another_user = Factory(:user, :id => 38)
+      get :editpassword, :id => "38"
+      response.should redirect_to(login_path)
     end
   end
 
-  describe "GET editpassword" do
-    it "assigns the requested user as @user" do
-      User.stub(:find).with("37") { mock_user }
-      get :editpassword, :id => "37"
-      assigns(:user).should be(mock_user)
+   describe "for signed_in users" do
+    before(:each) do
+      @user = test_sign_in(Factory(:user))
     end
+
+    it "should succeed given correct index" do 
+      get :editpassword, :id => @user.id
+      response.should be_success
+    end
+
+    it "should succeed given any index" do 
+      get :editpassword, :id => @user.id + 20
+      response.should be_success
+      assigns(:user).should eq(@user)
+    end
+  end
   end
 
  describe "PUT updatepassword" do
 
-    describe "with valid params" do
-      it "updates the requested user" do
-        User.should_receive(:find).with("37") { mock_user }
-        mock_user.should_receive(:update_attributes).with({'these' => 'params'})
-        put :updatepassword, :id => "37", :user => {'these' => 'params'}
+    describe "for signed-in users" do
+    
+    describe "failure" do
+      before(:each) do
+        @user = Factory(:user, :id => "38")
+        test_sign_in(@user)
       end
-
-      it "assigns the requested user as @user" do
-        User.stub(:find) { mock_user(:update_attributes => true) }
-        put :updatepassword, :id => "1"
-        assigns(:user).should be(mock_user)
+      
+      before(:each) do
+        @attr = {:password => "abcdabcd", :password_confirmation => "BLAHBLAH"}
       end
-
-      it "redirects to the user" do
-        User.stub(:find) { mock_user(:update_attributes => true) }
-        put :updatepassword, :id => "1"
-        response.should redirect_to(user_url(mock_user))
+      
+      it "should render the 'editpassword' page" do
+        put :updatepassword, :id => @user, :user => @attr
+        response.should render_template('editpassword')
       end
+      
     end
 
-    describe "with invalid params" do
-      it "assigns the user as @user" do
-        User.stub(:find) { mock_user(:update_attributes => false) }
-        put :update, :id => "1"
-        assigns(:user).should be(mock_user)
+    describe "success" do
+      before(:each) do
+        @user = Factory(:user, :id => "38")
+        test_sign_in(@user)
       end
-
-      it "re-renders the 'editpassword' template" do
-        User.stub(:find) { mock_user(:update_attributes => false) }
-        put :updatepassword, :id => "1"
-        response.should render_template("editpassword")
+      
+      before(:each) do
+        @attr = { :password => "password", :password_confirmation => "password"}
+      end
+      
+      it "should change the user's attributes" do
+        put :updatepassword, :id => @user, :user => @attr
+        @user.reload
+        response.should redirect_to(@user)
       end
     end
+  end
+
+  
 
   # describe "GET adduser" do
 

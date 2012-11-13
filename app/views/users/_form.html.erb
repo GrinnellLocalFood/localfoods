@@ -1,9 +1,10 @@
 <%= form_for(@user, :html=>{:class=>'form-horizontal'}) do |f| %>
   <% if @user.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</h2>
+    <!-- <div id="error_explanation"> -->
+    <div class="alert">
+      <h4><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</h4>
 
-      <ul>
+      <br><ul>
       <% @user.errors.full_messages.each do |msg| %>
         <li><%= msg %></li>
       <% end %>
@@ -101,7 +102,7 @@
 
  <% end %>
 
- <br>
+
  <div class="control-group controls">
   <%= f.submit "Submit!", :class=>"btn-large btn-primary" %>
 </div>
@@ -110,5 +111,4 @@
 * Denotes required field
 </div>
 
-</form>
 <% end %>

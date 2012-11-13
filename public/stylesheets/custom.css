@@ -3,12 +3,14 @@
 }
 
 .field_with_errors {
-  -moz-border-radius: 4px;
+/*  -moz-border-radius: 4px;
   border-radius: 4px;
   padding: 1px;
   padding-bottom: 0px;
-  background-color: red;
-  display: table;
+  background-color: blue;
+  display: table;*/
+  color: #c09853;
+
 }
 
 #error_explanation {
@@ -29,11 +31,16 @@
   font-size: 12px;
   margin: -7px;
   margin-bottom: 0px;
-  background-color: red;
+  background-color: blue;
   color: white;
 }
 
 #error_explanation ul li {
   font-size: 12px;
   list-style: square;
+}
+
+.test_box {
+border: 2px solid green;
+
 }

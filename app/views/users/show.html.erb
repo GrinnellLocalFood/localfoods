@@ -1,16 +1,19 @@
 <div class="container-fluid">
 	<div class="row-fluid">
-		<div class="span6 offset3">
+		<div class="span4 offset4">
 
-			<h2>Hello <%= @user.first_name %>!</h2>
+			
+
+			<h2 align="center">Hello <%= @user.first_name %>!</h2>
 
 			<strong>Your Roles:</strong>
+			
 			<% if @user.farmer %>
-			<br><br>Farmer
+			Farmer
 			<% end %>
 
 			<% if @user.member %>
-			<br><br>Member
+			Member
 			<% end %>
 
 			<% if @user.coordinator %>
@@ -18,7 +21,7 @@
 			<% end %>
 
 			<% if @user.admin %>
-			<br><br>Admin
+			Admin
 
 			<br><br>
 			<%= link_to 'Add user', new_user_path, 
@@ -27,6 +30,8 @@
 					:class=>"btn" %>
 			<% end %>
 			
+
+
 		</div>
 	</div>
 </div>

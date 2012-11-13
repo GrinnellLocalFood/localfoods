@@ -121,6 +121,32 @@ end
       response.should have_selector('label', :for => "user_coordinator", :content => "Coordinator")
     end
   end
+
+  describe "for coordinators" do
+    before(:each) do
+      @user = test_sign_in(Factory(:user, :coordinator => true))
+    end
+
+    it "should succeed given correct index" do 
+      get :edit, :id => @user.id
+      response.should be_success
+    end
+
+    it "should succeed given any index" do   
+      @another_user = Factory(:user, :id => @user.id + 20, :email => "example20@example.com")
+      get :edit, :id => @user.id + 20
+      response.should be_success
+      assigns(:user).should eq(@another_user)
+    end
+
+    it "should be able to edit coordinator,farmer status" do
+      @another_user = Factory(:user, :id => @user.id + 20, :email => "example20@example.com")
+      @another_user.save
+      get :edit, :id => @user.id + 20
+      response.should have_selector('label', :for => "user_farmer", :content => "Farmer")
+      response.should have_selector('label', :for => "user_coordinator", :content => "Coordinator")
+    end
+  end
 end
 
 

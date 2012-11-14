@@ -105,4 +105,27 @@ describe User do
     change_password_user.save.should eq(false)
   end
 
+  it "should create a farmer possessing a farm with the correct id" do
+    farmer = User.new(@attr.merge(:farmer => true))
+    farmer.save
+    farmer.farm.should_not be_nil
+    Farm.find(farmer.id).should eql(farmer.farm)
+  end
+
+  it "should add a farm for a user who is changed to a farmer" do
+    user = User.new(@attr) #non-farmer
+    user.save!
+    user.farmer = true
+    user.save
+    user.farm.should_not be_nil
+    Farm.find(user.id).should eql(user.farm)
+  end
+
+  it "should not give a non-farmer a farm" do
+    non_farmer = User.create(@attr)
+    non_farmer.farm.should eq(nil)
+  end
+
+
+
 end

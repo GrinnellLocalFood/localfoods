@@ -79,11 +79,20 @@ class UsersController < ApplicationController
 
     respond_to do |format|
       if @user.save
-        sign_in @user
+        # If already signed in, you don't want to be redirected after new user creation
+        if signed_in? 
+          format.html { redirect_to(users_path, :notice => 'User was successfully created.',
+          :class=>"alert alert-success") }
+          format.xml  { head :ok }
+
+        else 
+          sign_in @user
         # format.html { redirect_to(@user, :notice => 'User was successfully created.') }
         format.html { redirect_to @user }
         format.xml  { render :xml => @user, :status => :created, :location => @user }
-      else
+      end
+      
+    else
         #resets password and confirmation fields
         @user.password = ""
         @user.password_confirmation = ""
@@ -102,11 +111,14 @@ class UsersController < ApplicationController
       if @user.update_attributes(params[:user])
         if current_user != nil && current_user.admin
           sign_in current_user
+          format.html { redirect_to(users_path, :notice => 'User was successfully updated.') }
+          format.xml  { head :ok }
         else
           sign_in @user
+          format.html { redirect_to(current_user, :notice => 'User was successfully updated.') }
+          format.xml  { head :ok }
         end
-        format.html { redirect_to(current_user, :notice => 'User was successfully updated.') }
-        format.xml  { head :ok }
+        
       else
         sign_in @user
         format.html { render :action => "edit" }
@@ -140,7 +152,7 @@ class UsersController < ApplicationController
     @user.destroy
 
     respond_to do |format|
-      format.html { redirect_to(users_path) }
+      format.html { redirect_to(users_path, :notice => 'User was successfully destroyed.') }
       format.xml  { head :ok }
     end
   end

@@ -1,7 +1,14 @@
 <div class="container-fluid">
 	<div class="row-fluid">
 		<div class="span6 offset3">
+
+		<% if signed_in? %> 
+			<h1 align="center">Add User</h1><br>
+		<% else %>
 			<h1 align="center">Sign Up</h1><br>
+		<% end %>
+
+
 			<%= render 'form' %>
 		</div>
 	</div>

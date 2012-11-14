@@ -10,26 +10,29 @@
 			<strong>Your Roles:</strong>
 			
 			<% if @user.member %>
-			Member, 
+			Member 
 			<% end %>
 
 			<% if @user.farmer %>
-			Farmer
+			, Farmer
 			<% end %>
 
 			<% if @user.coordinator %>
-			Coordinator 
+			, Coordinator 
 			<% end %>
 
 			<% if @user.admin %>
-			Admin
-			<% end %>
+			, Admin
 
 			<br><br>
 			<%= link_to 'Add user', new_user_path, 
 					:class=>"btn" %>
 			<%= link_to 'Show Users', users_path, 
 					:class=>"btn" %>
+
+			<% end %>
+
+			
 			
 			
 			</div>

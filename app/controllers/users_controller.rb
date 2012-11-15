@@ -6,7 +6,7 @@ class UsersController < ApplicationController
   def index
     @users = User.all
 
-    if current_user.admin
+    if current_user.admin || current_user.coordinator
         respond_to do |format|
         format.html # index.html.erb
         format.xml  { render :xml => @users }
@@ -45,8 +45,11 @@ class UsersController < ApplicationController
   def edit
     @title = "Edit Account"
 
-   if current_user.admin
+   if (current_user.admin || current_user.coordinator)
       @user = User.find(params[:id])
+      if(@user.admin && current_user.coordinator)
+         redirect_to(current_user, :alert => "Permission Denied")
+      end
     else
       @user = current_user
     end
@@ -100,7 +103,7 @@ class UsersController < ApplicationController
 
     respond_to do |format|
       if @user.update_attributes(params[:user])
-        if current_user != nil && current_user.admin
+        if current_user != nil && (current_user.admin || current_user.coordinator)
           sign_in current_user
         else
           sign_in @user

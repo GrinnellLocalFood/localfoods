@@ -23,9 +23,20 @@ describe UsersController do
     end
   end
 
-  describe "for admin users" do
+  describe "for admins" do
     before(:each) do
       @user = test_sign_in(Factory(:user,:admin => true))
+    end
+
+    it "should be successful" do 
+      get :index
+      response.should be_success
+    end
+  end
+
+   describe "for coordinators" do
+    before(:each) do
+      @user = test_sign_in(Factory(:user,:coordinator => true))
     end
 
     it "should be successful" do 
@@ -54,6 +65,28 @@ describe "GET show" do
       @another_user = Factory(:user,:id => 38,:email => "example38@example.com")    
       get :show, :id => "38"
       response.should be_success
+    end
+  end
+
+  describe "For admin" do
+     before(:each) do
+      @user = test_sign_in(Factory(:user, :admin => true))
+    end
+    it "should have New user and show user button" do    
+      get :show, :id => "1"
+      response.should have_selector("a", :href => users_path, :content => "Show Users")
+      response.should have_selector("a", :href => users_path + "/new", :content => "Add User")
+    end
+  end
+
+ describe "For coordinators" do
+     before(:each) do
+      @user = test_sign_in(Factory(:user, :coordinator => true))
+    end
+    it "should have New user and show user button" do    
+      get :show, :id => "1"
+      response.should have_selector("a", :href => users_path, :content => "Show Users")
+      response.should_not have_selector("a", :href => users_path + "/new", :content => "Add User")
     end
   end
 end
@@ -117,6 +150,35 @@ end
       @another_user.save
       get :edit, :id => @user.id + 20
       response.should have_selector('label', :for => "user_admin", :content => "Admin")
+      response.should have_selector('label', :for => "user_farmer", :content => "Farmer")
+      response.should have_selector('label', :for => "user_coordinator", :content => "Coordinator")
+    end
+  end
+
+  describe "for coordinators" do
+    before(:each) do
+      @user = test_sign_in(Factory(:user, :coordinator => true))
+    end
+
+    it "should succeed given correct index" do 
+      get :edit, :id => @user.id
+      response.should be_success
+    end
+
+    it "should succeed given member or farmer but not an admin" do   
+      @another_user = Factory(:user, :id => @user.id + 20, :email => "example20@example.com")
+      @admin_user = Factory(:user, :id => @user.id + 21, :email => "example21@example.com", :admin => true)
+      get :edit, :id => @user.id + 20
+      response.should be_success
+      assigns(:user).should eq(@another_user)
+      get :edit, :id => @user.id + 21
+      response.should redirect_to(@user)
+    end
+
+    it "should be able to edit coordinator,farmer status" do
+      @another_user = Factory(:user, :id => @user.id + 20, :email => "example20@example.com")
+      @another_user.save
+      get :edit, :id => @user.id + 20
       response.should have_selector('label', :for => "user_farmer", :content => "Farmer")
       response.should have_selector('label', :for => "user_coordinator", :content => "Coordinator")
     end
@@ -311,6 +373,14 @@ end
         test_sign_in(@user)
         delete :destroy, :id => @user
         response.should redirect_to(@user)
+      end
+    end
+    describe "For coordinator" do
+      it "should protect the action" do
+        @coordinator = Factory(:user, :coordinator => true, :email => "coord@example.com")
+        test_sign_in(@coordinator)
+        delete :destroy, :id => @user
+        response.should redirect_to(@coordinator)
       end
     end
 end

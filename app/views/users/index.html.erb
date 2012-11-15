@@ -18,6 +18,7 @@
   </tr>
 
 <% @users.each do |user| %>
+<% if (current_user.admin || current_user.coordinator) %>
   <tr>
     <td><%= user.id %></td>
     <td><%= user.first_name %></td>
@@ -29,9 +30,17 @@
     <td><%= user.coordinator %></td>
     <td><%= user.farmer %></td>
     <td><%= user.admin %></td>
+<% end %>
     <td><%= link_to 'Show', user %></td>
+    <% if current_user.admin || (!user.admin && current_user.coordinator) %>
     <td><%= link_to 'Edit', edit_user_path(user) %></td>
+    <% end %>
+
+   
+
+    <% if current_user.admin %>
     <td><%= link_to "Delete", user, :confirm => 'Are you sure?', :method=>:delete, :class=>:Destroy %></td>
+    <% end %>
 
   </tr>
 <% end %>
@@ -39,5 +48,7 @@
 
 <br />
 
+<% if current_user.admin %>
 <%= link_to 'New User', new_user_path %>
+<% end %>
 <%= link_to 'Back', current_user %>

@@ -38,7 +38,8 @@
      <%= f.label :admin %>
      <%= f.check_box :admin %>
     </div>
-    <% if current_user.admin || current_user.coordinator %>
+  <% end %>
+  <% if current_user.admin || current_user.coordinator %>
     <div class="field">
      <%= f.label :coordinator %>
      <%= f.check_box :coordinator %>
@@ -47,8 +48,7 @@
      <%= f.label :farmer %>
      <%= f.check_box :farmer %>
     </div>
-    <% end %>
-  <% end %>
+  <% end %> 
 
   <div class="actions">
     <%= f.submit "Save" %>

@@ -19,10 +19,13 @@
 </p> Admin 
 <% end %>
 
-<% if current_user.admin %>
-<%= link_to 'Add user', new_user_path %>
-<%= link_to 'Show Users', users_path %>
 </p>
+
+<% if current_user.admin %>
+<%= link_to 'Add User', new_user_path %>
+<% end %>
+<% if current_user.admin || current_user.coordinator %>
+<%= link_to 'Show Users', users_path %>
 <% end %>
 
 </p>

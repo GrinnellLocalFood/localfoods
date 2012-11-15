@@ -13,6 +13,66 @@
 
 }
 
+#logohead {
+margin-top: 4px;
+
+}
+
+
+#hero-image-unit {
+  position:absolute;
+  left:0px;
+  top:60px;
+  background-position: center;
+  background-size: cover;
+ /* font-size: 25px;
+  font-weight: 200;
+  line-height: 30px;*/
+  /*background-image:url (DSC_2825-4.jpg);*/
+  background-image:url(/img/DSC_2825-4-small-edit.jpg);
+  background-repeat: no-repeat;
+  width:100%;
+  height:400px;
+}
+
+#hero-image-unit h1 {
+  min-width: 500px;
+  margin-bottom: 0;
+  font-size: 60px;
+  line-height: 1;
+  letter-spacing: -1px;
+  color: inherit;
+}
+
+#hero-image-unit h2 {
+  min-width: 800px;
+  margin-top: 60px;
+  margin-right: 10%;
+
+  font-size: 35px;
+  line-height: 1;
+  letter-spacing: -1px;
+  color: white;
+}
+
+#hero-image-unit li {
+  line-height: 30px;
+}
+
+#hero-image-unit p {
+  min-width: 500px;
+  text-align: justify;
+  margin-top: 20px;
+  margin-left: 40%;
+  margin-right: 10%;
+  font-size: 17px;
+  line-height: 1.5;
+  letter-spacing: 0px;
+  color: white;
+
+}
+
+
 #error_explanation {
  -moz-border-radius: 7px;
   border-radius: 7px;

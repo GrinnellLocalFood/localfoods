@@ -3,9 +3,12 @@
     <div class="container">
       <nav>
 
-        <ul class="nav pull-left">
+          <!-- <ul class="nav pull-left">
           <li><%= link_to "Grinnell LocalFoods", root_path, :class=>"brand" %></li>
-        </ul>
+          </ul> -->
+
+          <%= link_to image_tag("/img/just_localfood_horizontal_40.png", :width=>"250", :id=>"logohead"), root_path %>
+       
         
         <ul class="nav pull-right">
 
@@ -35,7 +38,7 @@
               </ul>
             </li>
 
-         <!--  <li><%= link_to "Profile", current_user %></li>
+    <!--  <li><%= link_to "Profile", current_user %></li>
           <li><%= link_to "Change Password", editpassword_user_path(current_user) %></li>
           <li><%= link_to "Edit Account", edit_user_path(current_user) %></li>
           <li><%= link_to "Log Out", logout_path, :method => :delete %></li>    -->          
@@ -60,8 +63,11 @@
           <% end %>
 
         </ul>
+
+
+
       </nav>
+
     </div>
   </div>
-
 </header>

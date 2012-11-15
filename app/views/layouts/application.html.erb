@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 <head>
 	<title><%= title %></title>
 
@@ -17,13 +18,13 @@
 	<%= javascript_include_tag 'jquery.js', 'bootstrap.js', :defaults %>
 	<%= csrf_meta_tag %>
 </head>
-
-<body>
+<!-- <img src="/img/DSC_2825-4.jpg" width=40>  -->
+	<body>
 	<%= render 'layouts/header' %>
-	
+
 	<%= yield %>
 
 	<%= render 'layouts/footer' %>
-</body>
+	</body>
 
 </html>

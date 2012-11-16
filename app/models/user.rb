@@ -24,9 +24,14 @@ class User < ActiveRecord::Base
 
   validates_length_of :phone, :minimum => 10, :maximum => 15, :allow_blank => true
 
-  before_save :encrypt_password, :default_values
+   
+
+  before_save :encrypt_password, :default_values, :update_farm
+  # after_save :create_farm
 
   before_validation :format_values
+
+  has_one :farm, :foreign_key => "id", :autosave => true
 
   def self.authenticate(email, submitted_password)
     user = find_by_email(email)
@@ -37,6 +42,15 @@ class User < ActiveRecord::Base
   def has_password?(submitted_password)
     encrypted_password == encrypt(submitted_password) 
   end
+
+  # def farm
+  #   if self.farmer?
+  #     #Farm.where returns an array, so we return the first element of the array
+  #     Farm.where("id = ?", self.id).first 
+  #   else
+  #     nil
+  #   end
+  # end
 
   private
 
@@ -83,5 +97,20 @@ class User < ActiveRecord::Base
     def self.authenticate_with_salt(id, cookie_salt)
       user = find_by_id(id)
       (user && user.salt == cookie_salt) ? user : nil
-  end
+    end
+
+    def update_farm
+      if self.farm.nil?
+        if self.farmer?
+          create_farm
+        end
+      elsif !self.farmer
+          self.farm.destroy
+          self.farm = nil
+      end
+    end
+
 end
+
+
+

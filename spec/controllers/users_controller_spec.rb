@@ -149,9 +149,9 @@ end
       @another_user = Factory(:user, :id => @user.id + 20, :email => "example20@example.com")
       @another_user.save
       get :edit, :id => @user.id + 20
-      response.should have_selector('label', :for => "user_admin", :content => "Admin")
-      response.should have_selector('label', :for => "user_farmer", :content => "Farmer")
-      response.should have_selector('label', :for => "user_coordinator", :content => "Coordinator")
+      response.should have_selector('input', :name => "user[admin]", :type => "hidden", :value => '0')
+      response.should have_selector('input', :name => "user[coordinator]", :type => "hidden", :value => '0')
+      response.should have_selector('input', :name => "user[farmer]", :type => "hidden", :value => '0')
     end
   end
 
@@ -179,8 +179,8 @@ end
       @another_user = Factory(:user, :id => @user.id + 20, :email => "example20@example.com")
       @another_user.save
       get :edit, :id => @user.id + 20
-      response.should have_selector('label', :for => "user_farmer", :content => "Farmer")
-      response.should have_selector('label', :for => "user_coordinator", :content => "Coordinator")
+      response.should have_selector('input', :name => "user[coordinator]", :type => "hidden", :value => '0')
+      response.should have_selector('input', :name => "user[farmer]", :type => "hidden", :value => '0')
     end
   end
 end

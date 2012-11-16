@@ -1,14 +1,13 @@
 class UsersController < ApplicationController
 
+  skip_before_filter :require_login, :only => [:new, :create]
   # GET /users
   # GET /users.xml
   def index
     @users = User.all
 
-    if current_user == nil
-      redirect_to root_path
-    elsif current_user.admin
-      respond_to do |format|
+    if current_user.admin || current_user.coordinator
+        respond_to do |format|
         format.html # index.html.erb
         format.xml  { render :xml => @users }
       end
@@ -46,10 +45,11 @@ class UsersController < ApplicationController
   def edit
     @title = "Edit Account"
 
-    if(current_user == nil)
+   if (current_user.admin || current_user.coordinator)
       @user = User.find(params[:id])
-    elsif current_user.admin
-      @user = User.find(params[:id])
+      if(@user.admin && current_user.coordinator)
+         redirect_to(current_user, :alert => "Permission Denied")
+      end
     else
       @user = current_user
     end
@@ -79,9 +79,14 @@ class UsersController < ApplicationController
 
     respond_to do |format|
       if @user.save
+        # Tell the UserMailer to send a welcome Email after save
+        UserMailer.welcome_email(request.host_with_port,@user).deliver
+        if(!current_user.nil?)
+          @user = current_user
+        end        
         sign_in @user
-        # format.html { redirect_to(@user, :notice => 'User was successfully created.') }
         format.html { redirect_to @user }
+        # format.html { redirect_to(@user, :notice => 'User was successfully created.') }
         format.xml  { render :xml => @user, :status => :created, :location => @user }
       else
         #resets password and confirmation fields
@@ -100,7 +105,7 @@ class UsersController < ApplicationController
 
     respond_to do |format|
       if @user.update_attributes(params[:user])
-        if current_user != nil && current_user.admin
+        if current_user != nil && (current_user.admin || current_user.coordinator)
           sign_in current_user
         else
           sign_in @user
@@ -115,18 +120,24 @@ class UsersController < ApplicationController
     end
   end
 
-  # PUT /users/1/updatepassword
-  # PUT /users/1.xml
+  #PUT /users/1/updatepassword
+  #PUT /users/1.xml
   def updatepassword
     @user = User.find(params[:id])
 
     respond_to do |format|
-      if @user.update_attributes(params[:user])
-        sign_in @user
-        format.html { redirect_to(@user, :notice => 'User was successfully updated.') }
-        format.xml  { head :ok }
+      if @user.has_password?(params[:user][:old_password])
+        if @user.update_attributes(params[:user])
+          sign_in @user
+          format.html { redirect_to(@user, :alert => 'User was successfully updated.') }
+         format.xml  { head :ok }
+       else
+          sign_in @user
+          format.html { render :action => "editpassword" }
+          format.xml  { render :xml => @user.errors, :status => :unprocessable_entity }
+        end
       else
-        sign_in @user
+        flash.now[:alert] = "Old Password Incorrect."
         format.html { render :action => "editpassword" }
         format.xml  { render :xml => @user.errors, :status => :unprocessable_entity }
       end
@@ -136,12 +147,19 @@ class UsersController < ApplicationController
   # DELETE /users/1
   # DELETE /users/1.xml
   def destroy
-    @user = User.find(params[:id])
-    @user.destroy
+    if(current_user.admin)
+      @user = User.find(params[:id])
+      @user.destroy
 
-    respond_to do |format|
-      format.html { redirect_to(users_path) }
-      format.xml  { head :ok }
+      respond_to do |format|
+        format.html { redirect_to(users_path) }
+        format.xml  { head :ok }
+      end
+    else
+      respond_to do |format|
+        format.html { redirect_to(current_user) }
+        format.xml  { head :ok }
     end
+  end
   end
 end

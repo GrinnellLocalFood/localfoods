@@ -26,13 +26,15 @@ ActiveRecord::Schema.define(:version => 20121114062333) do
     t.string   "phone"
     t.string   "encrypted_password"
     t.string   "display_name"
-    t.boolean  "member",             :default => true
-    t.boolean  "coordinator",        :default => false
-    t.boolean  "farmer",             :default => false
-    t.boolean  "admin",              :default => false
+    t.boolean  "member",                 :default => true
+    t.boolean  "coordinator",            :default => false
+    t.boolean  "farmer",                 :default => false
+    t.boolean  "admin",                  :default => false
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "salt"
+    t.string   "password_reset_token"
+    t.datetime "password_reset_sent_at"
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true

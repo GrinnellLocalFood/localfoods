@@ -1,6 +1,6 @@
 class User < ActiveRecord::Base
 
-  attr_accessor :password_confirmation, :password
+  attr_accessor :password_confirmation, :password, :old_password
   attr_accessible :first_name,
                   :last_name,
                   :display_name, 
@@ -8,6 +8,7 @@ class User < ActiveRecord::Base
                   :phone,
                   :password, #user entered password
                   :password_confirmation,
+                  :old_password,
                   :admin,
                   :coordinator,
                   :farmer
@@ -38,7 +39,20 @@ class User < ActiveRecord::Base
     encrypted_password == encrypt(submitted_password) 
   end
 
+  def send_password_reset
+    generate_token(:password_reset_token)
+    self.password_reset_sent_at = Time.zone.now
+    save!
+    UserMailer.password_reset(self).deliver
+  end
+
   private
+
+    def generate_token(column)
+      begin
+      self[column] = SecureRandom.hex
+      end while User.exists?(column => self[column])
+    end
 
     #validate password either if:
     # => encrypted_password field is nil (i.e user has just registered) 

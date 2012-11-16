@@ -422,16 +422,19 @@ end
         @user = Factory(:user, :id => "38")
         test_sign_in(@user)
       end
-      
-      before(:each) do
-        @attr = {:password => "abcdabcd", :password_confirmation => "BLAHBLAH"}
-      end
-      
-      it "should render the 'editpassword' page" do
+            
+      it "should render the 'editpassword' page for mismatched passwords" do
+        @attr = {:old_password => @user.password, :password => "abcdabcd", :password_confirmation => "BLAHBLAH"}
         put :updatepassword, :id => @user, :user => @attr
         response.should render_template('editpassword')
       end
       
+       it "should render the 'editpassword' page for incorrect old password" do
+        @attr = {:old_password => "WRONGPASSWORD", :password => "abcdabcd", :password_confirmation => "abcdabcd"}
+        put :updatepassword, :id => @user, :user => @attr
+        response.should render_template('editpassword')
+      end
+
     end
 
     describe "success" do
@@ -441,7 +444,7 @@ end
       end
       
       before(:each) do
-        @attr = { :password => "password", :password_confirmation => "password"}
+        @attr = { :old_password => @user.password, :password => "password", :password_confirmation => "password"}
       end
       
       it "should change the user's password" do

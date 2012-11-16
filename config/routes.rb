@@ -1,9 +1,4 @@
 Localfoods::Application.routes.draw do
-  get "sessions/new"
-
-  get "pages/home"
-
-  get "pages/register"
 
   resources :users do
     member do
@@ -24,6 +19,8 @@ Localfoods::Application.routes.draw do
   match '/register',  :to => 'users#new'
   match '/login',  :to => 'sessions#new'
   match '/logout', :to => 'sessions#destroy'
+
+  resources :password_resets
 
   root :to => 'pages#home'
 

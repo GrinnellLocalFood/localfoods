@@ -79,6 +79,8 @@ class UsersController < ApplicationController
 
     respond_to do |format|
       if @user.save
+        # Tell the UserMailer to send a welcome Email after save
+        UserMailer.welcome_email(request.host_with_port,@user).deliver
         if(!current_user.nil?)
           @user = current_user
         end        
@@ -124,12 +126,18 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
 
     respond_to do |format|
-      if @user.update_attributes(params[:user])
-        sign_in @user
-        format.html { redirect_to(@user, :notice => 'User was successfully updated.') }
-        format.xml  { head :ok }
+      if @user.has_password?(params[:user][:old_password])
+        if @user.update_attributes(params[:user])
+          sign_in @user
+          format.html { redirect_to(@user, :alert => 'User was successfully updated.') }
+         format.xml  { head :ok }
+       else
+          sign_in @user
+          format.html { render :action => "editpassword" }
+          format.xml  { render :xml => @user.errors, :status => :unprocessable_entity }
+        end
       else
-        sign_in @user
+        flash.now[:alert] = "Old Password Incorrect."
         format.html { render :action => "editpassword" }
         format.xml  { render :xml => @user.errors, :status => :unprocessable_entity }
       end

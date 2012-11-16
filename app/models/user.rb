@@ -26,10 +26,12 @@ class User < ActiveRecord::Base
 
    
 
-  before_save :encrypt_password, :default_values
-  after_save :create_farm
+  before_save :encrypt_password, :default_values, :update_farm
+  # after_save :create_farm
 
   before_validation :format_values
+
+  has_one :farm, :foreign_key => "id", :autosave => true
 
   def self.authenticate(email, submitted_password)
     user = find_by_email(email)
@@ -41,14 +43,14 @@ class User < ActiveRecord::Base
     encrypted_password == encrypt(submitted_password) 
   end
 
-  def farm
-    if self.farmer?
-      #Farm.where returns an array, so we return the first element of the array
-      Farm.where("id = ?", self.id).first 
-    else
-      nil
-    end
-  end
+  # def farm
+  #   if self.farmer?
+  #     #Farm.where returns an array, so we return the first element of the array
+  #     Farm.where("id = ?", self.id).first 
+  #   else
+  #     nil
+  #   end
+  # end
 
   private
 
@@ -97,11 +99,18 @@ class User < ActiveRecord::Base
       (user && user.salt == cookie_salt) ? user : nil
     end
 
-    def create_farm
-      if self.farmer? && self.farm.nil?
-        farm = Farm.new
-        farm.user = self
-        farm.save!
+    def update_farm
+      if self.farm.nil?
+        if self.farmer?
+          create_farm
+        end
+      elsif !self.farmer
+          self.farm.destroy
+          self.farm = nil
       end
     end
+
 end
+
+
+

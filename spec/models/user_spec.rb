@@ -121,6 +121,28 @@ describe User do
     Farm.find(user.id).should eql(user.farm)
   end
 
+  it "should delete a farm for a user who is no longer a farmer" do
+    user = User.new(@attr.merge(:farmer => true)) #farmer
+    user.save!
+    user.farmer = false
+    user.save
+    user.farm.should be_nil
+    assert_raises (ActiveRecord::RecordNotFound) do
+      Farm.find(user.id)
+    end
+  end
+
+  it "should be able to set attributes of a farm" do
+    farmer = User.create!(@attr.merge(:farmer => true))
+    farmer.farm.url = "url"
+    farmer.farm.description = "description"
+    farmer.save
+    farm = Farm.find(farmer.id)
+    farm.url.should eq("url")
+    farm.description.should eq("description")
+  end
+
+
   it "should not give a non-farmer a farm" do
     non_farmer = User.create(@attr)
     non_farmer.farm.should eq(nil)

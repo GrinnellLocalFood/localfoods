@@ -1,8 +1,10 @@
 class Farm < ActiveRecord::Base
 	belongs_to :user, :foreign_key => "id" #a user's "id" column is the foreign key
-					  #:autosave => false 
+					  # :autosave => false 
 
-	before_save :not_farmer?
+	# before_save :not_farmer?
+
+	attr_accessible :url, :description
 
 private
 

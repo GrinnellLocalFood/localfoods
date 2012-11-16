@@ -11,10 +11,4 @@ describe Farm do
               :password_confirmation => "password"}
   end
 
-  it "should destroy itself if its user is no longer a farmer" do
-  	user = User.create!(@attr.merge(:farmer => true))
-  	user.farmer = false
-  	user.save
-  	Farm.find(user.id).should be_nil
-  end
 end

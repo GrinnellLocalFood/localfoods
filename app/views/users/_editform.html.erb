@@ -57,7 +57,8 @@
   </div>
 
   <!-- admin specific options -->
-  <% if current_user.admin == true %>
+
+  <% if current_user.admin %>
 
   <div class="controls">
 
@@ -65,6 +66,9 @@
     Admin
      <%= f.check_box :admin %>
    </label>
+   <% end %>
+
+ <% if current_user.admin || current_user.coordinator %>
    
     <label class="checkbox inline">
       Coordinator
@@ -76,6 +80,7 @@
       <%= f.check_box :farmer %>
     </label>
   <% end %>
+
 
 </div>
 

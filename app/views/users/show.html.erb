@@ -18,14 +18,19 @@
 			<% end %>
 
 			<% if @user.admin %>
-			<br><br>Admin
+			<br><br> Admin 
+			<% end %>
 
 			<br><br>
-			<%= link_to 'Add user', new_user_path, 
-					:class=>"btn" %>
-			<%= link_to 'Show Users', users_path, 
+			<% if current_user.admin %>
+				<%= link_to 'Add User', new_user_path,
 					:class=>"btn" %>
 			<% end %>
+			<% if current_user.admin || current_user.coordinator %>
+				<%= link_to 'Show Users', users_path,
+					:class=>"btn" %>
+			<% end %>
+
 			
 		</div>
 	</div>

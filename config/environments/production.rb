@@ -46,4 +46,7 @@ Localfoods::Application.configure do
 
   # Send deprecation notices to registered listeners
   config.active_support.deprecation = :notify
+
+  # path for development environment
+  config.path = "http://localhost.herokuapp.com/"
 end

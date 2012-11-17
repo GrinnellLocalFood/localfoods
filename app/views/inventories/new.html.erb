@@ -1,0 +1,19 @@
+<div class="container">
+	<div class="row">
+		<div class="span8 offset2 custom-block">
+
+			<!-- <div class="custom-block"> -->
+
+		<% if signed_in? %> 
+			<h1 align="center">Add Item</h1><br>
+			Farm: <%= @farm.id %>
+		<% end %>
+
+
+			<%= render 'inventoryform' %>
+
+<!-- </div> -->
+
+		</div>
+	</div>
+</div>

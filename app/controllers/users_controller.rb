@@ -142,6 +142,8 @@ class UsersController < ApplicationController
           format.html { render :action => "editpassword" }
           format.xml  { render :xml => @user.errors, :status => :unprocessable_entity }
         end
+
+# FIX HOW ALERTS ARE FLASHED HERE
       else
         flash.now[:alert] = "Old Password Incorrect."
         format.html { render :action => "editpassword" }

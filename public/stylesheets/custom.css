@@ -18,6 +18,26 @@ margin-top: 4px;
 
 }
 
+.center {
+    display:inline-block;
+}
+
+.custom-block {
+  text-align: justify;
+  box-shadow: 0px 0px 10px #C5C5C5;
+  padding-top: 20px;
+  padding-bottom: 30px;
+  background-color: white;
+
+}
+
+#editpassword {
+  background-image:url(/img/apple_blah.jpg);
+  background-repeat: no-repeat;
+  background-position: center;
+  /*background-position: 0px 0px;*/
+  /*background-size: cover;*/
+}
 
 #hero-image-unit {
   position:absolute;
@@ -35,14 +55,7 @@ margin-top: 4px;
   height:400px;
 }
 
-#hero-image-unit h1 {
-  min-width: 500px;
-  margin-bottom: 0;
-  font-size: 60px;
-  line-height: 1;
-  letter-spacing: -1px;
-  color: inherit;
-}
+
 
 #hero-image-unit h2 {
   min-width: 800px;
@@ -53,6 +66,7 @@ margin-top: 4px;
   line-height: 1;
   letter-spacing: -1px;
   color: white;
+
 }
 
 #hero-image-unit li {
@@ -60,14 +74,14 @@ margin-top: 4px;
 }
 
 #hero-image-unit p {
-  min-width: 500px;
+  min-width: 450px;
   text-align: justify;
   margin-top: 20px;
   margin-left: 40%;
   margin-right: 10%;
-  font-size: 17px;
+  font-size: 20px;
   line-height: 1.5;
-  letter-spacing: 0px;
+  letter-spacing: -1px;
   color: white;
 
 }

@@ -1,19 +1,38 @@
-<h1>Log In</h1>
-<%= form_for(:session, :url => sessions_path) do |f| %>
+<div class="container-fluid">
+	<div class="row-fluid">
+		<div class="span8 offset2 custom-block">
+
+<h1 align="center">Log In</h1><br>
+
+<%= form_for(:session, :url => sessions_path, 
+	:html=>{:class=>'form-horizontal'}) do |f| %>
+
 <% if flash[:error] -%>
-<p class='error'><%=h flash[:error] %></p>
+<p class="alert alert-error"><%=h flash[:error] %></p>
 <% end -%>
-<div class="field">
-  <%= f.label :email %>
-  <%= f.text_field :email %>
+
+<div class="control-group">
+	<label class="control-label">Email</label>
+	<div class="controls">
+		<%= f.text_field :email, :placeholder=>"Email" %>
+	</div>
 </div>
-<div class="field">
-  <%= f.label :password %>
-  <%= f.password_field :password %>
+
+<div class="control-group">
+	<label class="control-label">Password</label>
+	<div class="controls">
+  		<%= f.password_field :password, :placeholder=>"Password" %>
+  	</div>
 </div>
-<div class="actions">
-  <%= f.submit @title %>
+
+
+<div class="control-group controls">
+  <%= f.submit "Log In", :class=>"btn" %>
 </div>
 <% end %>
-<p>New user? <%= link_to "Register!", register_path %></p>
-<p>Forgotten password? <%= link_to "Reset!", new_password_reset_path %></p>
+<p align="center">New user? <%= link_to "Sign Up!", register_path %></p>
+<p align="center">Forgotten password? <%= link_to "Reset!", new_password_reset_path %></p>
+
+</div>
+</div>
+</div>

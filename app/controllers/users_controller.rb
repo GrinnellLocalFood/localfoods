@@ -79,16 +79,19 @@ class UsersController < ApplicationController
 
     respond_to do |format|
       if @user.save
+
         # Tell the UserMailer to send a welcome Email after save
         UserMailer.welcome_email(request.host_with_port,@user).deliver
         if(!current_user.nil?)
           @user = current_user
         end        
         sign_in @user
-        format.html { redirect_to @user }
-        # format.html { redirect_to(@user, :notice => 'User was successfully created.') }
-        format.xml  { render :xml => @user, :status => :created, :location => @user }
-      else
+         format.html { redirect_to(@user, :notice => 'User was successfully created.',
+          :class=>"alert alert-success") }
+
+         format.xml  { render :xml => @user, :status => :created, :location => @user }
+      
+    else
         #resets password and confirmation fields
         @user.password = ""
         @user.password_confirmation = ""
@@ -107,11 +110,14 @@ class UsersController < ApplicationController
       if @user.update_attributes(params[:user])
         if current_user != nil && (current_user.admin || current_user.coordinator)
           sign_in current_user
+          format.html { redirect_to(users_path, :notice => 'User was successfully updated.') }
+          format.xml  { head :ok }
         else
           sign_in @user
+          format.html { redirect_to(current_user, :notice => 'User was successfully updated.') }
+          format.xml  { head :ok }
         end
-        format.html { redirect_to(current_user, :notice => 'User was successfully updated.') }
-        format.xml  { head :ok }
+        
       else
         sign_in @user
         format.html { render :action => "edit" }
@@ -136,6 +142,8 @@ class UsersController < ApplicationController
           format.html { render :action => "editpassword" }
           format.xml  { render :xml => @user.errors, :status => :unprocessable_entity }
         end
+
+# FIX HOW ALERTS ARE FLASHED HERE
       else
         flash.now[:alert] = "Old Password Incorrect."
         format.html { render :action => "editpassword" }
@@ -160,6 +168,6 @@ class UsersController < ApplicationController
         format.html { redirect_to(current_user) }
         format.xml  { head :ok }
     end
-  end
+   end
   end
 end

@@ -1,75 +1,75 @@
 <%= form_for(@user, :html=>{:class=>'form-horizontal'}) do |f| %>
-  <% if @user.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</h2>
+<% if @user.errors.any? %>
+<div class="alert alert-error">
+  <h4><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</h4>
 
-      <ul>
-      <% @user.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
+  <br><ul>
+    <% @user.errors.full_messages.each do |msg| %>
+    <li><%= msg %></li>
+    <% end %>
+  </ul>
+</div>
+<% end %>
 
-  <div class="control-group">
-    <label class="control-label">
+<div class="control-group">
+  <label class="control-label">
     <%= f.label(:first_name, "First Name *", :placeholder=>"First Name") %>
-    </label>
-    <div class="controls">
+  </label>
+  <div class="controls">
     <%= f.text_field :first_name %>
   </div>
-  </div>
+</div>
 
-  <div class="control-group">
-    <label class="control-label">
+<div class="control-group">
+  <label class="control-label">
     <%= f.label :last_name, "Last Name *" %>
-    </label>
-    <div class="controls">
+  </label>
+  <div class="controls">
     <%= f.text_field :last_name, :placeholder=>"Last Name" %>
   </div>
-  </div>
+</div>
 
-  <div class="control-group">
-    <label class="control-label">
+<div class="control-group">
+  <label class="control-label">
     <%= f.label :email, "Email *" %>
-    </label>
-    <div class="controls">
+  </label>
+  <div class="controls">
     <%= f.text_field :email, :placeholder=>"Email" %>
   </div>
-  </div>
+</div>
 
-  <div class="control-group">
-    <label class="control-label">
+<div class="control-group">
+  <label class="control-label">
     <%= f.label :phone %>
-    </label>
-    <div class="controls">
+  </label>
+  <div class="controls">
     <%= f.text_field :phone, :placeholder=>"Phone" %>
   </div>
-  </div>
+</div>
 
-  <div class="control-group">
-    <label class="control-label">
+<div class="control-group">
+  <label class="control-label">
     <%= f.label :display_name, "Display Name" %>
-    </label>
-    <div class="controls">
+  </label>
+  <div class="controls">
     <%= f.text_field :display_name, :placeholder=>"Display Name" %>
   </div>
-  </div>
+</div>
 
   <!-- admin specific options -->
 
-  <% if current_user.admin %>
 
+
+ <% if current_user.admin || current_user.coordinator %>
   <div class="controls">
-
-    <label class="checkbox inline">
+  
+  <% if current_user.admin %>
+   <label class="checkbox inline">
     Admin
      <%= f.check_box :admin %>
    </label>
-   <% end %>
-
- <% if current_user.admin || current_user.coordinator %>
-   
+  <% end %>
+    
     <label class="checkbox inline">
       Coordinator
       <%= f.check_box :coordinator %>
@@ -79,17 +79,19 @@
       Farmer
       <%= f.check_box :farmer %>
     </label>
-  <% end %>
+  </div>
+ <% end %>
 
 
+
+
+<div class="control-group controls">
+  <%= f.submit "Save", :class=>"btn btn-primary"%>
 </div>
 
-<br>
-  <div class="control-group controls">
-    <%= f.submit "Save", :class=>"btn btn-primary"%>
-  </div>
-
-<div align="center"/>
+<div align="center">
   * Denotes required field
 </div>
+
+
 <% end %>

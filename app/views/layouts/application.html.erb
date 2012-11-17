@@ -1,21 +1,30 @@
 <!DOCTYPE html>
 <html>
+
 <head>
 	<title><%= title %></title>
-	<%= notice %>
-	<%= alert %>
+
+	<% if notice %>
+    <div class="alert alert-success"><%= notice %></div>
+  	<% end %>
+
+  	<% if alert %>
+	<div class="alert"><%= alert %></div>
+	<% end %>
+
 	<%= stylesheet_link_tag '/stylesheets/custom.css' %>
 	<%= stylesheet_link_tag '/stylesheets/bootstrap.css' %>	
-	<%= javascript_include_tag :defaults %>
+	<!-- :defaults MUST come after jquery.j, as rails.js has to be loaded after jquery -->
+	<%= javascript_include_tag 'jquery.js', 'bootstrap.js', :defaults %>
 	<%= csrf_meta_tag %>
 </head>
-<body>
+<!-- <img src="/img/DSC_2825-4.jpg" width=40>  -->
+	<!-- <body> -->
 	<%= render 'layouts/header' %>
-	<div class="row-fluid">
-		
+
 	<%= yield %>
 
-	</div>
 	<%= render 'layouts/footer' %>
-</body>
+	<!-- </body> -->
+
 </html>

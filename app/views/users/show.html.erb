@@ -1,25 +1,28 @@
 <div class="container-fluid">
 	<div class="row-fluid">
-		<div class="span6 offset3">
+		<div class="span4 offset4 custom-block">
 
-			<h2>Hello <%= @user.first_name %>!</h2>
+			
 
+			<h2 align="center">Hello <%= @user.first_name %>!</h2>
+
+			<div align="center">
 			<strong>Your Roles:</strong>
-			<% if @user.farmer %>
-			<br><br>Farmer
+			
+			<% if @user.member %>
+			Member 
 			<% end %>
 
-			<% if @user.member %>
-			<br><br>Member
+			<% if @user.farmer %>
+			, Farmer
 			<% end %>
 
 			<% if @user.coordinator %>
-			<br><br>Coordinator 
+			, Coordinator 
 			<% end %>
 
 			<% if @user.admin %>
-			<br><br> Admin 
-			<% end %>
+			, Admin
 
 			<br><br>
 			<% if current_user.admin %>
@@ -29,9 +32,17 @@
 			<% if current_user.admin || current_user.coordinator %>
 				<%= link_to 'Show Users', users_path,
 					:class=>"btn" %>
+
 			<% end %>
 
+<<<<<<< HEAD
+=======
 			
+			
+			
+			</div>
+
+
 		</div>
 	</div>
 </div>

@@ -1,12 +1,23 @@
-<div class="container-fluid">
-	<div class="row-fluid">
-		<div class="span6 offset3">
+<div class="container">
+	<div class="row">
+		<div class="span8 offset2 custom-block">
+
+			<!-- <div class="custom-block"> -->
+
+		<% if signed_in? %> 
+			<h1 align="center">Add User</h1><br>
+		<% else %>
 			<h1 align="center">Sign Up</h1><br>
+		<% end %>
+
+
 			<%= render 'form' %>
+
+<!-- </div> -->
+
 		</div>
 	</div>
 </div>
 
 <!-- <%= link_to 'Back', users_path %> -->
 <!-- <%= link_to 'Back', users_path %> -->
-

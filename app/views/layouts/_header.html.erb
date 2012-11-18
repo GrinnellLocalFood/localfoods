@@ -16,7 +16,7 @@
           <% if signed_in? %>
 
 
-          <% if current_user.admin == true %> 
+          <% if current_user.admin || current_user.coordinator %> 
           <li><%= link_to "Add User", new_user_path %></li>
           <li><%= link_to "Show Users", users_path %></li>
           <% end %>

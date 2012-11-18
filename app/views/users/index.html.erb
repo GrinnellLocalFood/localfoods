@@ -51,7 +51,7 @@
 </table>
 
         <br />
-	<% if current_user.admin %>
+	<% if current_user.admin || current_user.coordinator %>
         <%= link_to 'New User', new_user_path, :class=>"btn" %>
     <% end %>  
 

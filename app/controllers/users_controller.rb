@@ -81,9 +81,11 @@ class UsersController < ApplicationController
       if @user.save
 
         # Tell the UserMailer to send a welcome Email after save
-        UserMailer.welcome_email(request.host_with_port,@user).deliver
         if(!current_user.nil?)
+	  UserMailer.welcome_email(request.host_with_port,@user, true).deliver
           @user = current_user
+	else
+	  UserMailer.welcome_email(request.host_with_port,@user, false).deliver
         end        
         sign_in @user
          format.html { redirect_to(@user, :notice => 'User was successfully created.',

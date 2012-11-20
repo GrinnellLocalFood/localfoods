@@ -4,11 +4,23 @@
     <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
   </head>
   <body>
-    <h1>Welcome to localfoods.herokuapp.com, <%= @user.first_name %></h1>
+    <h2>Welcome to Grinnell LocalFoods Coop, <%= @user.first_name %></h2>
+    <% if @admin_added %>
+    <% @user.create_password_reset %>
     <p>
-      You have successfully signed up to example.com,
+      You have been added to the Grinnell LocalFoods Coop website.
+      First, <%= link_to("set your password", edit_password_reset_url(@user.password_reset_token)) %>.
+    </p>
+    <p>
+      Then, to login to the site, just follow this link: <%= link_to("Login", @url) %>.
+    </p>
+    <% else %>
+    <p>
+      You have successfully signed up to Grinnell LocalFoods Coop website,
       To login to the site, just follow this link: <%= link_to("Login", @url) %>.
     </p>
+    <% end %>
     <p>Thanks for joining and have a great day!</p>
   </body>
+  <p>Grinnell LocalFoods Admins</p>
 </html>

@@ -1,8 +1,17 @@
 Welcome to example.com, <%= @user.first_name %>
 ===============================================
  
-You have successfully signed up to example.com,
- 
-To login to the site, just follow this link: <%= @url %>.
+You have successfully signed up to the Grinnell LocalFoods Website,
+
+<% if @admin_added %>
+      You have been added to the Grinnell LocalFoods Coop website.
+      First, set your password: <%= edit_password_reset_url(@user.password_reset_token) %>.
+      Then, to login to the site, just follow this link: @url %>.
+    <% else %>
+      You have successfully signed up to Grinnell LocalFoods Coop website,
+      To login to the site, just follow this link: <%= link_to("Login", @url) %>.
+    <% end %>
  
 Thanks for joining and have a great day!
+
+Grinnell LocalFoods Admins

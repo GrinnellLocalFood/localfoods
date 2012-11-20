@@ -49,4 +49,7 @@ Localfoods::Application.configure do
 
   # path for development environment
   config.path = "http://localhost.herokuapp.com/"
+
+  # default path for action mailer
+  config.action_mailer.default_url_options = {:host => "localfood.herokuapp.com"}
 end

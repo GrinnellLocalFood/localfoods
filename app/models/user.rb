@@ -107,7 +107,7 @@ class User < ActiveRecord::Base
     def update_farm
       if self.farm.nil?
         if self.farmer?
-          create_farm
+          raise "Farm could not be created" unless create_farm
         end
       elsif !self.farmer
           self.farm.destroy

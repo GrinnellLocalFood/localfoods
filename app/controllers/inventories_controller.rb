@@ -8,6 +8,14 @@ class InventoriesController < ApplicationController
   end
 
 
+  def index
+    #need to add permissions checking
+    @title = "My Products"
+    if signed_in?
+      @inventory = current_user.farm.inventory
+    end
+  end
+
   def new
     @title = "New Item"
     @inventory = Inventory.new
@@ -31,22 +39,32 @@ class InventoriesController < ApplicationController
 
     respond_to do |format|
       if @farm.inventory << @inventory
-      #item was saved correctly
         sign_in @user
         flash[:notice] = @inventory.name + " saved!"
-        redirect_to inventories_path
+        format.html { redirect_to(inventories_path, :notice => 'User was successfully created.',
+          :class=>"alert alert-success") }
+
+         # format.xml  { render :xml => @user, :status => :created, :location => @user }
       else
         sign_in @user
         flash[:notice] = @inventory.name + " could not be saved."
-        redirect_to inventories_path
+        format.html { redirect_to(inventories_path, :notice => 'User was successfully created.',
+          :class=>"alert alert-success") }
+
+         # format.xml  { render :xml => @user, :status => :created, :location => @user }
       end
     end
   end
 
+
   def destroy
+    respond_to do |format|
+      format.html
+    end
   end
 
   def edit
+    @title = "Edit"
   end
 
   def show

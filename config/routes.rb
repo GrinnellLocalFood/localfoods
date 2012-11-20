@@ -1,15 +1,5 @@
 Localfoods::Application.routes.draw do
 
-  # get "inventory/new"
-
-  # put "inventory/create"
-
-  # get "inventory/destroy"
-
-  # get "inventory/edit"
-
-  # get "inventory/show"
-
   resources :users do
     member do
       get 'editpassword'
@@ -24,7 +14,19 @@ Localfoods::Application.routes.draw do
     end
   end
 
-  resources :inventories
+  resources :inventories do
+    member do
+      get 'show'
+    end
+
+    member do
+      put 'destroy'
+    end
+
+    member do
+      get 'edit'
+    end
+  end
 
   resources :sessions, :only => [:new, :create, :destroy]
 

@@ -20,8 +20,8 @@ describe "LayoutLinks" do
 	describe "when not logged in" do
 		it "should have a login link" do
 			visit root_path
-			response.should have_selector("a", :href => login_path,
-				:content => "Log In")
+			response.should have_selector('input', :class => "btn", 
+				:id => "session_submit", :name => "commit", :type => "submit", :value => "Log In")
 		end
 	end
 

@@ -39,9 +39,7 @@
     <% if current_user.admin || (!user.admin && current_user.coordinator) %>
     <td><%= link_to 'Edit', edit_user_path(user) %></td>
     <% end %>
-
-   
-
+    
     <% if current_user.admin %>
     <td><%= link_to "Delete", user, :confirm => 'Are you sure?', :method=>:delete, :class=>:Destroy %></td>
     <% end %>

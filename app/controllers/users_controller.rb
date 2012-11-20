@@ -47,7 +47,7 @@ class UsersController < ApplicationController
 
    if (current_user.admin || current_user.coordinator)
       @user = User.find(params[:id])
-      if(@user.admin && current_user.coordinator)
+      if(!current_user.admin && @user.admin)
          redirect_to(current_user, :alert => "Permission Denied")
       end
     else

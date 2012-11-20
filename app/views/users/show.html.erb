@@ -23,6 +23,7 @@
 
 			<% if @user.admin %>
 			, Admin
+			<% end %>
 
 			<br><br>
 			<% if current_user.admin %>
@@ -30,9 +31,13 @@
 					:class=>"btn" %>
 			<% end %>
 			<% if current_user.admin || current_user.coordinator %>
-				<%= link_to 'Show Users', users_path,
-					:class=>"btn" %>
+				<%= link_to 'Show Users', users_path, :class=>"btn" %>
+			<% end %>
 
+			<% if current_user.farmer %>
+				<%= link_to 'Add Item', newitem_path, :class=>"btn" %>
+
+				<%= link_to 'Inventory', inventories_path, :class=>"btn" %>	
 			<% end %>
 	
 			</div>
@@ -41,4 +46,3 @@
 		</div>
 	</div>
 </div>
-<% end %>

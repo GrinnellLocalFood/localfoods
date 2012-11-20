@@ -1,18 +1,28 @@
-<!-- <div class="container">
-	<div class="row">
-		<div class="span8 offset2 custom-block"> -->
+<div class="container">
+	<div class="row-fluid">
+		<div class="span8 offset2 custom-block">
 
-			<h1>Reset Password</h1><br>
+			<h1 align="center">Reset Password</h1><br>
 
-			<%= form_tag password_resets_path, :method => :post do %>
-			<div class="field">
-				<%= label_tag :email %>
-				<%= text_field_tag :email, params[:email] %>
+			<%= form_tag password_resets_path, :class=>"form-horizontal", :method => :post do %>
+
+			<div class="control-group">
+				<label class="control-label">
+					<%= label_tag :email, "Email" %>
+				</label>
+				<div class="controls">
+					<%= text_field_tag :email, params[:email], :placeholder=>"Email" %>
+				</div>
+
 			</div>
-			<div class="actions"><%= submit_tag "Reset Password" %></div>
-			<% end %>
 
-<!-- 		</div>
+			
+			<div align="center">
+				<%= submit_tag "Reset Password", :class=>"btn btn-primary" %>
+			</div>
+
+			<% end %>
+			
+		</div>
 	</div>
 </div>
- -->

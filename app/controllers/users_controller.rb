@@ -144,6 +144,7 @@ class UsersController < ApplicationController
         end
 
 # FIX HOW ALERTS ARE FLASHED HERE
+
       else
         flash.now[:alert] = "Old Password Incorrect."
         format.html { render :action => "editpassword" }

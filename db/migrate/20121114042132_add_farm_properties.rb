@@ -1,7 +1,7 @@
 class AddFarmProperties < ActiveRecord::Migration
   def self.up
   	add_column :farms,:description
-        add_column, :farms, :url
+        add_column :farms, :url
   end
 
   def self.down

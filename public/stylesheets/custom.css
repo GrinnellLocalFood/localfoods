@@ -55,13 +55,33 @@ margin-top: 4px;
   height:400px;
 }
 
+.hero-text {
+  margin-top: 70px;
+  margin-left: 20%;
+  margin-right: 5%;
+  width: 681px;
+  text-align: justify;
+ /* margin-right: 10%;*/
+  /*margin-left: 500px;*/
+  color: white;
+}
 
+.hero-text h2{
+  font-size: 35px;
+  line-height: 1;
+  letter-spacing: -1px;
+}
+
+.hero-text p{
+  font-size: 20px;
+  line-height: 1.5;
+  letter-spacing: -1px;
+}
 
 #hero-image-unit h2 {
   min-width: 800px;
   margin-top: 60px;
   margin-right: 10%;
-
   font-size: 35px;
   line-height: 1;
   letter-spacing: -1px;

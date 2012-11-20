@@ -79,17 +79,28 @@ class UsersController < ApplicationController
 
     respond_to do |format|
       if @user.save
-
+<<<<<<< HEAD
         # Tell the UserMailer to send a welcome Email after save
         UserMailer.welcome_email(request.host_with_port,@user).deliver
         if(!current_user.nil?)
           @user = current_user
         end        
         sign_in @user
-         format.html { redirect_to(@user, :notice => 'User was successfully created.',
+=======
+        # If already signed in, you don't want to be redirected after new user creation
+        if signed_in? 
+          format.html { redirect_to(users_path, :notice => 'User was successfully created.',
           :class=>"alert alert-success") }
+          format.xml  { head :ok }
 
-         format.xml  { render :xml => @user, :status => :created, :location => @user }
+        else 
+          sign_in @user
+        # format.html { redirect_to(@user, :notice => 'User was successfully created.') }
+>>>>>>> Making_pretty
+        format.html { redirect_to @user }
+        # format.html { redirect_to(@user, :notice => 'User was successfully created.') }
+        format.xml  { render :xml => @user, :status => :created, :location => @user }
+      end
       
     else
         #resets password and confirmation fields
@@ -142,9 +153,6 @@ class UsersController < ApplicationController
           format.html { render :action => "editpassword" }
           format.xml  { render :xml => @user.errors, :status => :unprocessable_entity }
         end
-
-# FIX HOW ALERTS ARE FLASHED HERE
-
       else
         flash.now[:alert] = "Old Password Incorrect."
         format.html { render :action => "editpassword" }
@@ -160,6 +168,7 @@ class UsersController < ApplicationController
       @user = User.find(params[:id])
       @user.destroy
 
+<<<<<<< HEAD
       respond_to do |format|
         format.html { redirect_to(users_path) }
         format.xml  { head :ok }
@@ -168,7 +177,12 @@ class UsersController < ApplicationController
       respond_to do |format|
         format.html { redirect_to(current_user) }
         format.xml  { head :ok }
+=======
+    respond_to do |format|
+      format.html { redirect_to(users_path, :notice => 'User was successfully destroyed.') }
+      format.xml  { head :ok }
+>>>>>>> Making_pretty
     end
-   end
+  end
   end
 end

@@ -1,18 +1,23 @@
-<div id ="hero-image-unit">
-	
-	<br><br><br>
-	<h2 align="right">Welcome to the Grinnell Local Foods Coop!</h2>
-	<p>Support local farmers, local economy, and environmental sustainability by purchasing quality food grown right here in central Iowa.
-
-		<br><br>
-		<% if !signed_in? %>
-		<%= link_to "Sign Up!", register_path,
-		:class=>"btn btn-large" %>
-		<% end %>
-	</p>
-
+<div id ="hero-image-unit" style="z-index: -1">
 </div>
 
-<div style="margin:500px">
+<div class="container-fluid" align="right">
+	<div class="row">
+		<div class="hero-text">
+			<h2>Welcome to the Grinnell Local Foods Coop!</h2>
+			<p>Support local farmers, local economy, and environmental sustainability by purchasing quality food grown right here in central Iowa.
+
+				<br><br>
+				<% if !signed_in? %>
+				<%= link_to "Sign Up!", register_path,
+				:class=>"btn btn-large" %>
+
+				<% end %>
+			</p>
+		</div>
+	</div>
 </div>
 
+<!-- <div style="margin:500px">
+</div>
+-->

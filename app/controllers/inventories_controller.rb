@@ -21,7 +21,7 @@ class InventoriesController < ApplicationController
     @inventory = Inventory.new
 
     respond_to do |format|
-      format.html # new.html.erb
+      format.html #new.html.erb
       format.xml  { render :xml => @inventory }
     end
   end
@@ -41,14 +41,14 @@ class InventoriesController < ApplicationController
       if @farm.inventory << @inventory
         sign_in @user
         flash[:notice] = @inventory.name + " saved!"
-        format.html { redirect_to(inventories_path, :notice => 'User was successfully created.',
+        format.html { redirect_to(inventories_path, :notice => 'Item was added successfully.',
           :class=>"alert alert-success") }
 
          # format.xml  { render :xml => @user, :status => :created, :location => @user }
       else
         sign_in @user
         flash[:notice] = @inventory.name + " could not be saved."
-        format.html { redirect_to(inventories_path, :notice => 'User was successfully created.',
+        format.html { redirect_to(inventories_path, :notice => 'Item was added successfully.',
           :class=>"alert alert-success") }
 
          # format.xml  { render :xml => @user, :status => :created, :location => @user }
@@ -58,11 +58,23 @@ class InventoriesController < ApplicationController
 
 
   def destroy
-    respond_to do |format|
-      format.html
+    
+      @inventory = Inventory.find(params[:id])
+     if @inventory.farm_id == current_user.id
+        respond_to do |format|
+        @inventory.destroy
+        format.html { redirect_to(inventories_path) }
+        format.xml  { head :ok }
+      end
+    else
+      respond_to do |format|
+        flash[:error] = "Could not delete item."
+        format.html { redirect_to(inventories_path) }
+        format.xml  { head :ok }
+    end
     end
   end
-
+  
   def edit
     @title = "Edit"
   end

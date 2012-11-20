@@ -33,6 +33,7 @@ Localfoods::Application.routes.draw do
   match '/register',  :to => 'users#new'
   match '/login',  :to => 'sessions#new'
   match '/logout', :to => 'sessions#destroy'
+  match '/newitem', :to => 'inventories#new'
 
   resources :password_resets
 

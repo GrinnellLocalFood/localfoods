@@ -16,9 +16,24 @@
           <% if signed_in? %>
 
 
-          <% if current_user.admin || current_user.coordinator %> 
+          <% if current_user.admin %> 
           <li><%= link_to "Add User", new_user_path %></li>
+          <% end %>
+          <% if current_user.admin || current_user.coordinator %> 
           <li><%= link_to "Show Users", users_path %></li>
+          <% end %>
+
+          <% if current_user.farmer %> 
+          <li class="dropdown nav">
+            <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+              Farmer
+              <span class="caret"></span>
+            </a>
+            <ul class="dropdown-menu">
+              <li><%= link_to "Add Item", newitem_path %></li>
+              <li><%= link_to "Inventory", inventories_path %></li>
+            </li>   
+            </ul>
           <% end %>
 
 
@@ -36,16 +51,9 @@
               <li class="divider"></li>
               <li><%= link_to "Log Out", logout_path, :method => :delete %>
               </ul>
-            </li>
-
-    <!--  <li><%= link_to "Profile", current_user %></li>
-          <li><%= link_to "Change Password", editpassword_user_path(current_user) %></li>
-          <li><%= link_to "Edit Account", edit_user_path(current_user) %></li>
-          <li><%= link_to "Log Out", logout_path, :method => :delete %></li>    -->          
-          
+            </li>   
           <% else %>
-          <!--<li><%= link_to "Log In", login_path %></li>-->
-          <!--<li><%= link_to "Sign Up", register_path %></li>-->
+
 
           <%= form_for(:session, :url => sessions_path, 
           :html=>{:class=>'navbar-form pull-right'}) do |f| %>

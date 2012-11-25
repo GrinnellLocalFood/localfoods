@@ -1,5 +1,16 @@
+
+
 <div id ="hero-image-unit" style="z-index: -1">
 </div>
+
+	<% if notice %>
+    <div class="home_notice home_notice-success"><%= notice %></div>
+  	<% end %>
+
+  	<% if alert %>
+	<div class="home_alert home_alert-success"><%= alert %></div>
+	<% end %>
+
 
 <div class="container-fluid" align="right">
 	<div class="row">

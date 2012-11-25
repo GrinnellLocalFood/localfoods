@@ -1,48 +1,91 @@
-<div class="container-fluid">
-	<div class="row-fluid">
-		<div class="span4 offset4 custom-block">
+<div class="container">
+	<div class="row">
+		
+		<%if @user.farmer || @user.coordinator || @user.admin %>
 
-			
+
+		<div class="span2 offset1 custom-block">
+			<ul class="nav nav-list">
+
+				<% if @user.coordinator || @user.admin %>
+				<li class="nav-header">User Options</li>
+				<li><%= link_to 'Show Users', users_path %></li>
+				<% if @user.admin %>
+				<li><%= link_to 'Add User', new_user_path %></li>
+				<% end %>
+				<% end %>
+
+				<% if @user.farmer %>
+				<li class="nav-header">Farmer Options</li>
+				<li><%= link_to 'Show Inventory', inventories_path %></li>
+				<li><%= link_to 'Add Item', newitem_path %></li>
+			</ul>
+		</div>
+		<% end %>
+
+
+		<% end %>
+
+
+		<div class="span8 custom-block">
+
+			<% if notice %>
+			<div class="alert alert-success"><%= notice %></div>
+			<% end %>
+
+			<% if alert %>
+			<div class="alert alert-success"><%= alert %></div>
+			<% end %>
 
 			<h2 align="center">Hello <%= @user.first_name %>!</h2>
 
-			<div align="center">
-			<strong>Your Roles:</strong>
-			
-			<% if @user.member %>
-			Member 
-			<% end %>
 
-			<% if @user.farmer %>
-			, Farmer
-			<% end %>
+			<table class="table" style="width:500px" align="center">
+			<!-- 	<tr>
+					<th style="color: gray">First Name</th>
+					<td><%= @user.first_name %></td>
+				</tr>
 
-			<% if @user.coordinator %>
-			, Coordinator 
-			<% end %>
+				<tr>
+					<th style="color: gray">Last Name</th>
+					<td><%= @user.last_name %></td>
+				</tr> -->
 
-			<% if @user.admin %>
-			, Admin
-			<% end %>
+				<tr>
+					<th style="color: gray">Email</th>
+					<td><%= @user.email %></td>
+				</tr>
 
-			<br><br>
-			<% if current_user.admin %>
-				<%= link_to 'Add User', new_user_path,
-					:class=>"btn" %>
-			<% end %>
-			<% if current_user.admin || current_user.coordinator %>
-				<%= link_to 'Show Users', users_path, :class=>"btn" %>
-			<% end %>
+				<tr>
+					<th style="color: gray">Phone</th>
+					<td><%= @user.phone %></td>
+				</tr>
 
-			<% if current_user.farmer %>
-				<%= link_to 'Add Item', newitem_path, :class=>"btn" %>
+				<tr>
+					<th style="color: gray">Roles</th>
+					<td>
+						<% if @user.farmer %>
+						Farmer, 
+						<% end %>
 
-				<%= link_to 'Inventory', inventories_path, :class=>"btn" %>	
-			<% end %>
-	
+						<% if @user.coordinator %>
+						Coordinator, 
+						<% end %>
+
+						<% if @user.admin %>
+						Admin, 
+						<% end %>
+
+						<% if @user.member %>
+						Member
+						<% end %>
+					</td>
+
+				</table>
+
 			</div>
-
-
 		</div>
 	</div>
-</div>
+
+
+

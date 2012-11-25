@@ -16,12 +16,12 @@
           <% if signed_in? %>
 
 
-          <% if current_user.admin %> 
+        <!--   <% if current_user.admin %> 
           <li><%= link_to "Add User", new_user_path %></li>
           <% end %>
           <% if current_user.admin || current_user.coordinator %> 
           <li><%= link_to "Show Users", users_path %></li>
-          <% end %>
+          <% end %> -->
 
           <% if current_user.farmer %> 
           <li class="dropdown nav">

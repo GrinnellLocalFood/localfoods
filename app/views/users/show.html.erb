@@ -13,7 +13,7 @@
 			Member 
 			<% end %>
 
-			<% if @user.farmer %>
+			<% if @user.producer %>
 			, Farmer
 			<% end %>
 
@@ -34,10 +34,10 @@
 				<%= link_to 'Show Users', users_path, :class=>"btn" %>
 			<% end %>
 
-			<% if current_user.farmer %>
+			<% if current_user.producer %>
 				<%= link_to 'Add Item', newitem_path, :class=>"btn" %>
 
-				<%= link_to 'Inventory', inventories_path, :class=>"btn" %>	
+				<%= link_to 'Inventory', items_path, :class=>"btn" %>	
 			<% end %>
 	
 			</div>

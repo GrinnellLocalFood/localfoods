@@ -67,17 +67,6 @@
     </div>
   </div>
 
-  <div class="control-group">
-    <label class="control-label">
-      <%= f.label:display_name, "Display Name" %>
-    </label>
-    <div class="controls">
-      <%= f.text_field :display_name, :placeholder=>"Display Name" %>
-    </div>
-  </div>
-
-
-
   <!-- admin specific options -->
   <% if current_user != nil && current_user.admin == true %> 
 
@@ -94,8 +83,8 @@
     </label>
 
     <label class="checkbox inline">
-     Farmer
-     <%= f.check_box :farmer %>
+     Producer
+     <%= f.check_box :producer %>
    </label> 
 
  </div>

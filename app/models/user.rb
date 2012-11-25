@@ -3,7 +3,6 @@ class User < ActiveRecord::Base
   attr_accessor :password_confirmation, :password, :old_password
   attr_accessible :first_name,
                   :last_name,
-                  :display_name, 
                   :email, 
                   :phone,
                   :password, #user entered password
@@ -11,7 +10,7 @@ class User < ActiveRecord::Base
                   :old_password,
                   :admin,
                   :coordinator,
-                  :farmer
+                  :producer
 
   validates :email, :presence => true,
                     :uniqueness =>  { :case_sensitive => false }
@@ -72,9 +71,6 @@ class User < ActiveRecord::Base
     end
 
     def default_values
-      if self.display_name == ""
-        self.display_name = self.first_name + " " + self.last_name
-      end
     end
 
     def format_values
@@ -110,10 +106,10 @@ class User < ActiveRecord::Base
 
     def update_farm
       if self.farm.nil?
-        if self.farmer?
+        if self.producer
           raise "Farm could not be created" unless create_farm
         end
-      elsif !self.farmer
+      elsif !self.producer
           self.farm.destroy
           self.farm = nil
       end

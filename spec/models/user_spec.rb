@@ -62,12 +62,7 @@ describe User do
     user_with_duplicate_email = User.new(@attr)
     user_with_duplicate_email.should_not be_valid
   end
-
-  it "should accept blank display name and replace with 'first last'" do
-    no_display_name_user = User.create!(@attr.merge(:display_name => ""))
-    no_display_name_user.display_name.should eq(no_display_name_user.first_name  + " " + no_display_name_user.last_name)
-  end
-
+  
   it "should not accept mismatched passwords" do
     mismatched_pwd_user = User.new(@attr.merge(:password_confirmation => "not the same"))
     mismatched_pwd_user.should_not be_valid
@@ -105,26 +100,26 @@ describe User do
     change_password_user.save.should eq(false)
   end
 
-  it "should create a farmer possessing a farm with the correct id" do
-    farmer = User.new(@attr.merge(:farmer => true))
-    farmer.save
-    farmer.farm.should_not be_nil
-    Farm.find(farmer.id).should eql(farmer.farm)
+  it "should create a producer possessing a farm with the correct id" do
+    producer = User.new(@attr.merge(:producer => true))
+    producer.save
+    producer.farm.should_not be_nil
+    Farm.find(producer.id).should eql(producer.farm)
   end
 
-  it "should add a farm for a user who is changed to a farmer" do
-    user = User.new(@attr) #non-farmer
+  it "should add a farm for a user who is changed to a producer" do
+    user = User.new(@attr) #non-producer
     user.save!
-    user.farmer = true
+    user.producer = true
     user.save
     user.farm.should_not be_nil
     Farm.find(user.id).should eql(user.farm)
   end
 
-  it "should delete a farm for a user who is no longer a farmer" do
-    user = User.new(@attr.merge(:farmer => true)) #farmer
+  it "should delete a farm for a user who is no longer a producer" do
+    user = User.new(@attr.merge(:producer => true)) #producer
     user.save!
-    user.farmer = false
+    user.producer = false
     user.save
     user.farm.should be_nil
     assert_raises (ActiveRecord::RecordNotFound) do
@@ -133,19 +128,19 @@ describe User do
   end
 
   it "should be able to set attributes of a farm" do
-    farmer = User.create!(@attr.merge(:farmer => true))
-    farmer.farm.url = "url"
-    farmer.farm.description = "description"
-    farmer.save
-    farm = Farm.find(farmer.id)
+    producer = User.create!(@attr.merge(:producer => true))
+    producer.farm.url = "url"
+    producer.farm.description = "description"
+    producer.save
+    farm = Farm.find(producer.id)
     farm.url.should eq("url")
     farm.description.should eq("description")
   end
 
 
-  it "should not give a non-farmer a farm" do
-    non_farmer = User.create(@attr)
-    non_farmer.farm.should eq(nil)
+  it "should not give a non-producer a farm" do
+    non_producer = User.create(@attr)
+    non_producer.farm.should eq(nil)
   end
 
 

@@ -1,3 +1,3 @@
 class Item < ActiveRecord::Base
-	belongs_to :farm, :foreign_key => "farm_id"
+	belongs_to :inventory, :foreign_key => "inventory_id"
 end

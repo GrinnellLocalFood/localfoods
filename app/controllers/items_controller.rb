@@ -12,7 +12,7 @@ class ItemsController < ApplicationController
     #need to add permissions checking
     @title = "My Products"
     if signed_in?
-      @item = current_user.farm.item
+      @item = current_user.inventory.item
     end
   end
 
@@ -30,15 +30,15 @@ class ItemsController < ApplicationController
     @item = Item.new(params[:item])
 
     if current_user.producer?
-      @farm = current_user.farm
+      @inventory = current_user.inventory
     elsif current_user.coordinator || current_user.admin
-      @farm = current_user.farm
+      @inventory = current_user.inventory
     else
       redirect_to current_user
     end
 
     respond_to do |format|
-      if @farm.item << @item
+      if @inventory.item << @item
         sign_in @user
         flash[:notice] = @item.name + " saved!"
         format.html { redirect_to(items_path, :notice => 'Item was added successfully.',
@@ -60,7 +60,7 @@ class ItemsController < ApplicationController
   def destroy
     
       @item = Item.find(params[:id])
-     if @item.farm_id == current_user.id
+     if @item.inventory_id == current_user.id
         respond_to do |format|
         @item.destroy
         format.html { redirect_to(items_path) }

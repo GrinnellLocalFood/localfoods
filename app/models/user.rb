@@ -26,12 +26,12 @@ class User < ActiveRecord::Base
 
    
 
-  before_save :encrypt_password, :default_values, :update_farm
-  # after_save :create_farm
+  before_save :encrypt_password, :default_values, :update_inventory
+  # after_save :create_inventory
 
   before_validation :format_values
 
-  has_one :farm, :foreign_key => "id", :autosave => true
+  has_one :inventory, :foreign_key => "id", :autosave => true
 
   def self.authenticate(email, submitted_password)
     user = find_by_email(email)
@@ -104,14 +104,14 @@ class User < ActiveRecord::Base
       (user && user.salt == cookie_salt) ? user : nil
     end
 
-    def update_farm
-      if self.farm.nil?
+    def update_inventory
+      if self.inventory.nil?
         if self.producer
-          raise "Farm could not be created" unless create_farm
+          raise "Inventory could not be created" unless create_inventory
         end
       elsif !self.producer
-          self.farm.destroy
-          self.farm = nil
+          self.inventory.destroy
+          self.inventory = nil
       end
     end
 

@@ -1,9 +1,9 @@
 require 'spec_helper'
 
-describe Farm do
+describe Inventory do
 
   before(:each) do
-    @attr = { :user_id => -1, 
+    @attr = { :id => -1, 
               :first_name => "Example", 
               :last_name => "User", 
               :email => "user@example.com", 

@@ -160,8 +160,8 @@ class UsersController < ApplicationController
   def destroy
     if(current_user.admin)
       @user = User.find(params[:id])
-      if !@user.farm.nil?
-        @user.farm.destroy
+      if !@user.inventory.nil?
+        @user.inventory.destroy
       end
       @user.destroy
 

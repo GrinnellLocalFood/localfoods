@@ -100,47 +100,47 @@ describe User do
     change_password_user.save.should eq(false)
   end
 
-  it "should create a producer possessing a farm with the correct id" do
+  it "should create a producer possessing a inventory with the correct id" do
     producer = User.new(@attr.merge(:producer => true))
     producer.save
-    producer.farm.should_not be_nil
-    Farm.find(producer.id).should eql(producer.farm)
+    producer.inventory.should_not be_nil
+    Inventory.find(producer.id).should eql(producer.inventory)
   end
 
-  it "should add a farm for a user who is changed to a producer" do
+  it "should add a inventory for a user who is changed to a producer" do
     user = User.new(@attr) #non-producer
     user.save!
     user.producer = true
     user.save
-    user.farm.should_not be_nil
-    Farm.find(user.id).should eql(user.farm)
+    user.inventory.should_not be_nil
+    Inventory.find(user.id).should eql(user.inventory)
   end
 
-  it "should delete a farm for a user who is no longer a producer" do
+  it "should delete a inventory for a user who is no longer a producer" do
     user = User.new(@attr.merge(:producer => true)) #producer
     user.save!
     user.producer = false
     user.save
-    user.farm.should be_nil
+    user.inventory.should be_nil
     assert_raises (ActiveRecord::RecordNotFound) do
-      Farm.find(user.id)
+      Inventory.find(user.id)
     end
   end
 
-  it "should be able to set attributes of a farm" do
+  it "should be able to set attributes of a inventory" do
     producer = User.create!(@attr.merge(:producer => true))
-    producer.farm.url = "url"
-    producer.farm.description = "description"
+    producer.inventory.url = "url"
+    producer.inventory.description = "description"
     producer.save
-    farm = Farm.find(producer.id)
-    farm.url.should eq("url")
-    farm.description.should eq("description")
+    inventory = Inventory.find(producer.id)
+    inventory.url.should eq("url")
+    inventory.description.should eq("description")
   end
 
 
-  it "should not give a non-producer a farm" do
+  it "should not give a non-producer a inventory" do
     non_producer = User.create(@attr)
-    non_producer.farm.should eq(nil)
+    non_producer.inventory.should eq(nil)
   end
 
 

@@ -10,9 +10,9 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121125182959) do
+ActiveRecord::Schema.define(:version => 20121126224336) do
 
-  create_table "farms", :force => true do |t|
+  create_table "inventories", :force => true do |t|
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "url"
@@ -21,17 +21,17 @@ ActiveRecord::Schema.define(:version => 20121125182959) do
 
   create_table "items", :force => true do |t|
     t.string   "name"
-    t.boolean  "available",                                    :default => false
+    t.boolean  "available",     :default => false
     t.integer  "units"
-    t.decimal  "price",         :precision => 10, :scale => 2
-    t.integer  "minorder",                                     :default => 1
+    t.decimal  "price"
+    t.integer  "minorder",      :default => 1
     t.integer  "maxorder"
-    t.integer  "totalquantity",                                :default => 0
-    t.integer  "totalordered",                                 :default => 0
+    t.integer  "totalquantity", :default => 0
+    t.integer  "totalordered",  :default => 0
     t.string   "description"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "farm_id"
+    t.integer  "inventory_id"
   end
 
   create_table "users", :force => true do |t|

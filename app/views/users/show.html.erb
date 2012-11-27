@@ -1,7 +1,7 @@
 <div class="container">
 	<div class="row">
 		
-		<%if @user.farmer || @user.coordinator || @user.admin %>
+		<%if @user.producer || @user.coordinator || @user.admin %>
 
 
 		<div class="span2 offset1 custom-block">
@@ -9,27 +9,19 @@
 
 				<% if @user.coordinator || @user.admin %>
 				<li class="nav-header">User Options</li>
-				<li><%= link_to 'Show Users', users_path %></li>
+				<li><%= link_to 'Users', users_path %></li>
 				<% if @user.admin %>
 				<li><%= link_to 'Add User', new_user_path %></li>
 				<% end %>
 				<% end %>
 
-<<<<<<< HEAD
-				<% if @user.farmer %>
-				<li class="nav-header">Farmer Options</li>
-				<li><%= link_to 'Show Inventory', inventories_path %></li>
+				<% if @user.producer %>
+				<li class="nav-header">Producer Options</li>
+				<li><%= link_to 'Inventory', items_path %></li>
 				<li><%= link_to 'Add Item', newitem_path %></li>
+				<% end %>
 			</ul>
 		</div>
-		<% end %>
-=======
-			<% if @user.producer %>
-			, Producer
-			<% end %>
->>>>>>> e93a0a27acec6fec9bcb978c432231e02b76ea83
-
-
 		<% end %>
 
 
@@ -43,18 +35,9 @@
 			<div class="alert alert-success"><%= alert %></div>
 			<% end %>
 
-<<<<<<< HEAD
+
 			<h2 align="center">Hello <%= @user.first_name %>!</h2>
-
-=======
-			<% if current_user.producer %>
-				<%= link_to 'Add Item', newitem_path, :class=>"btn" %>
-
-				<%= link_to 'Inventory', items_path, :class=>"btn" %>	
-			<% end %>
-	
-			</div>
->>>>>>> e93a0a27acec6fec9bcb978c432231e02b76ea83
+			<br>
 
 			<table class="table" style="width:500px" align="center">
 			<!-- 	<tr>
@@ -80,8 +63,13 @@
 				<tr>
 					<th style="color: gray">Roles</th>
 					<td>
-						<% if @user.farmer %>
-						Farmer, 
+
+						<% if @user.member %>
+						Member
+						<% end %>
+
+						<% if @user.producer %>
+						Producer, 
 						<% end %>
 
 						<% if @user.coordinator %>
@@ -92,9 +80,7 @@
 						Admin, 
 						<% end %>
 
-						<% if @user.member %>
-						Member
-						<% end %>
+
 					</td>
 
 				</table>

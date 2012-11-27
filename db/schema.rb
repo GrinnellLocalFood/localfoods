@@ -10,28 +10,28 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121117231821) do
+ActiveRecord::Schema.define(:version => 20121126224336) do
 
-  create_table "farms", :force => true do |t|
+  create_table "inventories", :force => true do |t|
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "url"
     t.string   "description"
   end
 
-  create_table "inventories", :force => true do |t|
+  create_table "items", :force => true do |t|
     t.string   "name"
-    t.boolean  "available",                                    :default => false
+    t.boolean  "available",     :default => false
     t.integer  "units"
-    t.decimal  "price",         :precision => 10, :scale => 2
-    t.integer  "minorder",                                     :default => 1
+    t.decimal  "price"
+    t.integer  "minorder",      :default => 1
     t.integer  "maxorder"
-    t.integer  "totalquantity",                                :default => 0
-    t.integer  "totalordered",                                 :default => 0
+    t.integer  "totalquantity", :default => 0
+    t.integer  "totalordered",  :default => 0
     t.string   "description"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "farm_id"
+    t.integer  "inventory_id"
   end
 
   create_table "users", :force => true do |t|
@@ -40,10 +40,9 @@ ActiveRecord::Schema.define(:version => 20121117231821) do
     t.string   "email"
     t.string   "phone"
     t.string   "encrypted_password"
-    t.string   "display_name"
     t.boolean  "member",                 :default => true
     t.boolean  "coordinator",            :default => false
-    t.boolean  "farmer",                 :default => false
+    t.boolean  "producer",               :default => false
     t.boolean  "admin",                  :default => false
     t.datetime "created_at"
     t.datetime "updated_at"

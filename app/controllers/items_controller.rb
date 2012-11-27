@@ -1,10 +1,10 @@
-class InventoriesController < ApplicationController
+class ItemsController < ApplicationController
   before_filter :check_permissions
   
   def check_permissions
     @user = current_user
     redirect_to @user unless signed_in? && (@user.coordinator || 
-      @user.admin || @user.farmer)
+      @user.admin || @user.producer)
   end
 
 
@@ -12,43 +12,43 @@ class InventoriesController < ApplicationController
     #need to add permissions checking
     @title = "My Products"
     if signed_in?
-      @inventory = current_user.farm.inventory
+      @item = current_user.inventory.item
     end
   end
 
   def new
     @title = "New Item"
-    @inventory = Inventory.new
+    @item = Item.new
 
     respond_to do |format|
       format.html #new.html.erb
-      format.xml  { render :xml => @inventory }
+      format.xml  { render :xml => @item }
     end
   end
 
   def create
-    @inventory = Inventory.new(params[:inventory])
+    @item = Item.new(params[:item])
 
-    if current_user.farmer?
-      @farm = current_user.farm
+    if current_user.producer?
+      @inventory = current_user.inventory
     elsif current_user.coordinator || current_user.admin
-      @farm = current_user.farm
+      @inventory = current_user.inventory
     else
       redirect_to current_user
     end
 
     respond_to do |format|
-      if @farm.inventory << @inventory
+      if @inventory.item << @item
         sign_in @user
-        flash[:notice] = @inventory.name + " saved!"
-        format.html { redirect_to(inventories_path, :notice => 'Item was added successfully.',
+        flash[:notice] = @item.name + " saved!"
+        format.html { redirect_to(items_path, :notice => 'Item was added successfully.',
           :class=>"alert alert-success") }
 
          # format.xml  { render :xml => @user, :status => :created, :location => @user }
       else
         sign_in @user
-        flash[:notice] = @inventory.name + " could not be saved."
-        format.html { redirect_to(inventories_path, :notice => 'Item was added successfully.',
+        flash[:notice] = @item.name + " could not be saved."
+        format.html { redirect_to(items_path, :notice => 'Item was added successfully.',
           :class=>"alert alert-success") }
 
          # format.xml  { render :xml => @user, :status => :created, :location => @user }
@@ -59,17 +59,17 @@ class InventoriesController < ApplicationController
 
   def destroy
     
-      @inventory = Inventory.find(params[:id])
-     if @inventory.farm_id == current_user.id
+      @item = Item.find(params[:id])
+     if @item.inventory_id == current_user.id
         respond_to do |format|
-        @inventory.destroy
-        format.html { redirect_to(inventories_path) }
+        @item.destroy
+        format.html { redirect_to(items_path) }
         format.xml  { head :ok }
       end
     else
       respond_to do |format|
         flash[:error] = "Could not delete item."
-        format.html { redirect_to(inventories_path) }
+        format.html { redirect_to(items_path) }
         format.xml  { head :ok }
     end
     end

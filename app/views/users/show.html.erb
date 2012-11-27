@@ -15,6 +15,7 @@
 				<% end %>
 				<% end %>
 
+<<<<<<< HEAD
 				<% if @user.farmer %>
 				<li class="nav-header">Farmer Options</li>
 				<li><%= link_to 'Show Inventory', inventories_path %></li>
@@ -22,6 +23,11 @@
 			</ul>
 		</div>
 		<% end %>
+=======
+			<% if @user.producer %>
+			, Producer
+			<% end %>
+>>>>>>> e93a0a27acec6fec9bcb978c432231e02b76ea83
 
 
 		<% end %>
@@ -37,8 +43,18 @@
 			<div class="alert alert-success"><%= alert %></div>
 			<% end %>
 
+<<<<<<< HEAD
 			<h2 align="center">Hello <%= @user.first_name %>!</h2>
 
+=======
+			<% if current_user.producer %>
+				<%= link_to 'Add Item', newitem_path, :class=>"btn" %>
+
+				<%= link_to 'Inventory', items_path, :class=>"btn" %>	
+			<% end %>
+	
+			</div>
+>>>>>>> e93a0a27acec6fec9bcb978c432231e02b76ea83
 
 			<table class="table" style="width:500px" align="center">
 			<!-- 	<tr>

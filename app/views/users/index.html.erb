@@ -16,11 +16,9 @@
             <table class="table table-hover">
               <tr>
                 <th>User</th>
-                <th>First name</th>
-                <th>Last name</th>
+                <th>Name</th>
                 <th>Email</th>
                 <th>Phone</th>
-                <th>Display name</th>
                 <th>Member</th>
                 <th>Coordinator</th>
                 <th>Farmer</th>
@@ -34,14 +32,12 @@
 <% if (current_user.admin || current_user.coordinator) %>
   <tr>
     <td><%= user.id %></td>
-    <td><%= user.first_name %></td>
-    <td><%= user.last_name %></td>
+    <td><%= user.first_name + " " +user.last_name %></td>
     <td><%= user.email %></td>
     <td><%= user.phone %></td>
-    <td><%= user.display_name %></td>
     <td><%= user.member %></td>
     <td><%= user.coordinator %></td>
-    <td><%= user.farmer %></td>
+    <td><%= user.producer %></td>
     <td><%= user.admin %></td>
 <% end %>
     <td><%= link_to 'Show', user %></td>

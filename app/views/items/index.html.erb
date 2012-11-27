@@ -9,7 +9,7 @@
 <div class="container-fluid">
     <div class="row-fluid">
         <div class="span12">
-            <% if @inventory.count != 0 %>
+            <% if @item.count != 0 %>
             <h1>Listing Products</h1>
 
             <table class="table table-hover">
@@ -27,7 +27,7 @@
                 <th></th>
             </tr>
 
-            <% @inventory.each do |item| %>
+            <% @item.each do |item| %>
             <tr>
                 <td><%= item.name %></td>
                 <td><%= item.description %></td>
@@ -38,7 +38,7 @@
                 <td><%= item.maxorder %></td>
                 <td><%= item.available %></td>
                 <td><%= link_to 'Show', item %></td>
-                <td><%= link_to 'Edit', edit_inventory_path(item) %></td>
+                <td><%= link_to 'Edit', edit_item_path(item) %></td>
                 <td><%= link_to "Delete", item, :confirm => 'Are you sure?', :method=>:delete, :class=>:Destroy %></td>
             </tr>
             <% end %>

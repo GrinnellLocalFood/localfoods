@@ -3,7 +3,6 @@ class User < ActiveRecord::Base
   attr_accessor :password_confirmation, :password, :old_password
   attr_accessible :first_name,
                   :last_name,
-                  :display_name, 
                   :email, 
                   :phone,
                   :password, #user entered password
@@ -11,7 +10,7 @@ class User < ActiveRecord::Base
                   :old_password,
                   :admin,
                   :coordinator,
-                  :farmer
+                  :producer
 
   validates :email, :presence => true,
                     :uniqueness =>  { :case_sensitive => false }
@@ -27,12 +26,12 @@ class User < ActiveRecord::Base
 
    
 
-  before_save :encrypt_password, :default_values, :update_farm
-  # after_save :create_farm
+  before_save :encrypt_password, :default_values, :update_inventory
+  # after_save :create_inventory
 
   before_validation :format_values
 
-  has_one :farm, :foreign_key => "id", :autosave => true
+  has_one :inventory, :foreign_key => "id", :autosave => true
 
   def self.authenticate(email, submitted_password)
     user = find_by_email(email)
@@ -72,9 +71,6 @@ class User < ActiveRecord::Base
     end
 
     def default_values
-      if self.display_name == ""
-        self.display_name = self.first_name + " " + self.last_name
-      end
     end
 
     def format_values
@@ -108,14 +104,14 @@ class User < ActiveRecord::Base
       (user && user.salt == cookie_salt) ? user : nil
     end
 
-    def update_farm
-      if self.farm.nil?
-        if self.farmer?
-          raise "Farm could not be created" unless create_farm
+    def update_inventory
+      if self.inventory.nil?
+        if self.producer
+          raise "Inventory could not be created" unless create_inventory
         end
-      elsif !self.farmer
-          self.farm.destroy
-          self.farm = nil
+      elsif !self.producer
+          self.inventory.destroy
+          self.inventory = nil
       end
     end
 

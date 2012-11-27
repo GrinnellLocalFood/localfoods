@@ -145,13 +145,13 @@ end
       assigns(:user).should eq(@another_user)
     end
 
-    it "should be able to edit admin, coordinator,farmer status" do
+    it "should be able to edit admin, coordinator,producer status" do
       @another_user = Factory(:user, :id => @user.id + 20, :email => "example20@example.com")
       @another_user.save
       get :edit, :id => @user.id + 20
       response.should have_selector('input', :name => "user[admin]", :type => "hidden", :value => '0')
       response.should have_selector('input', :name => "user[coordinator]", :type => "hidden", :value => '0')
-      response.should have_selector('input', :name => "user[farmer]", :type => "hidden", :value => '0')
+      response.should have_selector('input', :name => "user[producer]", :type => "hidden", :value => '0')
     end
   end
 
@@ -165,7 +165,7 @@ end
       response.should be_success
     end
 
-    it "should succeed given member or farmer but not an admin" do   
+    it "should succeed given member or producer but not an admin" do   
       @another_user = Factory(:user, :id => @user.id + 20, :email => "example20@example.com")
       @admin_user = Factory(:user, :id => @user.id + 21, :email => "example21@example.com", :admin => true)
       get :edit, :id => @user.id + 20
@@ -175,12 +175,12 @@ end
       response.should redirect_to(@user)
     end
 
-    it "should be able to edit coordinator,farmer status" do
+    it "should be able to edit coordinator,producer status" do
       @another_user = Factory(:user, :id => @user.id + 20, :email => "example20@example.com")
       @another_user.save
       get :edit, :id => @user.id + 20
       response.should have_selector('input', :name => "user[coordinator]", :type => "hidden", :value => '0')
-      response.should have_selector('input', :name => "user[farmer]", :type => "hidden", :value => '0')
+      response.should have_selector('input', :name => "user[producer]", :type => "hidden", :value => '0')
     end
   end
 end

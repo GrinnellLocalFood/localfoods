@@ -1,9 +1,6 @@
 require 'spec_helper'
 
-describe InventoriesController do
-
-
-  
+describe ItemsController do  
   
 describe "For non-signed in users" do
 

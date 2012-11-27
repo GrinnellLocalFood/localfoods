@@ -28,6 +28,12 @@ Localfoods::Application.routes.draw do
     end
   end
 
+  resources :inventories do
+    member do
+      get 'edit'
+    end
+  end
+
   resources :sessions, :only => [:new, :create, :destroy]
 
   match '/register',  :to => 'users#new'

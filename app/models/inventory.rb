@@ -3,6 +3,6 @@ class Inventory < ActiveRecord::Base
 					  # :autosave => false 
 	has_many :item, :foreign_key => "inventory_id", :autosave => true
 
-	attr_accessible :url, :description
+	attr_accessible :url, :description, :display_name
 
 end

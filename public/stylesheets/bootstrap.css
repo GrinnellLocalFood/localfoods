@@ -1011,7 +1011,7 @@ textarea,
 }
 
 textarea {
-  height: auto;
+  height: 100px;
 }
 
 textarea,

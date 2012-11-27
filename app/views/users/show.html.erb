@@ -4,7 +4,7 @@
 		<%if @user.producer || @user.coordinator || @user.admin %>
 
 
-		<div class="span2 offset1 custom-block">
+		<div class="span3 custom-block" style="padding-bottom: 76px">
 			<ul class="nav nav-list">
 
 				<% if @user.coordinator || @user.admin %>
@@ -86,6 +86,52 @@
 				</table>
 
 			</div>
+
+			<% if @user.producer %>
+				<div class="span8 offset3 custom-block" style="margin-top: 17px">
+
+				<% if notice %>
+				<div class="alert alert-success"><%= notice %></div>
+				<% end %>
+
+				<% if alert %>
+				<div class="alert alert-success"><%= alert %></div>
+				<% end %>
+
+
+				<h2 align="center">Hello <%= @user.first_name %>!</h2>
+				<br>
+
+				<table class="table" style="width:500px" align="center">
+				<!-- 	<tr>
+						<th style="color: gray">First Name</th>
+						<td><%= @user.first_name %></td>
+					</tr>
+
+					<tr>
+						<th style="color: gray">Last Name</th>
+						<td><%= @user.last_name %></td>
+					</tr> -->
+
+					<tr>
+						<th style="color: gray">Prdducer Name</th>
+						<td><%= @user.inventory.display_name %></td>
+					</tr>
+
+					<tr>
+						<th style="color: gray">Website</th>
+						<td><%= @user.inventory.url %></td>
+					</tr>
+
+					<tr>
+						<th style="color: gray">Description</th>
+						<td><%= @user.inventory.description %></td>
+					</tr>
+
+					</table>
+
+				</div>
+			<% end %>
 		</div>
 	</div>
 

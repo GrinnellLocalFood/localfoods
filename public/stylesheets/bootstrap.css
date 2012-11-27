@@ -1868,6 +1868,7 @@ legend + .control-group {
   *margin-left: 0;
 }*/
 
+/*CHANGE*/
 /*The width change here and the margin change below
   make sense for a span8 offset2 page*/
 .form-horizontal .control-label {
@@ -1877,7 +1878,7 @@ legend + .control-group {
   text-align: right;
 }
 
-
+/*CHANGE*/
 .form-horizontal .controls {
   *display: inline-block;
   *padding-left: 20px;

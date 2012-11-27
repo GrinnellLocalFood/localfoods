@@ -41,8 +41,12 @@
                 <td><%= link_to 'Edit', edit_item_path(item) %></td>
                 <td><%= link_to "Delete", item, :confirm => 'Are you sure?', :method=>:delete, :class=>:Destroy %></td>
             </tr>
+            </table>
+
+            <%= link_to 'Add Item', newitem_path, :class=>"btn" %>
+            
             <% end %>
-        </table>
+        
 
         <% else %>
         <div class="container">
@@ -52,14 +56,15 @@
                     <h1 align="center">You have no items!</h1>
                     <br>
                     <p align="center">Add items by clicking the "Add Item" button below</p>
- <% end %>
+
                     <br>
                     <p align="center"><%= link_to 'Add Item', newitem_path, :class=>"btn" %></p>
-
                 </div>
             </div>
         </div>
+        <% end %>
 
-</div>
-</div>
+
+        </div>
+    </div>
 </div>

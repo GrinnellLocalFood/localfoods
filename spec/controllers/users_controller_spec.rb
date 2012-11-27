@@ -74,7 +74,7 @@ describe "GET show" do
     end
     it "should have New user and show user button" do    
       get :show, :id => "1"
-      response.should have_selector("a", :href => users_path, :content => "Show Users")
+      response.should have_selector("a", :href => users_path, :content => "All Users")
       response.should have_selector("a", :href => users_path + "/new", :content => "Add User")
     end
   end
@@ -85,7 +85,7 @@ describe "GET show" do
     end
     it "should have New user and show user button" do    
       get :show, :id => "1"
-      response.should have_selector("a", :href => users_path, :content => "Show Users")
+      response.should have_selector("a", :href => users_path, :content => "All Users")
       response.should_not have_selector("a", :href => users_path + "/new", :content => "Add User")
     end
   end

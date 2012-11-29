@@ -99,9 +99,13 @@
 				<% end %>
 
 
-				<h2 align="center">Hello <%= @user.first_name %>!</h2>
-				<br>
+				<h2 align="center">Producer Profile</h2>
+				
 
+				<h2 align="center">
+					<%= image_tag (@user.inventory.photo.url, :width => 150, :height => 150) %>
+				</h2>
+				<br>
 				<table class="table" style="width:500px" align="center">
 				<!-- 	<tr>
 						<th style="color: gray">First Name</th>
@@ -112,9 +116,8 @@
 						<th style="color: gray">Last Name</th>
 						<td><%= @user.last_name %></td>
 					</tr> -->
-
 					<tr>
-						<th style="color: gray">Prdducer Name</th>
+						<th style="color: gray">Producer Name</th>
 						<td><%= @user.inventory.display_name %></td>
 					</tr>
 

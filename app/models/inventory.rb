@@ -3,6 +3,7 @@ class Inventory < ActiveRecord::Base
 					  # :autosave => false 
 	has_many :item, :foreign_key => "inventory_id", :autosave => true
 
-	attr_accessible :url, :description, :display_name
+    has_attached_file :photo, :styles => {:small => "150x150>"}
+	attr_accessible :url, :description, :display_name, :photo
 
 end

@@ -46,8 +46,8 @@ class ItemsController < ApplicationController
          # format.xml  { render :xml => @user, :status => :created, :location => @user }
        else
         flash[:notice] = @item.name + " could not be saved."
-        format.html { redirect_to(items_path, :notice => 'Item was added successfully.',
-          :class=>"alert alert-success") }
+        format.html { render :action => "new" }
+        format.xml  { render :xml => @user.errors, :status => :unprocessable_entity }
 
          # format.xml  { render :xml => @user, :status => :created, :location => @user }
        end

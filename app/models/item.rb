@@ -4,11 +4,30 @@ class Item < ActiveRecord::Base
 
 	attr_accessible :name, :description, :minorder, :maxorder, :item_photo ,:price, :available, :units
 
-	def is_available?(item)
-		if item.available
+	validates :name, :presence => true
+	validates :description, :presence => true
+	validates :minorder, :presence => true
+	validates :price, :presence => true
+	validates :units, :presence => true
+	validates :maxorder, :numericality => {:greater_than => :minorder}, :allow_blank => true
+
+	before_validation :format_values
+
+
+	def is_available?
+		if self.available
 			"Yes"
 		else
 			"No"
 		end
+	end
+
+	private
+
+	def format_values
+		if(self.units.nil? || self.units.empty?)
+			self.units = "units"
+		end
+		self.units.downcase
 	end
 end

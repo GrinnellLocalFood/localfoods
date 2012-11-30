@@ -2,7 +2,7 @@
 <% if @item.errors.any? %>
 <!-- <div id="error_explanation"> -->
 <div class="alert alert-error">
-  <h4><%= pluralize(@item.errors.count, "error") %> prohibited this user from being saved:</h4>
+  <h4><%= pluralize(@item.errors.count, "error") %> prohibited this item from being saved:</h4>
 
   <br><ul>
   <% @item.errors.full_messages.each do |msg| %>
@@ -27,7 +27,16 @@
     <%= f.label :description, "Description *" %>
   </label>
   <div class="controls">
-    <%= f.text_field :description, :placeholder=>"Description" %>
+    <%= f.text_area :description, :placeholder=>"Description" %>
+  </div>
+</div>
+
+<div class="control-group">
+  <label class="control-label">
+    <%= f.label :totalquantity, "Total Quantity *" %>
+  </label>
+  <div class="controls">
+    <%= f.text_field :totalquantity, :placeholder=>"Total Quantity" %>
   </div>
 </div>
 
@@ -47,16 +56,7 @@
 
 <div class="control-group">
   <label class="control-label">
-    <%= f.label :totalquantity, "Total Quantity *" %>
-  </label>
-  <div class="controls">
-    <%= f.text_field :totalquantity, :placeholder=>"Total Quantity" %>
-  </div>
-</div>
-
-<div class="control-group">
-  <label class="control-label">
-    <%= f.label :units, "Units *" %>
+    <%= f.label :units, "Units" %>
   </label>
   <div class="controls">
     <%= f.text_field :units, :placeholder=>"Pounds, Grams, Gallons etc." %>

@@ -38,7 +38,7 @@
 				<%end%>
 			</h1>
 
-			<h2 style="text-align:center;margin-right: 200px"><%= @item.name %></h2>
+			<h2 style="text-align:center;margin-right: 200px"><%= @item.name.pluralize %></h2>
 			<br>
 			<table class="table" style="width:500px" align="center">
 				<!-- 	<tr>
@@ -51,12 +51,17 @@
 						<td><%= @user.last_name %></td>
 					</tr> -->
 					<tr>
+						<th style="color: gray">Producer</th>
+						<td><%=@item.inventory.display_name%></td>
+					</tr>
+
+					<tr>
 						<th style="color: gray">Availability</th>
-						<td><%=@item.is_available?(@item)%></td>
+						<td><%=@item.is_available?%></td>
 					</tr>
 					<tr>
-						<th style="color: gray">Price</th>
-						<td><%= @item.price %></td>
+						<th style="color: gray">Price Per <%= @item.units.singularize.titlecase %></th>
+						<td><%= number_to_currency(@item.price) %></td>
 					</tr>
 					<tr>
 						<th style="color: gray">Minimum Order</th>

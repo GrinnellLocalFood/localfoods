@@ -32,21 +32,21 @@
                 <td><%= item.name %></td>
                 <td><%= item.description %></td>
                 <td><%= item.totalquantity %></td>
-                <td><%= item.price %></td>
+                <td><%= number_to_currency(item.price) %></td>
                 <td><%= item.totalordered %></td>
                 <td><%= item.minorder %></td>
                 <td><%= item.maxorder %></td>
-                <td><%= item.available %></td>
+                <td><%= item.is_available? %></td>
                 <td><%= link_to 'Show', item %></td>
                 <td><%= link_to 'Edit', edit_item_path(item) %></td>
                 <td><%= link_to "Delete", item, :confirm => 'Are you sure?', :method=>:delete, :class=>:Destroy %></td>
             </tr>
-            </table>
-
+             <% end %>
+        </table>
+            
             <%= link_to 'Add Item', newitem_path, :class=>"btn" %>
             
-            <% end %>
-        
+           
 
         <% else %>
         <div class="container">

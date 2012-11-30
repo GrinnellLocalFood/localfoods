@@ -8,7 +8,12 @@ describe Item do
               :email => "user@example.com", 
               :password => "password",
               :password_confirmation => "password"}
-    @item = { :name => "Apple" }
+    @item = { :name => "Apple", 
+              :description => "blah",
+              :minorder => 5, 
+              :maxorder => 15, 
+              :price => 4.00, 
+              :available => true }
   end
 
   it "should allow a producer to add multiple items" do

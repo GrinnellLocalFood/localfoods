@@ -20,11 +20,11 @@ Localfoods::Application.routes.draw do
     end
 
     member do
-      put 'destroy'
+      get 'edit'
     end
 
     member do
-      get 'edit'
+      put 'update'
     end
   end
 

@@ -1,6 +1,26 @@
 <div class="container">
 	<div class="row">
-		<div class="span8 offset3 custom-block" style="margin-top: 17px">
+		<div class="span2.5 custom-block" style="padding-bottom: 76px">
+				<ul class="nav nav-list">
+
+					<% if @user.coordinator || @user.admin %>
+					<li class="nav-header">User Options</li>
+					<li><%= link_to 'All Users', users_path %></li>
+					<% if @user.admin %>
+					<li><%= link_to 'Add User', new_user_path %></li>
+					<% end %>
+					<% end %>
+
+					<% if @user.producer %>
+					<li class="nav-header">Producer Options</li>
+					<li><%= link_to 'Edit Current Item', edit_item_path %></li>
+					<li><%= link_to 'Inventory', items_path %></li>
+					<li><%= link_to 'Add Item', newitem_path %></li>
+					<% end %>
+				</ul>
+			</div>
+
+		<div class="span8 custom-block" >
 
 			<% if notice %>
 			<div class="alert alert-success"><%= notice %></div>
@@ -11,13 +31,14 @@
 			<% end %>
 
 
-			<h2 align="center"><%= @item.name %></h2>
+			<h1 style="text-align:left;margin-left:65px;float:left">
 
-			<% if !(@item.item_photo_file_name.nil?) %>
-			<h2 align="center">
+				<% if !(@item.item_photo_file_name.nil?) %>
 				<%= image_tag(@item.item_photo.url, :width => 150, :height => 150) %>
-			</h2>
-			<%end%>
+				<%end%>
+			</h1>
+
+			<h2 style="text-align:center;margin-right: 200px"><%= @item.name %></h2>
 			<br>
 			<table class="table" style="width:500px" align="center">
 				<!-- 	<tr>

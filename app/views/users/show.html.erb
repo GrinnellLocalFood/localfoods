@@ -101,10 +101,11 @@
 
 				<h2 align="center">Producer Profile</h2>
 				
-
+				<% if !(@user.inventory.photo_file_name.nil?) %>
 				<h2 align="center">
-					<%= image_tag (@user.inventory.photo.url, :width => 150, :height => 150) %>
+					<%= image_tag(@user.inventory.photo.url, :width => 150, :height => 150) %>
 				</h2>
+				<%end%>
 				<br>
 				<table class="table" style="width:500px" align="center">
 				<!-- 	<tr>

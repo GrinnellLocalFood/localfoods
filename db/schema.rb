@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121129012415) do
+ActiveRecord::Schema.define(:version => 20121130042611) do
 
   create_table "inventories", :force => true do |t|
     t.datetime "created_at"
@@ -26,17 +26,21 @@ ActiveRecord::Schema.define(:version => 20121129012415) do
 
   create_table "items", :force => true do |t|
     t.string   "name"
-    t.boolean  "available",     :default => false
+    t.boolean  "available",               :default => false
     t.integer  "units"
     t.decimal  "price"
-    t.integer  "minorder",      :default => 1
+    t.integer  "minorder",                :default => 1
     t.integer  "maxorder"
-    t.integer  "totalquantity", :default => 0
-    t.integer  "totalordered",  :default => 0
+    t.integer  "totalquantity",           :default => 0
+    t.integer  "totalordered",            :default => 0
     t.string   "description"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "inventory_id"
+    t.string   "item_photo_file_name"
+    t.string   "item_photo_content_type"
+    t.integer  "item_photo_file_size"
+    t.datetime "item_photo_updated_at"
   end
 
   create_table "users", :force => true do |t|

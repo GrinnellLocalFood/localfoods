@@ -1,2 +1,59 @@
-<h1>Item#show</h1>
-<p>Find me in app/views/item/show.html.erb</p>
+<div class="container">
+	<div class="row">
+		<div class="span8 offset3 custom-block" style="margin-top: 17px">
+
+			<% if notice %>
+			<div class="alert alert-success"><%= notice %></div>
+			<% end %>
+
+			<% if alert %>
+			<div class="alert alert-success"><%= alert %></div>
+			<% end %>
+
+
+			<h2 align="center"><%= @item.name %></h2>
+
+			<% if !(@item.item_photo_file_name.nil?) %>
+			<h2 align="center">
+				<%= image_tag(@item.item_photo.url, :width => 150, :height => 150) %>
+			</h2>
+			<%end%>
+			<br>
+			<table class="table" style="width:500px" align="center">
+				<!-- 	<tr>
+						<th style="color: gray">First Name</th>
+						<td><%= @user.first_name %></td>
+					</tr>
+
+					<tr>
+						<th style="color: gray">Last Name</th>
+						<td><%= @user.last_name %></td>
+					</tr> -->
+					<tr>
+						<th style="color: gray">Availability</th>
+						<td><%=@item.is_available?(@item)%></td>
+					</tr>
+					<tr>
+						<th style="color: gray">Price</th>
+						<td><%= @item.price %></td>
+					</tr>
+					<tr>
+						<th style="color: gray">Minimum Order</th>
+						<td><%= @item.minorder %></td>
+					</tr>
+
+					<tr>
+						<th style="color: gray">Maximum Order</th>
+						<td><%= @item.maxorder %></td>
+					</tr>
+
+					<tr>
+						<th style="color: gray">Description</th>
+						<td><%= @item.description %></td>
+					</tr>
+
+				</table>
+
+			</div>
+		</div>
+	</div>

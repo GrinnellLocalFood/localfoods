@@ -2,6 +2,7 @@ source 'http://rubygems.org'
 
 gem 'rails', '3.0.1'
 gem 'paperclip', '2.7.0'
+gem 'cocaine', '0.3.2'
 
 group :development, :test do
   gem 'sqlite3','1.3.3'

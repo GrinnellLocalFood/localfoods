@@ -13,7 +13,14 @@ describe "For non-signed in users" do
 
   describe "GET 'new'" do
     it "should redirect to login page" do
-      get 'new'
+      get 'producer_new'
+      response.should redirect_to(login_path)
+    end
+  end
+
+  describe "GET 'new'" do
+    it "should redirect to login page" do
+      get 'admin_coord_new'
       response.should redirect_to(login_path)
     end
   end

@@ -116,15 +116,12 @@ describe User do
     Inventory.find(user.id).should eql(user.inventory)
   end
 
-  it "should delete a inventory for a user who is no longer a producer" do
+  it "should not delete a inventory for a user who is no longer a producer" do
     user = User.new(@attr.merge(:producer => true)) #producer
     user.save!
     user.producer = false
     user.save
-    user.inventory.should be_nil
-    assert_raises (ActiveRecord::RecordNotFound) do
-      Inventory.find(user.id)
-    end
+    user.inventory.should_not be_nil
   end
 
   it "should be able to set attributes of a inventory" do

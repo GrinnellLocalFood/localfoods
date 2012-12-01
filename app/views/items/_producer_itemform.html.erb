@@ -2,7 +2,7 @@
 <% if @item.errors.any? %>
 <!-- <div id="error_explanation"> -->
 <div class="alert alert-error">
-  <h4><%= pluralize(@item.errors.count, "error") %> prohibited this user from being saved:</h4>
+  <h4><%= pluralize(@item.errors.count, "error") %> prohibited this item from being saved:</h4>
 
   <br><ul>
   <% @item.errors.full_messages.each do |msg| %>
@@ -33,21 +33,7 @@
     <%= f.label :description, "Description *" %>
   </label>
   <div class="controls">
-    <%= f.text_field :description, :placeholder=>"Description" %>
-  </div>
-</div>
-
-<div class="control-group">
-  <label class="control-label">
-    <%= f.label :price, "Unit Price *" %>
-  </label>
-  <div class="controls">
-
-<div class="input-prepend">
-<span class="add-on">$</span>
-    <%= f.text_field :price, :placeholder=>"Unit Price", :class=>"span2", :id=>"inv_price_field" %>
-</div>
-
+    <%= f.text_area :description, :placeholder=>"Description" %>
   </div>
 </div>
 
@@ -62,10 +48,24 @@
 
 <div class="control-group">
   <label class="control-label">
-    <%= f.label :units, "Units *" %>
+    <%= f.label :price, "Price Per Unit *" %>
   </label>
   <div class="controls">
-    <%= f.text_field :units, :placeholder=>"Pounds, Grams, Gallons etc." %>
+
+<div class="input-prepend">
+<span class="add-on">$</span>
+    <%= f.text_field :price, :placeholder=>"Unit Price", :class=>"span2", :id=>"inv_price_field" %>
+</div>
+
+  </div>
+</div>
+
+<div class="control-group">
+  <label class="control-label">
+    <%= f.label :units, "Units" %>
+  </label>
+  <div class="controls">
+    <%= f.text_field :units, :placeholder=>"lb, oz, pint etc." %>
   </div>
 </div>
 
@@ -84,6 +84,16 @@
   </label>
   <div class="controls">
     <%= f.text_field :maxorder, :placeholder=>"Maximum Order" %>
+  </div>
+</div>
+
+<div class="control-group">
+  <label class="control-label">
+    <%= f.label(:available, "Available") %>
+  </label>
+  <div class="controls">
+    <%= f.radio_button :available, true %> Yes
+    <%= f.radio_button :available, false %> No
   </div>
 </div>
 

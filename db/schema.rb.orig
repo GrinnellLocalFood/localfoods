@@ -10,6 +10,9 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
+<<<<<<< HEAD
+ActiveRecord::Schema.define(:version => 20121130070010) do
+=======
 ActiveRecord::Schema.define(:version => 20121201202621) do
 
   create_table "application_states", :force => true do |t|
@@ -17,6 +20,7 @@ ActiveRecord::Schema.define(:version => 20121201202621) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+>>>>>>> EditItem
 
   create_table "inventories", :force => true do |t|
     t.datetime "created_at"

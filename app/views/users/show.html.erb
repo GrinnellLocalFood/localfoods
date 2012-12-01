@@ -13,6 +13,11 @@
 
 				<% if @user.admin %>
 				<li><%= link_to 'Add User', new_user_path %></li>
+				<% if ApplicationState.orders_open?%>
+				<li><%= link_to 'Close Orders', '/editorderstate' %></li>
+				<% else %>
+				<li><%= link_to 'Open Orders', '/editorderstate' %></li>
+				<% end %>
 				<% end %>
 			
 				<li class="nav-header">Inventory</li>
@@ -107,7 +112,7 @@
 				
 				<% if !(@user.inventory.photo_file_name.nil?) %>
 				<h2 align="center">
-					<%= image_tag(@user.inventory.photo.url, :width => 150, :height => 150) %>
+					<%= image_tag @user.inventory.photo.url(:small) %>
 				</h2>
 				<%end%>
 				<br>

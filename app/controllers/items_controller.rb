@@ -65,29 +65,27 @@ class ItemsController < ApplicationController
 
     respond_to do |format|
       if @inventory.item << @item
-        sign_in @user
         flash[:notice] = @item.name + " saved!"
         format.html { redirect_to(items_path, :notice => 'Item was added successfully.',
           :class=>"alert alert-success") }
 
          # format.xml  { render :xml => @user, :status => :created, :location => @user }
-      else
-        sign_in @user
+       else
         flash[:notice] = @item.name + " could not be saved."
-        format.html { redirect_to(items_path, :notice => 'Item was added successfully.',
-          :class=>"alert alert-success") }
+        format.html { render :action => "new" }
+        format.xml  { render :xml => @user.errors, :status => :unprocessable_entity }
 
          # format.xml  { render :xml => @user, :status => :created, :location => @user }
-      end
-    end
-  end
+       end
+     end
+   end
 
 
-  def destroy
-    
-      @item = Item.find(params[:id])
-     if @item.inventory_id == current_user.id
-        respond_to do |format|
+   def destroy
+
+    @item = Item.find(params[:id])
+    if @item.inventory_id == current_user.id
+      respond_to do |format|
         @item.destroy
         format.html { redirect_to(items_path) }
         format.xml  { head :ok }
@@ -97,16 +95,32 @@ class ItemsController < ApplicationController
         flash[:error] = "Could not delete item."
         format.html { redirect_to(items_path) }
         format.xml  { head :ok }
-    end
+      end
     end
   end
   
   def edit
-    @title = "Edit"
-  end
+   @title = "Edit"
+   @item = Item.find(params[:id])
+ end
 
-  def show
-     @item = Item.find(params[:id])
+ def update
+  @item = Item.find(params[:id])
+  respond_to do |format|
+    if @item.update_attributes(params[:item])
+      format.html { redirect_to(items_path, :notice => 'Item was successfully updated.') }
+      format.xml  { head :ok }
+    else
+
+      format.html { render :action => "edit" }
+      format.xml  { render :xml => @item.errors, :status => :unprocessable_entity }
+    end
   end
+end
+
+
+def show
+ @item = Item.find(params[:id])
+end
 
 end

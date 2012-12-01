@@ -13,6 +13,9 @@ Localfoods::Application.routes.draw do
       get 'edit'
     end
 
+    # member do
+    #   get 'items#new'
+    # end
   end
 
   resources :items do
@@ -42,9 +45,13 @@ Localfoods::Application.routes.draw do
   match '/register',  :to => 'users#new'
   match '/login',  :to => 'sessions#new'
   match '/logout', :to => 'sessions#destroy'
+<<<<<<< HEAD
   match '/producer_newitem', :to => 'items#producer_new'
   match '/admin_coord_newitem', :to => 'items#admin_coord_new'
+=======
+  match '/newitem', :to => 'items#new'
   match '/editorderstate', :to => 'application_states#editorderstate' 
+>>>>>>> EditItem
 
   resources :password_resets
 

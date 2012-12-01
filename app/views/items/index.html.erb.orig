@@ -47,11 +47,19 @@
                 <td><%= link_to 'Edit', edit_item_path(item) %></td>
                 <td><%= link_to "Delete", item, :confirm => 'Are you sure?', :method=>:delete, :class=>:Destroy %></td>
             </tr>
+<<<<<<< HEAD
 
             <% end %>
             </table>
 
 
+=======
+             <% end %>
+        </table>
+            
+        <%= link_to 'Add Item', newitem_path, :class=>"btn" %>   
+           
+>>>>>>> EditItem
         <% else %>
         <div class="container">
             <div class="row">

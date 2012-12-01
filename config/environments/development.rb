@@ -26,7 +26,7 @@ Localfoods::Application.configure do
   # path for development environment
   config.action_mailer.default_url_options = {:host => "localhost:3000"}
 
-  Paperclip.options[:command_path] = "/usr/bin"
+ Paperclip.options[:command_path] = '/usr/bin/'
 
 end
 

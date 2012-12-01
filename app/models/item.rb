@@ -1,6 +1,10 @@
 class Item < ActiveRecord::Base
 	belongs_to :inventory, :foreign_key => "inventory_id"
-	has_attached_file :item_photo
+	has_attached_file :item_photo, :url => "/system/item_photos/:id/:style/:basename.:extension", :styles => {
+		:thumb => "50x50>",
+		:medium => "300x300>",
+		:small => "150x150>"
+	}
 
 	attr_accessible :name, :description, :minorder, :maxorder, :item_photo ,:price, :available, :units
 

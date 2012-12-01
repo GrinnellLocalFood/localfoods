@@ -34,7 +34,7 @@
 			<h1 style="text-align:left;margin-left:65px;float:left">
 
 				<% if !(@item.item_photo_file_name.nil?) %>
-				<%= image_tag(@item.item_photo.url, :width => 150, :height => 150) %>
+				<%= image_tag(@item.item_photo.url(:small)) %>
 				<%end%>
 			</h1>
 

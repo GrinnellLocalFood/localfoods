@@ -32,7 +32,7 @@ class User < ActiveRecord::Base
 
   before_validation :format_values
 
-  has_one :inventory, :foreign_key => "id", :autosave => true
+  has_one :inventory, :foreign_key => "id", :autosave => true, :dependent => :destroy
 
   def self.authenticate(email, submitted_password)
     user = find_by_email(email)
@@ -111,8 +111,7 @@ class User < ActiveRecord::Base
           raise "Inventory could not be created" unless create_inventory
         end
       elsif !self.producer
-          self.inventory.destroy
-          self.inventory = nil
+          self.inventory.hide
       end
     end
 

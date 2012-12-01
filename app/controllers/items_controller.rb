@@ -12,13 +12,25 @@ class ItemsController < ApplicationController
     #need to add permissions checking
     @title = "My Products"
     if signed_in?
+      
       @item = current_user.inventory.item
     end
   end
 
-  def new
+  def producer_new
     @title = "New Item"
     @item = Item.new
+
+    respond_to do |format|
+      format.html #new.html.erb
+      format.xml  { render :xml => @item }
+    end
+  end
+
+  def admin_coord_new
+    @title = "Add Item for a Producer"
+    @item = Item.new
+    @inventories = Inventory.where("hidden = ?", false)
 
     respond_to do |format|
       format.html #new.html.erb
@@ -29,13 +41,27 @@ class ItemsController < ApplicationController
   def create
     @item = Item.new(params[:item])
 
-    if current_user.producer?
-      @inventory = current_user.inventory
-    elsif current_user.coordinator || current_user.admin
+    # if params[:item][:inventory_id].nil?
+    #   user = current_user
+    # else
+    #   user = User.find(params[:item][:inventory_id])
+
+    inv_id = params[:item][:inventory_id]
+    
+    if inv_id.blank?
+      #if they are admin and it is blank, they did not pick a producer
       @inventory = current_user.inventory
     else
-      redirect_to current_user
+      @inventory = Inventory.find(inv_id)
     end
+
+    # if current_user.producer?
+    #   @inventory = current_user.inventory
+    # elsif current_user.coordinator || current_user.admin
+    #   @inventory = current_user.inventory
+    # else
+    #   redirect_to current_user
+    # end
 
     respond_to do |format|
       if @inventory.item << @item

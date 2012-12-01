@@ -12,6 +12,10 @@ Localfoods::Application.routes.draw do
     member do
       get 'edit'
     end
+
+    # member do
+    #   get 'items#new'
+    # end
   end
 
   resources :items do
@@ -39,7 +43,8 @@ Localfoods::Application.routes.draw do
   match '/register',  :to => 'users#new'
   match '/login',  :to => 'sessions#new'
   match '/logout', :to => 'sessions#destroy'
-  match '/newitem', :to => 'items#new'
+  match '/producer_newitem', :to => 'items#producer_new'
+  match '/admin_coord_newitem', :to => 'items#admin_coord_new'
 
   resources :password_resets
 

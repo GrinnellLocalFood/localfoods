@@ -10,7 +10,13 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121130063432) do
+ActiveRecord::Schema.define(:version => 20121201202621) do
+
+  create_table "application_states", :force => true do |t|
+    t.boolean  "orders_open", :default => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "inventories", :force => true do |t|
     t.datetime "created_at"

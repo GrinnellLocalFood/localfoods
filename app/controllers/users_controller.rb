@@ -14,8 +14,7 @@ class UsersController < ApplicationController
     else
       redirect_to current_user
     end
-  end
-
+  end 
 
   # GET /users/1
   # GET /users/1.xml

@@ -1,0 +1,46 @@
+<div class="container">
+  <div class="row">
+    <div class="span8 offset2 custom-block">
+
+      <!-- <div class="custom-block"> -->
+
+<%= form_for(@application_state, :html=>{:class=>'form-horizontal', :multipart => true}) do |f| %>
+<% if @application_state.errors.any? %>
+<!-- <div id="error_explanation"> -->
+<div class="alert alert-error">
+  <h4><%= pluralize(@application_state.errors.count, "error") %> prohibited this application_state from being saved:</h4>
+
+  <br><ul>
+  <% @application_state.errors.full_messages.each do |msg| %>
+  <li><%= msg %></li>
+  <% end %>
+
+</ul>
+</div>
+<% end %>
+
+    <% if signed_in? %> 
+      <h1 align="center">Open or Close Orders</h1><br>
+
+    <% end %>
+
+    <div class="control-group">
+  	<label class="control-label">
+    	<%= f.label(:orders_open, "Open orders?") %>
+  	</label>
+  		<div class="controls">
+    		<%= f.radio_button :orders_open, true %> Yes
+    		<%= f.radio_button :orders_open, false %> No
+  		</div>
+	</div>
+
+	 <br>
+    <div class="control-group controls">
+      <%= f.submit "Change State", :class=>"btn btn-primary"%>
+    </div>
+<!-- </div> -->
+
+    </div>
+  </div>
+</div>
+<% end %>

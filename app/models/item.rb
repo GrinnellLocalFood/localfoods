@@ -19,7 +19,7 @@ class Item < ActiveRecord::Base
 
 
 	def is_available?
-		if self.available
+		if self.available && ApplicationState.orders_open?
 			"Yes"
 		else
 			"No"

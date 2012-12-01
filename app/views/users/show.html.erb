@@ -12,6 +12,11 @@
 				<li><%= link_to 'All Users', users_path %></li>
 				<% if @user.admin %>
 				<li><%= link_to 'Add User', new_user_path %></li>
+				<% if ApplicationState.orders_open?%>
+				<li><%= link_to 'Close Orders', '/editorderstate' %></li>
+				<% else %>
+				<li><%= link_to 'Open Orders', '/editorderstate' %></li>
+				<% end %>
 				<% end %>
 				<% end %>
 

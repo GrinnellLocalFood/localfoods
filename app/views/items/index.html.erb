@@ -14,6 +14,7 @@
 
             <table class="table table-hover">
               <tr>
+                <th>Photo</th>
                 <th>Name</th>
                 <th>Description</th>
                 <th>Total Quantity</th>
@@ -29,6 +30,11 @@
 
             <% @item.each do |item| %>
             <tr>
+                <td>
+                    <% if !(item.item_photo_file_name.nil?) %> 
+                    <%= image_tag (item.item_photo.url(:thumb))%>
+                    <% end %>
+                </td>
                 <td><%= item.name %></td>
                 <td><%= item.description %></td>
                 <td><%= item.totalquantity %></td>
@@ -44,10 +50,8 @@
              <% end %>
         </table>
             
-            <%= link_to 'Add Item', newitem_path, :class=>"btn" %>
-            
+        <%= link_to 'Add Item', newitem_path, :class=>"btn" %>   
            
-
         <% else %>
         <div class="container">
             <div class="row">

@@ -8,11 +8,15 @@
 			<ul class="nav nav-list">
 
 				<% if @user.coordinator || @user.admin %>
-				<li class="nav-header">User Options</li>
+				<li class="nav-header">Administration</li>
 				<li><%= link_to 'All Users', users_path %></li>
+
 				<% if @user.admin %>
 				<li><%= link_to 'Add User', new_user_path %></li>
 				<% end %>
+			
+				<li class="nav-header">Inventory</li>
+				<li><%= link_to 'Add Item for Producer', admin_coord_newitem_path %></li>
 				<% end %>
 
 				<% if @user.producer %>

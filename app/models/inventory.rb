@@ -9,7 +9,7 @@ class Inventory < ActiveRecord::Base
     has_attached_file :photo
 	attr_accessible :url, :description, :display_name, :photo, :hidden
 
-
+	accepts_nested_attributes_for :user
 	#fake-delete an inventory so that it persists even if a user is no longer
 	#a producer
 	def hide

@@ -10,7 +10,8 @@ class User < ActiveRecord::Base
                   :old_password,
                   :admin,
                   :coordinator,
-                  :producer
+                  :producer,
+                  :inventory_attributes
 
   validates :email, :presence => true,
                     :uniqueness =>  { :case_sensitive => false }
@@ -33,6 +34,8 @@ class User < ActiveRecord::Base
   before_validation :format_values
 
   has_one :inventory, :foreign_key => "id", :autosave => true, :dependent => :destroy
+
+  accepts_nested_attributes_for :inventory, :update_only => true
 
   def self.authenticate(email, submitted_password)
     user = find_by_email(email)

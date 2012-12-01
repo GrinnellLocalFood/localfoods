@@ -1,0 +1,114 @@
+<%= form_for(@item, :html=>{:class=>'form-horizontal', :multipart => true}) do |f| %>
+<% if @item.errors.any? %>
+<!-- <div id="error_explanation"> -->
+<div class="alert alert-error">
+  <h4><%= pluralize(@item.errors.count, "error") %> prohibited this user from being saved:</h4>
+
+  <br><ul>
+  <% @item.errors.full_messages.each do |msg| %>
+  <li><%= msg %></li>
+  <% end %>
+
+</ul>
+</div>
+<% end %>
+
+<% if current_user.coordinator || current_user.admin %>
+  <div class="control-group">
+    <label class="control-label">
+      <%= f.label :name, "Inventory Name *" %>
+    </label>
+    <div class="controls">
+     <%= select("item", "inventory_id", Inventory.all.collect {|p| [ p.display_name, p.id ] }, {:prompt => 'Select Producer'}) %>
+    </div>
+  </div>
+<% end %>
+
+
+<div class="control-group">
+  <label class="control-label">
+    <%= f.label :name, "Item Name *" %>
+  </label>
+  <div class="controls">
+    <%= f.text_field :name, :placeholder=>"Item Name" %>
+  </div>
+</div>
+
+<div class="control-group">
+  <label class="control-label">
+    <%= f.label :description, "Description *" %>
+  </label>
+  <div class="controls">
+    <%= f.text_field :description, :placeholder=>"Description" %>
+  </div>
+</div>
+
+<div class="control-group">
+  <label class="control-label">
+    <%= f.label :price, "Unit Price *" %>
+  </label>
+  <div class="controls">
+
+<div class="input-prepend">
+<span class="add-on">$</span>
+    <%= f.text_field :price, :placeholder=>"Unit Price", :class=>"span2", :id=>"inv_price_field" %>
+</div>
+
+  </div>
+</div>
+
+<div class="control-group">
+  <label class="control-label">
+    <%= f.label :totalquantity, "Total Quantity *" %>
+  </label>
+  <div class="controls">
+    <%= f.text_field :totalquantity, :placeholder=>"Total Quantity" %>
+  </div>
+</div>
+
+<div class="control-group">
+  <label class="control-label">
+    <%= f.label :units, "Units *" %>
+  </label>
+  <div class="controls">
+    <%= f.text_field :units, :placeholder=>"Pounds, Grams, Gallons etc." %>
+  </div>
+</div>
+
+<div class="control-group">
+  <label class="control-label">
+    <%= f.label :minorder, "Minimum Order *" %>
+  </label>
+  <div class="controls">
+    <%= f.text_field :minorder, :placeholder=>"Minimum Order" %>
+  </div>
+</div>
+
+<div class="control-group">
+  <label class="control-label">
+    <%= f.label:display_name, "Maximum Order" %>
+  </label>
+  <div class="controls">
+    <%= f.text_field :maxorder, :placeholder=>"Maximum Order" %>
+  </div>
+</div>
+
+<div class="control-group">
+  <label class="control-label">
+    <%= f.label(:item_photo, "Product Photo") %>
+  </label>
+  <div class="controls">
+    <%= f.file_field :item_photo %>
+  </div>
+</div>
+
+
+<div class="control-group controls">
+  <%= f.submit "Save Item", :class=>"btn-large btn-primary" %>
+</div>
+
+<div align="center">
+  * Denotes required field
+</div>
+
+<% end %>

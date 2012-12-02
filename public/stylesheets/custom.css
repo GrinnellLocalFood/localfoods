@@ -13,6 +13,17 @@
 
 }
 
+/*Between 140 and 220 (span3)*/
+.span2-half {
+  width: 180px;
+}
+
+.offset2-half {
+  margin-left: 220px;
+}
+
+
+
 #logohead {
 margin-top: 4px;
 
@@ -172,6 +183,12 @@ background-color: #fcf8e3;
   border-color: #bce8f1;
 }
 
+.home_alert .close {
+  position: relative;
+  top: -2px;
+  right: 10px;
+  line-height: 20px;
+}
 
 .home_notice { 
  position:absolute;
@@ -205,6 +222,13 @@ background-color: #fcf8e3;
   color: #3a87ad;
   background-color: #d9edf7;
   border-color: #bce8f1;
+}
+
+.home_notice .close {
+  position: relative;
+  top: -2px;
+  right: 10px;
+  line-height: 20px;
 }
 
 #inv_price_field{

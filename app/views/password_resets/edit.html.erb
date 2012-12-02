@@ -6,7 +6,8 @@
 
       <%= form_for @user, :url => password_reset_path(params[:id]),:html=>{:class=>'form-horizontal'} do |f| %>
       <% if @user.errors.any? %>
-      <div class="alert alert-error">
+      <div class="alert alert-error fade in">
+        <a class="close" data-dismiss="alert" href="#">&times;</a>
         <ul>
           <% for message in @user.errors.full_messages %>
           <li><%= message %></li>

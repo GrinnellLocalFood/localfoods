@@ -23,6 +23,19 @@
           <li><%= link_to "Show Users", users_path %></li>
           <% end %> -->
 
+          <% @inventories = Inventory.where("hidden = ?", false) %>
+          <li class="dropdown nav">
+              <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                Browse Producers
+                <span class="caret"></span>
+              </a>
+              <ul class="dropdown-menu">
+              <% @inventories.each do |inventory| %>
+                  <li><%= link_to inventory.display_name, public_index_inventory_path(inventory.id) %></li>
+              <% end %>
+          </li>   
+          </ul>
+
           <% if current_user.producer %> 
           <li class="dropdown nav">
             <a class="dropdown-toggle" data-toggle="dropdown" href="#">

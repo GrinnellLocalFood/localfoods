@@ -19,7 +19,7 @@
       <%= f.label :name, "Inventory Name *" %>
     </label>
     <div class="controls">
-     <%= select("item", "inventory_id", Inventory.all.collect {|p| [ p.display_name, p.id ] }, {:prompt => 'Select Producer'}) %>
+     <%= select("item", "inventory_id", Inventory.all.collect {|i| [ i.display_name, i.id ] }, {:prompt => 'Select Producer'}) %>
     </div>
   </div>
 <% end %>

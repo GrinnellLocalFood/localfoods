@@ -32,10 +32,21 @@ Localfoods::Application.routes.draw do
     end
   end
 
+
+# How to make a link to a path like /inventories/:id/foo:
+# 
+# inventory = Inventory.find(1)
+# link_to inventory(foo) will produce localhost/inventories/1/foo
+
   resources :inventories do
     member do
       get 'edit'
     end
+
+    member do
+      get 'public_index'
+    end
+    
   end
 
   resources :sessions, :only => [:new, :create, :destroy]
@@ -45,6 +56,7 @@ Localfoods::Application.routes.draw do
   match '/logout', :to => 'sessions#destroy'
   match '/producer_newitem', :to => 'items#producer_new'
   match '/admin_coord_newitem', :to => 'items#admin_coord_new'
+  match '/adsf', :to => 'inventories#public_index'
 
   resources :password_resets
 

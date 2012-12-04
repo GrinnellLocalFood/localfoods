@@ -52,10 +52,15 @@
                 <% end %>
             </tr>
 
-            <% end %>
  </table>
 <%= link_to 'Add Item', producer_newitem_path, :class=>"btn" %>
+            <% end %>
+<<<<<<< HEAD:app/views/inventories/public_index.html.erb
+            </table>
+            <%= link_to 'Add Item', producer_newitem_path, :class=>"btn" %>
+=======
            
+>>>>>>> 0d937233906fb3d5303ddcf2f06b4c3b5fe8d917:app/views/items/index.html.erb
 
 
         <% else %>
@@ -73,7 +78,10 @@
             </div>
         </div>
         <% end %>
+<<<<<<< HEAD:app/views/inventories/public_index.html.erb
+=======
         
+>>>>>>> 0d937233906fb3d5303ddcf2f06b4c3b5fe8d917:app/views/items/index.html.erb
 
 
         </div>

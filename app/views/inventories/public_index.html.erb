@@ -1,9 +1,15 @@
 <% if notice %>
-<div class="home_notice home_notice-success"><%= notice %></div>
+<div class="home_notice home_notice-success fade in">
+    <a class="close" data-dismiss="alert" href="#">&times;</a>
+    <%= notice %>
+</div>
 <% end %>
 
 <% if alert %>
-<div class="home_alert home_alert-success"><%= alert %></div>
+<div class="home_alert home_alert-success fade in">
+    <a class="close" data-dismiss="alert" href="#">&times;</a>
+    <%= alert %>
+</div>
 <% end %>
 
 <div class="container-fluid">
@@ -46,9 +52,10 @@
                 <% end %>
             </tr>
 
+ </table>
+<%= link_to 'Add Item', producer_newitem_path, :class=>"btn" %>
             <% end %>
-            </table>
-            <%= link_to 'Add Item', producer_newitem_path, :class=>"btn" %>
+           
 
 
         <% else %>
@@ -66,6 +73,7 @@
             </div>
         </div>
         <% end %>
+        
 
 
         </div>

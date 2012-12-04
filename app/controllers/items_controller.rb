@@ -1,5 +1,6 @@
 class ItemsController < ApplicationController
-  before_filter :check_permissions
+  before_filter :check_permissions, :except => :public_index
+  skip_before_filter :require_login, :only => :public_index
   
   def check_permissions
     @user = current_user
@@ -7,15 +8,28 @@ class ItemsController < ApplicationController
       @user.admin || @user.producer)
   end
 
-
-  def index
+  #PUT
+  def public_index
     #need to add permissions checking
-    @title = "My Products"
-    if signed_in?
-      
-      @item = current_user.inventory.item
+      @title = "View Inventory"
+    
+      @item = Item.where("inventory_id = ?", params[:item][:inventory_id])
+      respond_to do |format|
+        format.html
+        format.xml  { render :xml => @item }
     end
   end
+
+  def producer_index
+    @title = "View Inventory"
+
+    if current_user.producer
+      @item = current_user.inventory.item
+    else
+      redirect_to(current_user)
+    end
+  end
+
 
   def producer_new
     @title = "New Item"

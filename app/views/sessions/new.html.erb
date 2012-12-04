@@ -7,9 +7,12 @@
 			<%= form_for(:session, :url => sessions_path, 
 			:html=>{:class=>'form-horizontal'}) do |f| %>
 
-			<% if flash[:error] -%>
-			<p class="alert alert-error"><%=h flash[:error] %></p>
-			<% end -%>
+			<% if flash[:error] %>
+			<div class="alert alert-error fade in">
+				<a class="close" data-dismiss="alert" href="#">&times;</a>
+				<%=h flash[:error] %>
+			</div>
+			<% end %>
 
 			<div class="control-group">
 				<label class="control-label">Email</label>

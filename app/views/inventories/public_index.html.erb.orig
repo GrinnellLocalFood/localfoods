@@ -1,9 +1,15 @@
 <% if notice %>
-<div class="home_notice home_notice-success"><%= notice %></div>
+<div class="home_notice home_notice-success fade in">
+    <a class="close" data-dismiss="alert" href="#">&times;</a>
+    <%= notice %>
+</div>
 <% end %>
 
 <% if alert %>
-<div class="home_alert home_alert-success"><%= alert %></div>
+<div class="home_alert home_alert-success fade in">
+    <a class="close" data-dismiss="alert" href="#">&times;</a>
+    <%= alert %>
+</div>
 <% end %>
 
 <div class="container-fluid">
@@ -44,12 +50,20 @@
                 <td><%= item.maxorder %></td>
                 <td><%= item.is_available? %></td>
                 <td><%= link_to 'Show', item %></td>
-                <td><%= link_to 'Edit', edit_item_path(item) %></td>
-                <td><%= link_to "Delete", item, :confirm => 'Are you sure?', :method=>:delete, :class=>:Destroy %></td>
+                <% if signed_in? %>
+                    <% if current_user.admin || current_user.coordinator %>
+                        <td><%= link_to 'Edit', edit_item_path(item) %></td>
+                        <td><%= link_to "Delete", item, :confirm => 'Are you sure?', :method=>:delete, :class=>:Destroy %></td>
+                    <% end %>
+                <% end %>
             </tr>
 
+ </table>
+<%= link_to 'Add Item', producer_newitem_path, :class=>"btn" %>
             <% end %>
+
             </table>
+            <%= link_to 'Add Item', producer_newitem_path, :class=>"btn" %>
 
 
         <% else %>
@@ -67,8 +81,6 @@
             </div>
         </div>
         <% end %>
-        <%= link_to 'Add Item', producer_newitem_path, :class=>"btn" %>
-
 
         </div>
     </div>

@@ -1,13 +1,16 @@
 <%= form_for(@item, :html=>{:class=>'form-horizontal', :multipart => true}) do |f| %>
+
 <% if @item.errors.any? %>
 <!-- <div id="error_explanation"> -->
-<div class="alert alert-error">
-  <h4><%= pluralize(@item.errors.count, "error") %> prohibited this item from being saved:</h4>
+<div class="alert alert-error fade in">
+  <a class="close" data-dismiss="alert" href="#">&times;</a>
+  <h4><%= pluralize(@item.errors.count, "error") %> prohibited this user from being saved:</h4>
 
   <br><ul>
   <% @item.errors.full_messages.each do |msg| %>
   <li><%= msg %></li>
   <% end %>
+
 
 </ul>
 </div>

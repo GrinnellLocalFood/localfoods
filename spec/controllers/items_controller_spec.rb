@@ -4,13 +4,6 @@ describe ItemsController do
   
 describe "For non-signed in users" do
 
-  describe "GET 'index'" do
-    it "should redirect to login page" do
-      get :index
-      response.should redirect_to(login_path)
-    end
-  end
-
   describe "GET 'new'" do
     it "should redirect to login page" do
       get 'producer_new'

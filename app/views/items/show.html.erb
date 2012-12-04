@@ -23,11 +23,17 @@
 		<div class="span8 custom-block" >
 
 			<% if notice %>
-			<div class="alert alert-success"><%= notice %></div>
+			<div class="alert alert-success fade in">
+				<a class="close" data-dismiss="alert" href="#">&times;</a>
+				<%= notice %>
+			</div>
 			<% end %>
 
 			<% if alert %>
-			<div class="alert alert-success"><%= alert %></div>
+			<div class="alert alert-success fade in">
+				<a class="close" data-dismiss="alert" href="#">&times;</a>
+				<%= alert %>
+			</div>
 			<% end %>
 
 

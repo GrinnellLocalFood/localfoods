@@ -1,4 +1,19 @@
 <%= form_for(@user, :html=>{:class=>'form-horizontal'}) do |f| %>
+<<<<<<< HEAD
+<% if @user.errors.any? %>
+<div class="alert alert-error">
+    <h4><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</h4>
+
+    <br><ul>
+    <% @user.errors.full_messages.each do |msg| %>
+    <li><%= msg %></li>
+    <% end %>
+</ul>
+</div>
+<% end %>
+
+
+=======
  
  <% if @user.errors.any? %>
     <!-- <div id="error_explanation"> -->
@@ -14,6 +29,15 @@
     </div>
   <% end %>
 
+  <div class="control-group">
+    <label class="control-label">
+      <%= f.label :first_name, "First Name *" %>
+    </label>
+    <div class="controls">
+      <%= f.text_field :first_name, :placeholder=>"First Name" %>
+    </div>
+  </div>
+>>>>>>> 0d937233906fb3d5303ddcf2f06b4c3b5fe8d917
 
 
 <% if signed_in? && (current_user.admin || current_user.coordinator) %>

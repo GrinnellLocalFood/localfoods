@@ -1,7 +1,9 @@
 <%= form_for(@item, :html=>{:class=>'form-horizontal', :multipart => true}) do |f| %>
+
 <% if @item.errors.any? %>
 <!-- <div id="error_explanation"> -->
-<div class="alert alert-error">
+<div class="alert alert-error fade in">
+  <a class="close" data-dismiss="alert" href="#">&times;</a>
   <h4><%= pluralize(@item.errors.count, "error") %> prohibited this user from being saved:</h4>
 
   <br><ul>
@@ -19,7 +21,7 @@
       <%= f.label :name, "Inventory Name *" %>
     </label>
     <div class="controls">
-     <%= select("item", "inventory_id", Inventory.all.collect {|p| [ p.display_name, p.id ] }, {:prompt => 'Select Producer'}) %>
+     <%= select("item", "inventory_id", Inventory.all.collect {|i| [ i.display_name, i.id ] }, {:prompt => 'Select Producer'}) %>
     </div>
   </div>
 <% end %>

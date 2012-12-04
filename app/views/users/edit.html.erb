@@ -3,28 +3,30 @@
         <div class="span8 offset2 custom-block">
 
             <%= form_for(@user, :html=>{:class=>'form-horizontal'}) do |f| %>
-            <% if @user.errors.any? %>
-            <div class="alert alert-error">
-                <h4><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</h4>
+         
+         <% if @user.errors.any? %>
+      <div class="alert alert-error fade in">
+        <a class="close" data-dismiss="alert" href="#">&times;</a>
+        <h4><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</h4>
 
-                <br><ul>
-                <% @user.errors.full_messages.each do |msg| %>
-                <li><%= msg %></li>
-                <% end %>
-            </ul>
-        </div>
+        <br><ul>
+        <% @user.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
         <% end %>
+      </ul>
+    </div>
+    <% end %>
 
 <h1 align="center">Edit Account</h1>
 
 
 
 
-<h4 align="center" style="color:gray; margin-top:20px; margin-bottom:0px">Member Information</h4><br>
-
+<!-- <h4 align="center" style="color:gray; margin-top:20px; margin-bottom:0px">Member Information</h4> -->
+<br>
 
 <% if current_user.admin || current_user.coordinator %>
-<div class="controls" style="margin-left:200px; color:maroon">
+<div class="controls" style="margin-left:200px">
   <% if current_user.admin %>
   <label class="checkbox inline">
     Admin
@@ -91,7 +93,7 @@
 
 
 <% if @user.producer %>
-
+<br>
 <h4 align="center" style="color:gray">Producer Information</h4><br>
 
 <%= f.fields_for :inventory_attributes, @user.inventory do |inventory_form| %>

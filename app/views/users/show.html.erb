@@ -13,11 +13,7 @@
 
 				<% if @user.admin %>
 				<li><%= link_to 'Add User', new_user_path %></li>
-				<% if ApplicationState.orders_open?%>
-				<li><%= link_to 'Close Orders', '/editorderstate' %></li>
-				<% else %>
-				<li><%= link_to 'Open Orders', '/editorderstate' %></li>
-				<% end %>
+				<li><%= link_to 'Open/Close Orders', '/editorderstate' %></li>
 				<% end %>
 			
 				<li class="nav-header">Inventory</li>

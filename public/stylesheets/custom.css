@@ -134,10 +134,6 @@ margin-top: 4px;
   list-style: square;
 }
 
-
-
-
-
 .home_alert { 
  position:absolute;
   left:0px;
@@ -210,4 +206,9 @@ background-color: #fcf8e3;
 #inv_price_field{
 width: 180px;
 
+}
+
+.radio-control {
+  position: relative;
+    bottom: 2px;
 }

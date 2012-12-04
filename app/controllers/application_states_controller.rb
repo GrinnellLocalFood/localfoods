@@ -11,7 +11,11 @@ class ApplicationStatesController < ApplicationController
   		@application_state = ApplicationState.first
     	respond_to do |format|
       	if @application_state.update_attributes(params[:application_state])
-          format.html { redirect_to(current_user, :notice => 'Order status changed to') }
+          if(@application_state.orders_open)
+            format.html { redirect_to(current_user, :notice => 'Order status changed to open' ) }
+          else
+            format.html { redirect_to(current_user, :notice => 'Order status changed to closed' ) }
+          end
           format.xml  { head :ok }       
       else
         format.html { render :action => "editorderstate" }

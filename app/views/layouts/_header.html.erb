@@ -43,7 +43,7 @@
               <span class="caret"></span>
             </a>
             <ul class="dropdown-menu">
-              <li><%= link_to "Add Item", producer_newitem_path %></li>
+              <li><%= link_to "Add Item", producer_new_inventory_items_path(current_user.id) %></li>
               <li><%= link_to "Inventory", items_path %></li>
             </li>   
           </ul>

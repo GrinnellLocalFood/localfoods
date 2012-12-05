@@ -62,13 +62,14 @@ class ItemsController < ApplicationController
 
     inv_id = params[:item][:inventory_id]
     
-    if inv_id.blank?
-      #if they are admin and it is blank, they did not pick a producer
-      @inventory = current_user.inventory
-    else
-      @inventory = Inventory.find(inv_id)
-    end
+    # if inv_id.blank?
+    #   #if they are admin and it is blank, they did not pick a producer
+    #   @inventory = current_user.inventory
+    # else
+    #   @inventory = Inventory.find(inv_id)
+    # end
 
+    @inventory = Inventory.find(params[:inventory_id])
     # if current_user.producer?
     #   @inventory = current_user.inventory
     # elsif current_user.coordinator || current_user.admin
@@ -81,7 +82,7 @@ class ItemsController < ApplicationController
       if @inventory.item << @item
         sign_in @user
         flash[:notice] = @item.name + " saved!"
-        format.html { redirect_to(items_path, :notice => 'Item was added successfully.',
+        format.html { redirect_to(public_index_inventory_path(@inventory), :notice => 'Item was added successfully.',
           :class=>"alert alert-success") }
 
          # format.xml  { render :xml => @user, :status => :created, :location => @user }

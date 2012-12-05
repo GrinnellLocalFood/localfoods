@@ -47,6 +47,25 @@ Localfoods::Application.routes.draw do
       get 'public_index'
     end
     
+    resources :items do
+      collection do
+        get 'producer_new'
+      end
+
+      member do
+        get 'show'
+      end
+
+      member do
+        put 'destroy'
+      end
+
+      member do
+        get 'edit'
+      end
+
+    end
+
   end
 
   resources :sessions, :only => [:new, :create, :destroy]
@@ -54,7 +73,6 @@ Localfoods::Application.routes.draw do
   match '/register',  :to => 'users#new'
   match '/login',  :to => 'sessions#new'
   match '/logout', :to => 'sessions#destroy'
-  match '/producer_newitem', :to => 'items#producer_new'
   match '/admin_coord_newitem', :to => 'items#admin_coord_new'
   match '/adsf', :to => 'inventories#public_index'
 

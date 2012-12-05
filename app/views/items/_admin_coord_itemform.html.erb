@@ -21,7 +21,8 @@
       <%= f.label :name, "Inventory Name *" %>
     </label>
     <div class="controls">
-     <%= select("item", "inventory_id", Inventory.all.collect {|i| [ i.display_name, i.id ] }, {:prompt => 'Select Producer'}) %>
+     <!-- Leaving the first parameter as blank adds "inventory_id" directly to the params hash -->
+     <%= collection_select("", "inventory_id", Inventory.all, :id, :display_name) %>
     </div>
   </div>
 <% end %>

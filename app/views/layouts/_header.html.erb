@@ -1,7 +1,7 @@
-<header class="navbar navbar-fixed-top">
+<header class="navbar navbar-fixed-top" style="height:400px">
   <div class="navbar-inner">
     <div class="container">
-      <nav>
+
 
           <!-- <ul class="nav pull-left">
           <li><%= link_to "Grinnell LocalFoods", root_path, :class=>"brand" %></li>
@@ -25,15 +25,15 @@
 
           <% @inventories = Inventory.where("hidden = ?", false) %>
           <li class="dropdown nav">
-              <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                Browse Producers
-                <span class="caret"></span>
-              </a>
-              <ul class="dropdown-menu">
+            <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+              Browse Producers
+              <span class="caret"></span>
+            </a>
+            <ul class="dropdown-menu">
               <% @inventories.each do |inventory| %>
-                  <li><%= link_to inventory.display_name, public_index_inventory_path(inventory.id) %></li>
+              <li><%= link_to inventory.display_name, public_index_inventory_path(inventory.id) %></li>
               <% end %>
-          </li>   
+            </li>   
           </ul>
 
           <% if current_user.producer %> 
@@ -87,8 +87,33 @@
 
 
 
-        </nav>
 
+
+        </div>
       </div>
-    </div>
-  </header>
+
+
+
+      <div class="navbar-inner-inner">
+        <div class="container">
+      
+
+
+            
+
+
+   <ul class="nav pull-left">
+    
+    <li>second navbar?</li>
+    
+    <li>hello</li>
+    
+   </ul>
+
+        </div>
+      </div>
+
+<br style="margin-bottom:10px">
+    </header>
+
+

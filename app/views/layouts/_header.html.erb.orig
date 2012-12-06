@@ -2,16 +2,18 @@
   <div class="navbar-inner">
     <div class="container">
 
-
         <%= link_to image_tag("/img/just_localfood_horizontal_40.png", :width=>"250", :id=>"logohead"), root_path %>
         
         
         <ul class="nav pull-right">
+<<<<<<< HEAD
+=======
 
 
           <% if signed_in? %>
 
 
+>>>>>>> home_page_redux
           <% @inventories = Inventory.where("hidden = ?", false) %>
           <li class="dropdown nav">
             <a class="dropdown-toggle" data-toggle="dropdown" href="#">
@@ -24,6 +26,17 @@
               <% end %>
             </li>   
           </ul>
+
+
+          <% if signed_in? %>
+
+
+        <!--   <% if current_user.admin %> 
+          <li><%= link_to "Add User", new_user_path %></li>
+          <% end %>
+          <% if current_user.admin || current_user.coordinator %> 
+          <li><%= link_to "Show Users", users_path %></li>
+          <% end %> -->
 
 
           <% if current_user.producer %> 

@@ -47,7 +47,7 @@
 				</div>
 				<% end %>
 
-
+<<<<<<< HEAD
 				<% if alert %>
 				<div class="alert alert-success fade in">
 					<a class="close" data-dismiss="alert" href="#">&times;</a>
@@ -58,6 +58,13 @@
 				<div align="right" style="margin-right:60px; margin-bottom:-40px;
 				margin-top: 20px">
 				<%= link_to edit_user_path(params[:id]), :class=>"link" do %>
+=======
+
+			<div align="right" style="margin-right:60px; margin-bottom:-40px;
+			margin-top: 20px">
+				<%= link_to edit_user_path(current_user), :class=>"link", :rel=>"tooltip", :title=>"Edit Account" do %>
+
+>>>>>>> home_page_redux
 				<i class="icon-wrench"></i>
 
 				<% end %>

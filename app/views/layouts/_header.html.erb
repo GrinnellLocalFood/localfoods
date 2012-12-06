@@ -1,11 +1,6 @@
-<header class="navbar navbar-fixed-top" style="height:400px">
+<header class="navbar navbar-fixed-top">
   <div class="navbar-inner">
     <div class="container">
-
-
-          <!-- <ul class="nav pull-left">
-          <li><%= link_to "Grinnell LocalFoods", root_path, :class=>"brand" %></li>
-        </ul> -->
 
         <%= link_to image_tag("/img/just_localfood_horizontal_40.png", :width=>"250", :id=>"logohead"), root_path %>
         
@@ -15,13 +10,6 @@
 
           <% if signed_in? %>
 
-
-        <!--   <% if current_user.admin %> 
-          <li><%= link_to "Add User", new_user_path %></li>
-          <% end %>
-          <% if current_user.admin || current_user.coordinator %> 
-          <li><%= link_to "Show Users", users_path %></li>
-          <% end %> -->
 
           <% @inventories = Inventory.where("hidden = ?", false) %>
           <li class="dropdown nav">
@@ -49,9 +37,6 @@
           </ul>
           <% end %>
 
-
-          <!-- <li><%= link_to "Home", root_path %></li> -->
-          <!-- <li class="divider-vertical"></li> -->
           <li class="dropdown nav pull-right">
             <a class="dropdown-toggle" data-toggle="dropdown" href="#">
               Account
@@ -96,24 +81,27 @@
 
       <div class="navbar-inner-inner">
         <div class="container">
-      
 
 
-            
 
 
-   <ul class="nav pull-left">
-    
-    <li>second navbar?</li>
-    
-    <li>hello</li>
-    
-   </ul>
 
-        </div>
+
+         <ul class="nav pull-left">
+
+          <li style="margin-right:20px">Our Producers </li>
+
+          <li style="margin-right:20px">Pickup Info </li>
+
+          <li style="margin-right:20px">Contact Us </li>
+
+        </ul>
+
       </div>
+    </div>
 
-<br style="margin-bottom:10px">
-    </header>
+
+    <br style="margin-bottom:10px">
+  </header>
 
 

@@ -45,12 +45,16 @@
 			</div>
 			<% end %>
 
+
 			<div align="right" style="margin-right:60px; margin-bottom:-40px;
 			margin-top: 20px">
-				<%= link_to edit_user_path(current_user), :class=>"link" do %>
+				<%= link_to edit_user_path(current_user), :class=>"link", :rel=>"tooltip", :title=>"Edit Account" do %>
+
 				<i class="icon-wrench"></i>
+
 				<% end %>
 			</div>
+
 
 			<h2 style="margin-left:60px">Hello <%= @user.first_name %>!</h2>
 

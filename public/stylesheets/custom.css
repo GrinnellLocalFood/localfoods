@@ -145,10 +145,6 @@ margin-top: 4px;
   list-style: square;
 }
 
-
-
-
-
 .home_alert { 
  position:absolute;
   left:0px;
@@ -234,4 +230,34 @@ background-color: #fcf8e3;
 #inv_price_field{
 width: 180px;
 
+}
+
+.radio-control {
+  position: relative;
+    bottom: 2px;
+}
+
+.item-image {
+  text-align: left;
+  margin-left:65px;
+  margin-bottom: 20px;
+  float: left;
+}
+
+.item-name{
+font-size: 30px;
+font-weight: bold;
+margin-top: 30px;
+margin-left: 245px;
+margin-bottom: 0px;
+
+}
+
+.item-description {
+  text-align: left;
+text-indent: 10px;
+font-style: italic;
+margin-left: 250px;
+margin-right: 60px;
+margin-top: 2px;
 }

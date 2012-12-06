@@ -13,11 +13,7 @@
 
 				<% if @user.admin %>
 				<li><%= link_to 'Add User', new_user_path %></li>
-				<% if ApplicationState.orders_open?%>
-				<li><%= link_to 'Close Orders', '/editorderstate' %></li>
-				<% else %>
-				<li><%= link_to 'Open Orders', '/editorderstate' %></li>
-				<% end %>
+				<li><%= link_to 'Open/Close Orders', '/editorderstate' %></li>
 				<% end %>
 
 				<li class="nav-header">Inventory</li>
@@ -130,16 +126,8 @@
 				</h2>
 				<%end%>
 				<br>
+				
 				<table class="table" style="width:500px" align="center">
-				<!-- 	<tr>
-						<th style="color: gray">First Name</th>
-						<td><%= @user.first_name %></td>
-					</tr>
-
-					<tr>
-						<th style="color: gray">Last Name</th>
-						<td><%= @user.last_name %></td>
-					</tr> -->
 					<tr>
 						<th style="color: gray">Producer Name</th>
 						<td style="text-align:right"><%= @user.inventory.display_name %></td>

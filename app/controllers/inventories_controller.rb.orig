@@ -1,0 +1,57 @@
+class InventoriesController < ApplicationController
+
+skip_before_filter :require_login, :only => :public_index
+
+ def edit
+    @title = "Edit Producer Profile"
+    if(current_user.admin || current_user.coordinator)
+    	@inventory = Inventory.find(params[:id])
+    elsif(current_user.producer)
+       	@inventory = current_user.inventory
+    else
+    	redirect_to current_user
+    end
+  end
+
+
+  def update
+  	@inventory = current_user.inventory
+    respond_to do |format|
+      if @inventory.update_attributes(params[:inventory])
+          format.html { redirect_to(current_user, :notice => 'Producer Profile was successfully updated.') }
+          format.xml  { head :ok }       
+      else
+        format.html { render :action => "edit" }
+        format.xml  { render :xml => @inventory.errors, :status => :unprocessable_entity }
+      end
+    end
+   end
+
+<<<<<<< HEAD
+=======
+  #PUT
+  def public_index
+    #need to add permissions checking
+      @title = "View Inventory"
+    
+      @item = Item.where("inventory_id = ?", params[:id])
+      respond_to do |format|
+        format.html
+        format.xml  { render :xml => @item }
+    end
+  end
+
+
+  def producer_index
+    @title = "View Inventory"
+
+    if current_user.producer
+      @item = current_user.inventory.item
+    else
+      redirect_to(current_user)
+    end
+  end
+
+
+>>>>>>> 5e7320e7e6da529e2976d69b6b66e67f02a3bcbf
+end

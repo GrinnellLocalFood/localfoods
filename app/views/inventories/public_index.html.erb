@@ -42,8 +42,8 @@
                 <td><%= item.totalordered %></td>
                 <td><%= item.minorder %></td>
                 <td><%= item.maxorder %></td>
-                <td><%= item.available %></td>
-                
+                <td><%= item.is_available? %></td>
+                <td><%= link_to 'Show', item %></td>
                 <% if signed_in? %>
                     <% if current_user.admin || current_user.coordinator %>
                         <td><%= link_to 'Edit', edit_item_path(item) %></td>

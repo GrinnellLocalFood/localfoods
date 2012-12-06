@@ -1,26 +1,7 @@
 <div class="container">
 	<div class="row">
-		<div class="span2.5 custom-block" style="padding-bottom: 76px">
-				<ul class="nav nav-list">
 
-					<% if @user.coordinator || @user.admin %>
-					<li class="nav-header">User Options</li>
-					<li><%= link_to 'All Users', users_path %></li>
-					<% if @user.admin %>
-					<li><%= link_to 'Add User', new_user_path %></li>
-					<% end %>
-					<% end %>
-
-					<% if @user.producer %>
-					<li class="nav-header">Producer Options</li>
-					<li><%= link_to 'Edit Current Item', edit_item_path %></li>
-					<li><%= link_to 'Inventory', items_path %></li>
-					<li><%= link_to 'Add Item', newitem_path %></li>
-					<% end %>
-				</ul>
-			</div>
-
-		<div class="span8 custom-block" >
+		<div class="span8 offset2 custom-block" >
 
 			<% if notice %>
 			<div class="alert alert-success fade in">
@@ -36,15 +17,22 @@
 			</div>
 			<% end %>
 
+			<div align="right" style="margin-right:60px; margin-bottom:-40px;
+			margin-top: 20px">
+				<%= link_to edit_item_path(params[:id]), :class=>"link" do %>
+				<i class="icon-wrench"></i>
+				<% end %>
+			</div>
 
-			<h1 style="text-align:left;margin-left:65px;float:left">
-
+			<media class="item-image">
 				<% if !(@item.item_photo_file_name.nil?) %>
 				<%= image_tag(@item.item_photo.url(:small)) %>
 				<%end%>
-			</h1>
+			</media>
 
-			<h2 style="text-align:center;margin-right: 200px"><%= @item.name.pluralize %></h2>
+			<div class="item-name"><%= @item.name.pluralize %></div>
+			<br>
+			<div class="item-description"><%= @item.description %></div>
 			<br>
 			<table class="table" style="width:500px" align="center">
 				<!-- 	<tr>
@@ -79,10 +67,6 @@
 						<td><%= @item.maxorder %></td>
 					</tr>
 
-					<tr>
-						<th style="color: gray">Description</th>
-						<td><%= @item.description %></td>
-					</tr>
 
 				</table>
 

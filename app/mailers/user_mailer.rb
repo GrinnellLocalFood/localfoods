@@ -13,4 +13,15 @@ class UserMailer < ActionMailer::Base
   	@user = user
   	mail(:to => user.email, :subject => "Reset Password")
   end
+
+  def order_status_change(user, email_text, orders_open)
+    @user = user
+    @text = email_text
+    if(orders_open)
+      subject = "Orders are now open!"
+    else
+      subject = "Orders are now closed!"
+    end
+    mail(:to => user.email, :subject => subject)
+  end
 end

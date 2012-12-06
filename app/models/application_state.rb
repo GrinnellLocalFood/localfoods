@@ -1,6 +1,7 @@
 class ApplicationState < ActiveRecord::Base
 
-	attr_accessible :orders_open
+	attr_accessible :orders_open, :email_content, :email_users
+	attr_accessor :email_content, :email_users
 
 	#return boolean
 	def self.orders_open?

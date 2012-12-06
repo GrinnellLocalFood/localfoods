@@ -31,7 +31,7 @@ skip_before_filter :require_login, :only => :public_index
   def public_index
     #need to add permissions checking
       @title = "View Inventory"
-    
+      @producer = User.find(params[:id])
       @item = Item.where("inventory_id = ?", params[:id])
       respond_to do |format|
         format.html

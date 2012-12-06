@@ -16,7 +16,7 @@
     <div class="row-fluid">
         <div class="span12">
             <% if @item.count != 0 %>
-            <h1>Listing Products</h1>
+            <h1>Listing Products for <%= @producer.inventory.display_name %></h1>
 
             <table class="table table-hover">
               <tr>
@@ -46,7 +46,7 @@
                 
                 <% if signed_in? %>
                     <% if current_user.admin || current_user.coordinator %>
-                        <td><%= link_to 'Edit', edit_item_path(item) %></td>
+                        <td><%= link_to 'Edit', edit_inventory_item_path(item) %></td>
                         <td><%= link_to "Delete", item, :confirm => 'Are you sure?', :method=>:delete, :class=>:Destroy %></td>
                     <% end %>
                 <% end %>
@@ -54,7 +54,7 @@
 
             <% end %>
  </table>
-<%= link_to 'Add Item', producer_newitem_path, :class=>"btn" %>
+<%= link_to 'Add Item', producer_new_inventory_items_path(params[:id]), :class=>"btn" %>
            
 
 
@@ -68,7 +68,7 @@
                     <p align="center">Add items by clicking the "Add Item" button below</p>
 
                     <br>
-                    <p align="center"><%= link_to 'Add Item', producer_newitem_path, :class=>"btn" %></p>
+                    <p align="center"><%= link_to 'Add Item', producer_new_inventory_items_path(params[:id]), :class=>"btn" %></p>
                 </div>
             </div>
         </div>

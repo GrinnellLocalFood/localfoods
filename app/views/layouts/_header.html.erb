@@ -11,18 +11,6 @@
         
         
         <ul class="nav pull-right">
-
-
-          <% if signed_in? %>
-
-
-        <!--   <% if current_user.admin %> 
-          <li><%= link_to "Add User", new_user_path %></li>
-          <% end %>
-          <% if current_user.admin || current_user.coordinator %> 
-          <li><%= link_to "Show Users", users_path %></li>
-          <% end %> -->
-
           <% @inventories = Inventory.where("hidden = ?", false) %>
           <li class="dropdown nav">
               <a class="dropdown-toggle" data-toggle="dropdown" href="#">
@@ -35,6 +23,18 @@
               <% end %>
           </li>   
           </ul>
+
+
+          <% if signed_in? %>
+
+
+        <!--   <% if current_user.admin %> 
+          <li><%= link_to "Add User", new_user_path %></li>
+          <% end %>
+          <% if current_user.admin || current_user.coordinator %> 
+          <li><%= link_to "Show Users", users_path %></li>
+          <% end %> -->
+
 
           <% if current_user.producer %> 
           <li class="dropdown nav">

@@ -54,29 +54,7 @@ class ItemsController < ApplicationController
 
   def create
     @item = Item.new(params[:item])
-
-    # if params[:item][:inventory_id].nil?
-    #   user = current_user
-    # else
-    #   user = User.find(params[:item][:inventory_id])
-
-    inv_id = params[:item][:inventory_id]
-    
-    # if inv_id.blank?
-    #   #if they are admin and it is blank, they did not pick a producer
-    #   @inventory = current_user.inventory
-    # else
-    #   @inventory = Inventory.find(inv_id)
-    # end
-
     @inventory = Inventory.find(params[:inventory_id])
-    # if current_user.producer?
-    #   @inventory = current_user.inventory
-    # elsif current_user.coordinator || current_user.admin
-    #   @inventory = current_user.inventory
-    # else
-    #   redirect_to current_user
-    # end
 
     respond_to do |format|
       if @inventory.item << @item

@@ -1,22 +1,24 @@
 <div class="container">
 	<div class="row">
 		
-		<%if @user.producer || @user.coordinator || @user.admin %>
-
-
-		<div class="span2-half offset2-half custom-block" style="padding-bottom: 76px">
+		
+		<% if (current_user.admin || current_user.coordinator || (@user.producer && current_user == @user)) %>
+		
+			<div class="span2-half offset2-half custom-block" style="padding-bottom: 76px">
 			<ul class="nav nav-list">
 
-				<% if @user.coordinator || @user.admin %>
-				<li class="nav-header">Administration</li>
-				<li><%= link_to 'All Users', users_path %></li>
+				<% if current_user.admin || current_user.coordinator %>
+					<li class="nav-header">Administration</li>
+					<li><%= link_to 'All Users', users_path %></li>
 
-				<% if @user.admin %>
-				<li><%= link_to 'Add User', new_user_path %></li>
+					<% if current_user == @user %>
+						<li><%= link_to 'Add Item for Producer', admin_coord_newitem_path %></li>
+					<% end %>
 				<% end %>
 
-				<li class="nav-header">Inventory</li>
-				<li><%= link_to 'Add Item for Producer', admin_coord_newitem_path %></li>
+
+				<% if current_user.admin %>
+					<li><%= link_to 'Add User', new_user_path %></li>
 				<% end %>
 
 				<% if @user.producer %>
@@ -24,30 +26,37 @@
 				<li><%= link_to 'Inventory', public_index_inventory_path(@user.id) %></li>
 				<li><%= link_to 'Add Item', producer_new_inventory_items_path(@user.id) %></li>
 				<% end %>
-			</ul>
-		</div>
+				</ul>
+			</div>
+
+				<!-- Add Item for Producer should only be on the admins homepage -->
+
+					<!-- <li class="nav-header">Inventory</li>
+					<li><%= link_to 'Add Item for Producer', admin_coord_newitem_path %></li>
+				 -->
 		<% end %>
 
 
-		<div class="span8 custom-block" style="margin-left:33px">
 
-			<% if notice %>
-			<div class="alert alert-success fade in">
-				<a class="close" data-dismiss="alert" href="#">&times;</a>
-				<%= notice %>
-			</div>
-			<% end %>
+			<div class="span8 custom-block" style="margin-left:33px">
 
-			<% if alert %>
-			<div class="alert alert-success fade in">
-				<a class="close" data-dismiss="alert" href="#">&times;</a>
-				<%= alert %>
-			</div>
-			<% end %>
+				<% if notice %>
+				<div class="alert alert-success fade in">
+					<a class="close" data-dismiss="alert" href="#">&times;</a>
+					<%= notice %>
+				</div>
+				<% end %>
 
-			<div align="right" style="margin-right:60px; margin-bottom:-40px;
-			margin-top: 20px">
-				<%= link_to edit_user_path(current_user), :class=>"link" do %>
+				<% if alert %>
+				<div class="alert alert-success fade in">
+					<a class="close" data-dismiss="alert" href="#">&times;</a>
+					<%= alert %>
+				</div>
+				<% end %>
+
+				<div align="right" style="margin-right:60px; margin-bottom:-40px;
+				margin-top: 20px">
+				<%= link_to edit_user_path(params[:id]), :class=>"link" do %>
 				<i class="icon-wrench"></i>
 				<% end %>
 			</div>
@@ -156,6 +165,3 @@
 			<% end %>
 		</div>
 	</div>
-
-
-

@@ -94,7 +94,7 @@
                         <td><%= item.maxorder %></td>
                         <!-- ADD ELSE IF TO item.available SO THAT IT DISPLAYS SOLD OUT IF QTY REMAINING IS 0 -->   
                         <td><% if item.available %>Yes<% else %>No<% end %></td>
-                        <td><%= link_to "Show", inventory_items_path({ :inventory_id => params[:id], :id => item.id }) %></td>
+                        <td><%= link_to "Show", inventory_item_path({ :inventory_id => params[:id], :id => item.id }) %></td>
                         <td><%= link_to "Edit", edit_inventory_item_path({ :inventory_id => params[:id], :id => item.id }) %></td>
                         <td><%= link_to "Delete", inventory_item_path({ :inventory_id => params[:id], :id => item.id }), :confirm => 'Are you sure?', :method=>:delete %></td>
                     <% end %> 

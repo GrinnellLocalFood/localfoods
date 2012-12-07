@@ -6,13 +6,54 @@
 <div class="home_alert home_alert-success"><%= alert %></div>
 <% end %>
 
-<div class="container-fluid">
+<div class="container">
     <div class="row-fluid">
-        <div class="span12">
-            <% if @item.count != 0 %>
-            <h1>Listing Products</h1>
+        <div class="span12 custom-block">
 
-            <table class="table table-hover">
+
+      
+
+
+
+            <div id="myCarousel" class="carousel slide" data-interval="4000"style="float:left; margin-right: 20px; margin-bottom: 0px; margin-top: -20px;" >
+                <!-- Carousel items -->
+                <div class="carousel-inner">
+
+                    <div class="active item">
+                        <img src="/img/r1.jpg" alt="">
+                        <div class="carousel-caption">
+                            <p>Caption text here</p>
+                        </div>
+                    </div>
+
+                    <div class="item">
+                        <img src="/img/r2.jpg" alt="">
+                        <div class="carousel-caption">
+                            <p>Caption text here</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Carousel nav -->
+                <a class="carousel-control left" href="#myCarousel" data-slide="prev">&lsaquo;</a>
+                <a class="carousel-control right" href="#myCarousel" data-slide="next">&rsaquo;</a>
+            </div>
+
+
+            <h1 style="margin-top: -5px;"><%= @current_user.inventory.display_name %></h1>
+
+
+
+            <div style="text-indent: 2.5%; margin-right: 20px;">
+                <%= @current_user.inventory.description %>
+            </div>
+
+
+            <% if @item.count != 0 %>
+
+<h3 style="clear:both; text-indent: 2.5%; margin-bottom: 15px; background-color: #595959; color: white; padding: 5px;">Current Inventory</h3>
+
+            <table class="producer-table table-hover" align="center">
+
               <tr>
                 <th>Name</th>
                 <th>Description</th>
@@ -43,7 +84,12 @@
             </tr>
 
             <% end %>
+
+
             </table>
+
+
+<%= link_to 'Add Item', producer_new_inventory_items_path(current_user), :class=>"btn", :style=>"margin-left: 2.5%; margin-top: 20px;" %>
 
 
         <% else %>
@@ -56,12 +102,12 @@
                     <p align="center">Add items by clicking the "Add Item" button below</p>
 
                     <br>
-                    <p align="center"><%= link_to 'Add Item', producer_newitem_path, :class=>"btn" %></p>
+                    <p align="center"><%= link_to 'Add Item', producer_new_inventory_items_path(current_user), :class=>"btn" %></p>
                 </div>
             </div>
         </div>
         <% end %>
-        <%= link_to 'Add Item', producer_newitem_path, :class=>"btn" %>
+        
 
 
         </div>

@@ -76,19 +76,18 @@ class ItemsController < ApplicationController
   end
 
 
-  def destroy
-    
-      @item = Item.find(params[:id])
-     if @item.inventory_id == current_user.id
+  def destroy   
+    @item = Item.find(params[:id])
+     if (current_user.admin || current_user.coordinator || current_user.id == @item.inventory_id)
         respond_to do |format|
         @item.destroy
-        format.html { redirect_to(items_path) }
+        format.html { redirect_to(public_index_inventory_path(params[:inventory_id])) }
         format.xml  { head :ok }
       end
     else
       respond_to do |format|
         flash[:error] = "Could not delete item."
-        format.html { redirect_to(items_path) }
+        format.html { redirect_to(public_index_inventory_path(params[:inventory_id])) }
         format.xml  { head :ok }
     end
     end

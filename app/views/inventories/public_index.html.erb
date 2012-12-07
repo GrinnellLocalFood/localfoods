@@ -76,6 +76,9 @@
                         <th>Min Order</th>
                         <th>Max Order</th> 
                         <th>Available</th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
                     </tr>
 
 
@@ -93,7 +96,7 @@
                         <td><% if item.available %>Yes<% else %>No<% end %></td>
                         <td><%= link_to "Show", inventory_items_path({ :inventory_id => params[:id], :id => item.id }) %></td>
                         <td><%= link_to "Edit", edit_inventory_item_path({ :inventory_id => params[:id], :id => item.id }) %></td>
-                        <td><%= link_to "Delete", inventory_item_path({ :inventory_id => params[:id], :id => item.id }), :confirm => 'Are you sure?', :method=>:delete, :class=>:Destroy %></td>
+                        <td><%= link_to "Delete", inventory_item_path({ :inventory_id => params[:id], :id => item.id }), :confirm => 'Are you sure?', :method=>:delete %></td>
                     <% end %> 
                 
                 <!-- Other wise you are either not logged in, or only a member -->

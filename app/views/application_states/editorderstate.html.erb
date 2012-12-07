@@ -24,7 +24,7 @@
     <h1 align="center">Open/Close Orders</h1><br>
     <% end %>
 
-     <div align="center">
+    <div align="center">
       Open orders?
       &nbsp;&nbsp;
       Yes
@@ -37,32 +37,49 @@
 
     <br>
 
-     <div align="center">
+    <script type="text/javascript">
+    window.onload = function()
+    {
+       document.getElementById('application_state_email_content').disabled = true;
+       document.getElementById('application_state_email_users_true').onclick = enable;
+       document.getElementById('application_state_email_users_false').onclick = disable;
+    }
+
+    function enable()
+    {
+      if(this.value == "true")
+        document.getElementById('application_state_email_content').disabled = false;
+    }
+
+    function disable()
+    {
+      if(this.value == "false")
+        document.getElementById('application_state_email_content').disabled = true;
+    }
+
+    </script>
+
+    <div align="center">
 
       Email users?
       &nbsp;&nbsp;
       Yes
-      <%= f.radio_button :email_users, true, :class=>"radio-control"%> 
+      <%= f.radio_button :email_users, true, :class=>"radio-control" %> 
       &nbsp;&nbsp;
       No
       <%= f.radio_button :email_users, false, :class=>"radio-control", :checked => true %> 
 
     </div>
-    <br> <br>
-    <div class="control-group">
-      <label class="control-label">
-        <%= f.label :email_content, "Note to users" %>
-      </label>
-      <% if @application_state.orders_open %>
-        <div class="controls">
-            <%= f.text_area :email_content %>
-        </div>
-      <% else %>
-        <div class="controls">
-            <%= f.text_area :email_content %>
-        </div>
-      <% end %>
-    </div>
+    <br>    
+        <div class="controls", style="margin-left:215px">
+          <div class="email-display">Hi <i>User</i>,
+          <br>
+          <%= f.text_area :email_content %>
+          <br>
+          Have a Great Day!
+          <br>
+          Grinnell Local Food Admin</div>
+      </div>
     <br>
     <div align="center">
       <%= f.submit "Change State", :class=>"btn btn-primary"%>

@@ -1,6 +1,17 @@
 class Inventory < ActiveRecord::Base
-<<<<<<< HEAD
+	belongs_to :user, :foreign_key => "id" #a user's "id" column is the foreign key# :autosave => false 
+	has_many :item, :foreign_key => "inventory_id", :autosave => true
 
+<<<<<<< HEAD
+	has_attached_file :photo, :url => "/system/photos/:id/:style/:basename.:extension", :styles => {
+		:large => "700x700>",
+		:medium => "300x300>",
+		:small => "150x150>"
+	}
+	before_photo_post_process :process_only_images
+	attr_accessible :url, :description, :display_name, :photo
+	
+=======
 
 
 	belongs_to :user, :foreign_key => "id" #a user's "id" column is the foreign key
@@ -10,27 +21,33 @@ class Inventory < ActiveRecord::Base
     has_attached_file :photo
 	attr_accessible :url, :description, :display_name, :photo, :hidden
 
+
+	validates :display_name, :presence => true
+
+	before_create :default_display_name
+
+>>>>>>> 20ab5344c2e4ad62c52b24697b18f4aaf637d276
 	accepts_nested_attributes_for :user
 	#fake-delete an inventory so that it persists even if a user is no longer
 	#a producer
 	def hide
 		self.hidden = true
-=======
-	belongs_to :user, :foreign_key => "id" #a user's "id" column is the foreign key# :autosave => false 
-	has_many :item, :foreign_key => "inventory_id", :autosave => true
+	end
 
-	has_attached_file :photo, :url => "/system/photos/:id/:style/:basename.:extension", :styles => {
-		:large => "700x700>",
-		:medium => "300x300>",
-		:small => "150x150>"
-	}
-	before_photo_post_process :process_only_images
-	attr_accessible :url, :description, :display_name, :photo
 	private
+<<<<<<< HEAD
 	def process_only_images
 		if !(photo.content_type =~ %r{^(image|(x-)?application)/(x-png|pjpeg|jpeg|jpg|png|gif)$})
 			return false
 		end
->>>>>>> EditItem
 	end
+
+
+=======
+
+	def default_display_name
+		self.display_name = self.user.first_name + " " + self.user.last_name 
+	end
+>>>>>>> 20ab5344c2e4ad62c52b24697b18f4aaf637d276
 end
+

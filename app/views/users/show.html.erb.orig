@@ -11,15 +11,20 @@
 					<li class="nav-header">Administration</li>
 					<li><%= link_to 'All Users', users_path %></li>
 
+<<<<<<< HEAD
+				<% if @user.admin %>
+				<li><%= link_to 'Add User', new_user_path %></li>
+				<li><%= link_to 'Open/Close Orders', '/editorderstate' %></li>
+=======
 					<% if current_user == @user %>
 						<li><%= link_to 'Add Item for Producer', admin_coord_newitem_path %></li>
 					<% end %>
+>>>>>>> 20ab5344c2e4ad62c52b24697b18f4aaf637d276
 				<% end %>
 
 
 				<% if current_user.admin %>
 					<li><%= link_to 'Add User', new_user_path %></li>
-					<li><%= link_to 'Open/Close Orders', '/editorderstate' %></li>
 				<% end %>
 
 				<% if @user.producer %>

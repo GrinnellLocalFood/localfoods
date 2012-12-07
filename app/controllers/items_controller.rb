@@ -34,7 +34,7 @@ class ItemsController < ApplicationController
   def producer_new
     @title = "New Item"
     @item = Item.new
-
+    @url = inventory_items_path
     respond_to do |format|
       format.html #new.html.erb
       format.xml  { render :xml => @item }
@@ -54,33 +54,12 @@ class ItemsController < ApplicationController
 
   def create
     @item = Item.new(params[:item])
-
-    # if params[:item][:inventory_id].nil?
-    #   user = current_user
-    # else
-    #   user = User.find(params[:item][:inventory_id])
-
-    inv_id = params[:item][:inventory_id]
-    
-    if inv_id.blank?
-      #if they are admin and it is blank, they did not pick a producer
-      @inventory = current_user.inventory
-    else
-      @inventory = Inventory.find(inv_id)
-    end
-
-    # if current_user.producer?
-    #   @inventory = current_user.inventory
-    # elsif current_user.coordinator || current_user.admin
-    #   @inventory = current_user.inventory
-    # else
-    #   redirect_to current_user
-    # end
+    @inventory = Inventory.find(params[:inventory_id])
 
     respond_to do |format|
       if @inventory.item << @item
         flash[:notice] = @item.name + " saved!"
-        format.html { redirect_to(items_path, :notice => 'Item was added successfully.',
+        format.html { redirect_to(public_index_inventory_path(@inventory), :notice => 'Item was added successfully.',
           :class=>"alert alert-success") }
 
          # format.xml  { render :xml => @user, :status => :created, :location => @user }
@@ -116,6 +95,7 @@ class ItemsController < ApplicationController
   def edit
    @title = "Edit"
    @item = Item.find(params[:id])
+   @url = edit_inventory_item_path(:inventory_id => @item.inventory_id, :id => @item.id)
  end
 
  def update

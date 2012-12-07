@@ -9,7 +9,9 @@ class Inventory < ActiveRecord::Base
 	}
 	before_photo_post_process :process_only_images
 	attr_accessible :url, :description, :display_name, :photo
-	
+		validates :display_name, :presence => true
+
+	before_create :default_display_name
 	accepts_nested_attributes_for :user
 	#fake-delete an inventory so that it persists even if a user is no longer
 	#a producer
@@ -24,5 +26,8 @@ class Inventory < ActiveRecord::Base
 		end
 	end
 
-
+	def default_display_name
+		self.display_name = self.user.first_name + " " + self.user.last_name 
+	end
 end
+

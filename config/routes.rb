@@ -18,19 +18,19 @@ Localfoods::Application.routes.draw do
     # end
   end
 
-  resources :items do
-    member do
-      get 'show'
-    end
+  # resources :items do
+  #   member do
+  #     get 'show'
+  #   end
 
-    member do
-      put 'destroy'
-    end
+  #   member do
+  #     put 'destroy'
+  #   end
 
-    member do
-      get 'edit'
-    end
-  end
+  #   member do
+  #     get 'edit'
+  #   end
+  # end
 
 
 # How to make a link to a path like /inventories/:id/foo:
@@ -56,17 +56,17 @@ Localfoods::Application.routes.draw do
         get 'producer_new'
       end
 
-      member do
-        get 'show'
-      end
+      # member do
+      #   get 'show'
+      # end
 
-      member do
-        put 'destroy'
-      end
+      # member do
+      #   put 'destroy'
+      # end
 
-      member do
-        get 'edit'
-      end
+      # member do
+      #   get 'edit'
+      # end
 
     end
 

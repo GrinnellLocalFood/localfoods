@@ -67,10 +67,31 @@ class ItemsController < ApplicationController
       else
         sign_in @user
         flash[:notice] = @item.name + " could not be saved."
-        format.html { redirect_to(items_path, :notice => 'Item was added successfully.',
+        format.html { redirect_to(public_index_inventory_path(@inventory), :notice => 'Item was added successfully.',
           :class=>"alert alert-success") }
 
          # format.xml  { render :xml => @user, :status => :created, :location => @user }
+      end
+    end
+  end
+
+  def update
+    @item = Item.find(params[:id])
+    @inventory = Inventory.find(params[:inventory_id])
+
+    respond_to do |format|
+      sign_in @user
+      if (current_user.admin || current_user.coordinator || current_user.id == @item.inventory_id)
+        if @item.update_attributes(params[:item])
+          debugger
+          flash[:notice] = @item.name + " updated!"
+          format.html { redirect_to(public_index_inventory_path(@inventory), :notice => 'Item was added successfully.',
+          :class=>"alert alert-success") }
+        end
+      else
+        flash[:error] = "You do not have permission to perform this action."
+        format.html { redirect_to(public_index_inventory_path(@inventory)) }
+        format.xml  { head :ok }
       end
     end
   end
@@ -89,7 +110,7 @@ class ItemsController < ApplicationController
         flash[:error] = "Could not delete item."
         format.html { redirect_to(public_index_inventory_path(params[:inventory_id])) }
         format.xml  { head :ok }
-    end
+      end
     end
   end
   

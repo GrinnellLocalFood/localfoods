@@ -5,11 +5,11 @@
 			<!-- <div class="custom-block"> -->
 
 		<% if signed_in? %> 
-			<h1 align="center">Add Item</h1><br>
+			<h1 align="center">Edit Item</h1><br>
 
 		<% end %>
 
-			<%= render 'producer_itemform' %>
+			<%= render 'edit_itemform', :locals => {@item => @item}%>
 
 		</div>
 	</div>

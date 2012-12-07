@@ -10,19 +10,24 @@
 				<% if current_user.admin || current_user.coordinator %>
 					<li class="nav-header">Administration</li>
 					<li><%= link_to 'All Users', users_path %></li>
-			
-				
+
+					<% if current_user.admin %>
+						<li><%= link_to 'Add User', new_user_path %></li>
+					<% end %>
+					
 					<% if current_user == @user %>
 						<li><%= link_to 'Add Item for Producer', admin_coord_newitem_path %></li>
 					<% end %>
 				<% end %>
-	
 
 
+<<<<<<< HEAD
 				<% if current_user.admin %>
 					<li><%= link_to 'Add User', new_user_path %></li>
 					<li><%= link_to 'Open/Close Orders', '/editorderstate' %></li>
 				<% end %>
+=======
+>>>>>>> 55707004b0bd7b966fa01649bdeb26846171bbc6
 
 				<% if @user.producer %>
 				<li class="nav-header">Producer Options</li>
@@ -32,11 +37,6 @@
 				</ul>
 			</div>
 
-				<!-- Add Item for Producer should only be on the admins homepage -->
-
-					<!-- <li class="nav-header">Inventory</li>
-					<li><%= link_to 'Add Item for Producer', admin_coord_newitem_path %></li>
-				 -->
 		<% end %>
 
 
@@ -50,6 +50,7 @@
 				</div>
 				<% end %>
 
+
 				<% if alert %>
 				<div class="alert alert-success fade in">
 					<a class="close" data-dismiss="alert" href="#">&times;</a>
@@ -57,16 +58,15 @@
 				</div>
 				<% end %>
 
-				
-
 			<div align="right" style="margin-right:60px; margin-bottom:-40px;
 			margin-top: 20px">
-				<%= link_to edit_user_path(current_user), :class=>"link", :rel=>"tooltip", :title=>"Edit Account" do %>
+			<%= link_to edit_user_path(params[:id]), :class=>"link", :rel=>"tooltip", :title=>"Edit Account" do %>
 
-				<i class="icon-wrench"></i>
+			<i class="icon-wrench"></i>
 
-				<% end %>
-			</div>
+			<% end %>
+		</div>
+
 
 
 			<h2 style="margin-left:60px">Hello <%= @user.first_name %>!</h2>
@@ -138,20 +138,12 @@
 				
 				<% if !(@user.inventory.photo_file_name.nil?) %>
 				<h2 align="center">
-					<%= image_tag(@user.inventory.photo.url, :width => 150, :height => 150) %>
+					<%= image_tag @user.inventory.photo.url(:small) %>
 				</h2>
 				<%end%>
 				<br>
+				
 				<table class="table" style="width:500px" align="center">
-				<!-- 	<tr>
-						<th style="color: gray">First Name</th>
-						<td><%= @user.first_name %></td>
-					</tr>
-
-					<tr>
-						<th style="color: gray">Last Name</th>
-						<td><%= @user.last_name %></td>
-					</tr> -->
 					<tr>
 						<th style="color: gray">Producer Name</th>
 						<td style="text-align:right"><%= @user.inventory.display_name %></td>

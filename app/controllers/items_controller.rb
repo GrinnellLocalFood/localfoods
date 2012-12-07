@@ -1,6 +1,6 @@
 class ItemsController < ApplicationController
-  before_filter :check_permissions, :except => :public_index
-  skip_before_filter :require_login, :only => :public_index
+  before_filter :check_permissions, :except => :show
+  skip_before_filter :require_login, :only => :show
   
   def check_permissions
     @user = current_user
@@ -65,40 +65,15 @@ class ItemsController < ApplicationController
          # format.xml  { render :xml => @user, :status => :created, :location => @user }
        else
         flash[:notice] = @item.name + " could not be saved."
-        format.html { render :action => "new" }
-        format.xml  { render :xml => @user.errors, :status => :unprocessable_entity }
-
-         # format.xml  { render :xml => @user, :status => :created, :location => @user }
+        format.html { redirect_to(public_index_inventory_path(@inventory), :notice => 'Item was added successfully.',
+          :class=>"alert alert-success") }
+  		#format.xml  { render :xml => @item.errors, :status => :unprocessable_entity }
+      
        end
      end
    end
 
-
-   def destroy
-
-    @item = Item.find(params[:id])
-    if @item.inventory_id == current_user.id
-      respond_to do |format|
-        @item.destroy
-        format.html { redirect_to(items_path) }
-        format.xml  { head :ok }
-      end
-    else
-      respond_to do |format|
-        flash[:error] = "Could not delete item."
-        format.html { redirect_to(items_path) }
-        format.xml  { head :ok }
-      end
-    end
-  end
-  
-  def edit
-   @title = "Edit"
-   @item = Item.find(params[:id])
-   @url = inventory_item_path(:inventory_id => @item.inventory_id, :id => @item.id)
- end
-
- def update
+  def update
   @item = Item.find(params[:id])
   respond_to do |format|
     if (current_user.admin || current_user.coordinator || current_user.id == @item.inventory_id)
@@ -117,9 +92,34 @@ class ItemsController < ApplicationController
   end
 end
 
+  def destroy   
+    @item = Item.find(params[:id])
+     if (current_user.admin || current_user.coordinator || current_user.id == @item.inventory_id)
+        respond_to do |format|
+        @item.destroy
+        format.html { redirect_to(public_index_inventory_path(params[:inventory_id])) }
+        format.xml  { head :ok }
+      end
+    else
+      respond_to do |format|
+        flash[:error] = "Could not delete item."
+        format.html { redirect_to(public_index_inventory_path(params[:inventory_id])) }
+        format.xml  { head :ok }
+      end
+    end
+  end
+  
+  def edit
+   @title = "Edit"
+   @item = Item.find(params[:id])
+   @url = inventory_item_path(:inventory_id => @item.inventory_id, :id => @item.id)
+ end
+ 
 
-def show
- @item = Item.find(params[:id])
-end
+
+  def show
+    @item = Item.find(params[:id])
+    @title = @item.name
+  end
 
 end

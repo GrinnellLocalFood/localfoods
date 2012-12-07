@@ -15,9 +15,7 @@ Localfoods::Application.routes.draw do
 
   end
 
- resources :items do
 
-  end
 # How to make a link to a path like /inventories/:id/foo:
 # 
 # inventory = Inventory.find(1)
@@ -31,12 +29,15 @@ Localfoods::Application.routes.draw do
     member do
       get 'public_index'
     end
+
+    member do
+      get 'producer_index'
+    end
     
     resources :items do
       collection do
         get 'producer_new'
       end
-
     end
 
   end

@@ -34,10 +34,13 @@
             </a>
             <ul class="dropdown-menu">
               <li><%= link_to "Add Item", producer_new_inventory_items_path(current_user.id) %></li>
-              <li><%= link_to "Inventory", public_index_inventory_path(current_user.id) %></li>
+              <li><%= link_to "Inventory", producer_index_inventory_path(current_user) %></li>
             </li>   
           </ul>
           <% end %>
+
+
+
 
           <li class="dropdown nav pull-right">
             <a class="dropdown-toggle" data-toggle="dropdown" href="#">

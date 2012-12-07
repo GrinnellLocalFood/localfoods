@@ -6,13 +6,16 @@ class Item < ActiveRecord::Base
 		:small => "150x150>"
 	}
 
-	attr_accessible :name, :description, :minorder, :maxorder, :item_photo ,:price, :available, :units
+	attr_accessible :name, :description, :totalquantity, :minorder, :maxorder, :item_photo ,:price, :available, :units
 
 	validates :name, :presence => true
 	validates :description, :presence => true
 	validates :minorder, :presence => true
 	validates :price, :presence => true
 	validates :units, :presence => true
+	validates :totalquantity, :presence => true
+	
+	validates :minorder, :maxorder, :totalquantity, :numericality => { :only_integer => true }
 	validates :maxorder, :numericality => {:greater_than => :minorder}, :allow_blank => true
 
 	before_validation :format_values
@@ -33,5 +36,30 @@ class Item < ActiveRecord::Base
 			self.units = "units"
 		end
 		self.units.downcase
+	end
+
+	def order(quantity)
+		if (ApplicationState.orders_open? && (available && valid_quantity?(quantity)))
+			self.totalordered += quantity
+		end
+	end
+
+	def valid_quantity?(quantity)
+		(quantity >= minorder) && (quantity <= maxorder) && (quantity <= self.num_remaining)
+	end
+
+	def update_availability
+		self.available = (self.num_remaining >= minorder)
+  		#must return true because before_save cancels save if this method returns false
+  		return true
+	end
+
+	def num_remaining
+		totalquantity - totalordered
+	end
+
+	def reset_quantity
+		self.totalordered = 0
+		self.available = true
 	end
 end

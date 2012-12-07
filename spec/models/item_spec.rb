@@ -46,5 +46,12 @@ describe Item do
     producer.inventory.item.where("description = ?","new desc").first.should_not be_nil
   end 
 
+  it { should validate_presence_of :name }
+  it { should validate_presence_of :price }
+  it { should validate_presence_of :totalquantity }
+  
+  it { should validate_numericality_of :minorder }
+  it { should validate_numericality_of :maxorder }
+
 end
 

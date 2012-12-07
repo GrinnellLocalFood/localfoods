@@ -44,7 +44,7 @@
             </a>
             <ul class="dropdown-menu">
               <li><%= link_to "Add Item", producer_new_inventory_items_path(current_user.id) %></li>
-              <li><%= link_to "Inventory", edit_inventory_item_path(:inventory_id => 1, :id => 15) %></li>
+              <li><%= link_to "Inventory", public_index_inventory_path(current_user.id) %></li>
             </li>   
           </ul>
           <% end %>

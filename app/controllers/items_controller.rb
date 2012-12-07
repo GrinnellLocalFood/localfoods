@@ -95,19 +95,24 @@ class ItemsController < ApplicationController
   def edit
    @title = "Edit"
    @item = Item.find(params[:id])
-   @url = edit_inventory_item_path(:inventory_id => @item.inventory_id, :id => @item.id)
+   @url = inventory_item_path(:inventory_id => @item.inventory_id, :id => @item.id)
  end
 
  def update
   @item = Item.find(params[:id])
   respond_to do |format|
-    if @item.update_attributes(params[:item])
-      format.html { redirect_to(items_path, :notice => 'Item was successfully updated.') }
-      format.xml  { head :ok }
+    if (current_user.admin || current_user.coordinator || current_user.id == @item.inventory_id)
+      if @item.update_attributes(params[:item])
+        format.html { redirect_to(public_index_inventory_path(@item.inventory_id), :notice => 'Item was successfully updated.') }
+        format.xml  { head :ok }
+      else
+        format.html { render :action => "edit" }
+        format.xml  { render :xml => @item.errors, :status => :unprocessable_entity }
+      end
     else
-
-      format.html { render :action => "edit" }
-      format.xml  { render :xml => @item.errors, :status => :unprocessable_entity }
+      flash[:error] = "You do not have permission to perform this action."
+      format.html { redirect_to(public_index_inventory_path(@inventory)) }
+      format.xml { head :ok }
     end
   end
 end

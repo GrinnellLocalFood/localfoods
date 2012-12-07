@@ -48,6 +48,7 @@
 				</div>
 				<% end %>
 
+
 				<% if alert %>
 				<div class="alert alert-success fade in">
 					<a class="close" data-dismiss="alert" href="#">&times;</a>
@@ -59,8 +60,10 @@
 				margin-top: 20px">
 				<%= link_to edit_user_path(params[:id]), :class=>"link" do %>
 				<i class="icon-wrench"></i>
+
 				<% end %>
 			</div>
+
 
 			<h2 style="margin-left:60px">Hello <%= @user.first_name %>!</h2>
 

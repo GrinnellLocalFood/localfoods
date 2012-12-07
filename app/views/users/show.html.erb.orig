@@ -10,21 +10,18 @@
 				<% if current_user.admin || current_user.coordinator %>
 					<li class="nav-header">Administration</li>
 					<li><%= link_to 'All Users', users_path %></li>
-
-<<<<<<< HEAD
-				<% if @user.admin %>
-				<li><%= link_to 'Add User', new_user_path %></li>
-				<li><%= link_to 'Open/Close Orders', '/editorderstate' %></li>
-=======
+			
+				
 					<% if current_user == @user %>
 						<li><%= link_to 'Add Item for Producer', admin_coord_newitem_path %></li>
 					<% end %>
->>>>>>> 20ab5344c2e4ad62c52b24697b18f4aaf637d276
 				<% end %>
+	
 
 
 				<% if current_user.admin %>
 					<li><%= link_to 'Add User', new_user_path %></li>
+					<li><%= link_to 'Open/Close Orders', '/editorderstate' %></li>
 				<% end %>
 
 				<% if @user.producer %>
@@ -60,12 +57,17 @@
 				</div>
 				<% end %>
 
-				<div align="right" style="margin-right:60px; margin-bottom:-40px;
-				margin-top: 20px">
-				<%= link_to edit_user_path(params[:id]), :class=>"link" do %>
+				
+
+			<div align="right" style="margin-right:60px; margin-bottom:-40px;
+			margin-top: 20px">
+				<%= link_to edit_user_path(current_user), :class=>"link", :rel=>"tooltip", :title=>"Edit Account" do %>
+
 				<i class="icon-wrench"></i>
+
 				<% end %>
 			</div>
+
 
 			<h2 style="margin-left:60px">Hello <%= @user.first_name %>!</h2>
 
@@ -136,12 +138,20 @@
 				
 				<% if !(@user.inventory.photo_file_name.nil?) %>
 				<h2 align="center">
-					<%= image_tag @user.inventory.photo.url(:small) %>
+					<%= image_tag(@user.inventory.photo.url, :width => 150, :height => 150) %>
 				</h2>
 				<%end%>
 				<br>
-				
 				<table class="table" style="width:500px" align="center">
+				<!-- 	<tr>
+						<th style="color: gray">First Name</th>
+						<td><%= @user.first_name %></td>
+					</tr>
+
+					<tr>
+						<th style="color: gray">Last Name</th>
+						<td><%= @user.last_name %></td>
+					</tr> -->
 					<tr>
 						<th style="color: gray">Producer Name</th>
 						<td style="text-align:right"><%= @user.inventory.display_name %></td>

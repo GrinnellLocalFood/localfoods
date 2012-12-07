@@ -15,7 +15,15 @@
 </div>
 <% end %>
 
+<<<<<<< HEAD
+<div class="home_alert home_alert-success fade in">
+	<a class="close" data-dismiss="alert" href="#">&times;</a>
+	blah
+</div>
 
+
+=======
+>>>>>>> home_page_redux
 <div class="container-fluid" align="right">
 	<div class="row">
 		<div class="hero-text">

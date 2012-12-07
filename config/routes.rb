@@ -46,6 +46,10 @@ Localfoods::Application.routes.draw do
     member do
       get 'public_index'
     end
+
+    member do
+      get 'producer_index'
+    end
     
     resources :items do
       collection do

@@ -5761,9 +5761,13 @@ a.badge:hover {
   border-top: 1px solid #e5e5e5;
 }
 
+/*CHANGE*/
+
 .carousel {
   position: relative;
-  margin-bottom: 20px;
+
+  /*margin-bottom: 20px;*/
+
   line-height: 1;
 }
 
@@ -5827,7 +5831,7 @@ a.badge:hover {
 
 .carousel-control {
   position: absolute;
-  top: 40%;
+  top: 50%;
   left: 15px;
   width: 40px;
   height: 40px;

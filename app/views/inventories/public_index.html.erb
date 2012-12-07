@@ -66,11 +66,15 @@
               <tr>
                 <th>Name</th>
                 <th>Description</th>
-                <th>Total Quantity</th>
                 <th>Price</th>
-                <!-- <th>Quantity Ordered</th> -->
-                <!-- <th>Min Order</th> -->
-                <!-- <th>Max Order</th>  -->
+                <!-- If the current user is an admin, coordinator, or the producer whose page this is -->
+                <% if current_user && (current_user.admin || current_user.coordinator || current_user == @producer) %>
+                    <th>Total Qty.</th>
+                    <th>Qty. Ordered</th>
+                    <th>Min Order</th>
+                    <th>Max Order</th> 
+                <% end %>
+
                 <th>Available</th>
             </tr>
 
@@ -78,12 +82,15 @@
             <tr>
                 <td><%= item.name %></td>
                 <td><%= item.description %></td>
-                <td><%= item.totalquantity %></td>
                 <td><%= item.price %></td>
-                <!-- <td><%= item.totalordered %></td> -->
-                <!-- <td><%= item.minorder %></td> -->
-                <!-- <td><%= item.maxorder %></td> -->
-                <td><%= item.available %></td>
+                <!-- If the current user is an admin, coordinator, or the producer whose page this is -->
+                <% if current_user && (current_user.admin || current_user.coordinator || current_user == @producer) %>
+                    <td><%= item.totalquantity %></td>
+                    <td><%= item.totalordered %></td>
+                    <td><%= item.minorder %></td>
+                    <td><%= item.maxorder %></td>
+                <% end %>
+                <td><% if item.available %>Yes<% else %>No<% end %></td>
                 
                 <% end %>
 
@@ -105,7 +112,7 @@
     </div>
 </div>
 
-
- <!-- 
-<%= link_to 'Add Item', producer_new_inventory_items_path(params[:id]), :class=>"btn" %>
--->
+<!-- If the current user is an admin, coordinator, or the producer whose page this is -->
+<% if current_user && (current_user.admin || current_user.coordinator || current_user == @producer) %>
+        <%= link_to 'Add Item', producer_new_inventory_items_path(params[:id]), :class=>"btn" %>
+<% end %>

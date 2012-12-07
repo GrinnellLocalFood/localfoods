@@ -19,7 +19,7 @@
 
 			<div align="right" style="margin-right:60px; margin-bottom:-40px;
 			margin-top: 20px">
-				<%= link_to edit_item_path(params[:id]), :class=>"link" do %>
+				<%= link_to edit_inventory_item_path(:id => params[:id], :inventory_id => params[:inventory_id]), :class=>"link" do %>
 				<i class="icon-wrench"></i>
 				<% end %>
 			</div>

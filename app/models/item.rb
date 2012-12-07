@@ -10,13 +10,12 @@ class Item < ActiveRecord::Base
 
 	validates :name, :presence => true
 	validates :description, :presence => true
-	validates :minorder, :presence => true
+	validates :minorder, :presence => true, :numericality => { :only_integer => true }
 	validates :price, :presence => true
-	validates :units, :presence => true
-	validates :totalquantity, :presence => true
+	validates :units, :presence => true, :format => { :with => /[a-zA-Z.\s]/, :message => "cannot contain special or numeric characters." }
+	validates :totalquantity, :presence => true, :numericality => { :only_integer => true }
 	
-	validates :minorder, :maxorder, :totalquantity, :numericality => { :only_integer => true }
-	validates :maxorder, :numericality => {:greater_than => :minorder}, :allow_blank => true
+	validates :maxorder, :numericality => {:greater_than => :minorder, :only_integer => true}, :allow_blank => true
 
 	before_validation :format_values
 

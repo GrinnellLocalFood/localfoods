@@ -94,11 +94,23 @@ class ItemsController < ApplicationController
   end
   
   def edit
-    @title = "Edit"
+    @title = "Edit Item"
+    @item = Item.find(params[:id])
+
+    respond_to do |format|
+      format.html 
+      format.xml  { render :xml => @item }
+    end
   end
 
   def show
-     @item = Item.find(params[:id])
+    @item = Item.find(params[:id])
+    @title = @item.name
+
+    respond_to do |format|
+      format.html 
+      format.xml  { render :xml => @item }
+    end
   end
 
 end

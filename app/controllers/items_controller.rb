@@ -1,6 +1,6 @@
 class ItemsController < ApplicationController
-  before_filter :check_permissions, :except => :public_index
-  skip_before_filter :require_login, :only => :public_index
+  before_filter :check_permissions, :except => :show
+  skip_before_filter :require_login, :only => :show
   
   def check_permissions
     @user = current_user

@@ -8,8 +8,8 @@
       <h1 align="center">Edit Item</h1><br>
 
     <% end %>
-
-    <%= render 'producer_itemform' %>
+    <% @aurl = inventory_item_path %> 
+    <%= render :partial => 'producer_itemform', :locals => { :aurl => inventory_item_path } %>
 
 <!-- </div> -->
 

@@ -9,8 +9,10 @@
 
 		<% end %>
 
-			<%= render 'producer_itemform' %>
+			
+			 <%= render :partial => 'producer_itemform', :locals => { :aurl => inventory_items_path } %>
 
+	
 		</div>
 	</div>
 </div>

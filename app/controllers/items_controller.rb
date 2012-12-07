@@ -82,7 +82,7 @@ class ItemsController < ApplicationController
         format.xml  { head :ok }
       else
         format.html { render :action => "edit" }
-        format.xml  { render :xml => @item.errors, :status => :unprocessable_entity }
+        #format.xml  { render :xml => @item.errors, :status => :unprocessable_entity }
       end
     else
       flash[:error] = "You do not have permission to perform this action."

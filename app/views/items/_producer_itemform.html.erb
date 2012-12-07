@@ -1,4 +1,4 @@
-<%= form_for(@item, :url => @url, :html=>{:class=>'form-horizontal', :multipart => true}) do |f| %>
+<%= form_for(@item, :url => local_assigns[:aurl], :html=>{:class=>'form-horizontal', :multipart => true}) do |f| %>
 
 <% if @item.errors.any? %>
 <!-- <div id="error_explanation"> -->
@@ -117,5 +117,4 @@
 <div align="center">
   * Denotes required field
 </div>
-
-<% end %>
+    <% end %>

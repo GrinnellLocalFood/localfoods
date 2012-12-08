@@ -82,6 +82,10 @@
 					<th style="color: gray">Last Name</th>
 					<td><%= @user.last_name %></td>
 				</tr> -->
+				<tr>
+					<th style="color: gray">Name</th>
+					<td style="text-align:right"><%= @user.first_name + " " + @user.last_name %></td>
+				</tr>
 
 				<tr>
 					<th style="color: gray">Email</th>

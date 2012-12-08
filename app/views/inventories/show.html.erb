@@ -133,9 +133,14 @@
 <% else %>
 <h4 style="clear:both; background-color: #595959; color: white; padding: 15px; margin-bottom: 10px;">
     Currently Nothing For Sale</h4>
-
+ 
             <% end %> 
+            <br>
 
+            <!-- If the current user is an admin, coordinator, or the producer whose page this is -->
+            <% if current_user && (current_user.admin || current_user.coordinator || current_user == @producer) %>
+                <%= link_to 'Add Item', producer_new_inventory_items_path(params[:id]), :class=>"btn", :style=>"margin-left: 2.5%" %>
+            <% end %>
 
 
 
@@ -145,9 +150,5 @@
 
 
     </div>
-<!-- If the current user is an admin, coordinator, or the producer whose page this is -->
-<% if current_user && (current_user.admin || current_user.coordinator || current_user == @producer) %>
-    <%= link_to 'Add Item', producer_new_inventory_items_path(params[:id]), :class=>"btn" %>
-<% end %>
 </div>
 

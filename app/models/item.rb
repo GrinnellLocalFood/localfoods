@@ -1,5 +1,6 @@
 class Item < ActiveRecord::Base
 	belongs_to :inventory, :foreign_key => "inventory_id"
+	belongs_to :category, :foreign_key => "category_id"
 	has_attached_file :item_photo, :url => "/system/item_photos/:id/:style/:basename.:extension", :styles => {
 		:thumb => "50x50>",
 		:medium => "300x300>",

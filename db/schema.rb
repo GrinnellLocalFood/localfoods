@@ -10,10 +10,16 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121201202621) do
+ActiveRecord::Schema.define(:version => 20121208203134) do
 
   create_table "application_states", :force => true do |t|
     t.boolean  "orders_open", :default => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "categories", :force => true do |t|
+    t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -48,6 +54,7 @@ ActiveRecord::Schema.define(:version => 20121201202621) do
     t.string   "item_photo_content_type"
     t.integer  "item_photo_file_size"
     t.datetime "item_photo_updated_at"
+    t.integer  "category_id"
   end
 
   create_table "users", :force => true do |t|

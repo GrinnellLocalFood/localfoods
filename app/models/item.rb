@@ -21,11 +21,29 @@ class Item < ActiveRecord::Base
 
 
 	def is_available?
-		if self.available && ApplicationState.orders_open?
-			"Yes"
+		if ApplicationState.orders_open?
+			if num_remaining == 0
+				"Sold Out"
+			elsif self.available
+				"Yes"
+			else
+				"No"
+			end
 		else
 			"No"
 		end
+	end
+
+	def displayed_maxorder
+		if self.maxorder.blank?
+			"None"
+		else
+			self.maxorder
+		end
+	end
+
+	def num_remaining
+		totalquantity - totalordered
 	end
 
 	private
@@ -34,7 +52,7 @@ class Item < ActiveRecord::Base
 		if(self.units.nil? || self.units.empty?)
 			self.units = "units"
 		end
-		self.units.downcase
+		self.units = self.units.downcase
 	end
 
 	def order(quantity)
@@ -53,9 +71,6 @@ class Item < ActiveRecord::Base
   		return true
 	end
 
-	def num_remaining
-		totalquantity - totalordered
-	end
 
 	def reset_quantity
 		self.totalordered = 0

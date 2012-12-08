@@ -48,30 +48,16 @@ class ItemsController < ApplicationController
 
     respond_to do |format|
       format.html #new.html.erb
-      format.xml  { render :xml => @item }
     end
   end
 
   def create
-    @item = Item.new(params[:item])
-    @inventory = Inventory.find(params[:inventory_id])
+    create_helper("producer_new")
+  end
 
-    respond_to do |format|
-      if @inventory.item << @item
-        flash[:notice] = @item.name + " saved!"
-        format.html { redirect_to(public_index_inventory_path(@inventory), :notice => 'Item was added successfully.',
-          :class=>"alert alert-success") }
-
-         # format.xml  { render :xml => @user, :status => :created, :location => @user }
-       else
-        flash[:notice] = @item.name + " could not be saved."
-        format.html { redirect_to(public_index_inventory_path(@inventory), :notice => 'Item was added successfully.',
-          :class=>"alert alert-success") }
-  		#format.xml  { render :xml => @item.errors, :status => :unprocessable_entity }
-      
-       end
-     end
-   end
+  def admin_create
+    create_helper("admin_coord_new")
+  end
 
   def update
   @item = Item.find(params[:id])
@@ -82,7 +68,7 @@ class ItemsController < ApplicationController
         format.xml  { head :ok }
       else
         format.html { render :action => "edit" }
-        #format.xml  { render :xml => @item.errors, :status => :unprocessable_entity }
+        format.xml  { render :xml => @item.errors, :status => :unprocessable_entity }
       end
     else
       flash[:error] = "You do not have permission to perform this action."
@@ -122,4 +108,31 @@ end
     @title = @item.name
   end
 
+
+  private
+
+  def create_helper(action)
+    @item = Item.new(params[:item])
+    @inventory = Inventory.find(params[:inventory_id])
+
+    respond_to do |format|
+      if (current_user.admin || current_user.coordinator || current_user.id == @item.inventory_id)
+        if @inventory.item << @item
+          flash[:notice] = @item.name + " saved!"
+          format.html { redirect_to(public_index_inventory_path(@inventory), :notice => 'Item was added successfully.',
+            :class=>"alert alert-success") }
+
+           # format.xml  { render :xml => @user, :status => :created, :location => @user }
+        else
+          flash.now[:notice] = @item.name + " could not be saved."
+          format.html { render :action => action }
+          format.xml  { render :xml => @item.errors, :status => :unprocessable_entity }
+        end
+       else
+        flash[:error] = "You do not have permission to perform this action."
+        format.html { redirect_to(public_index_inventory_path(@inventory)) }
+        format.xml { head :ok }
+      end
+    end
+  end
 end

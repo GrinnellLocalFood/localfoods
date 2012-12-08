@@ -50,6 +50,7 @@ Localfoods::Application.routes.draw do
   match '/login',  :to => 'sessions#new'
   match '/logout', :to => 'sessions#destroy'
   match '/admin_coord_newitem', :to => 'items#admin_coord_new'
+  match '/admin_coord_createitem', :to => 'items#admin_create'
   match '/editorderstate', :to => 'application_states#editorderstate' 
 
   resources :password_resets

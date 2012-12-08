@@ -86,14 +86,14 @@
                     <tr>
                         <td><%= item.name %></td>
                         <td><%= item.description %></td>
-                        <td><%= item.price %></td>
+                        <td><%= number_to_currency(item.price) %><b>/<%= item.units.singularize %></b></td>
                         <!-- ADD QTY REMAINING HERE ONCE WE MERGE WITH NEW ITEM MODEL -->
                         <td><%= item.totalquantity %></td>
                         <td><%= item.totalordered %></td>
                         <td><%= item.minorder %></td>
-                        <td><%= item.maxorder %></td>
+                        <td><%= item.displayed_maxorder %></td>
                         <!-- ADD ELSE IF TO item.available SO THAT IT DISPLAYS SOLD OUT IF QTY REMAINING IS 0 -->   
-                        <td><% if item.available %>Yes<% else %>No<% end %></td>
+                        <td><%= item.is_available? %></td>
                         <td><%= link_to "Show", inventory_item_path({ :inventory_id => params[:id], :id => item.id }) %></td>
                         <td><%= link_to "Edit", edit_inventory_item_path({ :inventory_id => params[:id], :id => item.id }) %></td>
                         <td><%= link_to "Delete", inventory_item_path({ :inventory_id => params[:id], :id => item.id }), :confirm => 'Are you sure?', :method=>:delete %></td>
@@ -105,7 +105,7 @@
                         <th>Name</th>
                         <th>Description</th>
                         <th>Price</th>
-                        <!-- QTY REMAINING -->
+                        <th>Qty. Remaining</th>
                         <th>Min Order</th>
                         <th>Max Order</th> 
                         <th>Available</th>
@@ -117,12 +117,12 @@
                     <tr>
                         <td><%= item.name %></td>
                         <td><%= item.description %></td>
-                        <td><%= item.price %></td>
-                        <!-- ADD QTY REMAINING HERE ONCE WE MERGE WITH NEW ITEM MODEL -->
+                        <td><%= number_to_currency(item.price) %><b>/<%= item.units.singularize %></b></td>
+                        <td><%= item.num_remaining %></td>
                         <td><%= item.minorder %></td>
-                        <td><%= item.maxorder %></td>
+                        <td><%= item.displayed_maxorder %></td>
                         <!-- ADD ELSE IF TO item.available SO THAT IT DISPLAYS SOLD OUT IF QTY REMAINING IS 0 -->   
-                        <td><% if item.available %>Yes<% else %>No<% end %></td>
+                        <td><%= item.is_available? %></td>
                         <td><%= link_to "Show", inventory_item_path({ :inventory_id => params[:id], :id => item.id }) %></td>
                     <% end %>
                 <% end %>

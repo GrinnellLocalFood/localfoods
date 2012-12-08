@@ -15,7 +15,7 @@ class Item < ActiveRecord::Base
 	validates :units, :presence => true, :format => { :with => /[a-zA-Z.\s]/, :message => "cannot contain special or numeric characters." }
 	validates :totalquantity, :presence => true, :numericality => { :only_integer => true }
 	
-	validates :maxorder, :numericality => {:greater_than => :minorder, :only_integer => true}, :allow_blank => true
+	validates :maxorder, :numericality => {:greater_than => :minorder, :only_integer => true, :message => "must be greater than Minorder"}, :allow_blank => true
 
 	before_validation :format_values
 

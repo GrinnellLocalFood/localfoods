@@ -32,7 +32,7 @@
     Admin
     <%= f.check_box :admin %>
 </label>
-<% end %>
+  <% end %>
 
 <label class="checkbox inline">
     Coordinator
@@ -44,6 +44,7 @@
     <%= f.check_box :producer %>
 </label>
 </div>
+<% end %>
 <br>
 
 
@@ -135,20 +136,18 @@
 </div>
 <br>
 <% end %>
-<% end %>
 
 
 
-
-<div class="control-group controls">
-  <%= f.submit "Save Changes", :class=>"btn btn-primary"%>
-</div>
 
 <div align="center">
   * Denotes required field
 </div>
 <% end %>
 
+<div class="control-group controls">
+  <%= f.submit "Save Changes", :class=>"btn btn-primary"%>
+</div>
 
 </div>
 </div>

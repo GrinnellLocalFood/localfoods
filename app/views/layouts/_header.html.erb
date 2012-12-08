@@ -20,7 +20,7 @@
             </a>
             <ul class="dropdown-menu">
               <% @inventories.each do |inventory| %>
-              <li><%= link_to inventory.display_name, public_index_inventory_path(inventory.id) %></li>
+              <li><%= link_to inventory.display_name, inventory_path(inventory.id) %></li>
               <% end %>
             </li>   
           </ul>
@@ -34,7 +34,7 @@
             </a>
             <ul class="dropdown-menu">
               <li><%= link_to "Add Item", producer_new_inventory_items_path(current_user.id) %></li>
-              <li><%= link_to "Inventory", public_index_inventory_path(current_user) %></li>
+              <li><%= link_to "Inventory", inventory_path(current_user) %></li>
             </li>   
           </ul>
           <% end %>

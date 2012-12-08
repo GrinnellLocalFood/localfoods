@@ -24,7 +24,7 @@
 
 				<% if @user.producer %>
 				<li class="nav-header">Producer Options</li>
-				<li><%= link_to 'Inventory', public_index_inventory_path(@user.id) %></li>
+				<li><%= link_to 'Inventory', inventory_path(@user.id) %></li>
 				<li><%= link_to 'Add Item', producer_new_inventory_items_path(@user.id) %></li>
 				<% end %>
 				</ul>

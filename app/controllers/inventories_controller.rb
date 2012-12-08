@@ -1,6 +1,6 @@
 class InventoriesController < ApplicationController
 
-skip_before_filter :require_login, :only => :public_index
+skip_before_filter :require_login, :only => :show
 
  def edit
     @title = "Edit Producer Profile"
@@ -28,7 +28,7 @@ skip_before_filter :require_login, :only => :public_index
    end
 
   #PUT
-  def public_index
+  def show
     #need to add permissions checking
       @title = "View Inventory"
       @producer = User.find(params[:id])
@@ -38,17 +38,5 @@ skip_before_filter :require_login, :only => :public_index
         format.xml  { render :xml => @item }
     end
   end
-
-
-  def producer_index
-    @title = "View Inventory"
-
-    if current_user.producer
-      @item = current_user.inventory.item
-    else
-      redirect_to(current_user)
-    end
-  end
-
 
 end

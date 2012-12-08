@@ -64,7 +64,7 @@ class ItemsController < ApplicationController
   respond_to do |format|
     if (current_user.admin || current_user.coordinator || current_user.id == @item.inventory_id)
       if @item.update_attributes(params[:item])
-        format.html { redirect_to(public_index_inventory_path(@item.inventory_id), :notice => 'Item was successfully updated.') }
+        format.html { redirect_to(inventory_path(@item.inventory_id), :notice => 'Item was successfully updated.') }
         format.xml  { head :ok }
       else
         format.html { render :action => "edit" }
@@ -72,7 +72,7 @@ class ItemsController < ApplicationController
       end
     else
       flash[:error] = "You do not have permission to perform this action."
-      format.html { redirect_to(public_index_inventory_path(@inventory)) }
+      format.html { redirect_to(inventory_path(@inventory)) }
       format.xml { head :ok }
     end
   end
@@ -83,13 +83,13 @@ end
      if (current_user.admin || current_user.coordinator || current_user.id == @item.inventory_id)
         respond_to do |format|
         @item.destroy
-        format.html { redirect_to(public_index_inventory_path(params[:inventory_id])) }
+        format.html { redirect_to(inventory_path(params[:inventory_id])) }
         format.xml  { head :ok }
       end
     else
       respond_to do |format|
         flash[:error] = "Could not delete item."
-        format.html { redirect_to(public_index_inventory_path(params[:inventory_id])) }
+        format.html { redirect_to(inventory_path(params[:inventory_id])) }
         format.xml  { head :ok }
       end
     end
@@ -119,7 +119,7 @@ end
       if (current_user.admin || current_user.coordinator || current_user.id == @item.inventory_id)
         if @inventory.item << @item
           flash[:notice] = @item.name + " saved!"
-          format.html { redirect_to(public_index_inventory_path(@inventory), :notice => 'Item was added successfully.',
+          format.html { redirect_to(inventory_path(@inventory), :notice => 'Item was added successfully.',
             :class=>"alert alert-success") }
 
            # format.xml  { render :xml => @user, :status => :created, :location => @user }
@@ -130,7 +130,7 @@ end
         end
        else
         flash[:error] = "You do not have permission to perform this action."
-        format.html { redirect_to(public_index_inventory_path(@inventory)) }
+        format.html { redirect_to(inventory_path(@inventory)) }
         format.xml { head :ok }
       end
     end

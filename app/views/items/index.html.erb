@@ -1,0 +1,67 @@
+    <% if notice %>
+    <div class="home_alert home_alert-success fade in">
+        <a class="close" data-dismiss="alert" href="#">&times;</a>
+        <%= notice %>
+    </div>
+    <% end %>
+
+    <% if alert %>
+    <div class="home_alert home_alert-success fade in">
+        <a class="close" data-dismiss="alert" href="#">&times;</a>
+        <%= alert %>
+    </div>
+    <% end %>
+
+<div class="container">
+    <div class="row-fluid">
+        <div class="span12 offset0 custom-block">
+<!-- 
+            <div class="container-fluid">
+                <div class="row-fluid">
+                    <div class="span2 offset5"> -->
+
+                         <h3 style="text-align:center">Categories</h3>
+                         <table class="producer-table table-hover" align="center">
+                                <tr>
+                        <th>Name</th>
+                        <th>Producer</th>
+                        <th>Description</th>
+                        <th>Price</th>
+                        <th>Total Qty.</th>
+                        <th>Qty. Ordered</th>
+                        <th>Min Order</th>
+                        <th>Max Order</th> 
+                        <th>Available</th>
+                        <th>Category</th>
+                        <th></th>
+                        <th></th>
+                    </tr>
+                        <% @items.each do |item| %>
+                         <tr>
+                        <td><%= item.name %></td>
+                        <td><%= Inventory.find(item.inventory_id).display_name %></td>
+                        <td><%= item.description %></td>
+                        <td><%= number_to_currency(item.price) %><b>/<%= item.units.singularize %></b></td>
+                        <!-- ADD QTY REMAINING HERE ONCE WE MERGE WITH NEW ITEM MODEL -->
+                        <td><%= item.totalquantity %></td>
+                        <td><%= item.totalordered %></td>
+                        <td><%= item.minorder %></td>
+                        <td><%= item.displayed_maxorder %></td>
+                        <!-- ADD ELSE IF TO item.available SO THAT IT DISPLAYS SOLD OUT IF QTY REMAINING IS 0 -->   
+                        <td><%= item.is_available? %></td>
+                        <td><%= Category.find(item.category_id).name %></td>
+                        <td><%= link_to "Show", inventory_item_path({ :inventory_id => item.inventory_id, :id => item.id }) %></td>
+
+                    </tr>
+
+                        <% end %>
+
+                    </table>
+<!--            
+                    </div>
+                </div>
+            </div> -->
+        </div>
+
+    </div>
+</div>

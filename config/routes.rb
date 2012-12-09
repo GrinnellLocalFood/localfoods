@@ -22,6 +22,9 @@ Localfoods::Application.routes.draw do
 # link_to inventory(foo) will produce localhost/inventories/1/foo
 
   resources :inventories do
+    member do
+        get 'show_in_index'
+      end
     # member do
     #   get 'edit'
     # end

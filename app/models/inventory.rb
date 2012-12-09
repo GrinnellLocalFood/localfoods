@@ -5,7 +5,9 @@ class Inventory < ActiveRecord::Base
 	has_attached_file :photo, :url => "/system/photos/:id/:style/:basename.:extension", :styles => {
 		:large => "700x700>",
 		:medium => "300x300>",
-		:small => "150x150>"
+		:small => "150x150>",
+		:index_thumb => "100x100>",
+		:thumb => "60x60>"
 	}
 	before_photo_post_process :process_only_images
 	attr_accessible :url, :description, :display_name, :photo

@@ -1,6 +1,6 @@
 class InventoriesController < ApplicationController
 
-skip_before_filter :require_login, :only => :show
+skip_before_filter :require_login, :only => [:show, :index]
 
  def edit
     @title = "Edit Producer Profile"
@@ -37,6 +37,20 @@ skip_before_filter :require_login, :only => :show
         format.html
         format.xml  { render :xml => @item }
     end
+  end
+
+  def show_in_index
+      @title = "Our Producers"
+      @producer = User.find(params[:id])
+      @item = Item.where("inventory_id = ?", params[:id])
+    render :update do |page|
+      page.replace_html 'producer_info', :partial => 'show'
+    end
+  end
+
+  def index
+    @title = "Producers"
+    @producers = Inventory.all
   end
 
 end

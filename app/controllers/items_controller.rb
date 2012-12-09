@@ -8,6 +8,10 @@ class ItemsController < ApplicationController
       @user.admin || @user.producer)
   end
 
+  def index
+  @items = Item.all
+  end
+
   #PUT
   def public_index
     #need to add permissions checking

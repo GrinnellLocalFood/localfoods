@@ -118,14 +118,13 @@ end
     respond_to do |format|
       if (current_user.admin || current_user.coordinator || current_user.id == @item.inventory_id)
         if @inventory.item << @item
-          flash[:notice] = @item.name + " saved!"
           format.html { redirect_to(inventory_path(@inventory), :notice => 'Item was added successfully.',
             :class=>"alert alert-success") }
 
            # format.xml  { render :xml => @user, :status => :created, :location => @user }
         else
-          flash.now[:notice] = @item.name + " could not be saved."
-          format.html { render :action => action }
+          format.html { render :action => action, :notice => @item.name + " could not be saved.",
+            :class=>"alert alert-success" }
           format.xml  { render :xml => @item.errors, :status => :unprocessable_entity }
         end
        else

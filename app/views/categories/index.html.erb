@@ -1,0 +1,43 @@
+    <% if notice %>
+    <div class="home_alert home_alert-success fade in">
+        <a class="close" data-dismiss="alert" href="#">&times;</a>
+        <%= notice %>
+    </div>
+    <% end %>
+
+    <% if alert %>
+    <div class="home_alert home_alert-success fade in">
+        <a class="close" data-dismiss="alert" href="#">&times;</a>
+        <%= alert %>
+    </div>
+    <% end %>
+
+<div class="container">
+    <div class="row-fluid">
+        <div class="span6 offset3 custom-block">
+<!-- 
+            <div class="container-fluid">
+                <div class="row-fluid">
+                    <div class="span2 offset5"> -->
+
+                         <h3 style="text-align:center">Categories</h3>
+                         <table class="producer-table table-hover" align="center">
+                        <% @categories.each do |category| %>
+                        <tr>
+                            <td><b><%= category.name %></b></td>
+                            <td style="text-align:center"><%= link_to 'Edit', edit_category_path(category) %></td>
+                            <td><%= link_to "Delete", category, :confirm => 'Are you sure?', :method=>:delete, :class=>:Destroy %></td>
+                        </tr>
+                        <% end %>
+
+                    </table>
+                        <%= render 'categories_addform' %>
+
+<!--            
+                    </div>
+                </div>
+            </div> -->
+        </div>
+
+    </div>
+</div>

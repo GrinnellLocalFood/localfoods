@@ -40,6 +40,16 @@
   </div>
 </div>
 
+ <div class="control-group">
+    <label class="control-label">
+      <%= f.label :name, "Category Type *" %>
+    </label>
+    <div class="controls">
+     <!-- Leaving the first parameter as blank adds "inventory_id" directly to the params hash -->
+     <%= collection_select(:item, :category_id, Category.all, :id, :name) %>
+    </div>
+  </div>
+
 <div class="control-group">
   <label class="control-label">
     <%= f.label :totalquantity, "Total Quantity *" %>

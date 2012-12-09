@@ -13,7 +13,8 @@ describe Item do
               :minorder => 5, 
               :maxorder => 15, 
               :price => 4.00, 
-              :available => true }
+              :available => true, 
+              :category_id =>1}
   end
 
   it "should allow a producer to add multiple items" do
@@ -46,6 +47,9 @@ describe Item do
     producer.inventory.item.where("description = ?","new desc").first.should_not be_nil
   end 
 
+
+
+  it { should validate_presence_of :category_id}
   it { should validate_presence_of :name }
   it { should validate_presence_of :price }
   it { should validate_presence_of :totalquantity }

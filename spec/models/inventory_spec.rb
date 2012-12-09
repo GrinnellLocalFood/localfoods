@@ -8,7 +8,13 @@ describe Inventory do
               :last_name => "User", 
               :email => "user@example.com", 
               :password => "password",
-              :password_confirmation => "password"}
+              :password_confirmation => "password"}    
+    @item = { :name => "Apple", 
+              :description => "blah",
+              :minorder => 5, 
+              :maxorder => 15, 
+              :price => 4.00, 
+              :available => true }
   end
 
 end

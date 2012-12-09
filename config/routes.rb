@@ -51,6 +51,8 @@ Localfoods::Application.routes.draw do
 
   resources :password_resets
 
+  resources :categories
+
   root :to => 'pages#home'
 
 

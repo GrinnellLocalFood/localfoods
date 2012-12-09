@@ -7,7 +7,7 @@ class Item < ActiveRecord::Base
 		:small => "150x150>"
 	}
 
-	attr_accessible :name, :description, :totalquantity, :minorder, :maxorder, :item_photo ,:price, :available, :units
+	attr_accessible :name, :description, :totalquantity, :minorder, :maxorder, :item_photo ,:price, :available, :units, :category_id
 
 	validates :name, :presence => true
 	validates :description, :presence => true
@@ -17,7 +17,7 @@ class Item < ActiveRecord::Base
 	validates :totalquantity, :presence => true, :numericality => { :only_integer => true }
 	validates :maxorder, :numericality => { :only_integer => true }
 	validates :maxorder, :numericality => {:greater_than => :minorder, :message => "must be greater than Minorder"}, :allow_blank => true
-
+	validates :category_id, :presence => true
 	before_validation :format_values
 
 

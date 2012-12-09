@@ -76,6 +76,7 @@
                         <th>Min Order</th>
                         <th>Max Order</th> 
                         <th>Available</th>
+                        <th>Category</th>
                         <th></th>
                         <th></th>
                         <th></th>
@@ -94,6 +95,7 @@
                         <td><%= item.displayed_maxorder %></td>
                         <!-- ADD ELSE IF TO item.available SO THAT IT DISPLAYS SOLD OUT IF QTY REMAINING IS 0 -->   
                         <td><%= item.is_available? %></td>
+                        <td><%= Category.find(item.category_id).name %></td>
                         <td><%= link_to "Show", inventory_item_path({ :inventory_id => params[:id], :id => item.id }) %></td>
                         <td><%= link_to "Edit", edit_inventory_item_path({ :inventory_id => params[:id], :id => item.id }) %></td>
                         <td><%= link_to "Delete", inventory_item_path({ :inventory_id => params[:id], :id => item.id }), :confirm => 'Are you sure?', :method=>:delete %></td>

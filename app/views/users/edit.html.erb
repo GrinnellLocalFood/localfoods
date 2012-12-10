@@ -1,10 +1,10 @@
 <div class="container">
-    <div class="row">
-        <div class="span8 offset2 custom-block">
+  <div class="row">
+    <div class="span8 offset2 custom-block">
 
-            <%= form_for(@user, :html=>{:class=>'form-horizontal', :multipart => true}) do |f| %>
-         
-         <% if @user.errors.any? %>
+      <%= form_for(@user, :html=>{:class=>'form-horizontal', :multipart => true}) do |f| %>
+
+      <% if @user.errors.any? %>
       <div class="alert alert-error fade in">
         <a class="close" data-dismiss="alert" href="#">&times;</a>
         <h4><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</h4>
@@ -17,73 +17,72 @@
     </div>
     <% end %>
 
-<h1 align="center">Edit Account</h1>
+    <h1 align="center">Edit Account</h1>
 
 
 
 
-<!-- <h4 align="center" style="color:gray; margin-top:20px; margin-bottom:0px">Member Information</h4> -->
-<br>
+    <!-- <h4 align="center" style="color:gray; margin-top:20px; margin-bottom:0px">Member Information</h4> -->
+    <br>
 
-<% if current_user.admin || current_user.coordinator %>
-<div class="controls" style="margin-left:200px">
-  <% if current_user.admin %>
-  <label class="checkbox inline">
-    Admin
-    <%= f.check_box :admin %>
-</label>
-  <% end %>
+    <% if current_user.admin || current_user.coordinator %>
+    <div class="controls" style="margin-left:200px">
+      <% if current_user.admin %>
+      <label class="checkbox inline">
+        Admin
+        <%= f.check_box :admin %>
+      </label>
+      <% end %>
 
-<label class="checkbox inline">
-    Coordinator
-    <%= f.check_box :coordinator %>
-</label>
+      <label class="checkbox inline">
+        Coordinator
+        <%= f.check_box :coordinator %>
+      </label>
 
-<label class="checkbox inline">
-    Producer
-    <%= f.check_box :producer %>
-</label>
-</div>
-<% end %>
-<br>
+      <label class="checkbox inline">
+        Producer
+        <%= f.check_box :producer %>
+      </label>
+    </div>
+    <% end %>
+    <br>
 
 
-        <div class="control-group">
-          <label class="control-label">
-            <%= f.label(:first_name, "First Name *", :placeholder=>"First Name") %>
-        </label>
-        <div class="controls">
-            <%= f.text_field :first_name %>
-        </div>
+    <div class="control-group">
+      <label class="control-label">
+        <%= f.label(:first_name, "First Name *", :placeholder=>"First Name") %>
+      </label>
+      <div class="controls">
+        <%= f.text_field :first_name %>
+      </div>
     </div>
 
     <div class="control-group">
       <label class="control-label">
         <%= f.label :last_name, "Last Name *" %>
-    </label>
-    <div class="controls">
+      </label>
+      <div class="controls">
         <%= f.text_field :last_name, :placeholder=>"Last Name" %>
+      </div>
     </div>
-</div>
 
-<div class="control-group">
-  <label class="control-label">
-    <%= f.label :email, "Email *" %>
-</label>
-<div class="controls">
-    <%= f.text_field :email, :placeholder=>"Email" %>
-</div>
-</div>
+    <div class="control-group">
+      <label class="control-label">
+        <%= f.label :email, "Email *" %>
+      </label>
+      <div class="controls">
+        <%= f.text_field :email, :placeholder=>"Email" %>
+      </div>
+    </div>
 
-<div class="control-group">
-  <label class="control-label">
-    <%= f.label :phone %>
-</label>
-<div class="controls">
-    <%= f.text_field :phone, :placeholder=>"Phone" %>
-</div>
-</div>
-
+    <div class="control-group">
+      <label class="control-label">
+        <%= f.label :phone %>
+      </label>
+      <div class="controls">
+        <%= f.text_field :phone, :placeholder=>"Phone" %>
+      </div>
+    </div>
 
 
 
@@ -93,63 +92,62 @@
 
 
 
-<% if @user.producer %>
-<br>
-<h4 align="center" style="color:gray">Producer Information</h4><br>
 
-<%= f.fields_for :inventory_attributes, @user.inventory do |inventory_form| %>
+    <% if @user.producer %>
+    <br>
+    <h4 align="center" style="color:gray">Producer Information</h4><br>
 
-<div class="control-group">
-  <label class="control-label">
-    <%= inventory_form.label(:display_name, "Producer Name") %>
-</label>
-<div class="controls">
-    <%= inventory_form.text_field :display_name %>
-</div>
-</div>
+    <%= f.fields_for :inventory_attributes, @user.inventory do |inventory_form| %>
 
-<div class="control-group">
-  <label class="control-label">
-    <%= inventory_form.label(:url, "Website", :placeholder=>"www.example.com") %>
-</label>
-<div class="controls">
-    <%= inventory_form.text_field :url %>
-</div>
-</div>
+    <div class="control-group">
+      <label class="control-label">
+        <%= inventory_form.label(:display_name, "Producer Name") %>
+      </label>
+      <div class="controls">
+        <%= inventory_form.text_field :display_name %>
+      </div>
+    </div>
 
-<div class="control-group">
-  <label class="control-label">
-    <%= inventory_form.label(:description, "Description") %>
-</label>
-<div class="controls">
-    <%= inventory_form.text_area :description %>
-</div>
-</div>
+    <div class="control-group">
+      <label class="control-label">
+        <%= inventory_form.label(:url, "Website", :placeholder=>"www.example.com") %>
+      </label>
+      <div class="controls">
+        <%= inventory_form.text_field :url %>
+      </div>
+    </div>
 
-<div class="control-group">
-  <label class="control-label">
-    <%= inventory_form.label(:photo, "Profile Photo") %>
-</label>
-<div class="controls">
-    <%= inventory_form.file_field :photo %>
-</div>
-</div>
-<br>
-<% end %>
+    <div class="control-group">
+      <label class="control-label">
+        <%= inventory_form.label(:description, "Description") %>
+      </label>
+      <div class="controls">
+        <%= inventory_form.text_area :description %>
+      </div>
+    </div>
 
+    <div class="control-group">
+      <label class="control-label">
+        <%= inventory_form.label(:photo, "Profile Photo") %>
+      </label>
+      <div class="controls">
+        <%= inventory_form.file_field :photo %>
+      </div>
+    </div>
 
+    <% end %>
 
+    <div align="center">
+      * Denotes required field
+    </div>
+    <% end %>
 
-<div align="center">
-  * Denotes required field
-</div>
-<% end %>
+    <br>
+    <div class="control-group controls">
+      <%= f.submit "Save Changes", :class=>"btn btn-primary"%>
+    </div>
 
-<div class="control-group controls">
-  <%= f.submit "Save Changes", :class=>"btn btn-primary"%>
-</div>
-
-</div>
+  </div>
 </div>
 </div>
 <% end %>

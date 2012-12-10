@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121201202621) do
+ActiveRecord::Schema.define(:version => 20121208194920) do
 
   create_table "application_states", :force => true do |t|
     t.boolean  "orders_open", :default => false
@@ -29,6 +29,12 @@ ActiveRecord::Schema.define(:version => 20121201202621) do
     t.integer  "photo_file_size"
     t.datetime "photo_updated_at"
     t.boolean  "hidden",             :default => false
+  end
+
+  create_table "item_photos", :force => true do |t|
+    t.integer  "item_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "items", :force => true do |t|

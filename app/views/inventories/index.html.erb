@@ -13,11 +13,15 @@
 
 		<div class="span2 custom-block">
 			<ul class="nav nav-list">
+				<li class="nav-header">Producers</li>
 				<% @producers.each do |producer| %>
-				<li><%= producer.id.to_s %>> <%= link_to (producer.display_name, show_in_index_inventory_path(producer), :remote => true)%>
-					</li>
 				<li class="divider"></li>
+				<li><!--<%= producer.id.to_s %>--><%= link_to (producer.display_name, show_in_index_inventory_path(producer), :remote => true)%>
+					</li>
+				
 				<% end %>
+
+				<li class="divider"></li>
 			</ul>
 		</div>
 
@@ -25,7 +29,7 @@
 		<div class="span10 custom-block">
 			<span id="producer_info">
 				<div align="center">
-				<h2><%= @title %></h2>
+	<br>
 				<p>View our producers by clicking the links on the left!</p>
 			</div>
 			</span>

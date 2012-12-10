@@ -16,5 +16,6 @@ describe Inventory do
               :price => 4.00, 
               :available => true }
   end
+  
 
 end

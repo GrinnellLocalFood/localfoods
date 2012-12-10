@@ -18,7 +18,7 @@
 <% if current_user.coordinator || current_user.admin %>
   <div class="control-group">
     <label class="control-label">
-      <%= f.label :name, "Inventory Name *" %>
+      <%= f.label :name, "Producer Name *" %>
     </label>
     <div class="controls">
      <!-- Leaving the first parameter as blank adds "inventory_id" directly to the params hash -->
@@ -26,6 +26,16 @@
     </div>
   </div>
 <% end %>
+
+ <div class="control-group">
+    <label class="control-label">
+      <%= f.label :name, "Category Type *" %>
+    </label>
+    <div class="controls">
+     <!-- Leaving the first parameter as blank adds "inventory_id" directly to the params hash -->
+     <%= collection_select(:item, :category_id, Category.all, :id, :name) %>
+    </div>
+  </div>
 
 <div class="control-group">
   <label class="control-label">
@@ -44,16 +54,6 @@
     <%= f.text_area :description, :placeholder=>"Description" %>
   </div>
 </div>
-
- <div class="control-group">
-    <label class="control-label">
-      <%= f.label :name, "Category Type *" %>
-    </label>
-    <div class="controls">
-     <!-- Leaving the first parameter as blank adds "inventory_id" directly to the params hash -->
-     <%= collection_select(:item, :category_id, Category.all, :id, :name) %>
-    </div>
-  </div>
 
 <div class="control-group">
   <label class="control-label">

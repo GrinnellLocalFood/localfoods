@@ -4,22 +4,22 @@
 		
 		<% if (current_user.admin || current_user.coordinator || (@user.producer && current_user == @user)) %>
 		
-			<div class="span2-half offset2-half custom-block" style="padding-bottom: 76px">
+		<div class="span2-half offset2-half custom-block" style="padding-bottom: 30px">
 			<ul class="nav nav-list">
 
 				<% if current_user.admin || current_user.coordinator %>
-					<li class="nav-header">Administration</li>
-					<li><%= link_to 'All Users', users_path %></li>
+				<li class="nav-header">Administration</li>
+				<li><%= link_to 'All Users', users_path %></li>
 
-					<% if current_user == @user %>
-						<li><%= link_to 'Add Item for Producer', admin_coord_newitem_path %></li>
-					<% end %>
+				<% if current_user == @user %>
+				<li><%= link_to 'Add Item for Producer', admin_coord_newitem_path %></li>
+				<% end %>
 				<% end %>
 
 
 				<% if current_user.admin %>
-					<li><%= link_to 'Add User', new_user_path %></li>
-					<li><%= link_to 'Open/Close Orders', '/editorderstate' %></li>
+				<li><%= link_to 'Add User', new_user_path %></li>
+				<li><%= link_to 'Open/Close Orders', '/editorderstate' %></li>
 				<% end %>
 
 				<% if @user.producer %>
@@ -27,52 +27,57 @@
 				<li><%= link_to 'Inventory', inventory_path(@user.id) %></li>
 				<li><%= link_to 'Add Item', producer_new_inventory_items_path(@user.id) %></li>
 				<% end %>
-				</ul>
-			</div>
+			</ul>
+		</div>
 
+
+		<!-- spacing for members, who don't have the above sidebar -->
+		<% else %>
+		<div class="span2">
+		</div>
 		<% end %>
 
 
 
-			<div class="span8 custom-block" style="margin-left:33px">
+		<div class="span8 custom-block" style="margin-left:33px">
 
-				<% if notice %>
-				<div class="alert alert-success fade in">
-					<a class="close" data-dismiss="alert" href="#">&times;</a>
-					<%= notice %>
-				</div>
-				<% end %>
+			<% if notice %>
+			<div class="alert alert-success fade in">
+				<a class="close" data-dismiss="alert" href="#">&times;</a>
+				<%= notice %>
+			</div>
+			<% end %>
 
 
-				<% if alert %>
-				<div class="alert alert-success fade in">
-					<a class="close" data-dismiss="alert" href="#">&times;</a>
-					<%= alert %>
-				</div>
-				<% end %>
+			<% if alert %>
+			<div class="alert alert-success fade in">
+				<a class="close" data-dismiss="alert" href="#">&times;</a>
+				<%= alert %>
+			</div>
+			<% end %>
 
 			<div align="right" style="margin-right:60px; margin-bottom:-40px;
 			margin-top: 20px">
 			<%= link_to edit_user_path(params[:id]), :class=>"link", :rel=>"tooltip", :title=>"Edit Account" do %>
 
 			<i class="icon-wrench"></i>
-
-			<% end %>
 		</div>
+		<% end %>
+		
 
 
 
-			<h2 style="margin-left:60px">Hello <%= @user.first_name %>!</h2>
-
-
-
-
-			<br>
+		<h2 style="margin-left:60px">Hello <%= @user.first_name %>!</h2>
 
 
 
 
-			<table class="table" style="width:500px" align="center">
+		<br>
+
+
+
+
+		<table class="table" style="width:500px" align="center">
 			<!-- 	<tr>
 					<th style="color: gray">First Name</th>
 					<td><%= @user.first_name %></td>

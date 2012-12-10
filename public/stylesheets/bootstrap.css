@@ -4133,9 +4133,10 @@ input[type="submit"].btn.btn-mini {
   margin-bottom: 3px;
 }
 
+/*CHANGE*/
 .tabs-left > .nav-tabs {
   float: left;
-  margin-right: -19px;
+  margin-right: -20px;
   border-right: 1px solid #ddd;
 }
 

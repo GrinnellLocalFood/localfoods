@@ -1,3 +1,15 @@
+<% if signed_in? && (current_user.admin || current_user.coordinator || current_user == @producer) %>
+
+<div align="right" style="margin-right:20px; margin-bottom: -20px;
+margin-top: -5px">
+<%= link_to edit_user_path(params[:id]), :class=>"link", :rel=>"tooltip", :title=>"Edit Account" do %>
+
+<i class="icon-wrench"></i>
+<% end %>
+</div>
+<% end %>
+
+
 <div id="myCarousel" class="carousel slide" data-interval="4000"style="float:left; margin-bottom: 0px; margin-right: 10px; margin-top: -20px;" >
     <!-- Carousel items -->
     <div class="carousel-inner">
@@ -20,6 +32,8 @@
     <a class="carousel-control left" href="#myCarousel" data-slide="prev">&lsaquo;</a>
     <a class="carousel-control right" href="#myCarousel" data-slide="next">&rsaquo;</a>
 </div>
+
+
 
 
 <h1 style="text-align: left; margin-right: 20px; margin-left: 20px; margin-top: 0px"><%= @producer.inventory.display_name %></h1>
@@ -119,7 +133,7 @@
             <br>
 
             <!-- If the current user is an admin, coordinator, or the producer whose page this is -->
-            <% if current_user && (current_user.admin || current_user.coordinator || current_user == @producer) %>
+            <% if signed_in? && (current_user.admin || current_user.coordinator || current_user == @producer) %>
             <%= link_to 'Add Item', producer_new_inventory_items_path(params[:id]), :class=>"btn", :style=>"margin-left: 2.5%" %>
             <% end %>
 

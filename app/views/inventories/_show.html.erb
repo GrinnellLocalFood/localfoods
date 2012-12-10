@@ -22,13 +22,17 @@
 </div>
 
 
-<h1 style="text-align: left; margin-right: 20px; margin-left: 20px; margin-top: 0px">
-    <%= @producer.inventory.display_name %>
-</h1>
+<h1 style="text-align: left; margin-right: 20px; margin-left: 20px; margin-top: 0px"><%= @producer.inventory.display_name %></h1>
 
-<div style="text-indent: 2.5%; margin-right: 20px; margin-left: 20px">
+<% if @producer.inventory.url != nil %>
+<%= link_to @producer.inventory.url, url_with_protocol(@producer.inventory.url) %>
+<% end %>
+
+<div style="text-indent: 2.5%; margin-right: 20px; margin-left: 20px; margin-top: 5px;">
     <%= @producer.inventory.description %>
 </div>
+
+
 
 
 <% if @item.count != 0 %>

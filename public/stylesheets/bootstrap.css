@@ -4135,12 +4135,12 @@ input[type="submit"].btn.btn-mini {
 
 .tabs-left > .nav-tabs {
   float: left;
-  margin-right: 0px;
+  margin-right: -19px;
   border-right: 1px solid #ddd;
 }
 
 .tabs-left > .nav-tabs > li > a {
-  margin-right: -1px;
+  margin-right: 1px;
   -webkit-border-radius: 4px 0 0 4px;
      -moz-border-radius: 4px 0 0 4px;
           border-radius: 4px 0 0 4px;
@@ -4152,6 +4152,7 @@ input[type="submit"].btn.btn-mini {
 
 .tabs-left > .nav-tabs .active > a,
 .tabs-left > .nav-tabs .active > a:hover {
+  font-weight: bold;
   border-color: #ddd transparent #ddd #ddd;
   *border-right-color: #ffffff;
 }

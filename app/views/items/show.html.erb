@@ -16,13 +16,18 @@
 				<%= alert %>
 			</div>
 			<% end %>
-
+			<% if signed_in? %>
+			<% if current_user.admin || current_user.coordinator || 
+				(current_user.producer && 
+				current_user.id == params[:inventory_id]) %>
 			<div align="right" style="margin-right:60px; margin-bottom:-40px;
 			margin-top: 20px">
 				<%= link_to edit_inventory_item_path(:id => params[:id], :inventory_id => params[:inventory_id]), :class=>"link" do %>
 				<i class="icon-wrench"></i>
 				<% end %>
 			</div>
+			<% end %>
+			<% end %>
 
 			<media class="item-image">
 				<% if !(@item.item_photo_file_name.nil?) %>

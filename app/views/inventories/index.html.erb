@@ -1,22 +1,14 @@
 <script type="text/javascript">
-    window.onload = function()
-    {	
-	var lis = document.getElementsByTagName("li");
-	for (var i = 0; i < lis.length; i++)
-	lis[i].onclick = activate;
-    }
 
     function activate(e)
     {
-	var lis = document.getElementsByTagName("li");
-	
+	var lis = document.getElementsByTagName("li");	
 	e.parentNode.className = "active";
 	for (var i = 0; i < lis.length; i++)
 		if (lis[i].className === "active" && !(lis[i] == e.parentNode))
 		{
 			lis[i].className = "";
 		}
-	
     }
     </script>
 

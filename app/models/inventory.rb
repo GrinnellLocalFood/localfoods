@@ -9,7 +9,7 @@ class Inventory < ActiveRecord::Base
 	}
 	before_photo_post_process :process_only_images
 	attr_accessible :url, :description, :display_name, :photo
-		validates :display_name, :presence => true
+		validates :display_name, :presence => true, :if => "!self.hidden?"
 
 	before_create :default_display_name
 	accepts_nested_attributes_for :user

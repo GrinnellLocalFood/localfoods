@@ -49,7 +49,7 @@ skip_before_filter :require_login, :only => [:show, :index, :show_in_index]
   end
 
   def index
-    @title = "Producers"
+    @title = "Our Producers"
     @producers = Inventory.all
   end
 

@@ -36,7 +36,6 @@
                         <% @categories.each do |category| %>
                         <tr>
                             <td style="min-width: 190px;"><b><%= category.name %></b></td>
-                            <td style="text-align:right"><%= link_to 'Edit', edit_category_path(category) %></td>
                             <td style="text-align:right"><%= link_to "Delete", category, :confirm => 'Are you sure?', :method=>:delete, :class=>:Destroy %></td>
                         </tr>
                         <% end %>

@@ -9,6 +9,7 @@ class ItemsController < ApplicationController
   end
 
   def index
+  @title = "All Products"
   @categories = Category.all
   end
 
@@ -39,22 +40,12 @@ class ItemsController < ApplicationController
     @title = "New Item"
     @item = Item.new
     @url = inventory_items_path
-    respond_to do |format|
-      flash[:notice] = "Item Added Successfully"
-      format.html #new.html.erb
-      format.xml  { render :xml => @item }
-    end
   end
 
   def admin_coord_new
     @title = "Add Item for a Producer"
     @item = Item.new
     @inventories = Inventory.where("hidden = ?", false)
-
-    respond_to do |format|
-      flash[:notice] = "Item Added Successfully"
-      format.html #new.html.erb
-    end
   end
 
   def create

@@ -1,6 +1,7 @@
-<%= form_for(Category.new, :html=>{:class=>'form-horizontal', :multipart => true}) do |f| %>
+<%= form_for(@category, :url => url_for(:controller => 'categories', :action => 'create'), :html=>{:class=>'form-horizontal'}) do |f| %>
 
-<div class="control-group">
+
+<div class="control-group" style="margin-top: 20px">
   <label class="control-label">
     <%= f.label :name, "Category Name *" %>
   </label>
@@ -8,6 +9,14 @@
     <%= f.text_field :name, :placeholder=>"Category Name" %>
   </div>
 </div>
-<%= f.submit "Add Category", :class=>"btn-small btn-primary" %>
+
+<div class="control-group controls">
+<%= f.submit "Add Category", :class=>"btn btn-primary" %>
+</div>
+
+<div align="center" style="color: gray">
+  * Denotes required field
+</div>
 
 <% end %>
+

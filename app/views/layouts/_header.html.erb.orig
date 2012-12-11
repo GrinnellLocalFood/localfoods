@@ -86,9 +86,16 @@
 
           <li style="margin-right:20px;"><%= link_to ("Our Producers", inventories_path, :style=>"color:white") %> </li>
 
-          <li style="margin-right:20px;"><%= link_to("All Products", items_path, :style => "color:white") %></li>
+<<<<<<< HEAD
+          <li style="margin-right:20px"><%= link_to("All Products", items_path, :style => "color:white") %></li>
 
+          <li style="margin-right:20px">Pickup Info </li>
+=======
+      <!--     <li style="margin-right:20px">Pickup Info </li>
+>>>>>>> PublicProducers
 
+          <li style="margin-right:20px">Contact Us </li>
+ -->
         </ul>
       </div>
     </div>

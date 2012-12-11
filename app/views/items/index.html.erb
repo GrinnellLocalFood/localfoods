@@ -8,8 +8,13 @@ $(document).ready(function()
 } 
 );
 </script>
-<h3 style="text-align:center">All Producers</h3>
-<table id="myTable" class="producer-table table-hover" align="center">
+
+<div class="container">
+    <div class="row-fluid">
+        <div class="span12">
+
+<h2>All Products</h2>
+<table class="table table-hover" align="center">
 
     <tr>
         <th>Name</th>
@@ -29,7 +34,7 @@ $(document).ready(function()
     <% @items.each do |item| %>
     <tr>
         <td><%= item.name %></td>
-        <td><%= Inventory.find(item.inventory_id).display_name %></td>
+        <td><%= item.inventory.display_name %></td>
         <td><%= item.description %></td>
         <td><%= number_to_currency(item.price) %><b>/<%= item.units.singularize %></b></td>
         <!-- ADD QTY REMAINING HERE ONCE WE MERGE WITH NEW ITEM MODEL -->
@@ -47,3 +52,6 @@ $(document).ready(function()
     <% end %>
 
 </table>
+</div>
+</div>
+</div>

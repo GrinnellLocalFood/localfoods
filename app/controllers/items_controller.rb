@@ -1,6 +1,6 @@
 class ItemsController < ApplicationController
-  before_filter :check_permissions, :except => :show
-  skip_before_filter :require_login, :only => :show
+  before_filter :check_permissions, :except => [:show, :index]
+  skip_before_filter :require_login, :only => [:show, :index]
   
   def check_permissions
     @user = current_user
@@ -40,6 +40,7 @@ class ItemsController < ApplicationController
     @item = Item.new
     @url = inventory_items_path
     respond_to do |format|
+      flash[:notice] = "Item Added Successfully"
       format.html #new.html.erb
       format.xml  { render :xml => @item }
     end
@@ -51,6 +52,7 @@ class ItemsController < ApplicationController
     @inventories = Inventory.where("hidden = ?", false)
 
     respond_to do |format|
+      flash[:notice] = "Item Added Successfully"
       format.html #new.html.erb
     end
   end
@@ -122,7 +124,7 @@ end
     respond_to do |format|
       if (current_user.admin || current_user.coordinator || current_user.id == @item.inventory_id)
         if @inventory.item << @item
-          format.html { redirect_to(inventory_path(@inventory), :notice => 'Item was added successfully.',
+          format.html { redirect_to(inventory_path(@inventory), :alert => 'Item was added successfully.',
             :class=>"alert alert-success") }
 
            # format.xml  { render :xml => @user, :status => :created, :location => @user }

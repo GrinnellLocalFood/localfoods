@@ -1,4 +1,4 @@
-
+ta
 
 /*!
  * Bootstrap v2.2.1
@@ -4133,14 +4133,15 @@ input[type="submit"].btn.btn-mini {
   margin-bottom: 3px;
 }
 
+/*CHANGE*/
 .tabs-left > .nav-tabs {
   float: left;
-  margin-right: 19px;
+  margin-right: -20px;
   border-right: 1px solid #ddd;
 }
 
 .tabs-left > .nav-tabs > li > a {
-  margin-right: -1px;
+  margin-right: 1px;
   -webkit-border-radius: 4px 0 0 4px;
      -moz-border-radius: 4px 0 0 4px;
           border-radius: 4px 0 0 4px;
@@ -4152,6 +4153,7 @@ input[type="submit"].btn.btn-mini {
 
 .tabs-left > .nav-tabs .active > a,
 .tabs-left > .nav-tabs .active > a:hover {
+  font-weight: bold;
   border-color: #ddd transparent #ddd #ddd;
   *border-right-color: #ffffff;
 }
@@ -4280,7 +4282,7 @@ input[type="submit"].btn.btn-mini {
   border-right: 1px solid #ffffff;
   border-left: 1px solid #f2f2f2;
 }
-n
+
 .navbar .btn,
 .navbar .btn-group {
   margin-top: 5px;
@@ -4447,7 +4449,7 @@ n
 .navbar .nav > li {
   float: left;
 }
-
+/*HERE*/
 .navbar .nav > li > a {
   float: none;
   padding: 10px 15px 10px;

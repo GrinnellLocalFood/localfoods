@@ -1,13 +1,11 @@
 class CategoriesController < ApplicationController
 
 def new
-	@category = Category.new
-	@title = "New Category"
 end
 
 def create
 	@category = Category.new(params[:category])
-
+	@categories = Category.all
 		
 	respond_to do |format|
 	  if (current_user.admin)
@@ -15,7 +13,7 @@ def create
 	      format.html { redirect_to(categories_path, :notice => "Category " + @category.name + " added!",
 	        :class=>"alert alert-success") }
 	    else
-	      format.html { render :action => action, :notice => "Category " + @category.name + "could not be added. Please try again.",
+	      format.html { render :action => 'index', :notice => "Category " + @category.name + "could not be added. Please try again.",
 	        :class=>"alert alert-success" }
 	      format.xml  { render :xml => @item.errors, :status => :unprocessable_entity }
 	    end
@@ -29,6 +27,7 @@ end
 
 def index
 	@categories = Category.all
+	@category = Category.new
 end
 
   def destroy   

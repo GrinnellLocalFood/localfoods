@@ -11,16 +11,22 @@
 # It's strongly recommended to check this file into your version control system.
 
 <<<<<<< HEAD
-ActiveRecord::Schema.define(:version => 20121130070010) do
+ActiveRecord::Schema.define(:version => 20121208203134) do
 =======
-ActiveRecord::Schema.define(:version => 20121201202621) do
+ActiveRecord::Schema.define(:version => 20121208194920) do
+>>>>>>> PublicProducers
 
   create_table "application_states", :force => true do |t|
     t.boolean  "orders_open", :default => false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
->>>>>>> EditItem
+
+  create_table "categories", :force => true do |t|
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "inventories", :force => true do |t|
     t.datetime "created_at"
@@ -33,6 +39,12 @@ ActiveRecord::Schema.define(:version => 20121201202621) do
     t.integer  "photo_file_size"
     t.datetime "photo_updated_at"
     t.boolean  "hidden",             :default => false
+  end
+
+  create_table "item_photos", :force => true do |t|
+    t.integer  "item_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "items", :force => true do |t|
@@ -52,6 +64,7 @@ ActiveRecord::Schema.define(:version => 20121201202621) do
     t.string   "item_photo_content_type"
     t.integer  "item_photo_file_size"
     t.datetime "item_photo_updated_at"
+    t.integer  "category_id"
   end
 
   create_table "users", :force => true do |t|

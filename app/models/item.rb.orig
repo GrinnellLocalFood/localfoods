@@ -15,9 +15,15 @@ class Item < ActiveRecord::Base
 	validates :price, :presence => true
 	validates :units, :presence => true, :format => { :with => /[a-zA-Z.\s]/, :message => "cannot contain special or numeric characters." }
 	validates :totalquantity, :presence => true, :numericality => { :only_integer => true }
+<<<<<<< HEAD
+	validates :maxorder, :numericality => { :only_integer => true }
+	validates :maxorder, :numericality => {:greater_than => :minorder, :message => "must be greater than Minorder"}, :allow_blank => true
+	validates :category_id, :presence => true
+=======
 	validates :maxorder, :numericality => {:only_integer => true}, :allow_blank => true
 	validates :maxorder, :numericality => {:greater_than_or_equal_to => :minorder, :message => "must be greater than Minorder"}, :allow_blank => true
 
+>>>>>>> PublicProducers
 	before_validation :format_values
 
 

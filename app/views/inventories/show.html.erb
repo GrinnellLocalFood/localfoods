@@ -1,159 +1,26 @@
+<div class="container">
+	<div class="row-fluid">
+		<div class="span12 custom-block">
+
 <% if notice %>
-<div class="home_notice home_notice-success fade in">
+<div class="notice notice-success fade in" style="margin-top: -20px; margin-bottom: 25px;">
     <a class="close" data-dismiss="alert" href="#">&times;</a>
     <%= notice %>
 </div>
 <% end %>
 
 <% if alert %>
-<div class="home_alert home_alert-success fade in">
+<div class="alert alert-success fade in" style="margin-top: -20px; margin-bottom: 25px">
     <a class="close" data-dismiss="alert" href="#">&times;</a>
     <%= alert %>
 </div>
 <% end %>
 
-<div class="container">
-    <div class="row-fluid">
-        <div class="span12 custom-block">
+	<%= render :partial => 'show'%>
 
-
-      
-
-
-
-            <div id="myCarousel" class="carousel slide" data-interval="4000"style="float:left; margin-right: 20px; margin-bottom: 0px; margin-top: -20px;" >
-                <!-- Carousel items -->
-                <div class="carousel-inner">
-
-                    <div class="active item">
-                        <img src="/img/r1.jpg" alt="">
-                        <div class="carousel-caption">
-                            <p>Caption text here</p>
-                        </div>
-                    </div>
-
-                    <div class="item">
-                        <img src="/img/r2.jpg" alt="">
-                        <div class="carousel-caption">
-                            <p>Caption text here</p>
-                        </div>
-                    </div>
-                </div>
-                <!-- Carousel nav -->
-                <a class="carousel-control left" href="#myCarousel" data-slide="prev">&lsaquo;</a>
-                <a class="carousel-control right" href="#myCarousel" data-slide="next">&rsaquo;</a>
-            </div>
-
-
-            <h1 style="margin-top: -5px;"><%= @producer.inventory.display_name %></h1>
-
-
-
-            <div style="text-indent: 2.5%; margin-right: 20px;">
-                <%= @producer.inventory.description %>
-            </div>
-
-
-            <% if @item.count != 0 %>
-
-<h3 style="clear:both; text-indent: 2.5%; margin-bottom: 15px; background-color: #595959; color: white; padding: 5px;">Current Inventory</h3>
-
-            <table class="producer-table table-hover" align="center">
-
-
-
-
-                <!-- ADD QTY REMAINING HERE ONCE WE MERGE WITH NEW ITEM MODEL -->
-
-                <!-- If the current user is an admin, coordinator, or the producer whose page this is -->
-                <% if current_user && (current_user.admin || current_user.coordinator || current_user == @producer) %>
-                    <tr>
-                        <th>Name</th>
-                        <th>Description</th>
-                        <th>Price</th>
-                        <th>Total Qty.</th>
-                        <th>Qty. Ordered</th>
-                        <th>Min Order</th>
-                        <th>Max Order</th> 
-                        <th>Available</th>
-                        <th>Category</th>
-                        <th></th>
-                        <th></th>
-                        <th></th>
-                    </tr>
-
-
-                    <% @item.each do |item| %>
-                    <tr>
-                        <td><%= item.name %></td>
-                        <td><%= item.description %></td>
-                        <td><%= number_to_currency(item.price) %><b>/<%= item.units.singularize %></b></td>
-                        <!-- ADD QTY REMAINING HERE ONCE WE MERGE WITH NEW ITEM MODEL -->
-                        <td><%= item.totalquantity %></td>
-                        <td><%= item.totalordered %></td>
-                        <td><%= item.minorder %></td>
-                        <td><%= item.displayed_maxorder %></td>
-                        <!-- ADD ELSE IF TO item.available SO THAT IT DISPLAYS SOLD OUT IF QTY REMAINING IS 0 -->   
-                        <td><%= item.is_available? %></td>
-                        <td><%= Category.find(item.category_id).name %></td>
-                        <td><%= link_to "Show", inventory_item_path({ :inventory_id => params[:id], :id => item.id }) %></td>
-                        <td><%= link_to "Edit", edit_inventory_item_path({ :inventory_id => params[:id], :id => item.id }) %></td>
-                        <td><%= link_to "Delete", inventory_item_path({ :inventory_id => params[:id], :id => item.id }), :confirm => 'Are you sure?', :method=>:delete %></td>
-                    </tr>
-                    <% end %> 
-                
-                <!-- Other wise you are either not logged in, or only a member -->
-                <% else %>
-                    <tr>
-                        <th>Name</th>
-                        <th>Description</th>
-                        <th>Price</th>
-                        <th>Qty. Remaining</th>
-                        <th>Min Order</th>
-                        <th>Max Order</th> 
-                        <th>Available</th>
-                        <th></th>
-                    </tr>
-
-
-                    <% @item.each do |item| %>
-                    <tr>
-                        <td><%= item.name %></td>
-                        <td><%= item.description %></td>
-                        <td><%= number_to_currency(item.price) %><b>/<%= item.units.singularize %></b></td>
-                        <td><%= item.num_remaining %></td>
-                        <td><%= item.minorder %></td>
-                        <td><%= item.displayed_maxorder %></td>
-                        <!-- ADD ELSE IF TO item.available SO THAT IT DISPLAYS SOLD OUT IF QTY REMAINING IS 0 -->   
-                        <td><%= item.is_available? %></td>
-                        <td><%= Category.find(item.category_id).name %></td>
-                        <td><%= link_to "Show", inventory_item_path({ :inventory_id => params[:id], :id => item.id }) %></td>
-                    </tr>
-                    <% end %>
-                <% end %>
-
-
-            </table>
-
-<% else %>
-<h4 style="clear:both; background-color: #595959; color: white; padding: 15px; margin-bottom: 10px;">
-    Currently Nothing For Sale</h4>
- 
-            <% end %> 
-            <br>
-
-            <!-- If the current user is an admin, coordinator, or the producer whose page this is -->
-            <% if current_user && (current_user.admin || current_user.coordinator || current_user == @producer) %>
-                <%= link_to 'Add Item', producer_new_inventory_items_path(params[:id]), :class=>"btn", :style=>"margin-left: 2.5%" %>
-            <% end %>
-
-
-
-
-
-        </div>
-
-
-    </div>
 </div>
+</div>
+</div>
+
+
 

@@ -39,13 +39,13 @@
 <% end %>
 
         <div class="control-group">
-          <label class="control-label">
-            <%= f.label(:first_name, "First Name *", :placeholder=>"First Name") %>
-        </label>
-        <div class="controls">
-            <%= f.text_field :first_name %>
-        </div>
+      <label class="control-label">
+        <%= f.label :first_name, "First Name *" %>
+    </label>
+    <div class="controls">
+        <%= f.text_field :first_name, :placeholder=>"First Name" %>
     </div>
+</div>
 
     <div class="control-group">
       <label class="control-label">
@@ -97,7 +97,7 @@
   <%= f.submit "Submit!", :class=>"btn-large btn-primary" %>
 </div>
 
-<div align="center">
+<div align="center" style="color: gray;">
   * Denotes required field
 </div>
 <% end %>

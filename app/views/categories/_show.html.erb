@@ -1,0 +1,40 @@
+<% if @items.empty? %>
+    <h2 align="center">No Items Available</h2>
+<% else %>
+<% if @category.nil? %>
+<h2 align="center">All Products</h2>
+<% else %>
+<h2 align="center"><%= @category.name %></h2>
+<% end %>
+<table class="table table-hover" align="center">
+
+    <tr>
+        <th>Name</th>
+        <th>Producer</th>
+        <th>Price</th>
+        <th>Total Qty.</th>
+        <th>Min Order</th>
+        <th>Max Order</th> 
+        <th>Category</th>
+        <th></th>
+    </tr>
+
+    <% @items.each do |item| %>
+    <tr>
+        <td><%= item.name %></td>
+        <td><%= link_to(item.inventory.display_name, inventory_path(item.inventory)) %></td>
+        <td><%= number_to_currency(item.price) %><b>/<%= item.units.singularize %></b></td>
+        <!-- ADD QTY REMAINING HERE ONCE WE MERGE WITH NEW ITEM MODEL -->
+        <td><%= item.totalquantity %></td>
+        <td><%= item.minorder %></td>
+        <td><%= item.displayed_maxorder %></td>
+        <!-- ADD ELSE IF TO item.available SO THAT IT DISPLAYS SOLD OUT IF QTY REMAINING IS 0 -->   
+        <td><%= Category.find(item.category_id).name %></td>
+        <td><%= link_to "Show", inventory_item_path({ :inventory_id => item.inventory_id, :id => item.id }) %></td>
+
+    </tr>
+
+    <% end %>
+
+</table>
+<% end %>

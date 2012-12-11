@@ -61,7 +61,7 @@ class ItemsController < ApplicationController
   respond_to do |format|
     if (current_user.admin || current_user.coordinator || current_user.id == @item.inventory_id)
       if @item.update_attributes(params[:item])
-        format.html { redirect_to(inventory_path(@item.inventory_id), :notice => 'Item was successfully updated.') }
+        format.html { redirect_to(inventory_path(@item.inventory_id), :alert => 'Item was successfully updated.') }
         format.xml  { head :ok }
       else
         format.html { render :action => "edit" }

@@ -20,7 +20,7 @@
                     :remote => true, :onclick => 'activate(this)')%> </li>
 
                 <% @categories.each do |category| %>
-                <li> <%= link_to (category.name, show_by_category_category_path(category), 
+                <li> <%= link_to(category.name, show_by_category_category_path(category), 
                     :remote => true, :onclick => 'activate(this)')%>
                     </li>
                 <li class="divider"></li>

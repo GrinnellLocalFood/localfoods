@@ -10,36 +10,18 @@
 
           <% if signed_in? %>
 
-
- <!--          <% @inventories = Inventory.where("hidden = ?", false) %>
+         <% if current_user.producer %> 
           <li class="dropdown nav">
             <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-              Browse Producers
+              My Inventory
               <span class="caret"></span>
             </a>
             <ul class="dropdown-menu">
-              <% @inventories.each do |inventory| %>
-              <li><%= link_to inventory.display_name, inventory_path(inventory.id) %></li>
-              <% end %>
-            </ul>
-          </li>    -->
-
-
-          <% if current_user.producer %> 
-          <li class="dropdown nav">
-            <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-              Producer
-              <span class="caret"></span>
-            </a>
-            <ul class="dropdown-menu">
-              <li><%= link_to "Add Item", producer_new_inventory_items_path(current_user.id) %></li>
-              <li><%= link_to "Inventory", inventory_path(current_user) %></li>
+              <li><%= link_to ("Add Item", producer_new_inventory_items_path(current_user.id)) %></li>
+              <li><%= link_to ("Inventory", inventory_path(current_user)) %></li>
             </ul>
           </li>   
           <% end %>
-
-
-
 
           <li class="dropdown nav pull-right">
             <a class="dropdown-toggle" data-toggle="dropdown" href="#">
@@ -78,15 +60,13 @@
         </div>
       </div>
 
-
-
       <div class="navbar-inner-inner">
         <div class="container">
          <ul class="sub-nav pull-left">
 
           <li style="margin-right:20px;"><%= link_to ("Our Producers", inventories_path, :style=>"color:white") %> </li>
 
-          <li style="margin-right:20px;"><%= link_to("All Products", items_path, :style => "color:white") %></li>
+          <li style="margin-right:20px;"><%= link_to ("All Products", items_path, :style => "color:white") %></li>
 
 
         </ul>

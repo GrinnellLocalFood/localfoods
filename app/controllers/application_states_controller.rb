@@ -12,7 +12,7 @@ def update
 
   respond_to do |format|
    if @application_state.update_attributes(params[:application_state])
-    if params[:application_state][:email_users]
+    if (params[:application_state][:email_users] == "true")
       User.all.each do |user|
         UserMailer.order_status_change(user, params[:application_state][:email_content], @application_state.orders_open).deliver
       end

@@ -1,5 +1,7 @@
 class CategoriesController < ApplicationController
 
+skip_before_filter :require_login, :only => [:show_by_category, :show_all]
+
 def new
 end
 

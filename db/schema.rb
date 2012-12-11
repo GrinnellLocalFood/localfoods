@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121208203134) do
+ActiveRecord::Schema.define(:version => 20121211032349) do
 
   create_table "application_states", :force => true do |t|
     t.boolean  "orders_open", :default => false
@@ -28,13 +28,13 @@ ActiveRecord::Schema.define(:version => 20121208203134) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "url"
-    t.string   "description"
+    t.text     "description",        :limit => 255
     t.string   "display_name"
     t.string   "photo_file_name"
     t.string   "photo_content_type"
     t.integer  "photo_file_size"
     t.datetime "photo_updated_at"
-    t.boolean  "hidden",             :default => false
+    t.boolean  "hidden",                            :default => false
   end
 
   create_table "item_photos", :force => true do |t|

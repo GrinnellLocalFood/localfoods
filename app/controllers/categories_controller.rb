@@ -30,6 +30,21 @@ def index
 	@category = Category.new
 end
 
+def show_by_category
+    @category = Category.find(params[:id])
+    @items = @category.items
+    render :update do |page|
+      page.replace_html 'category_info', :partial => 'show'
+    end
+ end
+
+ def show_all
+ 	@items = Item.all
+ 	render :update do |page|
+      page.replace_html 'category_info', :partial => 'show'
+    end
+ end
+
   def destroy   
     @category = Category.find(params[:id])
      if (current_user.admin)

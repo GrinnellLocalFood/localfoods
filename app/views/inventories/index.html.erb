@@ -19,7 +19,7 @@
 			<!-- <li class="nav-header">Producers</li> -->
 				<% @producers.each do |producer| %>
 				<li> <%= link_to (producer.display_name, show_in_index_inventory_path(producer), 
-:remote => true, :onclick => 'activate(this)')%>
+					:remote => true, :onclick => 'activate(this)')%>
 					</li>
 				<li class="divider"></li>
 				<% end %>

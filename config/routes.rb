@@ -54,7 +54,15 @@ Localfoods::Application.routes.draw do
 
   resources :password_resets
 
-  resources :categories
+  resources :categories do
+    member do
+      get 'show_by_category'
+    end
+
+    collection do
+      get 'show_all'
+    end
+  end
 
   root :to => 'pages#home'
 

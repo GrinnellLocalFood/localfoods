@@ -9,7 +9,7 @@ class ItemsController < ApplicationController
   end
 
   def index
-  @items = Item.all
+  @categories = Category.all
   end
 
   #PUT
@@ -107,13 +107,10 @@ end
    @url = inventory_item_path(:inventory_id => @item.inventory_id, :id => @item.id)
  end
  
-
-
   def show
     @item = Item.find(params[:id])
     @title = @item.name
   end
-
 
   private
 

@@ -17,7 +17,7 @@ class Item < ActiveRecord::Base
 	validates :totalquantity, :presence => true, :numericality => { :only_integer => true }
 	validates :maxorder, :numericality => {:only_integer => true}, :allow_blank => true
 	validates :maxorder, :numericality => {:greater_than_or_equal_to => :minorder, :message => "must be greater than Minorder"}, :allow_blank => true
-
+	validates :category_id, :presence => true
 	before_validation :format_values
 
 

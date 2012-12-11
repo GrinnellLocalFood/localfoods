@@ -1,57 +1,44 @@
-
-<script type="text/javascript" src="/path/to/jquery-min.js"></script>
-<script type="text/javascript" src="/path/to/jquery.tablesorter.min.js"></script>
 <script type="text/javascript">
-$(document).ready(function() 
-{ 
-    $("#myTable").tablesorter(); 
-} 
-);
-</script>
+
+    function activate(e)
+    {
+    var lis = document.getElementsByTagName("li");  
+    e.parentNode.className = "active";
+    for (var i = 0; i < lis.length; i++)
+        if (lis[i].className === "active" && !(lis[i] == e.parentNode))
+        {
+            lis[i].className = "";
+        }
+    }
+    </script>
 
 <div class="container">
     <div class="row-fluid">
-        <div class="span12">
+        <div class="tabbable tabs-left">
+            <ul class="span2 nav nav-tabs">
+                <li> <%= link_to ("All Products", show_all_categories_path, 
+                    :remote => true, :onclick => 'activate(this)')%> </li>
 
-<h2>All Products</h2>
-<table class="table table-hover" align="center">
+                <% @categories.each do |category| %>
+                <li> <%= link_to (category.name, show_by_category_category_path(category), 
+                    :remote => true, :onclick => 'activate(this)')%>
+                    </li>
+                <li class="divider"></li>
+                <% end %>
+            </ul>
+        
 
-    <tr>
-        <th>Name</th>
-        <th>Producer</th>
-        <th>Description</th>
-        <th>Price</th>
-        <th>Total Qty.</th>
-        <th>Qty. Ordered</th>
-        <th>Min Order</th>
-        <th>Max Order</th> 
-        <th>Available</th>
-        <th>Category</th>
-        <th></th>
-        <th></th>
-    </tr>
 
-    <% @items.each do |item| %>
-    <tr>
-        <td><%= item.name %></td>
-        <td><%= item.inventory.display_name %></td>
-        <td><%= item.description %></td>
-        <td><%= number_to_currency(item.price) %><b>/<%= item.units.singularize %></b></td>
-        <!-- ADD QTY REMAINING HERE ONCE WE MERGE WITH NEW ITEM MODEL -->
-        <td><%= item.totalquantity %></td>
-        <td><%= item.totalordered %></td>
-        <td><%= item.minorder %></td>
-        <td><%= item.displayed_maxorder %></td>
-        <!-- ADD ELSE IF TO item.available SO THAT IT DISPLAYS SOLD OUT IF QTY REMAINING IS 0 -->   
-        <td><%= item.is_available? %></td>
-        <td><%= Category.find(item.category_id).name %></td>
-        <td><%= link_to "Show", inventory_item_path({ :inventory_id => item.inventory_id, :id => item.id }) %></td>
-
-    </tr>
-
-    <% end %>
-
-</table>
+        <div class="tab-content span10 custom-block">
+            <span id="category_info">
+                <div align="center">
+                <h2><%= @title %></h2>
+                <br>
+                <p>View items by category!</p>
+            </div>
+            </span>
+        </div>
+    </div>
+    </div>
 </div>
-</div>
-</div>
+

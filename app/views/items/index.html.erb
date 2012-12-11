@@ -16,7 +16,7 @@
     <div class="row-fluid">
         <div class="tabbable tabs-left">
             <ul class="span2 nav nav-tabs">
-                <li> <%= link_to ("All Products", show_all_categories_path, 
+                <li> <%= link_to("All Products", show_all_categories_path, 
                     :remote => true, :onclick => 'activate(this)')%> </li>
 
                 <% @categories.each do |category| %>

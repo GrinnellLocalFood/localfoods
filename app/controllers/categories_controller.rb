@@ -35,16 +35,16 @@ end
 def show_by_category
     @category = Category.find(params[:id])
     @items = @category.items
-    render :update do |page|
-      page.replace_html 'category_info', :partial => 'show'
+    respond_to do |format|
+      format.js { render :locals => { :items => @items, :category => @category } }
     end
  end
 
  def show_all
  	@items = Item.all
- 	render :update do |page|
-      page.replace_html 'category_info', :partial => 'show'
-    end
+ 	respond_to do |format|
+      format.js { render :locals => { :items => @items } }
+  end
  end
 
   def destroy   

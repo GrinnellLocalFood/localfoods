@@ -8,8 +8,8 @@ describe "LayoutLinks" do
 	end
 
 	it "should have a Register page at register_path" do
-		visit register_path
-		page.should have_text("Register")
+		get register_path
+		page.should have_selector("title", :content => "Register")
 	end
 
 	it "should have a Login page at login_path" do

@@ -8,8 +8,8 @@ group :development, :test do
   gem 'sqlite3','1.3.5'
   gem 'rspec-rails', '2.11.0'
   gem 'factory_girl_rails', '1.4.0'
-  gem 'prototype-rails'
   gem 'jquery-rails', '2.0.2'
+  gem 'capybara'
   
   #leaving out annotate gem, it could not be found in sources
   #gem 'annotate-models'
@@ -20,7 +20,6 @@ group :production, :staging do
 end
 
 group :test do
-  gem 'webrat', '0.7.1'
   gem 'shoulda'
   gem 'shoulda-matchers'
 end

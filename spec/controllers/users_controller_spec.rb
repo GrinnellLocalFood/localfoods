@@ -74,8 +74,8 @@ describe "GET show" do
     end
     it "should have New user and show user button" do    
       get :show, :id => "1"
-      response.should have_selector("a", :href => users_path, :content => "All Users")
-      response.should have_selector("a", :href => users_path + "/new", :content => "Add User")
+        response.body.should have_text("All Users")
+        response.body.should have_text("Add User") 
     end
   end
 
@@ -85,8 +85,8 @@ describe "GET show" do
     end
     it "should have New user and show user button" do    
       get :show, :id => "1"
-      response.should have_selector("a", :href => users_path, :content => "All Users")
-      response.should_not have_selector("a", :href => users_path + "/new", :content => "Add User")
+      response.body.should have_text("All Users")
+      response.body.should have_text("Add User")
     end
   end
 end
@@ -149,9 +149,10 @@ end
       @another_user = Factory(:user, :id => @user.id + 20, :email => "example20@example.com")
       @another_user.save
       get :edit, :id => @user.id + 20
-      response.should have_selector('input', :name => "user[admin]", :type => "hidden", :value => '0')
-      response.should have_selector('input', :name => "user[coordinator]", :type => "hidden", :value => '0')
-      response.should have_selector('input', :name => "user[producer]", :type => "hidden", :value => '0')
+      response.body.should have_field("user[admin]")
+      response.body.should have_field("user[coordinator]")
+      response.body.should have_field("user[producer]")
+      
     end
   end
 
@@ -179,8 +180,9 @@ end
       @another_user = Factory(:user, :id => @user.id + 20, :email => "example20@example.com")
       @another_user.save
       get :edit, :id => @user.id + 20
-      response.should have_selector('input', :name => "user[coordinator]", :type => "hidden", :value => '0')
-      response.should have_selector('input', :name => "user[producer]", :type => "hidden", :value => '0')
+      response.body.should_not have_field("user[admin]")
+      response.body.should have_field("user[coordinator]")
+      response.body.should have_field("user[producer]")
     end
   end
 end

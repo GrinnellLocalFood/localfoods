@@ -3,25 +3,24 @@ require 'spec_helper'
 describe "LayoutLinks" do
 
 	it "should have a Home page at '/'" do
-		get '/'
-		response.should have_selector('title', :content => "Home")
+		visit '/'
+		page.should have_text("Home")
 	end
 
 	it "should have a Register page at register_path" do
-		get register_path
-		response.should have_selector('title', :content => "Register")
+		visit register_path
+		page.should have_text("Register")
 	end
 
 	it "should have a Login page at login_path" do
-		get login_path
-		response.should have_selector('title', :content => "Log In")
+		visit login_path
+		page.should have_text("Log In")
 	end
 
 	describe "when not logged in" do
 		it "should have a login link" do
-			visit root_path
-			response.should have_selector('input', :class => "btn", 
-				:id => "session_submit", :name => "commit", :type => "submit", :value => "Log In")
+			visit '/'
+			page.should have_button("Log In")
 		end
 	end
 
@@ -44,8 +43,7 @@ describe "LayoutLinks" do
 
 			it "should have a logout link" do
 				visit root_path
-				response.should have_selector("a", :href => logout_path,
-					:content => "Log Out")
+				page.should have_link("Log Out", :href => logout_path)
 			end
 
 		end

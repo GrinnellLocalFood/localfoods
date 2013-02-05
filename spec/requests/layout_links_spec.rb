@@ -4,17 +4,17 @@ describe "LayoutLinks" do
 
 	it "should have a Home page at '/'" do
 		visit '/'
-		page.should have_text("Home")
+		page.should have_title("Home")
 	end
 
 	it "should have a Register page at register_path" do
-		get register_path
-		page.should have_selector("title", :content => "Register")
+		visit register_path
+		page.should have_title("Register")
 	end
 
 	it "should have a Login page at login_path" do
 		visit login_path
-		page.should have_text("Log In")
+		page.should have_title("Log In")
 	end
 
 	describe "when not logged in" do

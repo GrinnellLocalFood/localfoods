@@ -27,6 +27,12 @@ RSpec.configure do |config|
   # instead of true.
   config.use_transactional_fixtures = true
 
+  RSpec::Matchers::define :have_title do |text|
+    match do |page|
+      Capybara.string(page.body).has_selector?('title', :text => text)
+    end
+  end
+
   def test_sign_in(user)
     controller.sign_in(user)
   end

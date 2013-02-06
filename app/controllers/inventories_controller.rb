@@ -40,9 +40,10 @@ skip_before_filter :require_login, :only => [:show, :index, :show_in_index]
   end
 
   def show_in_index
+      flash.now[:error] = params[:category_id]
       @title = "Our Producers"
       @producer = User.find(params[:id])
-      @item = Item.where("inventory_id = ?", params[:id])
+      @item = Item.where("inventory_id = ? and category_id = ?", params[:id], params[:category_id])
       respond_to do |format|
         format.js { render :locals => { :item => @item } }
       end
@@ -51,6 +52,7 @@ skip_before_filter :require_login, :only => [:show, :index, :show_in_index]
   def index
     @title = "Our Producers"
     @producers = Inventory.all
+    @categories = Category.all
   end
 
 end

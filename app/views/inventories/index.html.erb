@@ -18,10 +18,12 @@
 			<ul class="span2 nav nav-tabs">
 			<!-- <li class="nav-header">Producers</li> -->
 				<% @producers.each do |producer| %>
-				<li> <%= link_to(producer.display_name, show_in_index_inventory_path(producer), 
+				<% @categories.each do |category| %>
+				<li> <%= link_to(producer.display_name, show_in_index_inventory_path(producer, :category_id => category.id), 
 					:remote => true, :onclick => 'activate(this)')%>
 					</li>
 				<li class="divider"></li>
+				<% end %>
 				<% end %>
 			</ul>
 		

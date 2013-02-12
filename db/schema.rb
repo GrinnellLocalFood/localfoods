@@ -10,12 +10,26 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121211032349) do
+ActiveRecord::Schema.define(:version => 20130212011406) do
 
   create_table "application_states", :force => true do |t|
     t.boolean  "orders_open", :default => false
     t.datetime "created_at",                     :null => false
     t.datetime "updated_at",                     :null => false
+  end
+
+  create_table "cart_items", :force => true do |t|
+    t.datetime "created_at",                                :null => false
+    t.datetime "updated_at",                                :null => false
+    t.decimal  "quantity",   :precision => 10, :scale => 2
+    t.integer  "cart_id"
+    t.integer  "item_id"
+  end
+
+  create_table "carts", :force => true do |t|
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+    t.integer  "user_id"
   end
 
   create_table "categories", :force => true do |t|

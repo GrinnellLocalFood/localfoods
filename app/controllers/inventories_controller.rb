@@ -40,7 +40,6 @@ skip_before_filter :require_login, :only => [:show, :index, :show_in_index]
   end
 
   def show_in_index
-      flash.now[:error] = params[:category_id]
       @title = "Our Producers"
       @producer = User.find(params[:id])
       @item = Item.where("inventory_id = ? and category_id = ?", params[:id], params[:category_id])

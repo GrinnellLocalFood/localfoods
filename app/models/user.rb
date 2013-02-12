@@ -29,11 +29,11 @@ class User < ActiveRecord::Base
    
 
   before_save :encrypt_password, :default_values, :update_inventory
-  # after_save :create_inventory
-
+  
   before_validation :format_values
 
   has_one :inventory, :foreign_key => "id", :autosave => true, :dependent => :destroy
+  has_one :cart
 
   accepts_nested_attributes_for :inventory, :update_only => true
 

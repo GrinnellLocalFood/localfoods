@@ -1,8 +1,9 @@
 <script type="text/javascript">
 
-    function activate(e)
+    function activate(e, name)
     {
-    var lis = document.getElementsByTagName("li");  
+    var lis = document.getElementsByTagName("li");
+    var current_category = 
     e.parentNode.className = "active";
     for (var i = 0; i < lis.length; i++)
         if (lis[i].className === "active" && !(lis[i] == e.parentNode))
@@ -21,7 +22,7 @@
 
                 <% @categories.each do |category| %>
                 <li> <%= link_to(category.name, show_by_category_category_path(category), 
-                    :remote => true, :onclick => 'activate(this)')%>
+                    :remote => true, :onclick => 'activate(this, category)')%>
                     </li>
                 <li class="divider"></li>
                 <% end %>

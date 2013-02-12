@@ -40,7 +40,8 @@ Localfoods::Application.routes.draw do
     end
 
   end
-
+  resources :cart_items
+  resources :cart
   resources :sessions, :only => [:new, :create, :destroy]
   resources :items, :only => [:index]
   resources :application_states

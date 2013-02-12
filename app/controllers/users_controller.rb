@@ -78,6 +78,7 @@ class UsersController < ApplicationController
 
     respond_to do |format|
       if @user.save
+         @user.cart = Cart.create!(params[:user_id])
 
         # Tell the UserMailer to send a welcome Email after save
         if(!current_user.nil?)

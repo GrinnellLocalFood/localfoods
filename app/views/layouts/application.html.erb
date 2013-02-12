@@ -8,7 +8,9 @@
 	<%= stylesheet_link_tag '/stylesheets/custom.css' %>
 	<%= stylesheet_link_tag '/stylesheets/bootstrap.css' %>	
 	<!-- :defaults MUST come after jquery.j, as rails.js has to be loaded after jquery -->
-	<%= javascript_include_tag 'jquery.js', 'bootstrap.js', :defaults %>
+	<script src="https:/ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js">
+	</script>
+	<%= javascript_include_tag 'bootstrap.js', :defaults %>
 	<%= csrf_meta_tag %>
 </head>
 	<body>

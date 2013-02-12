@@ -1,3 +1,46 @@
+<script type="text/javascript">
+ $('h1').hide();
+
+// TOTALLY BROKEN
+    $(document).ready(function() {
+
+
+      $('application_state_email_users_true').click(function() {
+        $(.attr('disabled', false);
+
+      });
+
+        $('application_state_email_users_false').click(function() {
+          $(this).attr('disabled', false);
+
+        });
+
+      });
+    });
+
+
+
+    // window.onload = function()
+    // {
+    //    document.getElementById('application_state_email_content').disabled = true;
+    //    document.getElementById('application_state_email_users_true').onclick = enable;
+    //    document.getElementById('application_state_email_users_false').onclick = disable;
+    // }
+
+    // function enable()
+    // {
+    //   if(this.value == "true")
+    //     document.getElementById('application_state_email_content').disabled = false;
+    // }
+
+    // function disable()
+    // {
+    //   if(this.value == "false")
+    //     document.getElementById('application_state_email_content').disabled = true;
+    // }
+
+    </script>
+
 <div class="container">
   <div class="row">
     <div class="span8 offset2 custom-block">
@@ -37,27 +80,7 @@
 
     <br>
 
-    <script type="text/javascript">
-    window.onload = function()
-    {
-       document.getElementById('application_state_email_content').disabled = true;
-       document.getElementById('application_state_email_users_true').onclick = enable;
-       document.getElementById('application_state_email_users_false').onclick = disable;
-    }
-
-    function enable()
-    {
-      if(this.value == "true")
-        document.getElementById('application_state_email_content').disabled = false;
-    }
-
-    function disable()
-    {
-      if(this.value == "false")
-        document.getElementById('application_state_email_content').disabled = true;
-    }
-
-    </script>
+    
 
     <div align="center">
 
@@ -71,23 +94,25 @@
 
     </div>
     <br>    
-        <div class="controls" style="margin-left:215px">
-          <div class="email-display">Hi <i>User</i>,
-          <br>
+    <div class="controls" style="margin-left:215px">
+      <div class="email-display">Hi <i>User</i>,
+        <br>
+        <div id="email_content">
           <%= f.text_area :email_content %>
-          <br>
-          Have a Great Day!
-          <br>
-          Grinnell Local Food Admin
         </div>
+        <br>
+        Have a Great Day!
+        <br>
+        Grinnell Local Food Admin
       </div>
+    </div>
     <br>
     <div align="center">
       <%= f.submit "Change State", :class=>"btn btn-primary"%>
     </div>
 
-  
-<% end %>
-</div>
+
+    <% end %>
+  </div>
 </div>
 </div>

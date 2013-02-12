@@ -1,15 +1,14 @@
 <script type="text/javascript">
-
-    function activate(e)
-    {
-    var lis = document.getElementsByTagName("li");  
-    e.parentNode.className = "active";
-    for (var i = 0; i < lis.length; i++)
-        if (lis[i].className === "active" && !(lis[i] == e.parentNode))
-        {
-            lis[i].className = "";
-        }
-    }
+// add the 'active' class to whatever link is clicked
+// and remove it from whatever was active before
+$(document).ready(function() {
+    $('.category_link a').click(function() {
+        $('li').each(function() {
+            $(this).removeClass('active')
+        });
+        $(this).parent().addClass('active');
+    });
+});
     </script>
 
 <div class="container">
@@ -17,11 +16,10 @@
         <div class="tabbable tabs-left">
             <ul class="span2 nav nav-tabs">
                 <li> <%= link_to("All Products", show_all_categories_path, 
-                    :remote => true, :onclick => 'activate(this)')%> </li>
-
+                    :remote => true )%> </li>
                 <% @categories.each do |category| %>
-                <li> <%= link_to(category.name, show_by_category_category_path(category), 
-                    :remote => true, :onclick => 'activate(this)')%>
+                <li class="category_link"> <%= link_to(category.name, show_by_category_category_path(category), 
+                    :remote => true )%>
                     </li>
                 <li class="divider"></li>
                 <% end %>

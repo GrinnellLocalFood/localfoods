@@ -1,3 +1,71 @@
+<script type="text/javascript">
+
+// add the 'active' class to whatever link is clicked
+// and remove it from whatever was active before
+$(document).ready(function() {
+    // $('.producer_link a').click(function() {
+    //     $('li').each(function() {
+    //         $(this).removeClass('active')
+    //     });
+    //     $(this).parent().addClass('active');
+    // });
+
+    var list_of_categories = new Array();
+$('.category_label').each(function() {
+    var category_name = $(this).text();
+
+        // if there aren't yet any categories, add it
+        if (list_of_categories.length == 0) {
+            $('.category_list').after('<li class="category_filter"><a>' + category_name + '</a></li>');
+            list_of_categories.push(category_name);
+
+            // if the current category isn't there, add it
+        } else if (($.inArray(category_name, list_of_categories)) == -1) {
+
+            $('.category_list').after('<li class="category_filter"><a>' + category_name + '</a></li>');
+            list_of_categories.push(category_name);
+        }
+
+
+}); // end each
+
+$('.category_filter').click(function() {
+    var category_name = $(this).text();
+
+
+    $('.category_label').each(function() {
+
+        // hide everything not the curernt category
+        if ($(this).text() != category_name) {
+            $(this).parent().hide();
+
+
+        // show the current category
+    } else {
+        $(this).parent().show();
+
+    // make the current category active or inactive on the navbar
+    $('.category_filter').each(function() {
+        if ($(this).text() == category_name) {
+            $(this).addClass('active');
+        } else {
+            $(this).removeClass('active');
+        }
+
+    }); // end each
+
+        } // end else
+    }); // end each
+
+
+}); // end click
+
+}); // end ready
+
+</script>
+
+
+
 <% if signed_in? && (current_user.admin || current_user.coordinator || current_user == @producer) %>
 
 <div align="right" style="margin-right:20px; margin-bottom: -20px;
@@ -90,7 +158,7 @@ margin-top: -5px">
         <td><%= item.displayed_maxorder %></td>
         <!-- ADD ELSE IF TO item.available SO THAT IT DISPLAYS SOLD OUT IF QTY REMAINING IS 0 -->   
         <td><%= item.is_available? %></td>
-        <td><%= Category.find(item.category_id).name %></td>
+        <td class="category_label"><%= Category.find(item.category_id).name %></td>
         <td><%= link_to "Show", inventory_item_path({ :inventory_id => params[:id], :id => item.id }) %></td>
         <td><%= link_to "Edit", edit_inventory_item_path({ :inventory_id => params[:id], :id => item.id }) %></td>
         <td><%= link_to "Delete", inventory_item_path({ :inventory_id => params[:id], :id => item.id }), :confirm => 'Are you sure?', :method=>:delete %></td>
@@ -121,7 +189,7 @@ margin-top: -5px">
             <td><%= item.displayed_maxorder %></td>
             <!-- ADD ELSE IF TO item.available SO THAT IT DISPLAYS SOLD OUT IF QTY REMAINING IS 0 -->   
             <td><%= item.is_available? %></td>
-             <td><%= Category.find(item.category_id).name %></td>
+            <td><%= Category.find(item.category_id).name %></td>
             <td><%= link_to "Show", inventory_item_path({ :inventory_id => params[:id], :id => item.id }) %></td>
             <% end %>
             <% end %>

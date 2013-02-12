@@ -1,42 +1,71 @@
 <script type="text/javascript">
 
-    function activate(e)
-    {
-	var lis = document.getElementsByTagName("li");	
-	e.parentNode.className = "active";
-	for (var i = 0; i < lis.length; i++)
-		if (lis[i].className === "active" && !(lis[i] == e.parentNode))
-		{
-			lis[i].className = "";
-		}
-    }
-    </script>
+// add the 'active' class to whatever link is clicked
+// and remove it from whatever was active before
+
+$(document).ready(function() {
+
+$('.category_list').hide();
+
+	$('.producer_link a').click(function() {
+		$('li').each(function() {
+			$(this).removeClass('active')
+		});
+		$(this).parent().addClass('active');
+
+// hide all the old categories if you're just clicking between producers
+$('.category_filter').hide();
+$('.category_list').show();
+	}); // end click
+
+});
+
+
+</script>
 
 <div class="container">
 	<div class="row-fluid">
 		<div class="tabbable tabs-left">
+
 			<ul class="span2 nav nav-tabs">
-			<!-- <li class="nav-header">Producers</li> -->
+				<li class="nav-header">Producers</li>
 				<% @producers.each do |producer| %>
-				<li> <%= link_to(producer.display_name, show_in_index_inventory_path(producer), 
-					:remote => true, :onclick => 'activate(this)')%>
-					</li>
+				<li class="producer_link"> 
+					<%= link_to(producer.display_name, show_in_index_inventory_path(producer), 
+					:remote => true)%>
+				</li>
 				<li class="divider"></li>
 				<% end %>
-			</ul>
+			
 		
+
+		<!-- <div id="category_sidebar"> -->
+
+			
+					<li class="nav-header category_list">Categories</li>
+					<!-- <li class="divider category_sidebar"></li> -->
+					<!-- <li><a> wwwwwwwww </a></li> -->
+				</ul>
+			<!-- </div> -->
+		<!-- </div> -->
+
+
+
 
 
 		<div class="tab-content span10 custom-block">
 			<span id="producer_info">
 				<div align="center">
-				<h2><%= @title %></h2>
-				<br>
-				<p>View our producers by clicking the links on the left!</p>
-			</div>
+					<h2><%= @title %></h2>
+					<br>
+					<p>View our producers by clicking the links on the left!</p>
+				</div>
 			</span>
 		</div>
-	</div>
+
+
+
+
 	</div>
 </div>
 

@@ -3892,6 +3892,8 @@ input[type="submit"].btn.btn-mini {
   float: left;
 }
 
+/*CHANGE*/
+
 .nav-tabs > li > a,
 .nav-pills > li > a {
   padding-right: 12px;
@@ -3904,9 +3906,13 @@ input[type="submit"].btn.btn-mini {
   border-bottom: 1px solid #ddd;
 }
 
+/*CHANGE*/
+
 .nav-tabs > li {
   margin-bottom: -1px;
 }
+
+/*CHANGE*/
 
 .nav-tabs > li > a {
   padding-top: 8px;
@@ -3918,9 +3924,13 @@ input[type="submit"].btn.btn-mini {
           border-radius: 4px 4px 0 0;
 }
 
+/*CHANGE*/
+
 .nav-tabs > li > a:hover {
   border-color: #eeeeee #eeeeee #dddddd;
 }
+
+/*CHANGE*/
 
 .nav-tabs > .active > a,
 .nav-tabs > .active > a:hover {
@@ -4134,6 +4144,7 @@ input[type="submit"].btn.btn-mini {
 }
 
 /*CHANGE*/
+
 .tabs-left > .nav-tabs {
   float: left;
   margin-right: -20px;

@@ -1,12 +1,11 @@
 <script type="text/javascript">
 
-// add the 'active' class to whatever link is clicked
-// and remove it from whatever was active before
-
 $(document).ready(function() {
 
+// hide the categories title when you haven't yet selected a producer
 $('.category_list').hide();
 
+// make active or inactive whatever producer link you click
 	$('.producer_link a').click(function() {
 		$('li').each(function() {
 			$(this).removeClass('active')
@@ -18,7 +17,7 @@ $('.category_filter').hide();
 $('.category_list').show();
 	}); // end click
 
-});
+}); // end ready
 
 
 </script>

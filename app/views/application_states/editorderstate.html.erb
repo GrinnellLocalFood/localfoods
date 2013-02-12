@@ -2,18 +2,18 @@
 
 $(document).ready(function() {
   // hide these sections on page load
- $('#application_state_email_content').attr('disabled', true);
- $('#email_section').hide();
+  $('#application_state_email_content').attr('disabled', true);
+  $('#email_section').hide();
 
 // show the email section when the page loads, enable it
- $('#application_state_email_users_true').click(function() {
+$('#application_state_email_users_true').click(function() {
   $('#application_state_email_content').attr('disabled', false);
   $('#email_section').slideDown();
 
 }); // end click
 
 // roll it all back up and disable it if the "no" radio button is clicked
- $('#application_state_email_users_false').click(function() {
+$('#application_state_email_users_false').click(function() {
   $('#application_state_email_content').attr('disabled', true);
   $('#email_section').slideUp();
 
@@ -22,82 +22,82 @@ $(document).ready(function() {
       }); // end ready
 
 
-    </script>
+</script>
 
-    <div class="container">
-      <div class="row">
-        <div class="span8 offset2 custom-block">
+<div class="container">
+  <div class="row">
+    <div class="span8 offset2 custom-block">
 
-          <!-- <div class="custom-block"> -->
+      <!-- <div class="custom-block"> -->
 
-          <%= form_for(@application_state, :html=>{:class=>'form-horizontal', :multipart => true}) do |f| %>
+      <%= form_for(@application_state, :html=>{:class=>'form-horizontal', :multipart => true}) do |f| %>
 
-          <% if @application_state.errors.any? %>
-          <!-- <div id="error_explanation"> -->
-          <div class="alert alert-error">
-            <h4><%= pluralize(@application_state.errors.count, "error") %> prohibited this application_state from being saved:</h4>
+      <% if @application_state.errors.any? %>
+      <!-- <div id="error_explanation"> -->
+      <div class="alert alert-error">
+        <h4><%= pluralize(@application_state.errors.count, "error") %> prohibited this application_state from being saved:</h4>
 
-            <br><ul>
-            <% @application_state.errors.full_messages.each do |msg| %>
-            <li><%= msg %></li>
-            <% end %>
-
-          </ul>
-        </div>
+        <br><ul>
+        <% @application_state.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
         <% end %>
 
-        <% if signed_in? %> 
-        <h1 align="center">Open/Close Orders</h1><br>
-        <% end %>
+      </ul>
+    </div>
+    <% end %>
 
-        <div align="center">
-          Open orders?
-          &nbsp;&nbsp;
-          Yes
-          <%= f.radio_button :orders_open, true, :class=>"radio-control"%> 
-          &nbsp;&nbsp;
-          No
-          <%= f.radio_button :orders_open, false, :class=>"radio-control"%> 
+    <% if signed_in? %> 
+    <h1 align="center">Open/Close Orders</h1><br>
+    <% end %>
 
+    <div align="center">
+      Open orders?
+      &nbsp;&nbsp;
+      Yes
+      <%= f.radio_button :orders_open, true, :class=>"radio-control"%> 
+      &nbsp;&nbsp;
+      No
+      <%= f.radio_button :orders_open, false, :class=>"radio-control"%> 
+
+    </div>
+
+    <br>
+
+
+
+    <div align="center">
+
+      Email users?
+      &nbsp;&nbsp;
+      Yes
+      <%= f.radio_button :email_users, true, :class=>"radio-control" %> 
+      &nbsp;&nbsp;
+      No
+      <%= f.radio_button :email_users, false, :class=>"radio-control", :checked => true %> 
+
+    </div>
+    <br> 
+
+    <div id="email_section" class="controls" style="margin-left:215px">
+      <div class="email-display">Hi [User],
+        <br><br>
+        <div id="email_content">
+          <%= f.text_area :email_content, :placeholder=>"Write your message here" %>
         </div>
-
         <br>
-
-
-
-        <div align="center">
-
-          Email users?
-          &nbsp;&nbsp;
-          Yes
-          <%= f.radio_button :email_users, true, :class=>"radio-control" %> 
-          &nbsp;&nbsp;
-          No
-          <%= f.radio_button :email_users, false, :class=>"radio-control", :checked => true %> 
-
-        </div>
-        <br> 
-
-        <div id="email_section" class="controls" style="margin-left:215px">
-          <div class="email-display">Hi [User],
-            <br><br>
-            <div id="email_content">
-              <%= f.text_area :email_content, :placeholder=>"Write your message here" %>
-            </div>
-            <br>
-            Have a Great Day!
-            <br>
-            Grinnell Local Food Admin
-          </div>
-        </div>
-
+        Have a Great Day!
         <br>
-        <div align="center">
-          <%= f.submit "Change State", :class=>"btn btn-primary"%>
-        </div>
-
-
-        <% end %>
+        Grinnell Local Food Admin
       </div>
     </div>
+
+    <br>
+    <div align="center">
+      <%= f.submit "Change State", :class=>"btn btn-primary"%>
+    </div>
+
+
+    <% end %>
   </div>
+</div>
+</div>

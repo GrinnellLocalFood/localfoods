@@ -1,17 +1,11 @@
 <script type="text/javascript">
 
-// add the 'active' class to whatever link is clicked
-// and remove it from whatever was active before
 $(document).ready(function() {
-    // $('.producer_link a').click(function() {
-    //     $('li').each(function() {
-    //         $(this).removeClass('active')
-    //     });
-    //     $(this).parent().addClass('active');
-    // });
 
+// make an array to store the list of categories for a producer
 var list_of_categories = new Array();
 $('.category_label').each(function() {
+    // save the category name for easy use
     var category_name = $(this).text();
 
         // if there aren't yet any categories, add it
@@ -26,19 +20,19 @@ $('.category_label').each(function() {
             list_of_categories.push(category_name);
         }
 
-
 }); // end each
 
+// click behavior for when you select a present category
 $('.category_filter').click(function() {
+    // save the category name for easy use
     var category_name = $(this).text();
 
-
+    // go through all the inventory on the to decide what to hide/show
     $('.category_label').each(function() {
 
         // hide everything not the curernt category
         if ($(this).text() != category_name) {
             $(this).parent().hide();
-
 
         // show the current category
     } else {
@@ -56,7 +50,6 @@ $('.category_filter').click(function() {
 
         } // end else
     }); // end each
-
 
 }); // end click
 

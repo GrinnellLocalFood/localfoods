@@ -10,7 +10,7 @@ $(document).ready(function() {
     //     $(this).parent().addClass('active');
     // });
 
-    var list_of_categories = new Array();
+var list_of_categories = new Array();
 $('.category_label').each(function() {
     var category_name = $(this).text();
 
@@ -189,7 +189,7 @@ margin-top: -5px">
             <td><%= item.displayed_maxorder %></td>
             <!-- ADD ELSE IF TO item.available SO THAT IT DISPLAYS SOLD OUT IF QTY REMAINING IS 0 -->   
             <td><%= item.is_available? %></td>
-            <td><%= Category.find(item.category_id).name %></td>
+            <td class="category_label"><%= Category.find(item.category_id).name %></td>
             <td><%= link_to "Show", inventory_item_path({ :inventory_id => params[:id], :id => item.id }) %></td>
             <% end %>
             <% end %>
@@ -209,5 +209,8 @@ margin-top: -5px">
             <%= link_to 'Add Item', producer_new_inventory_items_path(params[:id]), :class=>"btn", :style=>"margin-left: 2.5%" %>
             <% end %>
 
-
+<!-- closing div's from the main show erb file -->
+</div>
+</div>
+</div>
 

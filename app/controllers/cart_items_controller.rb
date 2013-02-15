@@ -27,7 +27,7 @@ class CartItemsController < ApplicationController
 		@cart_item = CartItem.find(params[:cart_item_id])
 		respond_to do |format|
 			if @cart_item.update_attributes(params[:cart_item])
-				format.html { redirect_to(cart_path(params[:id]), :notice => 'Item was successfully updated.') }
+				format.html { redirect_to(cart_path(params[:id], :item => @cart_item.id, :disable => true), :notice => 'Item was successfully updated.') }
 				format.xml  { head :ok }       
 			else
 				format.html { redirect_to(cart_path(params[:id]), :error => 'Item was not successfully updated.') }

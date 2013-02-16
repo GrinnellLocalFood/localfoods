@@ -1,3 +1,4 @@
+# encoding: UTF-8
 # This file is auto-generated from the current state of the database. Instead
 # of editing this file, please use the migrations feature of Active Record to
 # incrementally modify your database, and then regenerate this schema definition.
@@ -14,19 +15,19 @@ ActiveRecord::Schema.define(:version => 20121211032349) do
 
   create_table "application_states", :force => true do |t|
     t.boolean  "orders_open", :default => false
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",                     :null => false
+    t.datetime "updated_at",                     :null => false
   end
 
   create_table "categories", :force => true do |t|
     t.string   "name"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "inventories", :force => true do |t|
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",                                           :null => false
+    t.datetime "updated_at",                                           :null => false
     t.string   "url"
     t.text     "description",        :limit => 255
     t.string   "display_name"
@@ -39,22 +40,22 @@ ActiveRecord::Schema.define(:version => 20121211032349) do
 
   create_table "item_photos", :force => true do |t|
     t.integer  "item_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "items", :force => true do |t|
     t.string   "name"
-    t.boolean  "available",               :default => false
+    t.boolean  "available",                                              :default => false
     t.string   "units"
-    t.decimal  "price"
-    t.integer  "minorder",                :default => 1
+    t.decimal  "price",                   :precision => 10, :scale => 2
+    t.integer  "minorder",                                               :default => 1
     t.integer  "maxorder"
-    t.integer  "totalquantity",           :default => 0
-    t.integer  "totalordered",            :default => 0
+    t.integer  "totalquantity",                                          :default => 0
+    t.integer  "totalordered",                                           :default => 0
     t.string   "description"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",                                                                :null => false
+    t.datetime "updated_at",                                                                :null => false
     t.integer  "inventory_id"
     t.string   "item_photo_file_name"
     t.string   "item_photo_content_type"
@@ -73,8 +74,8 @@ ActiveRecord::Schema.define(:version => 20121211032349) do
     t.boolean  "coordinator",            :default => false
     t.boolean  "producer",               :default => false
     t.boolean  "admin",                  :default => false
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",                                :null => false
+    t.datetime "updated_at",                                :null => false
     t.string   "salt"
     t.string   "password_reset_token"
     t.datetime "password_reset_sent_at"

@@ -17,6 +17,12 @@ class Inventory < ActiveRecord::Base
 	accepts_nested_attributes_for :user
 	#fake-delete an inventory so that it persists even if a user is no longer
 	#a producer
+
+	searchable do
+    text :name
+    integer :price, :totalquantity
+  end
+  
 	def hide
 		self.hidden = true
 	end

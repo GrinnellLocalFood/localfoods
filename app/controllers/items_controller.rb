@@ -9,6 +9,10 @@ class ItemsController < ApplicationController
   end
 
   def index
+    @search = Item.search do
+      fulltext params[:search]
+    end
+    @items = @search.results
   @title = "All Products"
   @categories = Category.all
   end
@@ -16,6 +20,10 @@ class ItemsController < ApplicationController
   #PUT
   def public_index
     #need to add permissions checking
+    @search = Item.search do
+      fulltext params[:search]
+    end
+    @items = @search.results
       @title = "View Inventory"
     
       @item = Item.where("inventory_id = ?", params[:item][:inventory_id])
@@ -26,6 +34,11 @@ class ItemsController < ApplicationController
   end
 
   def producer_index
+
+    @search = Item.search do
+      fulltext params[:search]
+    end
+    @items = @search.results
     @title = "View Inventory"
 
     if current_user.producer
@@ -128,4 +141,6 @@ end
       end
     end
   end
+
+
 end

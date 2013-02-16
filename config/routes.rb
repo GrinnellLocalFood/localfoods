@@ -44,7 +44,7 @@ Localfoods::Application.routes.draw do
   resources :sessions, :only => [:new, :create, :destroy]
   resources :items, :only => [:index]
   resources :application_states
-
+ 
   match '/register',  :to => 'users#new'
   match '/login',  :to => 'sessions#new'
   match '/logout', :to => 'sessions#destroy'

@@ -3,12 +3,15 @@
     <div class="container">
 
         <%= link_to image_tag("/img/just_localfood_horizontal_40.png", :width=>"250", :id=>"logohead"), root_path %>
-        
-        
+          
         <ul class="nav pull-right">
 
 
           <% if signed_in? %>
+
+          <div id="search", :class: pull-left>
+          <%= render :partial => 'items/itemsearchbar' %>
+          </div>
 
          <% if current_user.producer %> 
           <li class="dropdown nav">
@@ -37,7 +40,6 @@
               </ul>
             </li>   
             <% else %>
-
 
             <%= form_for(:session, :url => sessions_path, 
             :html=>{:class=>'navbar-form pull-right'}) do |f| %>

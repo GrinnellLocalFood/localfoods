@@ -26,6 +26,9 @@ class User < ActiveRecord::Base
 
   validates_length_of :phone, :minimum => 10, :maximum => 15, :allow_blank => true
 
+searchable do
+    text :first_name, :last_name, :email
+  end
    
 
   before_save :encrypt_password, :default_values, :update_inventory

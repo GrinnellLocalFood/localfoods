@@ -11,6 +11,7 @@ class User < ActiveRecord::Base
                   :admin,
                   :coordinator,
                   :producer,
+                  :inventory,
                   :inventory_attributes
 
   validates :email, :presence => true,
@@ -34,8 +35,9 @@ class User < ActiveRecord::Base
   before_validation :format_values
 
   has_one :inventory, :foreign_key => "id", :autosave => true, :dependent => :destroy
-
+  
   accepts_nested_attributes_for :inventory, :update_only => true
+
 
   def self.authenticate(email, submitted_password)
     user = find_by_email(email)
@@ -112,6 +114,7 @@ class User < ActiveRecord::Base
       if self.inventory.nil?
         if self.producer
           raise "Inventory could not be created" unless create_inventory
+          3.times{inventory.inventory_photos.build}
         end
       elsif !self.producer
           self.inventory.hide

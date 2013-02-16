@@ -74,21 +74,20 @@ margin-top: -5px">
 <div id="myCarousel" class="carousel slide" data-interval="4000"style="float:left; margin-bottom: 0px; margin-right: 10px; margin-top: -20px;" >
     <!-- Carousel items -->
     <div class="carousel-inner">
-
-        <div class="active item">
-            <img src="/img/r1.jpg" alt="">
-            <div class="carousel-caption">
-                <p>Caption text here</p>
-            </div>
+     
+      <% @producer.inventory.inventory_photos.each_with_index do
+      |inventory_photo, index| %>
+      <% if index == 0 %>
+      <div class="active item">
+            <%= image_tag inventory_photo.photo.url(:gallery_size) %>
         </div>
-
+      <% else %>
         <div class="item">
-            <img src="/img/r2.jpg" alt="">
-            <div class="carousel-caption">
-                <p>Caption text here</p>
-            </div>
+            <%= image_tag inventory_photo.photo.url(:gallery_size) %>
         </div>
-    </div>
+        <% end %>
+        <% end %>
+    </div>(
     <!-- Carousel nav -->
     <a class="carousel-control left" href="#myCarousel" data-slide="prev">&lsaquo;</a>
     <a class="carousel-control right" href="#myCarousel" data-slide="next">&rsaquo;</a>

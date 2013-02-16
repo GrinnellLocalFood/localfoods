@@ -1,6 +1,9 @@
 class Inventory < ActiveRecord::Base
+	attr_accessible :inventory_photos_attributes, :inventory_photos
 	belongs_to :user, :foreign_key => "id" #a user's "id" column is the foreign key# :autosave => false 
 	has_many :item, :foreign_key => "inventory_id", :autosave => true
+	has_many :inventory_photos, :dependent => :destroy
+	accepts_nested_attributes_for :inventory_photos
 
 	has_attached_file :photo, :url => "/system/photos/:id/:style/:basename.:extension", :styles => {
 		:large => "700x700>",

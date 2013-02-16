@@ -97,7 +97,7 @@
     <br>
     <h4 align="center" style="color:gray">Producer Information</h4><br>
 
-    <%= f.fields_for :inventory_attributes, @user.inventory do |inventory_form| %>
+    <%= f.fields_for :inventory, @user.inventory do |inventory_form| %>
 
     <div class="control-group">
       <label class="control-label">
@@ -134,6 +134,26 @@
         <%= inventory_form.file_field :photo %>
       </div>
     </div>
+
+    <%= inventory_form.fields_for :inventory_photos do |photo_form| %>
+    <% if photo_form.object.new_record? %>
+    <div class="control-group">
+      <label class="control-label">
+        <%= photo_form.label(:photo, "Gallery Photo") %>
+      </label>
+      <div class="controls">
+        <%= photo_form.file_field :photo %>
+      </div>
+    </div>
+    <% end %>
+    
+
+    <% unless photo_form.object.new_record? %>
+      <%= image_tag photo_form.object.photo.url(:thumb) %>
+      <%= photo_form.check_box '_destroy' %>
+      <%= photo_form.label '_destroy', 'Remove' %>
+    <% end %> 
+    <% end %>
 
     <% end %>
 

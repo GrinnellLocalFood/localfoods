@@ -3,13 +3,13 @@ class InventoryPhoto < ActiveRecord::Base
   attr_accessible :photo, :photo_attributes
   accepts_nested_attributes_for :inventory, :allow_destroy => true
   has_attached_file :photo, :url => "/system/inventory_photos/:id/:style/:basename.:extension", :styles => {
-		:gallery_size => "450x300",
-		:thumb => "45X30"
+		:gallery_size => "450x300#",
+		:thumb => "225X150#"
 
 	}
   validates_attachment_presence :photo
   validates_attachment_size :photo, :less_than => 5.megabytes
-  validates_attachment_content_type :photo, :content_type => '/image/', 
+  validates_attachment_content_type :photo, :content_type => /^image\/(jpg|jpeg|pjpeg|png|x-png|gif)$/, 
     :message => "This file does not have an accepted image extension."
   before_photo_post_process :process_only_images
   validate :file_dimensions, :unless => "errors.any?"

@@ -15,21 +15,17 @@
 </ul>
 </div>
 <% end %>
-<!-- 
-<% if current_user.producer %>
-  <% params.merge("inventory_id" => params[:id]) %>
-<% end %>
- -->
 
- <div class="control-group">
-    <label class="control-label">
-      <%= f.label :name, "Category Type *" %>
-    </label>
-    <div class="controls">
-     <!-- Leaving the first parameter as blank adds "inventory_id" directly to the params hash -->
-     <%= collection_select(:item, :category_id, Category.all, :id, :name) %>
-    </div>
-  </div>
+
+<div class="control-group">
+  <label class="control-label">
+    <%= f.label :name, "Category Type *" %>
+  </label>
+  <div class="controls">
+   <!-- Leaving the first parameter as blank adds "inventory_id" directly to the params hash -->
+   <%= collection_select(:item, :category_id, Category.all, :id, :name) %>
+ </div>
+</div>
 
 <div class="control-group">
   <label class="control-label">
@@ -64,10 +60,10 @@
   </label>
   <div class="controls">
 
-<div class="input-prepend">
-<span class="add-on">$</span>
-    <%= f.text_field :price, :placeholder=>"Unit Price", :class=>"span2", :id=>"inv_price_field" %>
-</div>
+    <div class="input-prepend">
+      <span class="add-on">$</span>
+      <%= f.text_field :price, :placeholder=>"Unit Price", :class=>"span2", :id=>"inv_price_field" %>
+    </div>
 
   </div>
 </div>
@@ -104,19 +100,59 @@
     <%= f.label(:available, "Available") %>
   </label>
   <div class="controls">
-    <%= f.radio_button :available, true %> Yes
-    <%= f.radio_button :available, false %> No
+    <div class="radio inline">
+      <%= f.radio_button :available, true %> Yes
+    </div>
+    <div class="radio inline">
+      <%= f.radio_button :available, false %> No
+    </div>
   </div>
 </div>
 
 <div class="control-group">
-  <label class="control-label">
-    <%= f.label(:item_photo, "Product Photo") %>
-  </label>
   <div class="controls">
-    <%= f.file_field :item_photo %>
+
+    <div class="fileupload fileupload-new" data-provides="fileupload">
+      <div class="fileupload-new thumbnail" style="width: 200px; height: 150px;">
+
+        <% if (@item.item_photo_file_name.nil?) %>
+        <img src="http://placekitten.com/200/150" />
+        <!-- <img src="http://www.placehold.it/200x150/&text=no+image" /> -->
+      </div>
+      <div class="fileupload-preview fileupload-exists thumbnail" style="max-width: 200px; max-height: 150px; line-height: 20px;">
+      </div>
+
+      <div>
+        <span class="btn btn-file">
+          <span class="fileupload-new">Select Image</span>
+          <span class="fileupload-exists">Choose Again</span>
+          <%= f.file_field :item_photo %>
+        </span>
+        <a href="#" class="btn fileupload-exists" data-dismiss="fileupload">Cancel</a>
+
+        <% else %>
+
+        <%= image_tag(@item.item_photo.url(:small)) %>
+      </div>
+      <div class="fileupload-preview fileupload-exists thumbnail" style="max-width: 150px; max-height: 150px; line-height: 20px;">
+      </div>
+
+      <div>
+        <span class="btn btn-file">
+          <span class="fileupload-new">Replace Image</span>
+          <span class="fileupload-exists">Choose Again</span>
+          <%= f.file_field :item_photo %>
+        </span>
+        <a href="#" class="btn fileupload-exists" data-dismiss="fileupload">Cancel</a>
+        <% end %>
+      </div>
+
+    </div>
   </div>
 </div>
+
+
+<!-- <input id="item_item_photo" type="file" name="item[item_photo]"></input> -->
 
 
 <div class="control-group controls">
@@ -126,4 +162,4 @@
 <div align="center" style="color: gray;">
   * Denotes required field
 </div>
-    <% end %>
+<% end %>

@@ -338,7 +338,7 @@ background-color: #595959;
 
 .producer-table th,
 .producer-table td {
-  padding: 8px;
+  padding: 6px;
   line-height: 20px;
   text-align: left;
   vertical-align: top;
@@ -434,4 +434,15 @@ padding-left: 8px;
 
 #email_section {
 
+}
+
+
+.inventory_title {
+ clear: both;
+ text-indent: 2.5%; 
+ margin-bottom: 15px; 
+ margin-right: 0px;
+ background-color: #595959; 
+ color: white; 
+ padding: 5px; 
 }

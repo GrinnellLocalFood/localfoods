@@ -2,19 +2,21 @@
 
 $(document).ready(function() {
 
+// something about the partial makes this need to be here too
+$('[data-toggle="tooltip"]').tooltip();
+
 // make an array to store the list of categories for a producer
 var list_of_categories = new Array();
+
+
+
+
 $('.category_label').each(function() {
     // save the category name for easy use
     var category_name = $(this).text();
 
-        // if there aren't yet any categories, add it
-        if (list_of_categories.length == 0) {
-            $('.category_list').after('<li class="category_filter"><a>' + category_name + '</a></li>');
-            list_of_categories.push(category_name);
-
-            // if the current category isn't there, add it
-        } else if (($.inArray(category_name, list_of_categories)) == -1) {
+        // if the current category isn't there, add it
+        if (($.inArray(category_name, list_of_categories)) == -1) {
 
             $('.category_list').after('<li class="category_filter"><a>' + category_name + '</a></li>');
             list_of_categories.push(category_name);
@@ -22,19 +24,28 @@ $('.category_label').each(function() {
 
 }); // end each
 
+
+
+// add the 'All' option to the category list
+$('.category_list').after('<li class="category_filter active"><a>' + 'All' + '</a></li>');
+list_of_categories.push('All');
+
+
+
+
 // click behavior for when you select a present category
 $('.category_filter').click(function() {
     // save the category name for easy use
     var category_name = $(this).text();
 
+
     // go through all the inventory on the to decide what to hide/show
     $('.category_label').each(function() {
 
-        // hide everything not the curernt category
-        if ($(this).text() != category_name) {
-            $(this).parent().hide();
-
-        // show the current category
+    // make sure 'All' isn't selected, or the categories match
+    if(($(this).text() != category_name) && (category_name != 'All')) {
+        $(this).parent().hide();
+        // otherwise show the current category
     } else {
         $(this).parent().show();
 
@@ -63,44 +74,48 @@ $('.category_filter').click(function() {
 
 <div align="right" style="margin-right:20px; margin-bottom: -20px;
 margin-top: -5px">
-<%= link_to edit_user_path(params[:id]), :class=>"link", :rel=>"tooltip", :title=>"Edit Account" do %>
+<%= link_to edit_user_path(params[:id]), :class=>"link", :'data-toggle'=>"tooltip", :title=>"Edit Account" do %>
 
 <i class="icon-wrench"></i>
 <% end %>
 </div>
 <% end %>
 
-
+<% if !(@producer.inventory.inventory_photos.empty?) %>
 <div id="myCarousel" class="carousel slide" data-interval="4000"style="float:left; margin-bottom: 0px; margin-right: 10px; margin-top: -20px;" >
     <!-- Carousel items -->
     <div class="carousel-inner">
-     
-      <% @producer.inventory.inventory_photos.each_with_index do
-      |inventory_photo, index| %>
-      <% if index == 0 %>
-      <div class="active item">
+        <% @producer.inventory.inventory_photos.each_with_index do
+          |inventory_photo, index| %>
+          <% if index == 0 %>
+          <div class="active item">
             <%= image_tag inventory_photo.photo.url(:gallery_size) %>
         </div>
-      <% else %>
+        <% else %>
         <div class="item">
             <%= image_tag inventory_photo.photo.url(:gallery_size) %>
         </div>
         <% end %>
         <% end %>
-    </div>(
+    </div>
     <!-- Carousel nav -->
     <a class="carousel-control left" href="#myCarousel" data-slide="prev">&lsaquo;</a>
     <a class="carousel-control right" href="#myCarousel" data-slide="next">&rsaquo;</a>
 </div>
-
-
-
-
-<h1 style="text-align: left; margin-right: 20px; margin-left: 20px; margin-top: 0px"><%= @producer.inventory.display_name %></h1>
-
-<% if @producer.inventory.url != nil %>
-<%= link_to @producer.inventory.url, url_with_protocol(@producer.inventory.url) %>
 <% end %>
+
+
+
+
+<div style="text-align: left; margin-right: 20px; margin-left: 20px; margin-top: 0px">
+
+    <h1><%= @producer.inventory.display_name %></h1>
+
+    <% if @producer.inventory.url != nil %>
+    <%= link_to @producer.inventory.url, url_with_protocol(@producer.inventory.url) %>
+    <% end %>
+
+</div>
 
 <div style="text-indent: 2.5%; margin-right: 20px; margin-left: 20px; margin-top: 5px;">
     <%= @producer.inventory.description %>
@@ -111,7 +126,7 @@ margin-top: -5px">
 
 <% if @item.count != 0 %>
 
-<h3 style="clear:both; text-indent: 2.5%; margin-bottom: 15px; background-color: #595959; color: white; padding: 5px;">Current Inventory</h3>
+<h3 class="inventory_title">Current Inventory</h3>
 
 <table class="producer-table table-hover" align="center">
 
@@ -190,9 +205,9 @@ margin-top: -5px">
         </table>
 
         <% else %>
-        <h4 style="clear:both; background-color: #595959; color: white; padding: 15px; margin-bottom: 10px;">
-            Currently Nothing For Sale</h4>
-
+        <h4 class="inventory_title">
+            Currently Nothing For Sale
+        </h4>
             <% end %> 
             <br>
 
@@ -201,8 +216,8 @@ margin-top: -5px">
             <%= link_to 'Add Item', producer_new_inventory_items_path(params[:id]), :class=>"btn", :style=>"margin-left: 2.5%" %>
             <% end %>
 
-<!-- closing div's from the main show erb file -->
-</div>
-</div>
+            <!-- closing div's from the main show erb file -->
+        </div>
+    </div>
 </div>
 

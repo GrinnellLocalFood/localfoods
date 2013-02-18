@@ -1,3 +1,5 @@
+
+
 <div class="container">
 	<div class="row">
 		
@@ -59,7 +61,7 @@
 
 			<div align="right" style="margin-right:60px; margin-bottom:-40px;
 			margin-top: 20px">
-			<%= link_to edit_user_path(params[:id]), :class=>"link", :rel=>"tooltip", :title=>"Edit Account" do %>
+			<%= link_to edit_user_path(params[:id]), :class=>"link", :'data-toggle'=>"tooltip", :title=>"Edit Account" do %>
 
 			<i class="icon-wrench"></i>
 		</div>
@@ -139,11 +141,6 @@
 
 				<h4 style="margin-left:60px">Producer Information</h4>
 				
-				<% if !(@user.inventory.photo_file_name.nil?) %>
-				<h2 align="center">
-					<%= image_tag @user.inventory.photo.url(:small) %>
-				</h2>
-				<%end%>
 				<br>
 				
 				<table class="table" style="width:500px" align="center">

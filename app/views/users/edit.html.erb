@@ -126,16 +126,8 @@
       </div>
     </div>
 
-    <div class="control-group">
-      <label class="control-label">
-        <%= inventory_form.label(:photo, "Profile Photo") %>
-      </label>
-      <div class="controls">
-        <%= inventory_form.file_field :photo %>
-      </div>
-    </div>
-
     <%= inventory_form.fields_for :inventory_photos do |photo_form| %>
+
     <% if photo_form.object.new_record? %>
     <div class="control-group">
       <label class="control-label">
@@ -150,8 +142,7 @@
 
     <% unless photo_form.object.new_record? %>
       <%= image_tag photo_form.object.photo.url(:thumb) %>
-      <%= photo_form.check_box '_destroy' %>
-      <%= photo_form.label '_destroy', 'Remove' %>
+      <%= link_to "Delete", inventory_photo_path(photo_form.object.id), :method => :delete %>
     <% end %> 
     <% end %>
 

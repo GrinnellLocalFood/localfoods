@@ -30,7 +30,7 @@
 			<% end %>
 
 			<% if !(@item.item_photo_file_name.nil?) %>
-			<media class="item-image">
+			<media class="item-image" style="margin-right: 10px; margin-top: 10px;">
 				<%= image_tag(@item.item_photo.url(:small)) %>
 			</media>
 			<%end%>

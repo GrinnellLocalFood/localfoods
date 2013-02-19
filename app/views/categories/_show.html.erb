@@ -1,43 +1,7 @@
-<%= stylesheet_link_tag '/stylesheets/grid/style.css' %>  
-
-<!-- <script src="/javascripts/grid/jquery.gridrotator.js"></script> -->
-<!-- <script src="/javascripts/grid/modernizr.custom.26633.js"></script> -->
-
 <script type="text/javascript">
 
 
 $(document).ready(function() {
-
-    $( '#ri-grid' ).gridrotator( {
-        rows        : 3,
-        columns     : 3,
-        animType    : 'fadeInOut',
-        animSpeed   : 1000,
-        interval    : 600,
-        step        : 1,
-        w1024           : {
-            rows    : 3,
-            columns : 3
-        },
-        w768            : {
-            rows    : 3,
-            columns : 3
-        },
-        w480            : {
-            rows    : 3,
-            columns : 3
-        },
-        w320            : {
-            rows    : 3,
-            columns : 3
-        },
-        w240            : {
-            rows    : 3,
-            columns : 3
-        },
-    } );
-
-
 
 
 // something about the partial makes this need to be here too
@@ -88,33 +52,6 @@ $('.category_filter').click(function() {
 }); // end ready
 
 </script>
-
-<!-- <li><a href="#"><img src="images/medium/1.jpg" alt="Whatever works"/></a></li>
-    <li><a href="#"><img src="images/medium/2.jpg" alt="Anything else"/></a></li>  -->
-
-
-
-<!-- 
-<div id="ri-grid" class="ri-grid ri-grid-size-2 ri-shadow">
-    <ul>
-
-    <% @items.each do |item| %>
-
-    <% if !(item.item_photo_file_name.nil?) %>
-    <li><a>
-        <%= image_tag(item.item_photo.url(:grid)) %>
-    </a></li>
-    <% end %>
-
-    <% end %>
-
-
- </ul>
-</div>
- -->
-
-
-
 
 
 <h2 align="center">All Products</h2>

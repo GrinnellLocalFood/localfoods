@@ -126,6 +126,11 @@ class UsersController < ApplicationController
         
       else
         sign_in @user
+
+if(!@user.inventory.nil?)
+        2.times {@user.inventory.inventory_photos.build}
+    end
+
         format.html { render :action => "edit" }
         format.xml  { render :xml => @user.errors, :status => :unprocessable_entity }
       end

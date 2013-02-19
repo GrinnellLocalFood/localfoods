@@ -56,7 +56,7 @@ skip_before_filter :require_login, :only => [:show, :index, :show_in_index]
   def show_all
   @items = Item.all
   respond_to do |format|
-      format.js { render :locals => { :items => @items } }
+      format.js { render :locals => { :items => Item.all } }
   end
  end
 

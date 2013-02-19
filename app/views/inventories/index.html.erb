@@ -2,9 +2,6 @@
 
 $(document).ready(function() {
 
-// hide the categories title when you haven't yet selected a producer
-$('.category_list').hide();
-
 // make active or inactive whatever producer link you click
 	$('.producer_link a').click(function() {
 		$('li').each(function() {
@@ -29,7 +26,7 @@ $('.category_list').show();
 
 			<ul class="span2 nav nav-tabs" style="width: 100px;">
 
-				<li class="producer_link"> 
+				<li class="producer_link active"> 
 					<%= link_to("All Products", show_all_categories_path, 
 					:remote => true, :style=>'padding-left: 4px; font-size: 13px;')%>
 				</li>
@@ -51,16 +48,10 @@ $('.category_list').show();
 		<div class="tab-content span10 custom-block" style="width: 820px;">
 			<span id="producer_info">
 				<div align="center">
-					<h2><%= @title %></h2>
-					<br>
-					<p>View our producers by clicking the links on the left!</p>
+					<%= render :partial => 'categories/show', :locals => {:@items => Item.all} %>
 				</div>
 			</span>
 		</div>
-
-
-
-
 	</div>
 </div>
 

@@ -83,6 +83,10 @@ class User < ActiveRecord::Base
       if self.phone != "" && !self.phone.nil?
         self.phone = self.phone.gsub(/\D/,'');
       end
+
+      if !self.inventory.nil? && !self.inventory.description.nil?
+        self.inventory.description.gsub(/\n/, '<br>');
+      end
     end
 
     #encrypt password only if the password field has something in it

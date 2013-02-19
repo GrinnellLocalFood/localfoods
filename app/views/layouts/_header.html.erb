@@ -9,9 +9,7 @@
 
           <% if signed_in? %>
 
-          <div id="search", :class: pull-left>
-          <%= render :partial => 'items/itemsearchbar' %>
-          </div>
+          
 
          <% if current_user.producer %> 
           <li class="dropdown nav">
@@ -69,6 +67,10 @@
           <li style="margin-right:20px;"><%= link_to("Our Producers", inventories_path, :style=>"color:white") %> </li>
 
           <li style="margin-right:20px;"><%= link_to("All Products", items_path, :style => "color:white") %></li>
+
+          <div class="navbar pull-right">
+          <%= render :partial => 'items/itemsearchbar' %>
+          </div>
 
 
         </ul>

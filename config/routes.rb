@@ -35,15 +35,25 @@ Localfoods::Application.routes.draw do
 
     resources :items do
       collection do
-        get 'producer_new'
+        get 'producer_new', :search
+
       end
     end
 
   end
 
+  controller :items do
+    post 'items' => 'items#search'
+  end
+
   resources :sessions, :only => [:new, :create, :destroy]
   resources :items, :only => [:index]
   resources :application_states
+  # resources :items do
+  #   member do
+  #     post 'search_result'
+  #   end
+  # end
  
   match '/register',  :to => 'users#new'
   match '/login',  :to => 'sessions#new'

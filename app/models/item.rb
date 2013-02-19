@@ -6,7 +6,6 @@ class Item < ActiveRecord::Base
 		:medium => "300x300>",
 		:small => "150x150>"
 	}
-
 	attr_accessible :name, :description, :totalquantity, :minorder, :maxorder, :item_photo ,:price, :available, :units, :category_id
 
 	validates :name, :presence => true
@@ -20,6 +19,9 @@ class Item < ActiveRecord::Base
 	validates :category_id, :presence => true
 	before_validation :format_values
 
+   searchable do
+    text :name, :description, :category
+   end
 
 	def is_available?
 		if ApplicationState.orders_open?

@@ -1,43 +1,28 @@
 <script type="text/javascript">
-
 $(document).ready(function() {
 
 // something about the partial makes this need to be here too
 $('[data-toggle="tooltip"]').tooltip();
-
 // make an array to store the list of categories for a producer
 var list_of_categories = new Array();
-
-
-
-
 $('.category_label').each(function() {
     // save the category name for easy use
     var category_name = $(this).text();
-
         // if the current category isn't there, add it
         if (($.inArray(category_name, list_of_categories)) == -1) {
-
-            $('.category_list').after('<li class="category_filter"><a>' + category_name + '</a></li>');
+            $('.category_list').after('<li class="category_filter"><a style="padding-left: 4px;">' + category_name + '</a></li>');
             list_of_categories.push(category_name);
         }
-
 }); // end each
 
-
-
 // add the 'All' option to the category list
-$('.category_list').after('<li class="category_filter active"><a>' + 'All' + '</a></li>');
+$('.category_list').after('<li class="category_filter active"><a style="padding-left: 4px;">' + 'All' + '</a></li>');
 list_of_categories.push('All');
-
-
-
 
 // click behavior for when you select a present category
 $('.category_filter').click(function() {
     // save the category name for easy use
     var category_name = $(this).text();
-
 
     // go through all the inventory on the to decide what to hide/show
     $('.category_label').each(function() {
@@ -58,12 +43,9 @@ $('.category_filter').click(function() {
         }
 
     }); // end each
-
         } // end else
     }); // end each
-
 }); // end click
-
 }); // end ready
 
 </script>
@@ -99,8 +81,11 @@ margin-top: -5px">
         <% end %>
     </div>
     <!-- Carousel nav -->
+
+    <% if (@producer.inventory.inventory_photos.length > 1) %>
     <a class="carousel-control left" href="#myCarousel" data-slide="prev">&lsaquo;</a>
     <a class="carousel-control right" href="#myCarousel" data-slide="next">&rsaquo;</a>
+    <% end %>
 </div>
 <% end %>
 
@@ -117,7 +102,8 @@ margin-top: -5px">
 
 </div>
 
-<div style="text-indent: 2.5%; margin-right: 20px; margin-left: 20px; margin-top: 5px;">
+<!-- <div style="text-indent: 2.5%; margin-right: 10px; margin-left: 0px; margin-top: 5px; height: 190px; overflow: auto; padding-left: 5px; padding-right: 5px;"> -->
+<div style="text-indent: 2.5%; margin-right: 10px; margin-left: 10px; margin-top: 5px;">
     <%= @producer.inventory.description %>
 </div>
 
@@ -208,16 +194,16 @@ margin-top: -5px">
         <h4 class="inventory_title">
             Currently Nothing For Sale
         </h4>
-            <% end %> 
-            <br>
+        <% end %> 
+        <br>
 
-            <!-- If the current user is an admin, coordinator, or the producer whose page this is -->
-            <% if signed_in? && (current_user.admin || current_user.coordinator || current_user == @producer) %>
-            <%= link_to 'Add Item', producer_new_inventory_items_path(params[:id]), :class=>"btn", :style=>"margin-left: 2.5%" %>
-            <% end %>
+        <!-- If the current user is an admin, coordinator, or the producer whose page this is -->
+        <% if signed_in? && (current_user.admin || current_user.coordinator || current_user == @producer) %>
+        <%= link_to 'Add Item', producer_new_inventory_items_path(params[:id]), :class=>"btn", :style=>"margin-left: 2.5%" %>
+        <% end %>
 
-            <!-- closing div's from the main show erb file -->
-        </div>
+        <!-- closing div's from the main show erb file -->
     </div>
+</div>
 </div>
 

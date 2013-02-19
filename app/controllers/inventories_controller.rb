@@ -53,9 +53,17 @@ skip_before_filter :require_login, :only => [:show, :index, :show_in_index]
       end
   end
 
+  def show_all
+  @items = Item.all
+  respond_to do |format|
+      format.js { render :locals => { :items => @items } }
+  end
+ end
+
   def index
     @title = "Our Producers"
     @producers = Inventory.all
+    @categories = Category.all
   end
 
 end

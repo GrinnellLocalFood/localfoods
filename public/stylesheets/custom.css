@@ -13,9 +13,23 @@
 
 }
 
-/*Between 140 and 220 (span3)*/
+/* Middle span distances */
+
+.span1-half {
+  width: 100px;
+}
+
+/*.row-fluid .span1-half {
+  width: 10.382978723404255%;
+  *width: 10.329787234042553%;
+}*/
+
 .span2-half {
   width: 180px;
+}
+
+.span10-half {
+  width: 820px;
 }
 
 .offset2-half {
@@ -23,9 +37,10 @@
 }
 
 .offset1-half {
-  margin-left: 180px;
-  color: green;
+  margin-left: 140px;
+
 }
+
 
 
 #logohead {
@@ -445,4 +460,9 @@ padding-left: 8px;
  background-color: #595959; 
  color: white; 
  padding: 5px; 
+}
+
+.category_filter {
+font-size: 13px;
+/*padding-left: 10px;*/
 }

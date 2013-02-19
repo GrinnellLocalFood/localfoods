@@ -4,7 +4,7 @@ class InventoryPhoto < ActiveRecord::Base
   accepts_nested_attributes_for :inventory, :allow_destroy => true
   has_attached_file :photo, :url => "/system/inventory_photos/:id/:style/:basename.:extension", :styles => {
 		:gallery_size => "450x300#",
-		:thumb => "225X150#"
+		:thumb => "180X120#"
 
 	}
   validates_attachment_presence :photo

@@ -126,39 +126,72 @@
       </div>
     </div>
 
+
+
+
     <%= inventory_form.fields_for :inventory_photos do |photo_form| %>
 
     <% if photo_form.object.new_record? %>
-    <div class="control-group">
-      <label class="control-label">
-        <%= photo_form.label(:photo, "Gallery Photo") %>
-      </label>
-      <div class="controls">
-        <%= photo_form.file_field :photo %>
-      </div>
+
+
+
+<div class="control-group">
+  <label class="control-label" style="margin-left: -50px; margin-right: -40px;">
+Gallery Photo
+  </label>
+
+ <div align="center">
+
+<div class="fileupload fileupload-new" data-provides="fileupload">
+  <div class="input-append">
+    <div class="uneditable-input span3">
+      <i class="icon-file fileupload-exists"></i> 
+      <span class="fileupload-preview"></span>
     </div>
+    <span class="btn btn-file">
+      <span class="fileupload-new">Select Photo</span>
+      <span class="fileupload-exists">Change</span>
+      <%= photo_form.file_field :photo %>
+    </span>
+    <a href="#" class="btn fileupload-exists" data-dismiss="fileupload">Cancel</a>
+  </div>
+</div>
+
+</div>
+</div>
+
     <% end %>
     
 
-    <% unless photo_form.object.new_record? %>
-      <%= image_tag photo_form.object.photo.url(:thumb) %>
-      <%= link_to "Delete", inventory_photo_path(photo_form.object.id), :method => :delete %>
-    <% end %> 
-    <% end %>
+  <% unless photo_form.object.new_record? %>
 
-    <% end %>
+  <div class="control-group">
+    <div class="controls">
 
-    <div align="center" style="color: gray;">
-      * Denotes required field
+      <%= image_tag photo_form.object.photo.url(:thumb), :style => 'border: 1px solid rgb(221, 221, 221); border-radius: 4px 4px 4px 4' %>
     </div>
-    <% end %>
-
-    <br>
-    <div class="control-group controls">
-      <%= f.submit "Save Changes", :class=>"btn btn-primary"%>
+    <div class="controls" style="margin-top: 5px;">
+      <%= link_to "Delete Gallery Photo", inventory_photo_path(photo_form.object.id), :class => 'btn', :method => :delete %>
     </div>
-
   </div>
+    <% end %> 
+    <% end %> 
+  <% end %>
+
+
+
+
+  <div align="center" style="color: gray;">
+    * Denotes required field
+  </div>
+  <% end %>
+
+  <br>
+  <div class="control-group controls">
+    <%= f.submit "Save Changes", :class=>"btn btn-primary"%>
+  </div>
+
+</div>
 </div>
 </div>
 <% end %>

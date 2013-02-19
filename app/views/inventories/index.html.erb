@@ -26,12 +26,20 @@ $('.category_list').show();
 	<div class="row-fluid">
 		<div class="tabbable tabs-left">
 
-			<ul class="span2 nav nav-tabs">
+
+			<ul class="span2 nav nav-tabs" style="width: 100px;">
+
+				<li class="producer_link"> 
+					<%= link_to("All Products", show_all_categories_path, 
+					:remote => true, :style=>'padding-left: 4px; font-size: 13px;')%>
+				</li>
+
 				<li class="nav-header">Producers</li>
+				
 				<% @producers.each do |producer| %>
 				<li class="producer_link"> 
 					<%= link_to(producer.display_name, show_in_index_inventory_path(producer), 
-					:remote => true)%>
+					:remote => true, :style=>'padding-left: 4px; font-size: 13px;')%>
 				</li>
 				
 				<% end %>
@@ -40,7 +48,7 @@ $('.category_list').show();
 				</ul>
 
 
-		<div class="tab-content span10 custom-block">
+		<div class="tab-content span10 custom-block" style="width: 820px;">
 			<span id="producer_info">
 				<div align="center">
 					<h2><%= @title %></h2>
@@ -55,4 +63,7 @@ $('.category_list').show();
 
 	</div>
 </div>
+
+
+
 

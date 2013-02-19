@@ -1,20 +1,132 @@
-<% if @items.empty? %>
-    <h2 align="center">No Items Available</h2>
-<% else %>
-<% if @category.nil? %>
+<%= stylesheet_link_tag '/stylesheets/grid/style.css' %>  
+
+<!-- <script src="/javascripts/grid/jquery.gridrotator.js"></script> -->
+<!-- <script src="/javascripts/grid/modernizr.custom.26633.js"></script> -->
+
+<script type="text/javascript">
+
+
+$(document).ready(function() {
+
+    $( '#ri-grid' ).gridrotator( {
+        rows        : 3,
+        columns     : 3,
+        animType    : 'fadeInOut',
+        animSpeed   : 1000,
+        interval    : 600,
+        step        : 1,
+        w1024           : {
+            rows    : 3,
+            columns : 3
+        },
+        w768            : {
+            rows    : 3,
+            columns : 3
+        },
+        w480            : {
+            rows    : 3,
+            columns : 3
+        },
+        w320            : {
+            rows    : 3,
+            columns : 3
+        },
+        w240            : {
+            rows    : 3,
+            columns : 3
+        },
+    } );
+
+
+
+
+// something about the partial makes this need to be here too
+$('[data-toggle="tooltip"]').tooltip();
+// make an array to store the list of categories for a producer
+var list_of_categories = new Array();
+$('.category_label').each(function() {
+    // save the category name for easy use
+    var category_name = $(this).text();
+        // if the current category isn't there, add it
+        if (($.inArray(category_name, list_of_categories)) == -1) {
+            $('.category_list').after('<li class="category_filter"><a style="padding-left: 4px;">' + category_name + '</a></li>');
+            list_of_categories.push(category_name);
+        }
+}); // end each
+
+// add the 'All' option to the category list
+$('.category_list').after('<li class="category_filter active"><a style="padding-left: 4px;">' + 'All' + '</a></li>');
+list_of_categories.push('All');
+
+// click behavior for when you select a present category
+$('.category_filter').click(function() {
+    // save the category name for easy use
+    var category_name = $(this).text();
+
+    // go through all the inventory on the to decide what to hide/show
+    $('.category_label').each(function() {
+
+    // make sure 'All' isn't selected, or the categories match
+    if(($(this).text() != category_name) && (category_name != 'All')) {
+        $(this).parent().hide();
+        // otherwise show the current category
+    } else {
+        $(this).parent().show();
+
+    // make the current category active or inactive on the navbar
+    $('.category_filter').each(function() {
+        if ($(this).text() == category_name) {
+            $(this).addClass('active');
+        } else {
+            $(this).removeClass('active');
+        }
+
+    }); // end each
+        } // end else
+    }); // end each
+}); // end click
+}); // end ready
+
+</script>
+
+<!-- <li><a href="#"><img src="images/medium/1.jpg" alt="Whatever works"/></a></li>
+    <li><a href="#"><img src="images/medium/2.jpg" alt="Anything else"/></a></li>  -->
+
+
+
+<!-- 
+<div id="ri-grid" class="ri-grid ri-grid-size-2 ri-shadow">
+    <ul>
+
+    <% @items.each do |item| %>
+
+    <% if !(item.item_photo_file_name.nil?) %>
+    <li><a>
+        <%= image_tag(item.item_photo.url(:grid)) %>
+    </a></li>
+    <% end %>
+
+    <% end %>
+
+
+ </ul>
+</div>
+ -->
+
+
+
+
+
 <h2 align="center">All Products</h2>
-<% else %>
-<h2 align="center"><%= @category.name %></h2>
-<% end %>
-<table class="table table-hover" align="center">
+<table class="producer-table table-hover" align="center">
 
     <tr>
         <th>Name</th>
         <th>Producer</th>
         <th>Price</th>
-        <th>Total Qty.</th>
+        <th>Qty. Remaining</th>
         <th>Min Order</th>
-        <th>Max Order</th> 
+        <th>Available</th> 
         <th>Category</th>
         <th></th>
     </tr>
@@ -23,13 +135,13 @@
     <tr>
         <td><%= item.name %></td>
         <td><%= link_to(item.inventory.display_name, inventory_path(item.inventory)) %></td>
-        <td><%= number_to_currency(item.price) %><b>/<%= item.units.singularize %></b></td>
-        <!-- ADD QTY REMAINING HERE ONCE WE MERGE WITH NEW ITEM MODEL -->
-        <td><%= item.totalquantity %></td>
+        <td><%= item.num_remaining %></td>
         <td><%= item.minorder %></td>
         <td><%= item.displayed_maxorder %></td>
         <!-- ADD ELSE IF TO item.available SO THAT IT DISPLAYS SOLD OUT IF QTY REMAINING IS 0 -->   
-        <td><%= Category.find(item.category_id).name %></td>
+        <td><%= item.is_available? %></td>
+        <!-- ADD ELSE IF TO item.available SO THAT IT DISPLAYS SOLD OUT IF QTY REMAINING IS 0 -->   
+        <td class="category_label"><%= Category.find(item.category_id).name %></td>
         <td><%= link_to "Show", inventory_item_path({ :inventory_id => item.inventory_id, :id => item.id }) %></td>
 
     </tr>
@@ -37,4 +149,5 @@
     <% end %>
 
 </table>
-<% end %>
+
+

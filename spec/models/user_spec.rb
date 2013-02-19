@@ -134,12 +134,9 @@ describe User do
     inventory.description.should eq("description")
   end
 
-
   it "should not give a non-producer a inventory" do
     non_producer = User.create(@attr)
     non_producer.inventory.should eq(nil)
   end
-
-
 
 end

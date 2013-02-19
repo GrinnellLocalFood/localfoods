@@ -93,6 +93,9 @@ margin-top: -5px">
         <td><%= Category.find(item.category_id).name %></td>
         <td><%= link_to "Show", inventory_item_path({ :inventory_id => params[:id], :id => item.id }) %></td>
         <td><%= link_to "Edit", edit_inventory_item_path({ :inventory_id => params[:id], :id => item.id }) %></td>
+        <% if @producer != current_user %>
+        <td><%= link_to "Add to Cart", cart_items_path(:item_id => item), :method => :post %>
+        <% end %>
         <td><%= link_to "Delete", inventory_item_path({ :inventory_id => params[:id], :id => item.id }), :confirm => 'Are you sure?', :method=>:delete %></td>
         <% end %> 
 

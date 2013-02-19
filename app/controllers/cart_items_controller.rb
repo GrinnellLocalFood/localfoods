@@ -18,16 +18,24 @@ class CartItemsController < ApplicationController
 		@item = CartItem.find(params[:id])
 		@item.destroy
 		respond_to do |format|
-        	format.html { redirect_to(cart_path(current_user)) }
+        	format.html { redirect_to(cart_path(current_user), :notice => 'Item successfully deleted.')}
         	format.xml  { head :ok }
     	end
 	end
 
 	def update
 		@cart_item = CartItem.find(params[:cart_item_id])
+
 		respond_to do |format|
 			if @cart_item.update_attributes(params[:cart_item])
-				format.html { redirect_to(cart_path(params[:id], :item => @cart_item.id, :disable => true), :notice => 'Item was successfully updated.') }
+				if params[:cart_item][:quantity] == "0"
+					@cart_item.destroy
+					@notice = 'Item successfully deleted'
+				end
+				if @notice.nil?
+					@notice = 'Item successfully updated.'
+				end
+				format.html { redirect_to(cart_path(params[:id], :item => @cart_item.id, :disable => true), :notice => @notice) }
 				format.xml  { head :ok }       
 			else
 				format.html { redirect_to(cart_path(params[:id]), :error => 'Item was not successfully updated.') }

@@ -1,0 +1,61 @@
+<script type="text/javascript">
+<<<<<<< HEAD
+
+    function activate(e, name)
+    {
+    var lis = document.getElementsByTagName("li");
+    var current_category = 
+    e.parentNode.className = "active";
+    for (var i = 0; i < lis.length; i++)
+        if (lis[i].className === "active" && !(lis[i] == e.parentNode))
+        {
+            lis[i].className = "";
+        }
+    }
+=======
+// add the 'active' class to whatever link is clicked
+// and remove it from whatever was active before
+$(document).ready(function() {
+    $('.category_link a').click(function() {
+        $('li').each(function() {
+            $(this).removeClass('active')
+        });
+        $(this).parent().addClass('active');
+    });
+});
+>>>>>>> 112200fa88738bcd4e6008af0bdef1da0c1c61ad
+    </script>
+
+<div class="container">
+    <div class="row-fluid">
+        <div class="tabbable tabs-left">
+            <ul class="span2 nav nav-tabs">
+                
+                <% @categories.each do |category| %>
+<<<<<<< HEAD
+                <li> <%= link_to(category.name, show_by_category_category_path(category), 
+                    :remote => true, :onclick => 'activate(this, category)')%>
+=======
+                <li class="category_link"> <%= link_to(category.name, show_by_category_category_path(category), 
+                    :remote => true )%>
+>>>>>>> 112200fa88738bcd4e6008af0bdef1da0c1c61ad
+                    </li>
+                <li class="divider"></li>
+                <% end %>
+            </ul>
+        
+
+
+        <div class="tab-content span10 custom-block">
+            <span id="category_info">
+                <div align="center">
+                <h2>Products</h2>
+                <br>
+                <p>View all products or view them by category!</p>
+            </div>
+            </span>
+        </div>
+    </div>
+    </div>
+</div>
+

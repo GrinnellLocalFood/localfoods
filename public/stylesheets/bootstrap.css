@@ -4345,9 +4345,10 @@ input[type="submit"].btn.btn-mini {
   margin-top: 3px;
 }
 
+/* CHANGE CONTROLS TOP MARGIN*/
 .navbar-form .input-append,
 .navbar-form .input-prepend {
-  margin-top: 6px;
+  margin-top: 3px;
   white-space: nowrap;
 }
 

@@ -70,9 +70,10 @@ margin-top: -5px">
         <% @producer.inventory.inventory_photos.each_with_index do
           |inventory_photo, index| %>
           <% if index == 0 %>
+          
           <div class="active item">
             <%= image_tag inventory_photo.photo.url(:gallery_size) %>
-        </div>
+          </div>
         <% else %>
         <div class="item">
             <%= image_tag inventory_photo.photo.url(:gallery_size) %>

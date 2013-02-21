@@ -35,30 +35,27 @@ Localfoods::Application.routes.draw do
 
     resources :items do
       collection do
-        get 'producer_new', :search
+        get 'producer_new'
+<<<<<<< HEAD
+=======
 
+>>>>>>> b21473be81a0818debe067092d6725f5946fd7ff
       end
     end
 
   end
-<<<<<<< HEAD
+
   resources :cart_items
   resources :cart
-=======
 
   controller :items do
     post 'items' => 'items#search'
   end
 
->>>>>>> 3a129ef58ec388696c06ddf7cad37ebb01cb25dd
   resources :sessions, :only => [:new, :create, :destroy]
   resources :items, :only => [:index]
   resources :application_states
-  # resources :items do
-  #   member do
-  #     post 'search_result'
-  #   end
-  # end
+ 
  
   match '/register',  :to => 'users#new'
   match '/login',  :to => 'sessions#new'
@@ -68,6 +65,7 @@ Localfoods::Application.routes.draw do
   match '/editorderstate', :to => 'application_states#editorderstate' 
 
   resources :password_resets
+  resources :inventory_photos, :only => [:destroy]
 
   resources :categories do
     member do

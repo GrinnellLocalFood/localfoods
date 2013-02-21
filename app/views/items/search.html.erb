@@ -1,0 +1,34 @@
+<h1>Search Results</h1>
+<table class="producer-table table-hover" align="center">
+<tr>
+        <th>Name</th>
+        <th>Description</th>
+        <th>Price</th>
+        <th>Total Qty.</th>
+        <th>Qty. Ordered</th>
+        <th>Min Order</th>
+        <th>Max Order</th>         
+        <th>Available</th>
+        <th>Category</th>
+        <th></th>
+        <th></th>
+        <th></th>
+   </tr>
+
+  <% @items.each do |item| %>
+    <tr>
+        <td><%= item.name %></td>
+        <td><%= item.description %></td>
+        <td><%= number_to_currency(item.price) %><b>/<%= item.units.singularize %></b></td>
+        <!-- ADD QTY REMAINING HERE ONCE WE MERGE WITH NEW ITEM MODEL -->
+        <td><%= item.totalquantity %></td>
+        <td><%= item.totalordered %></td>
+        <td><%= item.minorder %></td>
+        <td><%= item.displayed_maxorder %></td>
+        <!-- ADD ELSE IF TO item.available SO THAT IT DISPLAYS SOLD OUT IF QTY REMAINING IS 0 -->   
+        <td><%= item.is_available? %></td>
+        <td><%= Category.find(item.category_id).name %></td>
+        <td><%= link_to "Show", inventory_item_path({ :inventory_id => item.inventory.id, :id => item.id }) %></td>
+  <% end %>
+</table>
+  

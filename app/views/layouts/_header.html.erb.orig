@@ -3,43 +3,30 @@
     <div class="container">
 
         <%= link_to image_tag("/img/just_localfood_horizontal_40.png", :width=>"250", :id=>"logohead"), root_path %>
-        
-        
+          
         <ul class="nav pull-right">
 
 
           <% if signed_in? %>
 
+<<<<<<< HEAD
+          <li><%= link_to "My Cart(" + current_user.cart.cart_items.size.to_s + ")", cart_path(current_user.cart) %> </li>
+=======
+          
 
- <!--          <% @inventories = Inventory.where("hidden = ?", false) %>
+>>>>>>> 3a129ef58ec388696c06ddf7cad37ebb01cb25dd
+         <% if current_user.producer %> 
           <li class="dropdown nav">
             <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-              Browse Producers
+              My Inventory
               <span class="caret"></span>
             </a>
             <ul class="dropdown-menu">
-              <% @inventories.each do |inventory| %>
-              <li><%= link_to inventory.display_name, inventory_path(inventory.id) %></li>
-              <% end %>
-            </ul>
-          </li>    -->
-
-
-          <% if current_user.producer %> 
-          <li class="dropdown nav">
-            <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-              Producer
-              <span class="caret"></span>
-            </a>
-            <ul class="dropdown-menu">
-              <li><%= link_to "Add Item", producer_new_inventory_items_path(current_user.id) %></li>
-              <li><%= link_to "Inventory", inventory_path(current_user) %></li>
+              <li><%= link_to("Add Item", producer_new_inventory_items_path(current_user.id)) %></li>
+              <li><%= link_to("Inventory", inventory_path(current_user)) %></li>
             </ul>
           </li>   
           <% end %>
-
-
-
 
           <li class="dropdown nav pull-right">
             <a class="dropdown-toggle" data-toggle="dropdown" href="#">
@@ -55,7 +42,6 @@
               </ul>
             </li>   
             <% else %>
-
 
             <%= form_for(:session, :url => sessions_path, 
             :html=>{:class=>'navbar-form pull-right'}) do |f| %>
@@ -78,24 +64,19 @@
         </div>
       </div>
 
-
-
       <div class="navbar-inner-inner">
         <div class="container">
          <ul class="sub-nav pull-left">
 
-          <li style="margin-right:20px;"><%= link_to ("Our Producers", inventories_path, :style=>"color:white") %> </li>
+          <li style="margin-right:20px;"><%= link_to("Our Producers", inventories_path, :style=>"color:white") %> </li>
 
-<<<<<<< HEAD
-          <li style="margin-right:20px"><%= link_to("All Products", items_path, :style => "color:white") %></li>
+          <li style="margin-right:20px;"><%= link_to("All Products", items_path, :style => "color:white") %></li>
 
-          <li style="margin-right:20px">Pickup Info </li>
-=======
-      <!--     <li style="margin-right:20px">Pickup Info </li>
->>>>>>> PublicProducers
+          <div class="navbar pull-right">
+          <%= render :partial => 'items/itemsearchbar' %>
+          </div>
 
-          <li style="margin-right:20px">Contact Us </li>
- -->
+
         </ul>
       </div>
     </div>

@@ -1,11 +1,18 @@
 class ItemsController < ApplicationController
-  before_filter :check_permissions, :except => [:show, :index]
-  skip_before_filter :require_login, :only => [:show, :index]
+  before_filter :check_permissions, :except => [:show, :index, :search]
+  skip_before_filter :require_login, :only => [:show, :index, :search]
   
   def check_permissions
     @user = current_user
     redirect_to @user unless signed_in? && (@user.coordinator || 
       @user.admin || @user.producer)
+  end
+
+  def search
+    @search = Item.search do
+      fulltext params[:search]
+    end
+    @items = @search.results
   end
 
   def index
@@ -16,6 +23,7 @@ class ItemsController < ApplicationController
   #PUT
   def public_index
     #need to add permissions checking
+  
       @title = "View Inventory"
     
       @item = Item.where("inventory_id = ?", params[:item][:inventory_id])
@@ -128,4 +136,6 @@ end
       end
     end
   end
+
+
 end

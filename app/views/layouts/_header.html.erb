@@ -3,8 +3,7 @@
     <div class="container">
 
         <%= link_to image_tag("/img/just_localfood_horizontal_40.png", :width=>"250", :id=>"logohead"), root_path %>
-        
-        
+          
         <ul class="nav pull-right">
 
 
@@ -39,7 +38,6 @@
             </li>   
             <% else %>
 
-
             <%= form_for(:session, :url => sessions_path, 
             :html=>{:class=>'navbar-form pull-right'}) do |f| %>
 
@@ -68,6 +66,10 @@
           <li style="margin-right:20px;"><%= link_to("Our Producers", inventories_path, :style=>"color:white") %> </li>
 
           <li style="margin-right:20px;"><%= link_to("All Products", items_path, :style => "color:white") %></li>
+
+          <div class="navbar pull-right">
+          <%= render :partial => 'items/itemsearchbar' %>
+          </div>
 
 
         </ul>

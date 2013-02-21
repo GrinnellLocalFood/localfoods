@@ -3,6 +3,7 @@ class Item < ActiveRecord::Base
 	belongs_to :category, :foreign_key => "category_id"
 	has_attached_file :item_photo, :url => "/system/item_photos/:id/:style/:basename.:extension", :styles => {
 		:thumb => "50x50>",
+		:grid => "75x75#",
 		:medium => "300x300>",
 		:small => "150x150>"
 	}

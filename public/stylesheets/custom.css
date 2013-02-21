@@ -13,9 +13,23 @@
 
 }
 
-/*Between 140 and 220 (span3)*/
+/* Middle span distances */
+
+.span1-half {
+  width: 100px;
+}
+
+/*.row-fluid .span1-half {
+  width: 10.382978723404255%;
+  *width: 10.329787234042553%;
+}*/
+
 .span2-half {
   width: 180px;
+}
+
+.span10-half {
+  width: 820px;
 }
 
 .offset2-half {
@@ -23,9 +37,10 @@
 }
 
 .offset1-half {
-  margin-left: 180px;
-  color: green;
+  margin-left: 140px;
+
 }
+
 
 
 #logohead {
@@ -71,7 +86,7 @@ margin-top: 4px;
   margin-top: 85px;
   margin-left: 20%;
   margin-right: 5%;
-  width: 681px;
+  width: 690px;
   text-align: justify;
  /* margin-right: 10%;*/
   /*margin-left: 500px;*/
@@ -338,7 +353,7 @@ background-color: #595959;
 
 .producer-table th,
 .producer-table td {
-  padding: 8px;
+  padding: 6px;
   line-height: 20px;
   text-align: left;
   vertical-align: top;
@@ -389,11 +404,14 @@ margin-left: 0px;
 .sub-nav > li > a {
   float: none;
  /* padding: 10px 15px 10px;*/
-  color: #777777;
+  /*color: #777777;*/
+  color: red;
   text-decoration: none;
 /*  text-shadow: 0 1px 0 #ffffff;*/
 padding-bottom: 8px;
 padding-top: 8px;
+padding-right: 8px;
+padding-left: 8px;
 }
 
 
@@ -403,9 +421,10 @@ padding-top: 8px;
 
 .sub-nav > li > a:focus,
 .sub-nav > li > a:hover {
-  /*color: #333333;*/
-  text-decoration: none;
+  /*color: red;*/
   background-color: black;
+  text-decoration: none;
+  /*background-color: black;*/
   /*background-color: #eeeeee;*/
 }
 
@@ -428,8 +447,22 @@ padding-top: 8px;
   float: right;
 }
 
-.search {
-  margin-bottom: -10px;
-  padding-bottom: 0px;
+#email_section {
+
 }
 
+
+.inventory_title {
+ clear: both;
+ text-indent: 2.5%; 
+ margin-bottom: 15px; 
+ margin-right: 0px;
+ background-color: #595959; 
+ color: white; 
+ padding: 5px; 
+}
+
+.category_filter {
+font-size: 13px;
+/*padding-left: 10px;*/
+}

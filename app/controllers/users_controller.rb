@@ -44,13 +44,18 @@ class UsersController < ApplicationController
   def edit
     @title = "Edit Account"
 
-   if (current_user.admin || current_user.coordinator)
+    if (current_user.admin || current_user.coordinator)
       @user = User.find(params[:id])
+      
       if(!current_user.admin && @user.admin)
          redirect_to(current_user, :alert => "Permission Denied")
       end
     else
       @user = current_user
+    end
+
+    if(!@user.inventory.nil?)
+        3.times {@user.inventory.inventory_photos.build}
     end
 
     #   #admin automatically gets access. if not admin, checks to see if you're the right user
@@ -122,6 +127,11 @@ class UsersController < ApplicationController
         
       else
         sign_in @user
+
+if(!@user.inventory.nil?)
+        2.times {@user.inventory.inventory_photos.build}
+    end
+
         format.html { render :action => "edit" }
         format.xml  { render :xml => @user.errors, :status => :unprocessable_entity }
       end

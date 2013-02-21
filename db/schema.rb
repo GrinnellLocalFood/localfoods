@@ -1,4 +1,3 @@
-# encoding: UTF-8
 # This file is auto-generated from the current state of the database. Instead
 # of editing this file, please use the migrations feature of Active Record to
 # incrementally modify your database, and then regenerate this schema definition.
@@ -11,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121211032349) do
+ActiveRecord::Schema.define(:version => 20130218045343) do
 
   create_table "application_states", :force => true do |t|
     t.boolean  "orders_open", :default => false
@@ -40,16 +39,22 @@ ActiveRecord::Schema.define(:version => 20121211032349) do
   end
 
   create_table "inventories", :force => true do |t|
-    t.datetime "created_at",                                           :null => false
-    t.datetime "updated_at",                                           :null => false
+    t.datetime "created_at",                                     :null => false
+    t.datetime "updated_at",                                     :null => false
     t.string   "url"
-    t.text     "description",        :limit => 255
+    t.text     "description",  :limit => 255
     t.string   "display_name"
+    t.boolean  "hidden",                      :default => false
+  end
+
+  create_table "inventory_photos", :force => true do |t|
+    t.datetime "created_at",         :null => false
+    t.datetime "updated_at",         :null => false
     t.string   "photo_file_name"
     t.string   "photo_content_type"
     t.integer  "photo_file_size"
     t.datetime "photo_updated_at"
-    t.boolean  "hidden",                            :default => false
+    t.integer  "inventory_id"
   end
 
   create_table "item_photos", :force => true do |t|

@@ -62,6 +62,7 @@ Localfoods::Application.routes.draw do
   match '/editorderstate', :to => 'application_states#editorderstate' 
 
   resources :password_resets
+  resources :inventory_photos, :only => [:destroy]
 
   resources :categories do
     member do

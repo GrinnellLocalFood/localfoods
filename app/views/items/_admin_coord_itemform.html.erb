@@ -80,7 +80,7 @@
 
 <div class="control-group">
   <label class="control-label">
-    <%= f.label :units, "Units *" %>
+    <%= f.label :units, "Unit" %>
   </label>
   <div class="controls">
     <%= f.text_field :units, :placeholder=>"Pounds, Grams, Gallons etc." %>
@@ -106,13 +106,47 @@
 </div>
 
 <div class="control-group">
-  <label class="control-label">
-    <%= f.label(:item_photo, "Product Photo") %>
-  </label>
   <div class="controls">
-    <%= f.file_field :item_photo %>
+
+    <div class="fileupload fileupload-new" data-provides="fileupload">
+      <div class="fileupload-new thumbnail" style="width: 200px; height: 150px;">
+
+        <% if (@item.item_photo_file_name.nil?) %>
+        <img src="http://placekitten.com/200/150" />
+        <!-- <img src="http://www.placehold.it/200x150/&text=no+image" /> -->
+      </div>
+      <div class="fileupload-preview fileupload-exists thumbnail" style="max-width: 200px; max-height: 150px; line-height: 20px;">
+      </div>
+
+      <div>
+        <span class="btn btn-file">
+          <span class="fileupload-new">Select Image</span>
+          <span class="fileupload-exists">Choose Again</span>
+          <%= f.file_field :item_photo %>
+        </span>
+        <a href="#" class="btn fileupload-exists" data-dismiss="fileupload">Cancel</a>
+
+        <% else %>
+
+        <%= image_tag(@item.item_photo.url(:small)) %>
+      </div>
+      <div class="fileupload-preview fileupload-exists thumbnail" style="max-width: 150px; max-height: 150px; line-height: 20px;">
+      </div>
+
+      <div>
+        <span class="btn btn-file">
+          <span class="fileupload-new">Replace Image</span>
+          <span class="fileupload-exists">Choose Again</span>
+          <%= f.file_field :item_photo %>
+        </span>
+        <a href="#" class="btn fileupload-exists" data-dismiss="fileupload">Cancel</a>
+        <% end %>
+      </div>
+
+    </div>
   </div>
 </div>
+
 
 
 <div class="control-group controls">

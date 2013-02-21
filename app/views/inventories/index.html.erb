@@ -1,44 +1,60 @@
 <script type="text/javascript">
 
-    function activate(e)
-    {
-	var lis = document.getElementsByTagName("li");	
-	e.parentNode.className = "active";
-	for (var i = 0; i < lis.length; i++)
-		if (lis[i].className === "active" && !(lis[i] == e.parentNode))
-		{
-			lis[i].className = "";
-		}
-    }
-    </script>
+$(document).ready(function() {
+
+// make active or inactive whatever producer link you click
+	$('.producer_link a').click(function() {
+		$('li').each(function() {
+			$(this).removeClass('active')
+		});
+		$(this).parent().addClass('active');
+
+// hide all the old categories if you're just clicking between producers
+$('.category_filter').hide();
+$('.category_list').show();
+	}); // end click
+
+}); // end ready
+
+
+</script>
 
 <div class="container">
 	<div class="row-fluid">
 		<div class="tabbable tabs-left">
-			<ul class="span2 nav nav-tabs">
-			<!-- <li class="nav-header">Producers</li> -->
+
+
+			<ul class="span2 nav nav-tabs" style="width: 100px;">
+
+				<li class="producer_link active"> 
+					<%= link_to("All Products", show_all_categories_path, 
+					:remote => true, :style=>'padding-left: 4px; font-size: 13px;')%>
+				</li>
+
+				<li class="nav-header">Producers</li>
+				
 				<% @producers.each do |producer| %>
-				<% @categories.each do |category| %>
-				<li> <%= link_to(producer.display_name, show_in_index_inventory_path(producer, :category_id => category.id), 
-					:remote => true, :onclick => 'activate(this)')%>
-					</li>
-				<li class="divider"></li>
+				<li class="producer_link"> 
+					<%= link_to(producer.display_name, show_in_index_inventory_path(producer), 
+					:remote => true, :style=>'padding-left: 4px; font-size: 13px;')%>
+				</li>
+				
 				<% end %>
-				<% end %>
-			</ul>
-		
+
+					<li class="nav-header category_list">Categories</li>
+				</ul>
 
 
-		<div class="tab-content span10 custom-block">
+		<div class="tab-content span10 custom-block" style="width: 820px;">
 			<span id="producer_info">
 				<div align="center">
-				<h2><%= @title %></h2>
-				<br>
-				<p>View our producers by clicking the links on the left!</p>
-			</div>
+					<%= render :partial => 'categories/show', :locals => {:@items => Item.all} %>
+				</div>
 			</span>
 		</div>
 	</div>
-	</div>
 </div>
+
+
+
 

@@ -1,3 +1,12 @@
+<script type="text/javascript">
+
+$(document).ready(function() {
+$('#user_first_name').focus();
+
+}); //end ready
+
+</script>
+
 <%= form_for(@user, :html=>{:class=>'form-horizontal'}) do |f| %>
  
  <% if @user.errors.any? %>

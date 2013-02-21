@@ -1,3 +1,12 @@
+<script type="text/javascript">
+
+$(document).ready(function() {
+$('#category_field').focus();
+
+}); //end ready
+
+</script>
+
 <%= form_for(@category, :url => url_for(:controller => 'categories', :action => 'create'), :html=>{:class=>'form-horizontal'}) do |f| %>
 
 
@@ -6,7 +15,7 @@
     <%= f.label :name, "Category Name *" %>
   </label>
   <div class="controls">
-    <%= f.text_field :name, :placeholder=>"Category Name" %>
+    <%= f.text_field :name, :placeholder=>"Category Name", :id=>"category_field" %>
   </div>
 </div>
 

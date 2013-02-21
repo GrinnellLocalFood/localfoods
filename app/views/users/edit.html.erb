@@ -97,7 +97,7 @@
     <br>
     <h4 align="center" style="color:gray">Producer Information</h4><br>
 
-    <%= f.fields_for :inventory_attributes, @user.inventory do |inventory_form| %>
+    <%= f.fields_for :inventory, @user.inventory do |inventory_form| %>
 
     <div class="control-group">
       <label class="control-label">
@@ -126,28 +126,72 @@
       </div>
     </div>
 
-    <div class="control-group">
-      <label class="control-label">
-        <%= inventory_form.label(:photo, "Profile Photo") %>
-      </label>
-      <div class="controls">
-        <%= inventory_form.file_field :photo %>
-      </div>
+
+
+
+    <%= inventory_form.fields_for :inventory_photos do |photo_form| %>
+
+    <% if photo_form.object.new_record? %>
+
+
+
+<div class="control-group">
+  <label class="control-label" style="margin-left: -50px; margin-right: -40px;">
+  <%= photo_form.label(:photo, "Gallery Photo") %>
+  </label>
+
+ <div align="center">
+
+<div class="fileupload fileupload-new" data-provides="fileupload">
+  <div class="input-append">
+    <div class="uneditable-input span3">
+      <i class="icon-file fileupload-exists"></i> 
+      <span class="fileupload-preview"></span>
     </div>
-
-    <% end %>
-
-    <div align="center" style="color: gray;">
-      * Denotes required field
-    </div>
-    <% end %>
-
-    <br>
-    <div class="control-group controls">
-      <%= f.submit "Save Changes", :class=>"btn btn-primary"%>
-    </div>
-
+    <span class="btn btn-file">
+      <span class="fileupload-new">Select Photo</span>
+      <span class="fileupload-exists">Change</span>
+      <%= photo_form.file_field :photo %>
+    </span>
+    <a href="#" class="btn fileupload-exists" data-dismiss="fileupload">Cancel</a>
   </div>
+</div>
+
+</div>
+</div>
+
+    <% end %>
+    
+
+  <% unless photo_form.object.new_record? %>
+
+  <div class="control-group">
+    <div class="controls">
+
+      <%= image_tag photo_form.object.photo.url(:thumb), :style => 'border: 1px solid rgb(221, 221, 221); border-radius: 4px 4px 4px 4' %>
+    </div>
+    <div class="controls" style="margin-top: 5px;">
+      <%= link_to "Delete Gallery Photo", inventory_photo_path(photo_form.object.id), :class => 'btn', :method => :delete %>
+    </div>
+  </div>
+    <% end %> 
+    <% end %> 
+  <% end %>
+
+
+
+
+  <div align="center" style="color: gray;">
+    * Denotes required field
+  </div>
+  <% end %>
+
+  <br>
+  <div class="control-group controls">
+    <%= f.submit "Save Changes", :class=>"btn btn-primary"%>
+  </div>
+
+</div>
 </div>
 </div>
 <% end %>

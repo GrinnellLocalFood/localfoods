@@ -11,6 +11,7 @@ class User < ActiveRecord::Base
                   :admin,
                   :coordinator,
                   :producer,
+                  :inventory,
                   :inventory_attributes
 
   validates :email, :presence => true,
@@ -39,6 +40,7 @@ searchable do
   has_one :cart
 
   accepts_nested_attributes_for :inventory, :update_only => true
+
 
   def self.authenticate(email, submitted_password)
     user = find_by_email(email)
@@ -84,6 +86,10 @@ searchable do
       if self.phone != "" && !self.phone.nil?
         self.phone = self.phone.gsub(/\D/,'');
       end
+
+      if !self.inventory.nil? && !self.inventory.description.nil?
+        self.inventory.description.gsub(/\n/, '<br>');
+      end
     end
 
     #encrypt password only if the password field has something in it
@@ -115,6 +121,7 @@ searchable do
       if self.inventory.nil?
         if self.producer
           raise "Inventory could not be created" unless create_inventory
+          3.times{inventory.inventory_photos.build}
         end
       elsif !self.producer
           self.inventory.hide

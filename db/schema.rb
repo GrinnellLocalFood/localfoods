@@ -14,8 +14,8 @@ ActiveRecord::Schema.define(:version => 20130218045343) do
 
   create_table "application_states", :force => true do |t|
     t.boolean  "orders_open", :default => false
-    t.datetime "created_at",                     :null => false
-    t.datetime "updated_at",                     :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "cart_items", :force => true do |t|
@@ -34,13 +34,13 @@ ActiveRecord::Schema.define(:version => 20130218045343) do
 
   create_table "categories", :force => true do |t|
     t.string   "name"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "inventories", :force => true do |t|
-    t.datetime "created_at",                                     :null => false
-    t.datetime "updated_at",                                     :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.string   "url"
     t.text     "description",  :limit => 255
     t.string   "display_name"
@@ -59,22 +59,22 @@ ActiveRecord::Schema.define(:version => 20130218045343) do
 
   create_table "item_photos", :force => true do |t|
     t.integer  "item_id"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "items", :force => true do |t|
     t.string   "name"
-    t.boolean  "available",                                              :default => false
+    t.boolean  "available",               :default => false
     t.string   "units"
-    t.decimal  "price",                   :precision => 10, :scale => 2
-    t.integer  "minorder",                                               :default => 1
+    t.decimal  "price"
+    t.integer  "minorder",                :default => 1
     t.integer  "maxorder"
-    t.integer  "totalquantity",                                          :default => 0
-    t.integer  "totalordered",                                           :default => 0
+    t.integer  "totalquantity",           :default => 0
+    t.integer  "totalordered",            :default => 0
     t.string   "description"
-    t.datetime "created_at",                                                                :null => false
-    t.datetime "updated_at",                                                                :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.integer  "inventory_id"
     t.string   "item_photo_file_name"
     t.string   "item_photo_content_type"
@@ -93,8 +93,8 @@ ActiveRecord::Schema.define(:version => 20130218045343) do
     t.boolean  "coordinator",            :default => false
     t.boolean  "producer",               :default => false
     t.boolean  "admin",                  :default => false
-    t.datetime "created_at",                                :null => false
-    t.datetime "updated_at",                                :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.string   "salt"
     t.string   "password_reset_token"
     t.datetime "password_reset_sent_at"

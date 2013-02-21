@@ -7,9 +7,8 @@
       
       <ul class="nav pull-right">
 
-
         <% if signed_in? %>
-
+        <li><%= link_to("My Cart(" + current_user.cart.cart_items.size.to_s + ")", cart_path(current_user.cart.id)) %></li>
         <% if current_user.producer %> 
         <li class="dropdown nav">
           <a class="dropdown-toggle" data-toggle="dropdown" href="#">
@@ -33,44 +32,57 @@
             <li><%= link_to "Edit Account", edit_user_path(current_user) %></li>
             <li><%= link_to "Change Password", editpassword_user_path(current_user) %></li>
             <li class="divider"></li>
-            <li><%= link_to "Log Out", logout_path, :method => :delete %>
-            </ul>
-          </li>   
-          <% else %>
+            <li><%= link_to "Log Out", logout_path, :method => :delete %></li>
+          </ul>
+        </li>   
+        <% else %>
 
 
-          <%= form_for(:session, :url => sessions_path, 
-          :html=>{:class=>'navbar-form pull-right'}) do |f| %>
+        <%= form_for(:session, :url => sessions_path, 
+        :html=>{:class=>'navbar-form pull-right'}) do |f| %>
 
-          <%= f.text_field :email, :placeholder=>"Email", 
-          :class=>"span2" %>
+        <%= f.text_field :email, :placeholder=>"Email", 
+        :class=>"span2" %>
 
-          <%= f.password_field :password, :placeholder=>"Password",
-          :class=>"span2" %>
+        <%= f.password_field :password, :placeholder=>"Password",
+        :class=>"span2" %>
 
-          <%= f.submit "Log In", :class=>"btn" %>
+        <%= f.submit "Log In", :class=>"btn" %>
 
-          <% end %>
+        <% end %>
 
-          <% end %>
+        <% end %>
 
-        </ul>
-
-
-      </div>
-    </div>
-
-    <div class="navbar-inner-inner">
-      <div class="container">
-       <ul class="sub-nav pull-left">
-
-        <li><%= link_to("Browse Products", inventories_path, :style=>"color:white") %> </li>
-		<div class="navbar pull-right">
-          <%= render :partial => 'items/itemsearchbar' %>
-        </div>
       </ul>
+
+
     </div>
   </div>
+
+  <div class="navbar-inner-inner">
+    <div class="container">
+     <ul class="sub-nav pull-left">
+
+      <li><%= link_to("Browse Products", inventories_path, :style=>"color:white") %> </li>
+
+</ul>
+
+      <div class="navbar-form pull-right" style="margin-bottom: -40px; margin-left: 10px;">
+        <div class="input-append">
+
+          <%= form_tag :controller => 'items', :action => :search do %>
+          <input class="span2" type="text" name="search" placeholder="Search Products" style="width: 200px;">
+          <button class="btn" type="submit" value="Search">
+            <i class="icon-search"></i>
+          </button>
+          <% end %>
+
+        </div>
+      </div>
+
+    
+  </div>
+</div>
 
 </header>
 

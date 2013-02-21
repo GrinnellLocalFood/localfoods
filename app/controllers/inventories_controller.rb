@@ -47,7 +47,7 @@ skip_before_filter :require_login, :only => [:show, :index, :show_in_index]
   def show_in_index
       @title = "Our Producers"
       @producer = User.find(params[:id])
-      @item = Item.where("inventory_id = ? and category_id = ?", params[:id], params[:category_id])
+      @item = Item.where("inventory_id = ?", params[:id])
       respond_to do |format|
         format.js { render :locals => { :item => @item } }
       end

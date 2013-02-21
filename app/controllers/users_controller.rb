@@ -128,7 +128,7 @@ class UsersController < ApplicationController
       else
         sign_in @user
 
-if(!@user.inventory.nil?)
+    if(!@user.inventory.nil?)
         2.times {@user.inventory.inventory_photos.build}
     end
 

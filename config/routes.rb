@@ -35,7 +35,7 @@ Localfoods::Application.routes.draw do
 
     resources :items do
       collection do
-        get 'producer_new', :search
+        get 'producer_new'
 
       end
     end

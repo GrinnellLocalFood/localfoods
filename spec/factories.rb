@@ -5,5 +5,7 @@ Factory.define :user  do |user|
   user.email                 "mhartl" + rand(100000).to_s() + "@example.com"
   user.password              "foobar"
   user.password_confirmation "foobar"
-  user.cart 				 Cart.new
+  user.after_build do |f|
+  	f.cart ||= Cart.create!(:user_id => f.id)
+  end
 end

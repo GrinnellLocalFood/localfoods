@@ -5,7 +5,6 @@ gem 'paperclip', '2.7.0'
 gem 'cocaine', '0.3.2'
 gem 'sunspot_rails'
 gem 'sunspot_solr' 
-gem 'progress_bar'
 
 group :development, :test do
   gem 'sqlite3','1.3.5'
@@ -25,5 +24,6 @@ end
 group :test do
   gem 'shoulda'
   gem 'shoulda-matchers'
+  gem 'sunspot_test'
 end
 

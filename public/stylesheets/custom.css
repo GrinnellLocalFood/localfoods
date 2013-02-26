@@ -466,3 +466,27 @@ padding-left: 8px;
 font-size: 13px;
 /*padding-left: 10px;*/
 }
+
+#suggested_email {
+/*margin-top: -10px;*/
+/*margin-bottom: -10px;*/
+color: maroon;
+position: relative;
+  top: -20px;
+  /*bottom: -120px;*/
+/*margin-bottom: -20px;*/
+}
+
+/*position:absolute;
+  left:0px;
+  top:106px;*/
+
+.cart_table {
+  /*width: 95%;*/
+}
+
+.squared {
+  -webkit-border-radius: 0px;
+     -moz-border-radius: 0px;
+          border-radius: 0px;
+}

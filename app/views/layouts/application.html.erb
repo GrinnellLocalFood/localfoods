@@ -12,7 +12,8 @@
 	<!-- :defaults MUST come after jquery.js, as rails.js has to be loaded after jquery -->
 	<script src="https:/ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js">
 	</script>
-	<%= javascript_include_tag 'bootstrap.min.js', 'bootstrap-fileupload.min.js', 'jquery.gridrotator.js', :defaults %>
+	<!-- commented out , :defaults below -->
+	<%= javascript_include_tag 'bootstrap.min.js', 'bootstrap-fileupload.min.js', :defaults%>
 	<%= csrf_meta_tag %>
 
 <script type="text/javascript">

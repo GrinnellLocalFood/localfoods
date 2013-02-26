@@ -38,12 +38,25 @@ Localfoods::Application.routes.draw do
         get 'producer_new'
 
       end
+
+# EHH MAYBE
+      member do
+        get 'show_in_modal'
+      end
+# END EHH MAYBE
+
     end
 
   end
 
   resources :cart_items
-  resources :cart
+  resources :cart do
+    member do
+      get 'show_in_modal'
+    end
+  end
+
+
 
   controller :items do
     post 'items' => 'items#search'

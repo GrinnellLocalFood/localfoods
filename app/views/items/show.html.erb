@@ -1,3 +1,5 @@
+<!-- item show.html.erb -->
+
 <div class="container">
 	<div class="row">
 
@@ -16,58 +18,16 @@
 				<%= alert %>
 			</div>
 			<% end %>
-			<% if signed_in? %>
-			<% if current_user.admin || current_user.coordinator || 
-				(current_user.producer && 
-				current_user.id == params[:inventory_id]) %>
-			<div align="right" style="margin-right:60px; margin-bottom:-40px;
-			margin-top: 20px">
-				<%= link_to edit_inventory_item_path(:id => params[:id], :inventory_id => params[:inventory_id]), :'data-toggle'=>"tooltip", :class=>"link", :title=>"Edit Item" do %>
-				<i class="icon-wrench"></i>
-				<% end %>
+
+			<%= render :partial => 'show'%>
+
+
+			<div align="right" style="margin-top: 40px; margin-bottom: 40px; margin-right: 60px;">
+				<%= link_to("Continue Shopping", inventories_path, :class=>"btn") %>
+				<%= link_to "Add to Cart", cart_items_path(:item_id => @item), :remote => false, :method => :post, 
+				:class => "add_to_cart btn btn-primary", :style=>"float:right; margin-left: 8px;" %>
 			</div>
-			<% end %>
-			<% end %>
 
-			<% if !(@item.item_photo_file_name.nil?) %>
-			<media class="item-image" style="margin-right: 10px; margin-top: 10px;">
-				<%= image_tag(@item.item_photo.url(:small)) %>
-			</media>
-			<%end%>
-
-			<div class="item-name">
-				<%= @item.name %></div>
-			<br>
-
-			<div class="item-description"><%= @item.description %></div>
-			<br>
-			<table class="table" style="width:500px" align="center">
-					<tr>
-						<th style="color: gray">Producer</th>
-						<td><%=@item.inventory.display_name%></td>
-					</tr>
-
-					<tr>
-						<th style="color: gray">Availability</th>
-						<td><%=@item.is_available?%></td>
-					</tr>
-					<tr>
-						<th style="color: gray">Price Per <%= @item.units.singularize.titlecase %></th>
-						<td><%= number_to_currency(@item.price) %></td>
-					</tr>
-					<tr>
-						<th style="color: gray">Minimum Order</th>
-						<td><%= @item.minorder %></td>
-					</tr>
-
-					<tr>
-						<th style="color: gray">Maximum Order</th>
-						<td><%= @item.displayed_maxorder %></td>
-					</tr>
-
-
-				</table>
-
-			</div>
 		</div>
 	</div>
+</div>

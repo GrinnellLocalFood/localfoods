@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title><%= title %></title>
+
+	<%= stylesheet_link_tag '/stylesheets/custom.css' %>
+	<%= stylesheet_link_tag '/stylesheets/bootstrap.css' %>	
+	<%= stylesheet_link_tag '/stylesheets/bootstrap-fileupload.css' %>	
+
+<script type="text/javascript">
+
+$(document).ready(function() {
+$('[data-toggle="tooltip"]').tooltip();
+
+}); //end ready
+
+</script>
+
+</head>
+	<body>
+
+	<%= yield %>
+
+
+	</body>
+
+</html>

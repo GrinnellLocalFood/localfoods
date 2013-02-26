@@ -2,6 +2,8 @@ class ItemsController < ApplicationController
   before_filter :check_permissions, :except => [:show, :index, :search]
   skip_before_filter :require_login, :only => [:show, :index, :search]
   
+  layout 'blank', :only => :show_in_modal 
+
   def check_permissions
     @user = current_user
     redirect_to @user unless signed_in? && (@user.coordinator || 
@@ -110,6 +112,13 @@ end
     @item = Item.find(params[:id])
     @title = @item.name
   end
+
+# EH MAYBE
+  def show_in_modal
+    @item = Item.find(params[:id])
+    @title = @item.name
+  end
+# END EH MAYBE
 
   private
 

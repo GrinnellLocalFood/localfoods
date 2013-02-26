@@ -21,8 +21,14 @@ class Item < ActiveRecord::Base
 	before_validation :format_values
 
    searchable do
-    text :name, :description, :category
+    text :name, :boost => 5
+    text :inventory, :boost => 3 do inventory.display_name end
+    text :inventory_description, :boost => 1 do inventory.description end
+    text :category, :boost => 2  do category.name end
+    text :description, :boost => 3
    end
+
+   paginates_per 2
 
 	def is_available?
 		if ApplicationState.orders_open?

@@ -61,6 +61,7 @@ $('.category_filter').click(function() {
         <th>Name</th>
         <th>Producer</th>
         <th>Price</th>
+        <th>Unit</th>
         <th>Qty. Remaining</th>
         <th>Min Order</th>
         <th>Available</th> 
@@ -72,6 +73,8 @@ $('.category_filter').click(function() {
     <tr>
         <td><%= item.name %></td>
         <td><%= link_to(item.inventory.display_name, inventory_path(item.inventory)) %></td>
+        <td><%= item.price %></td>
+        <td><b><%= item.units.singularize %> </b></td>
         <td><%= item.num_remaining %></td>
         <td><%= item.minorder %></td>
         <td><%= item.displayed_maxorder %></td>

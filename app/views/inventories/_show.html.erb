@@ -128,6 +128,7 @@ margin-top: -5px">
         <th>Name</th>
         <th>Description</th>
         <th>Price</th>
+        <th>Unit</th>
         <th>Total Qty.</th>
         <th>Qty. Ordered</th>
         <th>Min Order</th>
@@ -135,6 +136,9 @@ margin-top: -5px">
         <th>Available</th>
         <th>Category</th>
         <th></th>
+        <% if @producer != current_user %>
+        <th></th>
+        <% end %>
         <th></th>
         <th></th>
     </tr>
@@ -143,8 +147,9 @@ margin-top: -5px">
     <% @item.each do |item| %>
     <tr>
         <td><%= item.name %></td>
-        <td><%= item.description %></td>
-        <td><%= number_to_currency(item.price) %><b>/<%= item.units.singularize %></b></td>
+        <td><%= item.description.size < 50 ? item.description : item.description[0..50] + "..." %></td>
+        <td><%= number_to_currency(item.price) %></td>
+        <td><b><%= item.units.singularize %></b></td>
         <!-- ADD QTY REMAINING HERE ONCE WE MERGE WITH NEW ITEM MODEL -->
         <td><%= item.totalquantity %></td>
         <td><%= item.totalordered %></td>
@@ -154,10 +159,10 @@ margin-top: -5px">
         <td><%= item.is_available? %></td>
         <td class="category_label"><%= Category.find(item.category_id).name %></td>
         <td><%= link_to "Show", inventory_item_path({ :inventory_id => params[:id], :id => item.id }) %></td>
-        <td><%= link_to "Edit", edit_inventory_item_path({ :inventory_id => params[:id], :id => item.id }) %></td>
         <% if @producer != current_user %>
         <td><%= link_to "Add to Cart", cart_items_path(:item_id => item), :method => :post %>
         <% end %>
+        <td><%= link_to "Edit", edit_inventory_item_path({ :inventory_id => params[:id], :id => item.id }) %></td>
         <td><%= link_to "Delete", inventory_item_path({ :inventory_id => params[:id], :id => item.id }), :confirm => 'Are you sure?', :method=>:delete %></td>
         <% end %> 
 

@@ -11,38 +11,10 @@ class ItemsController < ApplicationController
   def search
     @search = Item.search do
       fulltext params[:search]
+      paginate :page => params[:page], :per_page => 5
     end
     @items = @search.results
   end
-
-  def index
-  @title = "All Products"
-  @categories = Category.all
-  end
-
-  #PUT
-  def public_index
-    #need to add permissions checking
-  
-      @title = "View Inventory"
-    
-      @item = Item.where("inventory_id = ?", params[:item][:inventory_id])
-      respond_to do |format|
-        format.html
-        format.xml  { render :xml => @item }
-    end
-  end
-
-  def producer_index
-    @title = "View Inventory"
-
-    if current_user.producer
-      @item = current_user.inventory.item
-    else
-      redirect_to(current_user)
-    end
-  end
-
 
   def producer_new
     @title = "New Item"

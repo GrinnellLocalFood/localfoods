@@ -4,5 +4,8 @@ class Category < ActiveRecord::Base
 
 	attr_accessible :name
 	
-	validates_presence_of :name
+	validates :name, :presence => true,
+                    :uniqueness =>  { :case_sensitive => false, 
+                    	:message => "of category is already in use."}
+
 end

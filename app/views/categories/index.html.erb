@@ -2,7 +2,7 @@
     <div class="row-fluid">
         <div class="span8 offset2 custom-block">
 
-               <% if notice %>
+    <% if notice %>
     <div class="alert alert-success fade in">
         <a class="close" data-dismiss="alert" href="#">&times;</a>
         <%= notice %>
@@ -33,10 +33,14 @@
 
                          <h1 align="center" style="margin-bottom: 20px;">Categories</h1>
                          <table class="table table-hover" align="center" style="width: 400px;">
+                         <td style="min-width: 190px;"><b>Other</b></td> 
+                         <td style="text-align:right"></td>
                         <% @categories.each do |category| %>
                         <tr>
+                            <% unless category.name == "Other" %>
                             <td style="min-width: 190px;"><b><%= category.name %></b></td>
                             <td style="text-align:right"><%= link_to "Delete", category, :confirm => 'Are you sure?', :method=>:delete, :class=>:Destroy %></td>
+                            <% end %>
                         </tr>
                         <% end %>
 

@@ -466,3 +466,7 @@ padding-left: 8px;
 font-size: 13px;
 /*padding-left: 10px;*/
 }
+
+#pagination {
+  position: fixed;
+}

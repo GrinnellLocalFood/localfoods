@@ -46,10 +46,11 @@ Localfoods::Application.routes.draw do
 
   controller :items do
     post 'items' => 'items#search'
+    get 'items' => 'items#search'
   end
 
   resources :sessions, :only => [:new, :create, :destroy]
-  resources :items, :only => [:index]
+  
   resources :application_states
  
  

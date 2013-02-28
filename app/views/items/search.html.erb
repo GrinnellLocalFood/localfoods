@@ -1,39 +1,45 @@
+<!-- ITEMS search.html.erb -->
+
 <div class="container">
-<div class="row">
-<div class="span12">
-<h1 align="center">Search Results</h1>
-<div class="pagination" align="center"><%= paginate @search %></text>
-<table class="producer-table table-hover" align="center">
-<tr>
-        <th>Name</th>
-        <th>Description</th>
-        <th>Price</th>
-        <th>Total Qty.</th>
-        <th>Qty. Ordered</th>
-        <th>Min Order</th>
-        <th>Max Order</th>         
-        <th>Available</th>
-        <th>Category</th>
-        <th></th>        
-   </tr>
+    <div class="row">
+        <div class="span12">
+            <h1 align="left">Search Results</h1>
 
-  <% @search.results.each do |item| %>
-    <tr>
-        <td><%= item.name %></td>
-        <td><%= item.description %></td>
-        <td><%= number_to_currency(item.price) %><b>/<%= item.units.singularize %></b></td>
-        <!-- ADD QTY REMAINING HERE ONCE WE MERGE WITH NEW ITEM MODEL -->
-        <td><%= item.totalquantity %></td>
-        <td><%= item.totalordered %></td>
-        <td><%= item.minorder %></td>
-        <td><%= item.displayed_maxorder %></td>
-        <!-- ADD ELSE IF TO item.available SO THAT IT DISPLAYS SOLD OUT IF QTY REMAINING IS 0 -->   
-        <td><%= item.is_available? %></td>
-        <td><%= Category.find(item.category_id).name %></td>
-        <td><%= link_to "Show", inventory_item_path({ :inventory_id => item.inventory.id, :id => item.id }) %></td>
+            <table class="producer-table table-hover" align="center">
+                <tr>
+                    <th>Name</th>
+                    <th>Description</th>
+                    <th>Price</th>
+                    <th>Total Qty.</th>
+                    <th>Qty. Ordered</th>
+                    <th>Min Order</th>
+                    <th>Max Order</th>         
+                    <th>Available</th>
+                    <th>Category</th>
+                    <th></th>        
+                </tr>
 
-  <% end %>
-</table>
-</div>
-</div>
-</div>
+                <% @search.results.each do |item| %>
+                <tr>
+                    <td><%= item.name %></td>
+                    <td><%= item.description %></td>
+                    <td><%= number_to_currency(item.price) %><b>/<%= item.units.singularize %></b></td>
+                    <!-- ADD QTY REMAINING HERE ONCE WE MERGE WITH NEW ITEM MODEL -->
+                    <td><%= item.totalquantity %></td>
+                    <td><%= item.totalordered %></td>
+                    <td><%= item.minorder %></td>
+                    <td><%= item.displayed_maxorder %></td>
+                    <!-- ADD ELSE IF TO item.available SO THAT IT DISPLAYS SOLD OUT IF QTY REMAINING IS 0 -->   
+                    <td><%= item.is_available? %></td>
+                    <td><%= Category.find(item.category_id).name %></td>
+                    <td><%= link_to "Show", inventory_item_path({ :inventory_id => item.inventory.id, :id => item.id }) %></td>
+
+
+                    <% end %>
+                </table>
+
+                <div class="pagination" align="left"><%= paginate @search %></text>
+
+                </div>
+            </div>
+        </div>

@@ -10,5 +10,4 @@ class CartController < ApplicationController
 		@cart = current_cart
 	end
 
-
 end

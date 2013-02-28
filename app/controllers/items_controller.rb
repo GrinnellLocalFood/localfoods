@@ -85,12 +85,10 @@ end
     @title = @item.name
   end
 
-# EH MAYBE
   def show_in_modal
     @item = Item.find(params[:id])
     @title = @item.name
   end
-# END EH MAYBE
 
   private
 

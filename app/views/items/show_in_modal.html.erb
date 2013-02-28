@@ -3,48 +3,26 @@
 <script type="text/javascript">
 $(document).ready(function() {
 
-
-var e = $.Event("keydown", {
-	keyCode: 27
-});
-
 // ADD TO CART BEHAVIOR
 
 // replace default link behavior
-// $('.add_to_cart').attr('data-remote', true);
+$('.add_to_cart').attr('data-remote', true);
 
 // // $(this).trigger(jQuery.Event('keypress', {which: 27}));
 
-// $('.add_to_cart').click(function() {
+$('.add_to_cart').click(function() {
+
+	$(this).replaceWith('<button class="btn btn-primary disabled">Added to Cart</button>');
+
+	// for some reason this is always behind by one. still doesn't solve the problem
+	// setTimeout(
+	// 	function() {
+	// 		$('#cart_link').html('(<%= current_user.cart.cart_items.size %>)');
+	// 	},
+	// 	100)
 
 
-
-// $("body").trigger(e);
-
-
-
-
-// // mreaahaahah doesn't work
-// // $('#item_modal').modal();
-
-
-
-
-
-
-//   $('#cart_modal').modal({
-//     remote: '<%= show_in_modal_cart_path(current_user.cart.id) %>'
-// });
-
-// // note: concern about the delay here too
-// // load the modal, but delay it slightly for time to add to cart
-// setTimeout(
-//   function() {
-//    $('#cart').load('<%= show_in_modal_cart_path(current_user.cart.id) %>');
-// },
-// 100)
-
-//   }); // end click
+   }); // end click
 // // END ADD TO CART BEHAVIOR
 
 }); // end ready
@@ -52,16 +30,16 @@ var e = $.Event("keydown", {
 
 <div id="item_show">
 
-<%= render :partial => 'show'%>
+	<%= render :partial => 'show'%>
 
 
-<div class="modal-footer" style="margin-left: -15px; margin-right: -15px; margin-bottom: -15px;">
-	<!-- <div align="right" style="margin-top: 40px; margin-bottom: 40px; margin-right: 60px;"> -->
-    	<button class="btn" data-dismiss="modal" aria-hidden="true">Continue Shopping</button>
+	<div class="modal-footer" style="margin-left: -15px; margin-right: -15px; margin-bottom: -15px;">
+		<!-- <div align="right" style="margin-top: 40px; margin-bottom: 40px; margin-right: 60px;"> -->
+		<button class="btn" data-dismiss="modal" aria-hidden="true">Continue Shopping</button>
 		<%= link_to "Add to Cart", cart_items_path(:item_id => @item), :remote => false, :method => :post, 
-        :class => "add_to_cart btn btn-primary" %>
-	<!-- </div> -->
-</div>
+		:class => "add_to_cart btn btn-primary" %>
+		<!-- </div> -->
+	</div>
 
 </div>
 

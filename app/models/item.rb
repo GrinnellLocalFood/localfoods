@@ -28,8 +28,6 @@ class Item < ActiveRecord::Base
     text :description, :boost => 3
    end
 
-   paginates_per 2
-
 	def is_available?
 		if ApplicationState.orders_open?
 			if num_remaining == 0

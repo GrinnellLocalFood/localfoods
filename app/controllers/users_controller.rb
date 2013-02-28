@@ -58,12 +58,13 @@ class UsersController < ApplicationController
         3.times {@user.inventory.inventory_photos.build}
     end
 
-    #   #admin automatically gets access. if not admin, checks to see if you're the right user
-    #   unless signed_in? || current_user.admin || current_user=@user
-    #     redirect_to :controller => "pages", :action => "home"
-    # end
-
-
+    session[:return_to] = nil
+    if(params[:origin] == "header" || request.referrer.nil?)
+      session[:return_to] = user_path(@user)
+    else
+      session[:return_to] ||= request.referer
+    end
+    
   end
 
   # GET /users/1/editpassword
@@ -113,15 +114,19 @@ class UsersController < ApplicationController
   def update
     @user = User.find(params[:id])
 
+    if(session[:return_to].nil?)
+      session[:return_to] = user_path(@user)
+    end
+
     respond_to do |format|
       if @user.update_attributes(params[:user])
         if current_user != nil && (current_user.admin || current_user.coordinator)
           sign_in current_user
-          format.html { redirect_to(users_path, :notice => 'User was successfully updated.') }
+          format.html { redirect_to(session[:return_to], :notice => 'User was successfully updated.') }
           format.xml  { head :ok }
         else
           sign_in @user
-          format.html { redirect_to(current_user, :notice => 'User was successfully updated.') }
+          format.html { redirect_to(session[:return_to], :notice => 'User was successfully updated.') }
           format.xml  { head :ok }
         end
         

@@ -57,20 +57,6 @@
 
 <div class="control-group">
   <label class="control-label">
-    <%= f.label :price, "Unit Price *" %>
-  </label>
-  <div class="controls">
-
-<div class="input-prepend">
-<span class="add-on">$</span>
-    <%= f.text_field :price, :placeholder=>"Unit Price", :class=>"span2", :id=>"inv_price_field" %>
-</div>
-
-  </div>
-</div>
-
-<div class="control-group">
-  <label class="control-label">
     <%= f.label :totalquantity, "Total Quantity *" %>
   </label>
   <div class="controls">
@@ -80,10 +66,25 @@
 
 <div class="control-group">
   <label class="control-label">
+    <%= f.label :price, "Price Per Unit *" %>
+  </label>
+  <div class="controls">
+
+    <div class="input-prepend">
+      <span class="add-on">$</span>
+      <%= f.text_field :price, :placeholder=>"Unit Price", :class=>"span2", :id=>"inv_price_field" %>
+    </div>
+
+  </div>
+</div>
+
+
+<div class="control-group">
+  <label class="control-label">
     <%= f.label :units, "Unit" %>
   </label>
   <div class="controls">
-    <%= f.text_field :units, :placeholder=>"Pounds, Grams, Gallons etc." %>
+    <%= f.text_field :units, :placeholder=>"lb, oz, pint etc." %>
   </div>
 </div>
 
@@ -106,13 +107,28 @@
 </div>
 
 <div class="control-group">
+  <label class="control-label">
+    <%= f.label(:available, "Available") %>
+  </label>
+  <div class="controls">
+    <div class="radio inline">
+      <%= f.radio_button :available, true %> Yes
+    </div>
+    <div class="radio inline">
+      <%= f.radio_button :available, false %> No
+    </div>
+  </div>
+</div>
+
+
+<div class="control-group">
   <div class="controls">
 
     <div class="fileupload fileupload-new" data-provides="fileupload">
       <div class="fileupload-new thumbnail" style="width: 200px; height: 150px;">
 
         <% if (@item.item_photo_file_name.nil?) %>
-        <!-- <img src="http://placekitten.com/200/150" /> -->
+     <!--    <img src="http://placekitten.com/200/150" /> -->
         <img src="http://www.placehold.it/200x150/&text=no+image" />
       </div>
       <div class="fileupload-preview fileupload-exists thumbnail" style="max-width: 200px; max-height: 150px; line-height: 20px;">

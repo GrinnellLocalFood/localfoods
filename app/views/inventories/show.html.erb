@@ -1,3 +1,21 @@
+<script type="text/javascript">
+$(document).ready(function() {
+
+// $('#item_link').html('My Cart (<%= current_user.cart.cart_items.size %>) ')
+
+ $('#item_link').click(function() {
+
+  $('#item_modal').modal({
+    remote: '<%= show_in_modal_cart_path(current_user.cart.id) %>'
+  });
+
+ }); // close click
+
+}); // close document ready
+</script>
+
+
+
 <div class="container">
 	<div class="row">
 		<div class="span12 custom-block">
@@ -15,6 +33,10 @@
 <%= alert %>
 </div>
 <% end %>
+
+
+
+
 
 	<%= render :partial => 'show'%>
 

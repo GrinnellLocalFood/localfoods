@@ -1,6 +1,6 @@
 class ItemsController < ApplicationController
-  before_filter :check_permissions, :except => [:show, :index, :search]
-  skip_before_filter :require_login, :only => [:show, :index, :search]
+  before_filter :check_permissions, :except => [:show, :show_in_modal, :index, :search]
+  skip_before_filter :require_login, :only => [:show, :show_in_modal, :index, :search]
   
   layout 'blank', :only => :show_in_modal 
 

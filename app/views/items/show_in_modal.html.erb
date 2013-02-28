@@ -14,14 +14,6 @@ $('.add_to_cart').click(function() {
 
 	$(this).replaceWith('<button class="btn btn-primary disabled">Added to Cart</button>');
 
-	// for some reason this is always behind by one. still doesn't solve the problem
-	// setTimeout(
-	// 	function() {
-	// 		$('#cart_link').html('(<%= current_user.cart.cart_items.size %>)');
-	// 	},
-	// 	100)
-
-
    }); // end click
 // // END ADD TO CART BEHAVIOR
 

@@ -25,6 +25,8 @@ $('.show_link').click(function() {
  }); // end click
 
 
+<% if signed_in? %>
+
 // ADD TO CART BEHAVIOR
 // replace default link behavior
 $('.add_to_cart').attr('data-remote', true);
@@ -48,6 +50,10 @@ setTimeout(
 
  }); // end click
 // END ADD TO CART BEHAVIOR
+
+
+<% end %>
+
 
 
 // something about the partial makes this need to be here too
@@ -111,11 +117,6 @@ $('.category_filter').click(function() {
 <div class="modal-body">
     <p></p>
 </div>
-<!-- <div class="modal-footer">
-    <button class="btn" data-dismiss="modal" aria-hidden="true">Continue Shopping</button>
-    <button class="btn btn-primary">*Future Add to Cart*</button>
-
-</div> -->
 </div>
 <!-- End modal for items -->
 
@@ -173,7 +174,7 @@ margin-top: -5px">
 
 </div>
 
-<!-- <div style="text-indent: 2.5%; margin-right: 10px; margin-left: 0px; margin-top: 5px; height: 190px; overflow: auto; padding-left: 5px; padding-right: 5px;"> -->
+
 <div style="text-indent: 2.5%; margin-right: 10px; margin-left: 10px; margin-top: 5px;">
     <%= @producer.inventory.description %>
 </div>
@@ -268,8 +269,8 @@ margin-top: -5px">
             <!-- ADD ELSE IF TO item.available SO THAT IT DISPLAYS SOLD OUT IF QTY REMAINING IS 0 -->   
             <td><%= item.is_available? %></td>
             <td class="category_label"><%= Category.find(item.category_id).name %></td>
-            <td><%= link_to "Show", inventory_item_path({ :inventory_id => params[:id], :id => item.id }) %></td>
-            <td><%= link_to "Add to Cart", cart_items_path(:item_id => item), :method => :post %>
+            <td><%= link_to "Show", inventory_item_path({ :inventory_id => params[:id], :id => item.id }),
+        :class => "show_link", :'data-id' => item.id %></td>
             </td>
             <% end %>
             <% end %>

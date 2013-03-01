@@ -15,6 +15,7 @@ group :development, :test do
   gem 'factory_girl_rails', '1.4.0'
   gem 'jquery-rails', '2.0.2'
   gem 'capybara'
+  gem 'faker'
   
   #leaving out annotate gem, it could not be found in sources
   #gem 'annotate-models'

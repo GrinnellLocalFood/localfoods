@@ -1,6 +1,6 @@
 class InventoriesController < ApplicationController
 
-skip_before_filter :require_login, :only => [:show, :index, :show_in_index]
+skip_before_filter :require_login, :only => [:show, :index, :show_in_index, :show_all]
 
   #PUT
   def show

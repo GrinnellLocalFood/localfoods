@@ -266,6 +266,12 @@ margin-top: 20px;
   float: left;
 }
 
+.item-search-image {
+  margin-bottom: 0px;
+  margin-top: 0px;
+  /*float: left;*/
+}
+
 .item-name{
 text-align: left;
 font-size: 30px;

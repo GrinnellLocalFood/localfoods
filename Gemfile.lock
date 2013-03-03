@@ -53,6 +53,8 @@ GEM
       i18n (~> 0.5)
     fattr (2.2.1)
     ffi (1.4.0)
+    foreman (0.61.0)
+      thor (>= 0.13.6)
     highline (1.6.15)
     hike (1.2.1)
     i18n (0.6.1)
@@ -177,6 +179,7 @@ DEPENDENCIES
   cocaine (= 0.3.2)
   factory_girl_rails (= 1.4.0)
   faker
+  foreman
   jquery-rails (= 2.0.2)
   kaminari
   paperclip (= 2.7.0)

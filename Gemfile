@@ -8,6 +8,7 @@ gem 'sunspot_solr'
 gem 'progress_bar'
 gem 'sunspot_with_kaminari'
 gem 'kaminari'
+gem 'foreman'
 
 group :development, :test do
   gem 'sqlite3','1.3.5'

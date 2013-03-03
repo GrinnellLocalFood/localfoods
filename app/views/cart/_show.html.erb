@@ -1,0 +1,66 @@
+<script type="text/javascript">
+$(document).ready(function() {
+
+
+// update doesn't currently work right without javascript
+$('.cart_update, .cart_delete').attr('data-remote', true);
+
+
+$('.cart_update, .cart_delete').click(function() {
+// the timeout needs to happen so rails can update the cart...I think
+setTimeout(
+  function() {
+    $('#cart').load('<%= show_in_modal_cart_path(current_user.cart.id) %>');
+},
+100)
+
+// minor visual feedback on button click
+$(this).attr('disabled', true);
+
+}); // end update button click
+
+}); // close document ready
+</script>
+
+<div id="cart">
+
+<table class="table table-hover">
+  <tr>
+    <th>Product</th>
+    <th>Qty</th>
+    <th>Unit Price</th>
+    <th>Full Price</th>
+    <th></th>
+  </tr>
+  <% for cart_item in @cart.cart_items %>
+  <td><%= cart_item.item.name %></td>
+  <td>
+    <%= form_for(cart_item, :url => url_for({ :controller => "cart_items", :action => "update", :cart_item_id => cart_item.id}), :remote => true,
+    :html => {:class => 'form-horizontal'} ) do |f| %>
+    <div>
+
+      <div class="input-append">
+        <%= f.text_field :quantity, :style => "width:40px", :class => "quantity_field"%>
+
+
+       <!-- <%= f.submit "Update" %> -->
+        <button class="btn cart_update" type="submit" value="Update" name="commit" data-remote="false">   
+          Update
+        </button>   
+
+      </div>
+
+    </div>
+    <% end %>
+  </td>
+  <td class="cart_item_price"><%= number_to_currency(cart_item.item.price) %></td>
+  <td class="cart_full_price"><%= number_to_currency(cart_item.quantity*cart_item.item.price) %></td>
+  <td><%= link_to "Delete", cart_item, :remote => false, :method=>:delete, :class=>'cart_delete' %></td>
+</tr>
+</tr>
+<% end %>
+</table>
+
+<h5 id="cart_total" style="float:right; margin-right: 10px">Total: <%= number_to_currency @cart.total_price %></h5>
+
+</div>

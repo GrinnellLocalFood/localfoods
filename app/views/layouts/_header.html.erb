@@ -1,14 +1,56 @@
+
+<% if signed_in? %>
+<script type="text/javascript">
+$(document).ready(function() {
+
+$('#cart_link').html('My Cart (<%= current_user.cart.cart_items.size %>) ');
+
+ $('#cart_link').click(function() {
+
+  $('#cart_modal').modal({
+    remote: '<%= show_in_modal_cart_path(current_user.cart.id) %>'
+  });
+
+ }); // close click
+
+}); // close document ready
+
+</script>
+<% end %>
+
+
+<!-- Modal for cart -->
+<div id="cart_modal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-header">
+    <!-- <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button> -->
+    <h3 id="myModalLabel" style="margin-top: 10px;">Shopping Cart</h3>
+  </div>
+  <div class="modal-body">
+    <p></p>
+  </div>
+  <div class="modal-footer">
+    <button class="btn" data-dismiss="modal" aria-hidden="true">Continue Shopping</button>
+    <button class="btn btn-primary">Checkout</button>
+
+  </div>
+</div>
+<!-- End modal for cart -->
+
+
 <header class="navbar navbar-fixed-top">
   <div class="navbar-inner">
     <div class="container">
 
       <%= link_to image_tag("/img/partial_localfood_clear_horizontal_40.png", :width=>"400", :id=>"logohead"), root_path %>
       
-      
+      <% if signed_in? %>
       <ul class="nav pull-right">
+        
+        <li>
+          <a href="#" id="cart_link"></a>
+        </li>
+    
 
-        <% if signed_in? %>
-        <li><%= link_to("My Cart(" + current_user.cart.cart_items.size.to_s + ")", cart_path(current_user.cart.id)) %></li>
         <% if current_user.producer %> 
         <li class="dropdown nav">
           <a class="dropdown-toggle" data-toggle="dropdown" href="#">
@@ -29,7 +71,7 @@
           </a>
           <ul class="dropdown-menu">
             <li><%= link_to "Profile", current_user %></li>
-            <li><%= link_to "Edit Account", edit_user_path(current_user) %></li>
+            <li><%= link_to "Edit Account", edit_user_path(current_user, :origin => "header") %></li>
             <li><%= link_to "Change Password", editpassword_user_path(current_user) %></li>
             <li class="divider"></li>
             <li><%= link_to "Log Out", logout_path, :method => :delete %></li>
@@ -65,20 +107,20 @@
 
       <li><%= link_to("Browse Products", inventories_path, :style=>"color:white") %> </li>
 
-</ul>
+    </ul>
 
-      <div class="navbar-form pull-right" style="margin-bottom: -40px; margin-left: 10px;">
-        <div class="input-append">
+    <div class="navbar-form pull-right" style="margin-bottom: -40px; margin-left: 10px;">
+      <div class="input-append">
 
-          <%= form_tag :controller => 'items', :action => :search do %>
-          <input class="span2" type="text" name="search" placeholder="Search Products" style="width: 200px;">
-          <button class="btn" type="submit" value="Search">
-            <i class="icon-search"></i>
-          </button>
-          <% end %>
+        <%= form_tag :controller => 'items', :action => :search do %>
+        <input class="span2" type="text" name="search" placeholder="Search Products" style="width: 200px;">
+        <button class="btn" type="submit" value="Search">
+          <i class="icon-search"></i>
+        </button>
+        <% end %>
 
-        </div>
       </div>
+    </div>
 
     
   </div>

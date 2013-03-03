@@ -1,4 +1,8 @@
-<h1>Search Results</h1>
+<div class="container">
+<div class="row">
+<div class="span12">
+<h1 align="center">Search Results</h1>
+<div class="pagination" align="center"><%= paginate @search %></text>
 <table class="producer-table table-hover" align="center">
 <tr>
         <th>Name</th>
@@ -10,12 +14,10 @@
         <th>Max Order</th>         
         <th>Available</th>
         <th>Category</th>
-        <th></th>
-        <th></th>
-        <th></th>
+        <th></th>        
    </tr>
 
-  <% @items.each do |item| %>
+  <% @search.results.each do |item| %>
     <tr>
         <td><%= item.name %></td>
         <td><%= item.description %></td>
@@ -29,6 +31,9 @@
         <td><%= item.is_available? %></td>
         <td><%= Category.find(item.category_id).name %></td>
         <td><%= link_to "Show", inventory_item_path({ :inventory_id => item.inventory.id, :id => item.id }) %></td>
+
   <% end %>
 </table>
-  
+</div>
+</div>
+</div>

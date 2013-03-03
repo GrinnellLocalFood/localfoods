@@ -5,6 +5,10 @@ gem 'paperclip', '2.7.0'
 gem 'cocaine', '0.3.2'
 gem 'sunspot_rails'
 gem 'sunspot_solr' 
+gem 'progress_bar'
+gem 'sunspot_with_kaminari'
+gem 'kaminari'
+gem 'foreman'
 
 group :development, :test do
   gem 'sqlite3','1.3.5'
@@ -12,6 +16,7 @@ group :development, :test do
   gem 'factory_girl_rails', '1.4.0'
   gem 'jquery-rails', '2.0.2'
   gem 'capybara'
+  gem 'faker'
   
   #leaving out annotate gem, it could not be found in sources
   #gem 'annotate-models'

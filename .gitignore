@@ -6,3 +6,4 @@ webrat.log
 public/system
 public/system/photos/*
 public/system/item_photos/*
+solr/data/development/index

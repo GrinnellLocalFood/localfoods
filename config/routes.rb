@@ -25,31 +25,38 @@ Localfoods::Application.routes.draw do
     member do
         get 'show_in_index'
       end
-    # member do
-    #   get 'edit'
-    # end
-
-    # member do
-    #   get 'index'
-    # end
 
     resources :items do
       collection do
         get 'producer_new'
       end
+
+# EHH MAYBE
+      member do
+        get 'show_in_modal'
+      end
+# END EHH MAYBE
+
     end
 
   end
 
   resources :cart_items
-  resources :cart
+  resources :cart do
+    member do
+      get 'show_in_modal'
+    end
+  end
+
+
 
   controller :items do
     post 'items' => 'items#search'
+    get 'items' => 'items#search'
   end
 
   resources :sessions, :only => [:new, :create, :destroy]
-  resources :items, :only => [:index]
+  
   resources :application_states
  
  

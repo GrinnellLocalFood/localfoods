@@ -7,7 +7,7 @@ class Item < ActiveRecord::Base
 		:medium => "300x300>",
 		:small => "150x150>"
 	}
-	attr_accessible :name, :description, :totalquantity, :minorder, :maxorder, :item_photo ,:price, :available, :units, :category_id
+	attr_accessible :name, :description, :totalquantity, :minorder, :maxorder, :item_photo ,:price, :available, :units, :category_id, :inventory_id
 
 	validates :name, :presence => true
 	validates :description, :presence => true
@@ -21,7 +21,11 @@ class Item < ActiveRecord::Base
 	before_validation :format_values
 
    searchable do
-    text :name, :description, :category
+    text :name, :boost => 5
+    text :inventory, :boost => 3 do inventory.display_name end
+    text :inventory_description, :boost => 1 do inventory.description end
+    text :category, :boost => 2  do category.name end
+    text :description, :boost => 3
    end
 
 	def is_available?

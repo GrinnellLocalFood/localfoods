@@ -1,11 +1,31 @@
+<%= javascript_include_tag 'mailcheck.min.js'%>
+
 <script type="text/javascript">
 
 $(document).ready(function() {
+
+$("#mailcheck").append("<span id='suggested_email'></div>");
+
 $('#user_first_name').focus();
+
+
+    $('#user_email').on('blur', function() {
+      $(this).mailcheck({
+
+        suggested: function(element, suggestion) {
+             $("#suggested_email").html("<div class='control-group'><div class='controls'>" + "Did you mean? " + suggestion.full + "</div></div>");
+        },
+        empty: function(element) {
+            $("#suggested_email").html("");
+        }
+      });
+    });
 
 }); //end ready
 
+
 </script>
+
 
 <%= form_for(@user, :html=>{:class=>'form-horizontal'}) do |f| %>
  
@@ -22,7 +42,6 @@ $('#user_first_name').focus();
       </ul>
     </div>
   <% end %>
-
 
 
 <% if signed_in? && (current_user.admin || current_user.coordinator) %>
@@ -67,12 +86,15 @@ $('#user_first_name').focus();
 
 <div class="control-group">
   <label class="control-label">
-    <%= f.label :email, "Email *" %>
+    <%= f.label :email, "Email *"%>
 </label>
 <div class="controls">
-    <%= f.text_field :email, :placeholder=>"Email" %>
+    <%= f.text_field :email, :placeholder=>"Email", :rel=>"popover" %>
 </div>
 </div>
+
+<span id="mailcheck"></span>
+
 
 <div class="control-group">
   <label class="control-label">
@@ -103,7 +125,7 @@ $('#user_first_name').focus();
 
 
  <div class="control-group controls">
-  <%= f.submit "Submit!", :class=>"btn-large btn-primary" %>
+  <%= f.submit "Submit!", :class=>"squared btn-large btn-primary" %>
 </div>
 
 <div align="center" style="color: gray;">

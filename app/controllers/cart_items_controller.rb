@@ -11,16 +11,23 @@ class CartItemsController < ApplicationController
 			flash[:notice] = "Updated #{@item.name} in cart"
 		end
 
-		redirect_to url_for :controller => 'cart', :action => 'show', :id => current_user.cart
+		# redirect_to url_for :controller => 'cart', :action => 'show_in_modal', :id => current_user.cart
+			respond_to do |format|
+        	format.html { redirect_to(cart_path(current_user))}
+        	format.xml  { head :ok }
+        end
+
 	end
 
 	def destroy
 		@item = CartItem.find(params[:id])
 		@item.destroy
 		respond_to do |format|
+			format.js { render show_in_modal_cart_path(current_user) }
         	format.html { redirect_to(cart_path(current_user), :notice => 'Item successfully deleted.')}
         	format.xml  { head :ok }
     	end
+
 	end
 
 	def update
@@ -35,9 +42,11 @@ class CartItemsController < ApplicationController
 				if @notice.nil?
 					@notice = 'Item successfully updated.'
 				end
+				format.js { render show_in_modal_cart_path(params[:id]) }
 				format.html { redirect_to(cart_path(params[:id], :item => @cart_item.id, :disable => true), :notice => @notice) }
 				format.xml  { head :ok }       
 			else
+				format.js { render show_in_modal_cart_path(params[:id]) }
 				format.html { redirect_to(cart_path(params[:id]), :error => 'Item was not successfully updated.') }
 				format.xml  { render :xml => @cart_item.errors, :status => :unprocessable_entity }
 			end

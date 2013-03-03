@@ -1,6 +1,61 @@
 <script type="text/javascript">
 $(document).ready(function() {
 
+// SHOW ITEM BEHAVIOR
+// replace default link behavior
+$('.show_link').attr('data-remote', true);
+
+// after clicking "show"
+$('.show_link').click(function() {
+
+    // build the url for the item modal show page
+    var url_string = "/inventories/<%= @producer.inventory.id %>/items/" + $(this).attr('data-id') + "/show_in_modal";
+
+    // fire the modal
+    $('#item_modal').modal({  
+      remote: url_string
+  });
+    // refresh the modal so you can go to multiple items without refreshing the whole page
+    setTimeout(
+      function() {
+       $('#item_show').load(url_string);
+   },
+   100)
+
+ }); // end click
+
+
+<% if signed_in? %>
+
+// ADD TO CART BEHAVIOR
+// replace default link behavior
+$('.add_to_cart').attr('data-remote', true);
+
+
+$('.add_to_cart').click(function() {
+
+
+
+  $('#cart_modal').modal({
+    remote: '<%= show_in_modal_cart_path(current_user.cart.id) %>'
+});
+
+// note: concern about the delay here too
+// load the modal, but delay it slightly for time to add to cart
+setTimeout(
+  function() {
+   $('#cart').load('<%= show_in_modal_cart_path(current_user.cart.id) %>');
+},
+100)
+
+ }); // end click
+// END ADD TO CART BEHAVIOR
+
+
+<% end %>
+
+
+
 // something about the partial makes this need to be here too
 $('[data-toggle="tooltip"]').tooltip();
 // make an array to store the list of categories for a producer
@@ -52,6 +107,22 @@ $('.category_filter').click(function() {
 
 
 
+
+<!-- Modal for items -->
+<div id="item_modal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-header">
+    <!-- <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button> -->
+    <h3 id="itemModalLabel"></h3>
+</div>
+<div class="modal-body">
+    <p></p>
+</div>
+</div>
+<!-- End modal for items -->
+
+
+
+
 <% if signed_in? && (current_user.admin || current_user.coordinator || current_user == @producer) %>
 
 <div align="right" style="margin-right:20px; margin-bottom: -20px;
@@ -63,6 +134,9 @@ margin-top: -5px">
 </div>
 <% end %>
 
+
+
+
 <% if !(@producer.inventory.inventory_photos.empty?) %>
 <div id="myCarousel" class="carousel slide" data-interval="4000"style="float:left; margin-bottom: 0px; margin-right: 10px; margin-top: -20px;" >
     <!-- Carousel items -->
@@ -73,7 +147,7 @@ margin-top: -5px">
           
           <div class="active item">
             <%= image_tag inventory_photo.photo.url(:gallery_size) %>
-          </div>
+        </div>
         <% else %>
         <div class="item">
             <%= image_tag inventory_photo.photo.url(:gallery_size) %>
@@ -90,9 +164,6 @@ margin-top: -5px">
 </div>
 <% end %>
 
-
-
-
 <div style="text-align: left; margin-right: 20px; margin-left: 20px; margin-top: 0px">
 
     <h1><%= @producer.inventory.display_name %></h1>
@@ -103,7 +174,7 @@ margin-top: -5px">
 
 </div>
 
-<!-- <div style="text-indent: 2.5%; margin-right: 10px; margin-left: 0px; margin-top: 5px; height: 190px; overflow: auto; padding-left: 5px; padding-right: 5px;"> -->
+
 <div style="text-indent: 2.5%; margin-right: 10px; margin-left: 10px; margin-top: 5px;">
     <%= @producer.inventory.description %>
 </div>
@@ -128,6 +199,7 @@ margin-top: -5px">
         <th>Name</th>
         <th>Description</th>
         <th>Price</th>
+        <th>Unit</th>
         <th>Total Qty.</th>
         <th>Qty. Ordered</th>
         <th>Min Order</th>
@@ -135,16 +207,23 @@ margin-top: -5px">
         <th>Available</th>
         <th>Category</th>
         <th></th>
+        <% if @producer != current_user %>
+        <th></th>
+        <% end %>
         <th></th>
         <th></th>
     </tr>
 
 
+
+
+
     <% @item.each do |item| %>
     <tr>
         <td><%= item.name %></td>
-        <td><%= item.description %></td>
-        <td><%= number_to_currency(item.price) %><b>/<%= item.units.singularize %></b></td>
+        <td><%= item.description.size < 50 ? item.description : item.description[0..50] + "..." %></td>
+        <td><%= number_to_currency(item.price) %></td>
+        <td><b><%= item.units.singularize %></b></td>
         <!-- ADD QTY REMAINING HERE ONCE WE MERGE WITH NEW ITEM MODEL -->
         <td><%= item.totalquantity %></td>
         <td><%= item.totalordered %></td>
@@ -153,15 +232,17 @@ margin-top: -5px">
         <!-- ADD ELSE IF TO item.available SO THAT IT DISPLAYS SOLD OUT IF QTY REMAINING IS 0 -->   
         <td><%= item.is_available? %></td>
         <td class="category_label"><%= Category.find(item.category_id).name %></td>
-        <td><%= link_to "Show", inventory_item_path({ :inventory_id => params[:id], :id => item.id }) %></td>
-        <td><%= link_to "Edit", edit_inventory_item_path({ :inventory_id => params[:id], :id => item.id }) %></td>
+        <td><%= link_to "Show", inventory_item_path({ :inventory_id => params[:id], :id => item.id }),
+        :class => "show_link", :'data-id' => item.id %></td>
         <% if @producer != current_user %>
-        <td><%= link_to "Add to Cart", cart_items_path(:item_id => item), :method => :post %>
+        <td><%= link_to "Add to Cart", cart_items_path(:item_id => item), :remote => false, :method => :post, 
+        :class => "add_to_cart" %>
         <% end %>
+        <td><%= link_to "Edit", edit_inventory_item_path({ :inventory_id => params[:id], :id => item.id }) %></td>
         <td><%= link_to "Delete", inventory_item_path({ :inventory_id => params[:id], :id => item.id }), :confirm => 'Are you sure?', :method=>:delete %></td>
         <% end %> 
 
-        <!-- Other wise you are either not logged in, or only a member -->
+        <!-- Otherwise you are either not logged in, or only a member -->
         <% else %>
         <tr>
             <th>Name</th>
@@ -187,8 +268,8 @@ margin-top: -5px">
             <!-- ADD ELSE IF TO item.available SO THAT IT DISPLAYS SOLD OUT IF QTY REMAINING IS 0 -->   
             <td><%= item.is_available? %></td>
             <td class="category_label"><%= Category.find(item.category_id).name %></td>
-            <td><%= link_to "Show", inventory_item_path({ :inventory_id => params[:id], :id => item.id }) %></td>
-            <td><%= link_to "Add to Cart", cart_items_path(:item_id => item), :method => :post %>
+            <td><%= link_to "Show", inventory_item_path({ :inventory_id => params[:id], :id => item.id }),
+        :class => "show_link", :'data-id' => item.id %></td>
             </td>
             <% end %>
             <% end %>

@@ -49,9 +49,55 @@ $('.category_filter').click(function() {
         } // end else
     }); // end each
 }); // end click
+
+
+// SHOW ITEM BEHAVIOR
+// replace default link behavior
+$('.show_link').attr('data-remote', true);
+
+// after clicking "show"
+$('.show_link').click(function() {
+
+    // build the url for the item modal show page
+    var url_string = "/inventories/" + $(this).attr('data-inventory') + "/items/" + $(this).attr('data-id') + "/show_in_modal";
+
+    // fire the modal
+    $('#item_modal').modal({  
+      remote: url_string
+  });
+    // refresh the modal so you can go to multiple items without refreshing the whole page
+    setTimeout(
+      function() {
+       $('#item_show').load(url_string);
+   },
+   100)
+
+ }); // end click
+
+
+
 }); // end ready
 
 </script>
+
+
+<!-- Modal for items -->
+<div id="item_modal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-header">
+    <!-- <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button> -->
+    <h3 id="itemModalLabel"></h3>
+</div>
+<div class="modal-body">
+    <p></p>
+</div>
+<!-- <div class="modal-footer">
+    <button class="btn" data-dismiss="modal" aria-hidden="true">Continue Shopping</button>
+    <button class="btn btn-primary">*Future Add to Cart*</button>
+
+</div> -->
+</div>
+<!-- End modal for items -->
+
 
 
 <h2 align="center">All Products</h2>
@@ -61,6 +107,7 @@ $('.category_filter').click(function() {
         <th>Name</th>
         <th>Producer</th>
         <th>Price</th>
+        <th>Unit</th>
         <th>Qty. Remaining</th>
         <th>Min Order</th>
         <th>Available</th> 
@@ -72,6 +119,8 @@ $('.category_filter').click(function() {
     <tr>
         <td><%= item.name %></td>
         <td><%= link_to(item.inventory.display_name, inventory_path(item.inventory)) %></td>
+        <td><%= item.price %></td>
+        <td><b><%= item.units.singularize %> </b></td>
         <td><%= item.num_remaining %></td>
         <td><%= item.minorder %></td>
         <td><%= item.displayed_maxorder %></td>
@@ -79,7 +128,8 @@ $('.category_filter').click(function() {
         <td><%= item.is_available? %></td>
         <!-- ADD ELSE IF TO item.available SO THAT IT DISPLAYS SOLD OUT IF QTY REMAINING IS 0 -->   
         <td class="category_label"><%= Category.find(item.category_id).name %></td>
-        <td><%= link_to "Show", inventory_item_path({ :inventory_id => item.inventory_id, :id => item.id }) %></td>
+        <td><%= link_to "Show", inventory_item_path({ :inventory_id => item.inventory_id, :id => item.id }),
+        :class => "show_link", :'data-id' => item.id, :'data-inventory' => item.inventory.id %></td>
 
     </tr>
 

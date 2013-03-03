@@ -17,7 +17,7 @@ def create
 	    else
 	      format.html { render :action => 'index', :notice => "Category " + @category.name + "could not be added. Please try again.",
 	        :class=>"alert alert-success" }
-	      format.xml  { render :xml => @item.errors, :status => :unprocessable_entity }
+	      format.xml  { render :xml => @category.errors, :status => :unprocessable_entity }
 	    end
 	  else
 	    flash[:error] = "You do not have permission to perform this action."
@@ -25,6 +25,9 @@ def create
 	    format.xml { head :ok }
 	  end
 	end
+end
+
+def edit
 end
 
 def index
@@ -49,8 +52,16 @@ def show_by_category
 
   def destroy   
     @category = Category.find(params[:id])
-     if (current_user.admin)
+
+     if (current_user.admin && @category.name != "Other")
         respond_to do |format|
+        
+        # Change category to "Other" when a category is deleted
+        @category.items.each do |item|
+          item.category_id = Category.find_by_name("Other").id
+          item.save
+        end
+
         @category.destroy
         format.html { redirect_to(categories_path) }
         format.xml  { head :ok }
@@ -58,8 +69,8 @@ def show_by_category
     else
       respond_to do |format|
         flash[:error] = "Could not delete item."
-        format.html { redirect_to(categories_path) }
-        format.xml  { head :ok }
+       format.html { redirect_to(categories_path) }
+       format.xml  { head :ok }
       end
     end
   end

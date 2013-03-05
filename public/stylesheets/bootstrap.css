@@ -4408,9 +4408,6 @@ input[type="submit"].btn.btn-mini {
 .navbar-fixed-bottom .navbar-inner {
   padding-right: 0;
   padding-left: 0;
-/*  -webkit-border-radius: 0;
-     -moz-border-radius: 0;
-          border-radius: 0;*/
 }
 
 .navbar-static-top .container,

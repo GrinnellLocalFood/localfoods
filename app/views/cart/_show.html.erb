@@ -55,7 +55,7 @@ $(this).attr('disabled', true);
   </td>
   <td class="cart_item_price"><%= number_to_currency(cart_item.item.price) %></td>
   <td class="cart_full_price"><%= number_to_currency(cart_item.quantity*cart_item.item.price) %></td>
-  <td><%= link_to "Delete", cart_item, :remote => false, :method=>:delete, :class=>'cart_delete' %></td>
+  <td><%= link_to "Remove", cart_item, :remote => false, :method=>:delete, :class=>'cart_delete' %></td>
 </tr>
 </tr>
 <% end %>

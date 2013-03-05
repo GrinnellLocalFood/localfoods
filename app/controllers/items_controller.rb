@@ -13,7 +13,7 @@ class ItemsController < ApplicationController
   def search
     @search = Item.search do
       fulltext params[:search]
-      paginate :page => params[:page], :per_page => 5
+      paginate :page => params[:page], :per_page => 10
     end
     @items = @search.results
   end
@@ -85,12 +85,10 @@ end
     @title = @item.name
   end
 
-# EH MAYBE
   def show_in_modal
     @item = Item.find(params[:id])
     @title = @item.name
   end
-# END EH MAYBE
 
   private
 

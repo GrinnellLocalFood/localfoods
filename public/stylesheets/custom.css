@@ -266,6 +266,12 @@ margin-top: 20px;
   float: left;
 }
 
+.item-search-image {
+  margin-bottom: 0px;
+  margin-top: 0px;
+  /*float: left;*/
+}
+
 .item-name{
 text-align: left;
 font-size: 30px;
@@ -276,15 +282,9 @@ line-height: 25px;
 
 .item-description {
 text-align: left;
-/*margin-right: 65px;*/
-/*text-indent: 10px;
-font-style: italic;
-margin-left: 65px;
-margin-top: 2px;*/
 }
 
 .item-table {
-/*margin-top: 10px;*/
 }
 
 .email-display {
@@ -301,24 +301,12 @@ margin-top: 2px;*/
  
 
 color: white;
-/*background-color: #F5F5F5;*/
 background-color: #595959;
-/*background-color: white;*/
-
-
-/*  border: 1px solid #e3e3e3;
-  -webkit-border-radius: 4px;
-     -moz-border-radius: 4px;
-          border-radius: 4px;*/
-
  
   -webkit-box-shadow: 0 5px 4px rgba(0, 0, 0, 0.085);
      -moz-box-shadow: 0 5px 4px rgba(0, 0, 0, 0.085);
           box-shadow: 0 5px 4px rgba(0, 0, 0, 0.085);
           box-shadow: 0 5px 4px rgba(0, 0, 0, 0.085);
-
-/*box-shadow: 0px 0px 4px #C5C5C5;*/
-
 
 }
 
@@ -348,15 +336,51 @@ background-color: #595959;
 }
 
 
-.navbar-fixed-top .navbar-inner-inner,
-.navbar-static-top .navbar-inner-inner {
-/*  -webkit-box-shadow: 0 1px 10px rgba(0, 0, 0, 0.1);
-     -moz-box-shadow: 0 1px 10px rgba(0, 0, 0, 0.1);
-          box-shadow: 0 1px 10px rgba(0, 0, 0, 0.1);*/
+.form-navbar-fixed {
+  width: 100%;
+  position: fixed;
+/*  right: 0;
+  left: 0;*/
+  z-index: 1030;
+  margin-bottom: 0;
+
 }
+
+
+#big_table_header {
+  position: fixed;
+  top: 110px;
+  /*left: 40px;*/
+  /*margin-bottom: 120px;*/
+  /*top: 100px;*/
+}
+
+.big-table {
+  width: 100%;
+  margin-top:20px;
+}
+
+.big-table th,
+.big-table td {
+  padding: 6px;
+  line-height: 20px;
+  text-align: left;
+  vertical-align: top;
+  border-top: 1px solid #dddddd;
+}
+
+.big-table th {
+  font-weight: bold;
+}
+
+
+
+
 
 .producer-table {
   width: 95%;
+  /*margin-left: 20px;*/
+   /*margin-right: 20px;*/
   /*margin-top:100px;*/
 }
 
@@ -477,18 +501,10 @@ font-size: 13px;
 }
 
 #suggested_email {
-/*margin-top: -10px;*/
-/*margin-bottom: -10px;*/
-color: maroon;
-position: relative;
+  color: maroon;
+  position: relative;
   top: -20px;
-  /*bottom: -120px;*/
-/*margin-bottom: -20px;*/
 }
-
-/*position:absolute;
-  left:0px;
-  top:106px;*/
 
 .cart_table {
   /*width: 95%;*/
@@ -498,4 +514,12 @@ position: relative;
   -webkit-border-radius: 0px;
      -moz-border-radius: 0px;
           border-radius: 0px;
+}
+
+#item_category_id {
+  width: 100px;
+}
+
+.item_row:hover {
+ /*text-decoration: underline; */
 }

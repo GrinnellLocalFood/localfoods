@@ -51,9 +51,16 @@ $('.category_filter').click(function() {
 }); // end click
 
 
+
+// hide the non-javascript show link
+$('.classic_show').hide();
+
+// make the item rows clickable and have a pointer hover-over
+$('.item_row').css('cursor', 'pointer').addClass('show_link');
+
+
 // SHOW ITEM BEHAVIOR
-// replace default link behavior
-$('.show_link').attr('data-remote', true);
+
 
 // after clicking "show"
 $('.show_link').click(function() {
@@ -90,11 +97,6 @@ $('.show_link').click(function() {
 <div class="modal-body">
     <p></p>
 </div>
-<!-- <div class="modal-footer">
-    <button class="btn" data-dismiss="modal" aria-hidden="true">Continue Shopping</button>
-    <button class="btn btn-primary">*Future Add to Cart*</button>
-
-</div> -->
 </div>
 <!-- End modal for items -->
 
@@ -116,22 +118,27 @@ $('.show_link').click(function() {
     </tr>
 
     <% @items.each do |item| %>
+
     <tr>
-        <td><%= item.name %></td>
+
+        <td class="item_row" data-id="<%= item.id %>" data-inventory ="<%= item.inventory.id %>">
+            <%= item.name %>
+        </td>
+     
         <td><%= link_to(item.inventory.display_name, inventory_path(item.inventory)) %></td>
         <td><%= item.price %></td>
         <td><b><%= item.units.singularize %> </b></td>
         <td><%= item.num_remaining %></td>
         <td><%= item.minorder %></td>
-        <td><%= item.displayed_maxorder %></td>
         <!-- ADD ELSE IF TO item.available SO THAT IT DISPLAYS SOLD OUT IF QTY REMAINING IS 0 -->   
         <td><%= item.is_available? %></td>
         <!-- ADD ELSE IF TO item.available SO THAT IT DISPLAYS SOLD OUT IF QTY REMAINING IS 0 -->   
         <td class="category_label"><%= Category.find(item.category_id).name %></td>
-        <td><%= link_to "Show", inventory_item_path({ :inventory_id => item.inventory_id, :id => item.id }),
-        :class => "show_link", :'data-id' => item.id, :'data-inventory' => item.inventory.id %></td>
+        <td class="classic_show"><%= link_to "Show", inventory_item_path({ :inventory_id => item.inventory_id, :id => item.id }) %></td>
 
     </tr>
+
+
 
     <% end %>
 

@@ -31,11 +31,9 @@ Localfoods::Application.routes.draw do
         get 'producer_new'
       end
 
-# EHH MAYBE
       member do
         get 'show_in_modal'
       end
-# END EHH MAYBE
 
     end
 

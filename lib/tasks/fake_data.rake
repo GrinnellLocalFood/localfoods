@@ -1,7 +1,7 @@
 namespace :db do
   desc "Fill database with sample data"
   task :populate => :environment do
-    require 'faker'
+    require 'ffaker'
     Rake::Task['db:reset'].invoke
     clear_db
     make_categories
@@ -54,6 +54,7 @@ def make_producers
      :password => password,
      :password_confirmation => password,
      :producer => producer)
+
   end
 end
 
@@ -62,7 +63,7 @@ def make_items
     if user.producer
     20.times do |i|
       name = item_name
-      description = Faker::Lorem.sentences(2)
+      description = Faker::HipsterIpsum.sentences(2)
       minorder = rand(100)
       maxorder = minorder + rand(100)
       price = rand(100)
@@ -89,7 +90,7 @@ end
 def add_photos_to_inventories
   Inventory.all.each {|inventory| inventory.inventory_photos << 
     InventoryPhoto.new(:photo => File.open(Dir.glob(File.join(Rails.root, '/lib/tasks/sample_inventory_images/', '*')).sample)); 
-    inventory.display_name = Faker::Company.name; inventory.save}
+    inventory.display_name = Faker::Company.name; inventory.description = Faker::HipsterIpsum.sentences(8); inventory.save}
 end
 
 def item_name

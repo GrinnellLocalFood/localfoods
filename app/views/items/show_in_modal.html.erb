@@ -6,9 +6,9 @@ $(document).ready(function() {
 // ADD TO CART BEHAVIOR
 
 // replace default link behavior
-$('.add_to_cart').attr('data-remote', true);
+$('.modal_add_to_cart').attr('data-remote', true);
 
-$('.add_to_cart').click(function() {
+$('.modal_add_to_cart').click(function() {
 
 	$(this).replaceWith('<button class="btn btn-primary disabled">Added to Cart</button>');
 
@@ -24,8 +24,12 @@ $('.add_to_cart').click(function() {
 
 	<div class="modal-footer" style="margin-left: -15px; margin-right: -15px; margin-bottom: -15px;">
 		<button class="btn" data-dismiss="modal" aria-hidden="true">Continue Shopping</button>
+
+		<% if signed_in? %> 
 		<%= link_to "Add to Cart", cart_items_path(:item_id => @item), :remote => false, :method => :post, 
-		:class => "add_to_cart btn btn-primary" %>
+		:class => "modal_add_to_cart btn btn-primary" %>
+		<% end %>
+
 	</div>
 
 </div>

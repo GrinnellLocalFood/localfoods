@@ -1,6 +1,6 @@
 class InventoriesController < ApplicationController
 
-skip_before_filter :require_login, :only => [:show, :index, :show_in_index]
+skip_before_filter :require_login, :only => [:show, :index, :show_in_index, :show_all]
 
   #PUT
   def show
@@ -34,6 +34,24 @@ skip_before_filter :require_login, :only => [:show, :index, :show_in_index]
     @title = "Our Producers"
     @producers = Inventory.all
     @categories = Category.all
+  end
+
+  def edit
+    @inventory = Inventory.find(params[:id])
+  end
+
+  def update
+    @inventory = Inventory.find(params[:id])
+
+    respond_to do |format|
+      if @inventory.update_attributes(params[:inventory])
+          format.html { redirect_to(inventory_path(params[:id]), :notice => 'Items were successfully updated.') }
+          format.xml  { head :ok }
+      else
+        format.html { render :action => "edit" }
+        format.xml  { render :xml => @inventory.errors, :status => :unprocessable_entity }
+      end
+    end
   end
 
 end

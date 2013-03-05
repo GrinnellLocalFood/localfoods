@@ -1,0 +1,41 @@
+<!-- cart show.html.erb -->
+
+<div class="container">
+  <div class="row">
+    <div class="span12 custom-block">
+
+<% if notice %>
+<div class="alert alert-success fade in">
+    <a class="close" data-dismiss="alert" href="#">&times;</a>
+    <%= notice %>
+</div>
+<% end %>
+
+<<<<<<< HEAD
+<p>
+  <div style="float:right; margin-right: 10px;">
+  <%= link_to "Continue Shopping", inventories_url %> |
+  <%= link_to "Checkout" %>
+  </div>
+</p>
+    </div>
+  </div>
+=======
+<% if alert %>
+<div class="alert alert-success fade in">
+    <a class="close" data-dismiss="alert" href="#">&times;</a>
+<%= alert %>
+>>>>>>> 4e1f35a54fa10b99deb8a123745b336d1a34b60c
+</div>
+<% end %>
+<div style="margin-left: 40px; margin-right: 40px">
+<h2>Shopping Cart</h2>
+
+  <%= render :partial => 'show'%>
+
+<br><br>
+
+<button class="btn btn-primary" style="float:right; margin-left:8px;">Checkout</button>
+<%= link_to("Continue Shopping", inventories_path, :class=>"btn", :style=>"float:right;") %>
+
+</div>

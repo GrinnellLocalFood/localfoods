@@ -25,24 +25,15 @@ Localfoods::Application.routes.draw do
     member do
         get 'show_in_index'
       end
-    # member do
-    #   get 'edit'
-    # end
-
-    # member do
-    #   get 'index'
-    # end
 
     resources :items do
       collection do
         get 'producer_new'
       end
 
-# EHH MAYBE
       member do
         get 'show_in_modal'
       end
-# END EHH MAYBE
 
     end
 

@@ -7,7 +7,7 @@ class Item < ActiveRecord::Base
 		:medium => "300x300>",
 		:small => "150x150>"
 	}
-	attr_accessible :name, :description, :totalquantity, :minorder, :maxorder, :item_photo ,:price, :available, :units, :category_id
+	attr_accessible :name, :description, :totalquantity, :minorder, :maxorder, :item_photo ,:price, :available, :units, :category_id, :inventory_id
 
 	validates :name, :presence => true
 	validates :description, :presence => true

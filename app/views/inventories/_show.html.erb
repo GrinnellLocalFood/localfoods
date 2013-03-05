@@ -18,9 +18,9 @@ $('.show_link').click(function() {
     // refresh the modal so you can go to multiple items without refreshing the whole page
     setTimeout(
       function() {
-       $('#item_show').load(url_string);
-   },
-   100)
+         $('#item_show').load(url_string);
+     },
+     100)
 
  }); // end click
 
@@ -44,9 +44,9 @@ $('.add_to_cart').click(function() {
 // load the modal, but delay it slightly for time to add to cart
 setTimeout(
   function() {
-   $('#cart').load('<%= show_in_modal_cart_path(current_user.cart.id) %>');
-},
-100)
+     $('#cart').load('<%= show_in_modal_cart_path(current_user.cart.id) %>');
+ },
+ 100)
 
  }); // end click
 // END ADD TO CART BEHAVIOR
@@ -234,14 +234,26 @@ margin-top: -5px">
         <td class="category_label"><%= Category.find(item.category_id).name %></td>
         <td><%= link_to "Show", inventory_item_path({ :inventory_id => params[:id], :id => item.id }),
         :class => "show_link", :'data-id' => item.id %></td>
-        <td><%= link_to "Edit", edit_inventory_item_path({ :inventory_id => params[:id], :id => item.id }) %></td>
         <% if @producer != current_user %>
         <td><%= link_to "Add to Cart", cart_items_path(:item_id => item), :remote => false, :method => :post, 
         :class => "add_to_cart" %>
         <% end %>
-        <td><%= link_to "Edit", edit_inventory_item_path({ :inventory_id => params[:id], :id => item.id }) %></td>
-        <td><%= link_to "Delete", inventory_item_path({ :inventory_id => params[:id], :id => item.id }), :confirm => 'Are you sure?', :method=>:delete %></td>
+        <td><%= link_to edit_inventory_item_path({ :inventory_id => params[:id], :id => item.id }) do %>
+            <i class="icon-wrench"></i>
+            <% end %>
+        </td>
+        <td><%= link_to inventory_item_path({ :inventory_id => params[:id], :id => item.id }), :confirm => 'Are you sure?', :method=>:delete do %>
+            <i class="icon-trash"></i>
+            <% end %>
+        </td>
+
         <% end %> 
+
+
+
+
+
+
 
         <!-- Otherwise you are either not logged in, or only a member -->
         <% else %>
@@ -270,28 +282,28 @@ margin-top: -5px">
             <td><%= item.is_available? %></td>
             <td class="category_label"><%= Category.find(item.category_id).name %></td>
             <td><%= link_to "Show", inventory_item_path({ :inventory_id => params[:id], :id => item.id }),
-        :class => "show_link", :'data-id' => item.id %></td>
-            </td>
-            <% end %>
-            <% end %>
-
-
-        </table>
-
-        <% else %>
-        <h4 class="inventory_title">
-            Currently Nothing For Sale
-        </h4>
-        <% end %> 
-        <br>
-
-        <!-- If the current user is an admin, coordinator, or the producer whose page this is -->
-        <% if signed_in? && (current_user.admin || current_user.coordinator || current_user == @producer) %>
-        <%= link_to 'Add Item', producer_new_inventory_items_path(params[:id]), :class=>"btn", :style=>"margin-left: 2.5%" %>
+            :class => "show_link", :'data-id' => item.id %></td>
+        </td>
+        <% end %>
         <% end %>
 
-        <!-- closing div's from the main show erb file -->
-    </div>
+
+    </table>
+
+    <% else %>
+    <h4 class="inventory_title">
+        Currently Nothing For Sale
+    </h4>
+    <% end %> 
+    <br>
+
+    <!-- If the current user is an admin, coordinator, or the producer whose page this is -->
+    <% if signed_in? && (current_user.admin || current_user.coordinator || current_user == @producer) %>
+    <%= link_to 'Add Item', producer_new_inventory_items_path(params[:id]), :class=>"btn", :style=>"margin-left: 2.5%" %>
+    <% end %>
+
+    <!-- closing div's from the main show erb file -->
+</div>
 </div>
 </div>
 

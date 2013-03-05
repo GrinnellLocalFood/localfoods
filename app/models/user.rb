@@ -29,6 +29,7 @@ class User < ActiveRecord::Base
    
 
   before_save :encrypt_password, :default_values, :update_inventory
+  after_save :create_cart
   
   before_validation :format_values
 
@@ -117,11 +118,15 @@ class User < ActiveRecord::Base
       if self.inventory.nil?
         if self.producer
           raise "Inventory could not be created" unless create_inventory
-          3.times{inventory.inventory_photos.build}
         end
       elsif !self.producer
           self.inventory.hide
       end
+    end
+
+    def create_cart
+      @cart = Cart.new(:user_id => self.id)
+      @cart.save
     end
 
 end

@@ -355,8 +355,41 @@ background-color: #595959;
           box-shadow: 0 1px 10px rgba(0, 0, 0, 0.1);*/
 }
 
+
+#big_table_header {
+  position: fixed;
+  top: 110px;
+  /*left: 40px;*/
+  /*margin-bottom: 120px;*/
+  /*top: 100px;*/
+}
+
+.big-table {
+  width: 100%;
+  margin-top:20px;
+}
+
+.big-table th,
+.big-table td {
+  padding: 6px;
+  line-height: 20px;
+  text-align: left;
+  vertical-align: top;
+  border-top: 1px solid #dddddd;
+}
+
+.big-table th {
+  font-weight: bold;
+}
+
+
+
+
+
 .producer-table {
   width: 95%;
+  /*margin-left: 20px;*/
+   /*margin-right: 20px;*/
   /*margin-top:100px;*/
 }
 
@@ -477,18 +510,10 @@ font-size: 13px;
 }
 
 #suggested_email {
-/*margin-top: -10px;*/
-/*margin-bottom: -10px;*/
-color: maroon;
-position: relative;
+  color: maroon;
+  position: relative;
   top: -20px;
-  /*bottom: -120px;*/
-/*margin-bottom: -20px;*/
 }
-
-/*position:absolute;
-  left:0px;
-  top:106px;*/
 
 .cart_table {
   /*width: 95%;*/
@@ -499,3 +524,8 @@ position: relative;
      -moz-border-radius: 0px;
           border-radius: 0px;
 }
+
+#item_category_id {
+  width: 100px;
+}
+

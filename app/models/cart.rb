@@ -14,7 +14,8 @@ def paypal_url(return_url)
     :business => 'gulati_1362345849_biz@grinnell.edu',
     :cmd => '_cart',
     :upload => 1,
-    :return => return_url,
+    :returnurl => return_url,
+    :noshipping => 1,
     :invoice => id
   }
   cart_items.each_with_index do |item, index|

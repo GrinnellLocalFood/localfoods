@@ -24,8 +24,8 @@
 
 <br><br>
 
-<button class="btn btn-primary" style="float:right; margin-left:8px;"><%= link_to("Checkout", @cart.paypal_url(inventories_path)) %></button>
-<%= link_to("Checkout", @cart.paypal_url(inventories_path)) %>
+
+<%= link_to("Checkout", @cart.paypal_url(inventories_path), :class=> "btn btn-primary", :style=>"float:right; margin-left:8px;") %>
 <%= link_to("Continue Shopping", inventories_path, :class=>"btn", :style=>"float:right;") %>
 
 </div>

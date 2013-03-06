@@ -54,4 +54,10 @@ skip_before_filter :require_login, :only => [:show, :index, :show_in_index, :sho
     end
   end
 
+
+  def add
+    @inventory = Inventory.find(params[:id])
+    20.times {@inventory.item.build}
+  end
+
 end

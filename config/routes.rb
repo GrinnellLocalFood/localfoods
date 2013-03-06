@@ -26,6 +26,10 @@ Localfoods::Application.routes.draw do
         get 'show_in_index'
       end
 
+    member do
+      get 'add'
+    end
+
     resources :items do
       collection do
         get 'producer_new'

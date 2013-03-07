@@ -1,0 +1,9 @@
+<%= form_for(@inventory, :url => url_for({ :controller => "inventories", :action => "update" })) do |f| %>
+	 <%= f.submit "Save Item", :class=>"btn btn-primary" %>
+	<%= f.fields_for :item do |item_form| %>
+		<% if item_form.object.new_record? %>
+			<!-- All of the same edit stuff would go in here, maybe we should pull it into a partial? -->
+		<% end %>
+	<% end %>
+	 <%= f.submit "Save Item", :class=>"btn btn-primary" %>
+<% end %>

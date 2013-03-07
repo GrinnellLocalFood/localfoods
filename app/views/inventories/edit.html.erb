@@ -1,0 +1,46 @@
+<div class="container">
+  <div class="row-fluid">
+    <div class="span12">
+
+<%= form_for(@inventory, :html=>{:class=>'form-horizontal', :multipart => true}) do |f| %>
+
+<%= f.submit "Save Inventory", :class=>"btn btn-primary" %>
+
+
+<table class="big-table">
+  <tr>
+        <th>Name</th>
+        <th>Category</th>
+        <th>Description</th>
+        <th>Price</th>
+        <th>Unit</th>
+        <th>Min Order</th>
+        <th>Max Order</th>
+        <th>Total Qty.</th>
+        <th></th>
+</tr>
+
+  <%= f.fields_for :item do |item_form| %>
+
+  <tr>
+    <td><%= item_form.text_field :name, :placeholder => "Name" , :style => "width: 160px;" %></td>
+    <td><%= item_form.collection_select(:category_id, Category.all, :id, :name, :style => "width:50px;") %></td>
+    <td><%= item_form.text_area :description, :placeholder=>"Description", :style => "width: 180px; height: 70px;" %></td>
+    <td>
+    <div class="input-prepend">
+      <span class="add-on">$</span>
+      <%= item_form.text_field :price, :placeholder=>"Unit Price", :class=>"span2", :id=>"inv_price_field",
+      :style => "width: 35px;" %>
+    </div>
+    </td>
+    <td><%= item_form.text_field :units, :placeholder=>"lb, oz, pint etc.", :style => "width: 50px;" %></td>
+    <td><%= item_form.text_field :minorder, :placeholder=>"Minimum Order", :style => "width: 35px;" %></td>
+    <td><%= item_form.text_field :maxorder, :placeholder=>"Maximum Order", :style => "width: 35px;" %></td>
+    <td><%= item_form.text_field :totalquantity, :placeholder=>"Total Quantity", :style => "width: 35px;" %></td>
+  </tr>
+  <% end %>
+ </table>
+ <%= f.submit "Save Inventory", :class=>"btn btn-primary" %>
+<% end %>
+
+

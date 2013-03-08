@@ -75,9 +75,9 @@ $('.show_link').click(function() {
     // refresh the modal so you can go to multiple items without refreshing the whole page
     setTimeout(
       function() {
-       $('#item_show').load(url_string);
-   },
-   100)
+         $('#item_show').load(url_string);
+     },
+     100)
 
  }); // end click
 
@@ -91,12 +91,11 @@ $('.show_link').click(function() {
 <!-- Modal for items -->
 <div id="item_modal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-header">
-    <!-- <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button> -->
     <h3 id="itemModalLabel"></h3>
-</div>
-<div class="modal-body">
+    </div>
+    <div class="modal-body">
     <p></p>
-</div>
+    </div>
 </div>
 <!-- End modal for items -->
 
@@ -108,12 +107,11 @@ $('.show_link').click(function() {
     <tr>
         <th>Name</th>
         <th>Producer</th>
+        <th>Description</th>
         <th>Price</th>
-        <th>Unit</th>
-        <th>Qty. Remaining</th>
         <th>Min Order</th>
-        <th>Available</th> 
         <th>Category</th>
+        <th>Available</th> 
         <th></th>
     </tr>
 
@@ -121,20 +119,16 @@ $('.show_link').click(function() {
 
     <tr>
 
-        <td class="item_row" data-id="<%= item.id %>" data-inventory ="<%= item.inventory.id %>">
-            <%= item.name %>
-        </td>
-     
+        <td class="item_row" data-id="<%= item.id %>" data-inventory ="<%= item.inventory.id %>"><%= item.name %></td>
         <td><%= link_to(item.inventory.display_name, inventory_path(item.inventory)) %></td>
-        <td><%= item.price %></td>
-        <td><b><%= item.units.singularize %> </b></td>
-        <td><%= item.num_remaining %></td>
-        <td><%= item.minorder %></td>
-        <!-- ADD ELSE IF TO item.available SO THAT IT DISPLAYS SOLD OUT IF QTY REMAINING IS 0 -->   
-        <td><%= item.is_available? %></td>
-        <!-- ADD ELSE IF TO item.available SO THAT IT DISPLAYS SOLD OUT IF QTY REMAINING IS 0 -->   
-        <td class="category_label"><%= Category.find(item.category_id).name %></td>
-        <td class="classic_show"><%= link_to "Show", inventory_item_path({ :inventory_id => item.inventory_id, :id => item.id }) %></td>
+        <td class="item_row" data-id="<%= item.id %>"><%= item.description.size < 50 ? item.description : item.description[0..50] + "..." %></td>
+        <td class="item_row" data-id="<%= item.id %>">
+            <%= number_to_currency(item.price) %><b>/<%= item.units.singularize %></b></td>
+        <td class="item_row" data-id="<%= item.id %>"><%= item.minorder %></td>
+        <td class="category_label item_row" data-id="<%= item.id %>"><%= Category.find(item.category_id).name %></td>
+        <td class="item_row" data-id="<%= item.id %>"><%= item.is_available? %></td>
+        <td class="classic_show"><%= link_to "Show", 
+            inventory_item_path({ :inventory_id => item.inventory_id, :id => item.id }) %></td>
 
     </tr>
 

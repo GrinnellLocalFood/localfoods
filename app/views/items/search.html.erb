@@ -1,5 +1,45 @@
 <!-- ITEMS search.html.erb -->
 
+<script type="text/javascript">
+$(document).ready(function() {
+
+// hide the non-javascript show link
+$('.classic_show').hide();
+// make the item rows clickable and have a pointer hover-over
+$('.item_row').css('cursor', 'pointer').addClass('show_link');
+
+// SHOW ITEM BEHAVIOR
+// after clicking "show"
+$('.show_link').click(function() {
+
+    // build the url for the item modal show page
+    var url_string = "/inventories/" + $(this).attr('data-inventory') + "/items/" + $(this).attr('data-id') + "/show_in_modal";
+
+    // fire the modal
+    $('#item_modal').modal({  
+      remote: url_string
+  });
+    // refresh the modal so you can go to multiple items without refreshing the whole page
+    setTimeout(
+      function() {
+         $('#item_show').load(url_string);
+     },
+     100)
+ }); // end click
+}); // end ready
+</script>
+
+<!-- Modal for items -->
+<div id="item_modal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-header">
+    <h3 id="itemModalLabel"></h3>
+    </div>
+    <div class="modal-body">
+    <p></p>
+    </div>
+</div>
+<!-- End modal for items -->
+
 <div class="container">
     <div class="row">
         <div class="span12">
@@ -12,12 +52,9 @@
                     <th>Inventory</th>
                     <th>Description</th>
                     <th>Price</th>
-                    <th>Total Qty.</th>
-                    <th>Qty. Ordered</th>
-                    <th>Min Order</th>
-                    <th>Max Order</th>         
+                    <th>Min Order</th>   
+                    <th>Category</th>   
                     <th>Available</th>
-                    <th>Category</th>
                     <th></th>        
                 </tr>
 
@@ -31,19 +68,17 @@
                     <%end%>
                 </td>
 
-                    <td><%= item.name %></td>
+                    <td class="item_row" data-id="<%= item.id %>"><%= item.name %></td>
                     <td><%= link_to(item.inventory.display_name, inventory_path(item.inventory)) %></td>
-                    <td><%= item.description %></td>
-                    <td><%= number_to_currency(item.price) %><b>/<%= item.units.singularize %></b></td>
-                    <!-- ADD QTY REMAINING HERE ONCE WE MERGE WITH NEW ITEM MODEL -->
-                    <td><%= item.totalquantity %></td>
-                    <td><%= item.totalordered %></td>
-                    <td><%= item.minorder %></td>
-                    <td><%= item.displayed_maxorder %></td>
-                    <!-- ADD ELSE IF TO item.available SO THAT IT DISPLAYS SOLD OUT IF QTY REMAINING IS 0 -->   
-                    <td><%= item.is_available? %></td>
-                    <td><%= Category.find(item.category_id).name %></td>
-                    <td><%= link_to "Show", inventory_item_path({ :inventory_id => item.inventory.id, :id => item.id }) %></td>
+                    <td class="item_row" data-id="<%= item.id %>"><%= item.description %></td>
+                    <td class="item_row" data-id="<%= item.id %>">
+                        <%= number_to_currency(item.price) %><b>/<%= item.units.singularize %></b></td>
+                    <td class="item_row" data-id="<%= item.id %>"><%= item.minorder %></td>
+                    <td class="item_row" data-id="<%= item.id %>"><%= Category.find(item.category_id).name %></td>
+                    <td class="item_row" data-id="<%= item.id %>"><%= item.is_available? %></td>
+                    <td class="classic_show">
+                        <%= link_to "Show", inventory_item_path({ :inventory_id => item.inventory.id, :id => item.id }) %>
+                    </td>
 
 
                     <% end %>

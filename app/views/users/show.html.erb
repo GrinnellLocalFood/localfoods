@@ -25,20 +25,19 @@
 
 				<% if @user.producer %>
 				<li class="nav-header" style="padding-left: 12px">Producer Options</li>
-				<li><%= link_to 'Inventory', inventory_path(@user.id) %></li>
+				<li><%= link_to 'View Inventory', inventory_path(@user.id) %></li>
 				<li><%= link_to 'Add Item', producer_new_inventory_items_path(@user.id) %></li>
+				<li><%= link_to 'Add Multiple Items', add_inventory_path(@user.id) %></li>
+				<li><%= link_to 'Edit Multiple Items', edit_inventory_path(@user.id) %></li>
 				<% end %>
 			</ul>
 		</div>
-
 
 		<!-- spacing for members, who don't have the above sidebar -->
 		<% else %>
 		<div class="span2">
 		</div>
 		<% end %>
-
-
 
 		<div class="span8 custom-block" style="margin-left:33px">
 
@@ -48,7 +47,6 @@
 				<%= notice %>
 			</div>
 			<% end %>
-
 
 			<% if alert %>
 			<div class="alert alert-success fade in">
@@ -65,29 +63,10 @@
 		</div>
 		<% end %>
 		
-
-
-
 		<h2 style="margin-left:60px">Hello <%= @user.first_name %>!</h2>
-
-
-
-
 		<br>
 
-
-
-
 		<table class="table" style="width:500px" align="center">
-			<!-- 	<tr>
-					<th style="color: gray">First Name</th>
-					<td><%= @user.first_name %></td>
-				</tr>
-
-				<tr>
-					<th style="color: gray">Last Name</th>
-					<td><%= @user.last_name %></td>
-				</tr> -->
 				<tr>
 					<th style="color: gray">Name</th>
 					<td style="text-align:right"><%= @user.first_name + " " + @user.last_name %></td>
@@ -123,24 +102,18 @@
 						, Admin 
 						<% end %>
 
-
 					</td>
-
 				</table>
 
 
 				<% if @user.producer %>
-
 				<br>
 				<ul class="nav nav-list">
 					<li class="divider"></li>
 				</ul>
 				<br>
-
-				<h4 style="margin-left:60px">Producer Information</h4>
-				
-				<br>
-				
+				<h4 style="margin-left:60px">Producer Information</h4>	
+				<br>			
 				<table class="table" style="width:500px" align="center">
 					<tr>
 						<th style="color: gray">Producer Name</th>

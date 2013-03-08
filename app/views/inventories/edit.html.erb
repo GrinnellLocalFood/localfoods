@@ -1,5 +1,5 @@
 <div class="container">
-  <div class="row-fluid">
+  <div class="row">
     <div class="span12">
 
       <%= form_for(@inventory, :html=>{:class=>'form-horizontal', :multipart => true}) do |f| %>
@@ -11,15 +11,16 @@
             <table class="big-table-header">
               <thead>
                 <tr>
-                  <th style="width: 180px;">Name</th>
-                  <th style="width: 120px;">Category</th>
-                  <th style="width: 210px;">Description</th>
-                  <th style="width: 70px;">Price</th>
-                  <th style="width: 50px;">Unit</th>
-                  <th style="width: 60px; font-size: 12px; padding-top:2px;">Min Order</th>
-                  <th style="width: 60px; font-size: 12px; padding-top:2px;">Max Order</th>
-                  <th style="width: 60px; font-size: 12px; padding-top:2px;">Total Qty.</th>
-
+                  <th style="width: 50px;">Photo</th>
+                  <th style="width: 130px;">Name</th>
+                  <th style="width: 110px;">Category</th>
+                  <th style="width: 190px;">Description</th>
+                  <th style="width: 80px;">Price</th>
+                  <th style="width: 30px;">Unit</th>
+                  <th style="width: 58px; font-size: 12px; padding-top:2px;">Min Order</th>
+                  <th style="width: 62px; font-size: 12px; padding-top:2px;">Max Order</th>
+                  <th style="width: 40px; font-size: 12px; padding-top:2px;">Quantity</th>
+                  <th style="width: 40px; font-size: 12px; padding-top:2px;">Available</th>
                 </tr>
               </thead>
             </table>
@@ -33,38 +34,78 @@
           <%= f.fields_for :item do |item_form| %>
 
           <tr>
-            <td><%= item_form.text_field :name, :placeholder => "Name" , :style => "width: 150px;" %></td>
+
+            <td>
+            <div class="fileupload fileupload-new" data-provides="fileupload">
+              <div class="fileupload-new thumbnail" style="width: 40px; height: 40px;">
+
+                <% if (item_form.object.item_photo_file_name.nil?) %>
+              </div>
+              <div class="fileupload-preview fileupload-exists thumbnail" style="width: 50px; height: 50px;"></div>
+              <span class="btn btn-file" style="padding: 0px 5px 0px 5px; margin-top: -6px; ">
+                <span class="fileupload-new" style="font-size: 11.5px;">Browse</span>
+                <span class="fileupload-exists" style="font-size: 12px;">Change</span>
+                <%= item_form.file_field :item_photo %>
+              </span>
+              <a href="#" class="btn fileupload-exists" data-dismiss="fileupload" 
+              style="font-size: 12px; margin-top: 2px; padding: 0px 4px 0px 3px;">Remove</a>
+
+              <% else %>
+              <%= image_tag(item_form.object.item_photo.url(:thumb)) %>
+            </div>
+            <div class="fileupload-preview fileupload-exists thumbnail" style="max-width: 50px; max-height: 50px;">
+            </div>
+
+            <div>
+              <span class="btn btn-file" style="padding: 0px 4px 0px 3px; margin-top: -6px; ">
+                <span class="fileupload-new" style="font-size: 11.5px;">Replace</span>
+                <span class="fileupload-exists" style="font-size: 12px;">Change</span>
+
+                <%= item_form.file_field :item_photo %>
+              </span>
+              <a href="#" class="btn fileupload-exists" data-dismiss="fileupload" 
+              style="font-size: 12px; margin-top: 2px; padding: 0px 4px 0px 3px;">Cancel</a>
+              <% end %>
+            </td>
+
+
+            <td><%= item_form.text_field :name, :style => "width: 120px;" %></td>
             <td><%= item_form.collection_select(:category_id, Category.all, :id, :name, {}, {:style => "width:110px;"}) %></td>
-            <td><%= item_form.text_area :description, :placeholder=>"Description", :style => "width: 180px; height: 70px;" %></td>
+            <td><%= item_form.text_area :description, :style => "width: 180px; height: 70px;" %></td>
             <td>
               <div class="input-prepend">
                 <span class="add-on">$</span>
-                <%= item_form.text_field :price, :placeholder=>"Unit Price", :class=>"span2", :id=>"inv_price_field",
-                :style => "width: 35px;" %>
+                <%= item_form.text_field :price, :class=>"span2", :id=>"inv_price_field",
+                :style => "width: 45px;" %>
               </div>
             </td>
-            <td><%= item_form.text_field :units, :style => "width: 50px;" %></td>
-            <td><%= item_form.text_field :minorder, :style => "width: 35px;" %></td>
-            <td><%= item_form.text_field :maxorder, :style => "width: 35px;" %></td>
-            <td><%= item_form.text_field :totalquantity, :style => "width: 35px;" %></td>
+            <td><%= item_form.text_field :units, :style => "width: 45px;" %></td>
+            <td><%= item_form.text_field :minorder, :style => "width: 45px;" %></td>
+            <td><%= item_form.text_field :maxorder, :style => "width: 45px;" %></td>
+            <td><%= item_form.text_field :totalquantity, :style => "width: 45px;" %></td>
             <td><%= item_form.check_box :available %></td>
-          </tr>
-          <% end %>
-        </tbody>
-      </table>
 
-<br><br>
+            </tr>
+            <% end %>
 
-      <footer class="navbar navbar-fixed-bottom" style="z-index: 0;">
-        <div class="navbar-bottom">
-          <div class="container">
-            <%= f.submit "Save Inventory", :class=>"btn btn-primary" %>
+
+
+
+          </tbody>
+        </table>
+
+        <br><br>
+
+        <footer class="navbar navbar-fixed-bottom" style="z-index: 0;">
+          <div class="navbar-bottom">
+            <div class="container">
+              <%= f.submit "Save Inventory", :class=>"btn btn-primary" %>
+            </div>
           </div>
-        </div>
-      </footer>
+        </footer>
 
-      <% end %>
+        <% end %>
 
+      </div>
     </div>
   </div>
-</div>

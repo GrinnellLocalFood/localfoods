@@ -299,6 +299,10 @@ margin-top: -5px">
             <td><%= item.is_available? %></td>
             <td class="category_label"><%= Category.find(item.category_id).name %></td>
             <td class="clasic_show"><%= link_to "Show", inventory_item_path({ :inventory_id => params[:id], :id => item.id }) %></td>
+            <% if @producer != current_user %>
+            <td><%= link_to "Add to Cart", cart_items_path(:item_id => item), :remote => false, :method => :post, 
+            :class => "add_to_cart" %>
+        <% end %>
         </td>
         <% end %>
         <% end %>

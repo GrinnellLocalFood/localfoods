@@ -3,7 +3,7 @@ class CartItemsController < ApplicationController
 		@item = Item.find(params[:item_id])
 		@cart_item = CartItem.where("cart_id = ? AND item_id = ?", current_user.cart, @item).first
 		if @cart_item.nil?
-			@cart_item = CartItem.create!(:cart_id => current_user.cart.id, :quantity => 1.0, :item_id => @item.id)
+			@cart_item = CartItem.create!(:cart_id => current_user.cart.id, :quantity => @item.minorder, :item_id => @item.id)
 			flash[:notice] = "Added #{@item.name} to cart"
 		else
 			@cart_item.quantity = @cart_item.quantity + 1.0

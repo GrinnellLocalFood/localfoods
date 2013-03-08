@@ -4,11 +4,12 @@
     <div class="row">
         <div class="span12">
             <h1 align="left">Search Results</h1>
-
+            <div class="pagination" align="left"><%= paginate @search %></div>
             <table class="producer-table table-hover" align="center">
                 <tr>
                     <th></th>
                     <th>Name</th>
+                    <th>Inventory</th>
                     <th>Description</th>
                     <th>Price</th>
                     <th>Total Qty.</th>
@@ -31,6 +32,7 @@
                 </td>
 
                     <td><%= item.name %></td>
+                    <td><%= link_to(item.inventory.display_name, inventory_path(item.inventory)) %></td>
                     <td><%= item.description %></td>
                     <td><%= number_to_currency(item.price) %><b>/<%= item.units.singularize %></b></td>
                     <!-- ADD QTY REMAINING HERE ONCE WE MERGE WITH NEW ITEM MODEL -->

@@ -1,9 +1,86 @@
-<%= form_for(@inventory, :url => url_for({ :controller => "inventories", :action => "update" })) do |f| %>
-	 <%= f.submit "Save Item", :class=>"btn btn-primary" %>
-	<%= f.fields_for :item do |item_form| %>
-		<% if item_form.object.new_record? %>
-			<!-- All of the same edit stuff would go in here, maybe we should pull it into a partial? -->
-		<% end %>
-	<% end %>
-	 <%= f.submit "Save Item", :class=>"btn btn-primary" %>
-<% end %>
+<div class="container">
+  <div class="row-fluid">
+    <div class="span12">
+
+      <%= form_for(@inventory, :html=>{:class=>'form-horizontal', :multipart => true}) do |f| %>
+
+      <header class="navbar navbar-fixed-top" style="z-index: 1000;">
+        <div class="navbar-inner-table">
+          <div class="container" style="margin-top: -8px;">
+
+            <table class="big-table-header">
+              <thead>
+                <tr>
+                  <th style="width: 180px;">Name</th>
+                  <th style="width: 120px;">Category</th>
+                  <th style="width: 210px;">Description</th>
+                  <th style="width: 70px;">Price</th>
+                  <th style="width: 50px;">Unit</th>
+                  <th style="width: 60px; font-size: 12px; padding-top:2px;">Min Order</th>
+                  <th style="width: 60px; font-size: 12px; padding-top:2px;">Max Order</th>
+                  <th style="width: 60px; font-size: 12px; padding-top:2px;">Total Qty.</th>
+
+                </tr>
+              </thead>
+            </table>
+          </div>
+        </div>
+      </header>
+
+      <table class="big-table" style="margin-top: 30px;">
+
+        <tbody>
+          <%= f.fields_for :item do |item_form| %>
+
+          <% if item_form.object.errors.any? %>
+			<!-- <div id="error_explanation"> -->
+			<div class="alert alert-error fade in">
+  			<a class="close" data-dismiss="alert" href="#">&times;</a>
+  			<h4><%= pluralize(item_form.object.errors.count, "error") %> prohibited this user from being saved:</h4>
+
+ 			 <br><ul>
+  			<% item_form.object.errors.full_messages.each do |msg| %>
+  			<li><%= msg %></li>
+  			
+  			<% end %>
+  			</div>
+  		   <% end %>
+
+          <% if item_form.object.new_record? %>
+          <tr>
+            <td><%= item_form.text_field :name, :placeholder => "Name" , :style => "width: 150px;" %></td>
+            <td><%= item_form.collection_select(:category_id, Category.all, :id, :name, {}, {:style => "width:110px;"}) %></td>
+            <td><%= item_form.text_area :description, :placeholder=>"Description", :style => "width: 180px; height: 70px;" %></td>
+            <td>
+              <div class="input-prepend">
+                <span class="add-on">$</span>
+                <%= item_form.text_field :price, :placeholder=>"Unit Price", :class=>"span2", :id=>"inv_price_field",
+                :style => "width: 35px;" %>
+              </div>
+            </td>
+            <td><%= item_form.text_field :units, :style => "width: 50px;" %></td>
+            <td><%= item_form.text_field :minorder, :style => "width: 35px;" %></td>
+            <td><%= item_form.text_field :maxorder, :style => "width: 35px;" %></td>
+            <td><%= item_form.text_field :totalquantity, :style => "width: 35px;" %></td>
+            <td><%= item_form.check_box :available %></td>
+          </tr>
+          <% end %>
+          <% end %>
+        </tbody>
+      </table>
+
+<br><br>
+
+      <footer class="navbar navbar-fixed-bottom" style="z-index: 0;">
+        <div class="navbar-bottom">
+          <div class="container">
+            <%= f.submit "Save Inventory", :class=>"btn btn-primary" %>
+          </div>
+        </div>
+      </footer>
+
+      <% end %>
+
+    </div>
+  </div>
+</div>

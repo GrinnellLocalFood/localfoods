@@ -61,6 +61,12 @@ end
     @item = Item.find(params[:id])
      if (current_user.admin || current_user.coordinator || current_user.id == @item.inventory_id)
         respond_to do |format|
+        @cart_items = CartItem.where('item_id = ?', @item.id)
+        unless @cart_items.nil?
+          @cart_items.each do |cart_item|
+            cart_item.destroy
+          end
+        end
         @item.destroy
         format.html { redirect_to(inventory_path(params[:inventory_id])) }
         format.xml  { head :ok }

@@ -4,8 +4,8 @@ class Inventory < ActiveRecord::Base
 	has_many :item, :foreign_key => "inventory_id", :autosave => true
 	has_many :inventory_photos, :dependent => :destroy
 	accepts_nested_attributes_for :inventory_photos
-	accepts_nested_attributes_for :item
-
+	
+	accepts_nested_attributes_for :item, :reject_if => proc { |a| a['name'].blank? || a['name'].nil?}
 	attr_accessible :url, :description, :display_name, :photo, :item, :item_attributes
 	validates :display_name, :presence => true, :if => "!self.hidden?"
 

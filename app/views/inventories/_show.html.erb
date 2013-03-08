@@ -196,8 +196,6 @@ margin-top: -5px">
 
     <!-- ADD QTY REMAINING HERE ONCE WE MERGE WITH NEW ITEM MODEL -->
 
-    <!-- If the current user is an admin, coordinator, or the producer whose page this is -->
-    <% if current_user && (current_user.admin || current_user.coordinator || current_user == @producer) %>
     <tr>
         <th></th>
         <th>Name</th>
@@ -221,33 +219,37 @@ margin-top: -5px">
     <% @item.each do |item| %>
     <tr>
 
-<td>
- <% if !(item.item_photo_file_name.nil?) %>
-                    <media class="item_row" data-id="<%= item.id %>">
-                        <%= image_tag(item.item_photo.url(:thumb)) %>
-                    </media>
-                    <%end%>
-</td>
+        <td>
+            <% if !(item.item_photo_file_name.nil?) %>
+            <media class="item_row" data-id="<%= item.id %>">
+                <%= image_tag(item.item_photo.url(:thumb)) %>
+            </media>
+            <%end%>
+        </td>
 
         <td class="item_row" data-id="<%= item.id %>"><%= item.name %></td>
         <td class="item_row" data-id="<%= item.id %>"><%= item.description.size < 50 ? item.description : item.description[0..50] + "..." %></td>
         <td><%= number_to_currency(item.price) %></td>
         <td><b><%= item.units.singularize %></b></td>
-        <!-- ADD QTY REMAINING HERE ONCE WE MERGE WITH NEW ITEM MODEL -->
         <td><%= item.totalquantity %></td>
         <td><%= item.totalordered %></td>
         <td><%= item.minorder %></td>
         <td><%= item.displayed_maxorder %></td>
-        <!-- ADD ELSE IF TO item.available SO THAT IT DISPLAYS SOLD OUT IF QTY REMAINING IS 0 -->   
         <td><%= item.is_available? %></td>
         <td class="category_label"><%= Category.find(item.category_id).name %></td>
         <td class="clasic_show"><%= link_to "Show", inventory_item_path({ :inventory_id => params[:id], :id => item.id })%></td>
 
-        <% if @producer != current_user %>
+        <!-- add to cart -->
+        <% if current_user && (@producer != current_user) %>
+
         <td><%= link_to "Add to Cart", cart_items_path(:item_id => item), :remote => false, :method => :post, 
         :class => "add_to_cart" %>
         <% end %>
+        <!-- end add to cart -->
 
+
+        <!-- inventory controls -->
+        <% if current_user && (current_user.admin || current_user.coordinator || current_user == @producer) %>
         <td>
             <%= link_to edit_inventory_item_path({ :inventory_id => params[:id], :id => item.id }), :'data-toggle'=>"tooltip", :title=>"Edit Item" do %>
             <i class="icon-wrench"></i>
@@ -259,66 +261,27 @@ margin-top: -5px">
             <i class="icon-trash"></i>
             <% end %>
         </td>
-
-
-
+        <% end %>
+        <!-- end inventory controls -->
 
     </tr>
-        <% end %> 
-
-
-
-
-
-
-
-        <!-- Otherwise you are either not logged in, or only a member -->
-        <% else %>
-        <tr>
-            <th>Name</th>
-            <th>Description</th>
-            <th>Price</th>
-            <th>Qty. Remaining</th>
-            <th>Min Order</th>
-            <th>Max Order</th> 
-            <th>Available</th>
-            <th>Category</th>
-            <th></th>
-        </tr>
-
-
-        <% @item.each do |item| %>
-        <tr>
-            <td class="item_row" data-id="<%= item.id %>"><%= item.name %></td>
-            <td class="item_row" data-id="<%= item.id %>"><%= item.description %></td>
-            <td><%= number_to_currency(item.price) %><b>/<%= item.units.singularize %></b></td>
-            <td><%= item.num_remaining %></td>
-            <td><%= item.minorder %></td>
-            <td><%= item.displayed_maxorder %></td>
-            <!-- ADD ELSE IF TO item.available SO THAT IT DISPLAYS SOLD OUT IF QTY REMAINING IS 0 -->   
-            <td><%= item.is_available? %></td>
-            <td class="category_label"><%= Category.find(item.category_id).name %></td>
-            <td class="clasic_show"><%= link_to "Show", inventory_item_path({ :inventory_id => params[:id], :id => item.id }) %></td>
-        </td>
-        <% end %>
-        <% end %>
-
-
-    </table>
-
-    <% else %>
-    <h4 class="inventory_title">
-        Currently Nothing For Sale
-    </h4>
     <% end %> 
-    <br>
+</table>
 
-    <!-- If the current user is an admin, coordinator, or the producer whose page this is -->
-    <% if signed_in? && (current_user.admin || current_user.coordinator || current_user == @producer) %>
-    <%= link_to 'Add Item', producer_new_inventory_items_path(params[:id]), :class=>"btn", :style=>"margin-left: 2.5%" %>
-    <% end %>
 
-    <!-- closing div's from the main show erb file -->
+<% else %>
+<h4 class="inventory_title">
+    Currently Nothing For Sale
+</h4>
+<% end %> 
+<br>
+
+<!-- If the current user is an admin, coordinator, or the producer whose page this is -->
+<% if signed_in? && (current_user.admin || current_user.coordinator || current_user == @producer) %>
+<%= link_to 'Add Item', producer_new_inventory_items_path(params[:id]), :class=>"btn", :style=>"margin-left: 2.5%" %>
+<% end %>
+
+<!-- closing div's from the main show erb file -->
 </div>
 </div>
 </div>

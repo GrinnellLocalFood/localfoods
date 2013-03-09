@@ -38,7 +38,6 @@ skip_before_filter :require_login, :only => [:show, :index, :show_in_index, :sho
 
   def edit
     @inventory = Inventory.find(params[:id])
-    @edit = true
   end
 
   def update
@@ -49,10 +48,10 @@ skip_before_filter :require_login, :only => [:show, :index, :show_in_index, :sho
           format.html { redirect_to(inventory_path(params[:id]), :notice => 'Items were successfully updated.') }
           format.xml  { head :ok }
       else
-        if(@edit)
-          format.html { render :action => "edit" }
-        else
+        if(params[:add])
           format.html { render :action => "add", :reload => true }
+        else
+          format.html { render :action => "edit" }
         end
         format.xml  { render :xml => @inventory.errors, :status => :unprocessable_entity }
       end

@@ -1,7 +1,6 @@
 <script type="text/javascript">
 $(document).ready(function() {
 
-
 // hide the non-javascript show link
 $('.clasic_show').hide();
 
@@ -40,8 +39,6 @@ $('.add_to_cart').attr('data-remote', true);
 
 $('.add_to_cart').click(function() {
 
-
-
   $('#cart_modal').modal({
     remote: '<%= show_in_modal_cart_path(current_user.cart.id) %>'
 });
@@ -57,10 +54,7 @@ setTimeout(
  }); // end click
 // END ADD TO CART BEHAVIOR
 
-
 <% end %>
-
-
 
 // something about the partial makes this need to be here too
 $('[data-toggle="tooltip"]').tooltip();
@@ -139,9 +133,6 @@ margin-top: -5px">
 <% end %>
 </div>
 <% end %>
-
-
-
 
 <% if !(@producer.inventory.inventory_photos.empty?) %>
 <div id="myCarousel" class="carousel slide" data-interval="4000"style="float:left; margin-bottom: 0px; margin-right: 10px; margin-top: -20px;" >

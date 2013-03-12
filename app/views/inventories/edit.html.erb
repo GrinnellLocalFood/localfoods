@@ -33,8 +33,22 @@
         <tbody>
           <%= f.fields_for :item do |item_form| %>
 
-          <tr>
 
+      <% if item_form.object.errors.any? %>
+      <div class="big_form_alert big_form_alert-error fade in">
+        <a class="close" data-dismiss="alert" href="#">&times;</a>
+        <h4><%= pluralize(item_form.object.errors.count, "error") %> prohibited the following items from being saved:</h4>
+
+       <br>
+        <% item_form.object.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+        <% end %>
+
+        </div>
+         <% end %>
+
+
+          <tr>
             <td>
             <div class="fileupload fileupload-new" data-provides="fileupload" style="margin-bottom: 0px;">
               <div class="fileupload-new thumbnail" style="width: 50px; height: 50px;">

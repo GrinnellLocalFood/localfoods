@@ -4,7 +4,7 @@
 		
 		<% if (current_user.admin || current_user.coordinator || (@user.producer && current_user == @user)) %>
 		
-		<div class="span2-half offset2-half custom-block" style="padding-bottom: 20px; padding-top: 10px;">
+		<div class="span2-half custom-block" style="padding-bottom: 20px; padding-top: 10px;">
 			<ul class="nav nav-list">
 
 				<% if current_user.admin || current_user.coordinator %>

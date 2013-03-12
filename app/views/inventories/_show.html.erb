@@ -135,23 +135,38 @@ margin-top: -5px">
 <% end %>
 
 <% if !(@producer.inventory.inventory_photos.empty?) %>
-<div id="myCarousel" class="carousel slide" data-interval="4000"style="float:left; margin-bottom: 0px; margin-right: 10px; margin-top: -20px;" >
-    <!-- Carousel items -->
-    <div class="carousel-inner">
-        <% @producer.inventory.inventory_photos.each_with_index do
-          |inventory_photo, index| %>
-          <% if index == 0 %>
-          
-          <div class="active item">
-            <%= image_tag inventory_photo.photo.url(:gallery_size) %>
-        </div>
-        <% else %>
-        <div class="item">
-            <%= image_tag inventory_photo.photo.url(:gallery_size) %>
-        </div>
+<div id="myCarousel" class="carousel slide" data-interval="4000" 
+    style="float:left; margin-bottom: 0px; margin-right: 10px; margin-top: -20px;" >
+
+        <% if @producer.inventory.inventory_photos.length > 1 %>
+
+        <ol class="carousel-indicators">
+            <% @producer.inventory.inventory_photos.each_with_index do |inventory_photo, index| %>
+
+            <% if index == 0 %>
+            <li data-target="#myCarousel" data-slide-to="<%= index %>" class="active"></li>
+            <% else %>
+            <li data-target="#myCarousel" data-slide-to="<%= index %>"></li>
+              <% end %>
+            <% end %>
+        </ol>
         <% end %>
-        <% end %>
-    </div>
+
+        <!-- Carousel items -->
+        <div class="carousel-inner">
+            <% @producer.inventory.inventory_photos.each_with_index do |inventory_photo, index| %>
+            <% if index == 0 %>    
+              <div class="active item">
+                <%= image_tag inventory_photo.photo.url(:gallery_size) %>
+              </div>
+            <% else %>
+            <div class="item">
+                <%= image_tag inventory_photo.photo.url(:gallery_size) %>
+            </div>
+            <% end %>  
+            <% end %>  
+        </div>
+ 
     <!-- Carousel nav -->
 
     <% if (@producer.inventory.inventory_photos.length > 1) %>
@@ -160,6 +175,9 @@ margin-top: -5px">
     <% end %>
 </div>
 <% end %>
+
+
+
 
 <div style="text-align: left; margin-right: 20px; margin-left: 20px; margin-top: 0px">
 
@@ -195,12 +213,9 @@ margin-top: -5px">
         <th>Min Order</th>
         <th>Category</th>    
         <th>Available</th>
-
-       
         <% if @producer != current_user %>
         <th></th>
         <% end %>
-
         <% if current_user && (current_user.admin || current_user.coordinator || current_user == @producer) %>
         <th></th>
         <th></th>

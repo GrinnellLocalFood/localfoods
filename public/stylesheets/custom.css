@@ -150,19 +150,42 @@ margin-top: 4px;
   list-style: square;
 }
 
+.big_form_alert { 
+padding: 8px 0px 8px 0px;
+width: 100%;
+text-align: center;
+margin-top: 25px;
+margin-bottom: -30px;
+color: #c09853;
+text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
+background-color: #fcf8e3;
+}
+
+.big_form_alert-danger,
+.big_form_alert-error {
+  color: #b94a48;
+  background-color: #f2dede;
+  border-color: #eed3d7;
+}
+
+.big_form_alert .close {
+  position: relative;
+  bottom: 5px;
+  right: 12px;
+  line-height: 20px;
+}
+
 .home_alert { 
  position:absolute;
   left:0px;
   top:106px;
 padding: 8px 0px 8px 0px;
-/*text-indent: 14px;*/
 width: 100%;
 text-align: center;
 
 color: #c09853;
 text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
 background-color: #fcf8e3;
-
 }
 
 .home_alert-success {

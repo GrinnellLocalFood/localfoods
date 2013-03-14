@@ -42,6 +42,10 @@ class Item < ActiveRecord::Base
 		end
 	end
 
+	def cartable
+		num_remaining > 0 && ApplicationState.orders_open? && self.available
+	end
+
 	def displayed_maxorder
 		if self.maxorder.blank?
 			"None"

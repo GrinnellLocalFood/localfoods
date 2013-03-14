@@ -22,6 +22,7 @@ $(this).attr('disabled', true);
 }); // close document ready
 </script>
 
+
 <div id="cart">
 
 <table class="table table-hover">
@@ -35,23 +36,9 @@ $(this).attr('disabled', true);
   <% for cart_item in @cart.cart_items %>
   <td><%= cart_item.item.name %></td>
   <td>
-    <%= form_for(cart_item, :url => url_for({ :controller => "cart_items", :action => "update", :cart_item_id => cart_item.id}), :remote => true,
-    :html => {:class => 'form-horizontal'} ) do |f| %>
-    <div>
 
-      <div class="input-append">
-        <%= f.text_field :quantity, :style => "width:40px", :class => "quantity_field"%>
-
-
-       <!-- <%= f.submit "Update" %> -->
-        <button class="btn cart_update" type="submit" value="Update" name="commit" data-remote="false">   
-          Update
-        </button>   
-
-      </div>
-
-    </div>
-    <% end %>
+    <%= render :partial => 'cart_items/edit', :locals => {:cart_item => cart_item} %>
+    
   </td>
   <td class="cart_item_price"><%= number_to_currency(cart_item.item.price) %></td>
   <td class="cart_full_price"><%= number_to_currency(cart_item.quantity*cart_item.item.price) %></td>

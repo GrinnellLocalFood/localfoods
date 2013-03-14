@@ -245,7 +245,7 @@ margin-top: -5px">
         <td class="clasic_show"><%= link_to "Show", inventory_item_path({ :inventory_id => params[:id], :id => item.id })%></td>
 
         <!-- add to cart -->
-        <% if current_user && (@producer != current_user) %>
+        <% if current_user && (@producer != current_user) && item.num_remaining > 0 && item.available %>
 
         <td style="width: 100px;">
             <%= link_to "Add to Cart", cart_items_path(:item_id => item), :remote => false, :method => :post, 

@@ -1,0 +1,4 @@
+
+<%= link_to @cart_item.item.name, inventory_item_path(:inventory_id => @cart_item.item.inventory_id, :id => @cart_item.item.id)%>
+<%= link_to @cart_item.cart.user.first_name, cart_path(@cart_item.cart.id) %>
+<%= render :partial => 'edit', :locals => {:cart_item => @cart_item} %>

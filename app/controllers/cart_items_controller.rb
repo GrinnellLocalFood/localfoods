@@ -11,8 +11,9 @@ class CartItemsController < ApplicationController
 		end
 		else
 			@cart_item.quantity = @cart_item.quantity + 1
-			@cart_item.save
-			flash[:notice] = "Updated #{@item.name} in cart"
+			if @cart_item.save
+				flash[:notice] = "Updated #{@item.name} in cart"
+			end
 		end
 
 		# redirect_to url_for :controller => 'cart', :action => 'show_in_modal', :id => current_user.cart

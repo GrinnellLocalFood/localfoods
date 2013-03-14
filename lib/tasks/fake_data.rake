@@ -76,6 +76,7 @@ def make_items
         :minorder => minorder,
         :maxorder => maxorder,
         :price => price,
+        :totalquantity => totalquantity,
         :available => available,
         :category_id => category_id,
         :inventory_id => inventory_id)

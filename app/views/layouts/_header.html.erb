@@ -29,7 +29,7 @@ $('#cart_link').html('Cart (<%= current_user.cart.cart_items.size %>) ');
   </div>
   <div class="modal-footer">
     <button class="btn" data-dismiss="modal" aria-hidden="true">Continue Shopping</button>
-    <button class="btn btn-primary">Checkout</button>
+    <%= link_to("Checkout", url_for(:controller => "purchases", :action => "new"), :class=> "btn btn-primary", :style=>"float:right; margin-left:8px;") %>
 
   </div>
 </div>

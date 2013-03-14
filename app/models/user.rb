@@ -60,6 +60,18 @@ class User < ActiveRecord::Base
     save!
   end
 
+  def name
+    first_name + " " + last_name
+  end
+
+  def pending_payment
+    pending = 0.0
+    Purchase.where("user_id = ? AND paid = ?", id, false).each do |purchase|
+      pending += purchase.full_price
+    end
+    return pending
+  end
+
   private
 
     def generate_token(column)

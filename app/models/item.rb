@@ -30,7 +30,7 @@ class Item < ActiveRecord::Base
 
 	def is_available?
 		if ApplicationState.orders_open?
-			if num_remaining == 0
+			if num_remaining < minorder
 				"Sold Out"
 			elsif self.available
 				"Yes"
@@ -43,7 +43,7 @@ class Item < ActiveRecord::Base
 	end
 
 	def cartable
-		num_remaining > 0 && ApplicationState.orders_open? && self.available
+		num_remaining > minorder && ApplicationState.orders_open? && self.available
 	end
 
 	def displayed_maxorder

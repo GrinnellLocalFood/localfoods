@@ -42,7 +42,7 @@ Localfoods::Application.routes.draw do
     end
 
   end
-
+  resources :purchases, :only => [:new, :create, :index]
   resources :cart_items
   resources :cart do
     member do
@@ -68,6 +68,7 @@ Localfoods::Application.routes.draw do
   match '/admin_coord_newitem', :to => 'items#admin_coord_new'
   match '/admin_coord_createitem', :to => 'items#admin_create'
   match '/editorderstate', :to => 'application_states#editorderstate' 
+  match '/all_orders', :to => 'purchases#all_orders'
 
   resources :password_resets
   resources :inventory_photos, :only => [:destroy]

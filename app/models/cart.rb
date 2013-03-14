@@ -29,5 +29,11 @@ def paypal_url(return_url)
   "https://www.sandbox.paypal.com/cgi-bin/webscr?" + values.to_query
 end
 
+def clear_all_items
+  cart_items.each do |cart_item|
+    cart_item.destroy
+  end
+end
+
 
 end

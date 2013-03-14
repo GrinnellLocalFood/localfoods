@@ -11,11 +11,11 @@ class Cart < ActiveRecord::Base
 
 def paypal_url(return_url)
   values = {
-    :business => 'gulati_1362345849_biz@grinnell.edu',
+    :business => 'royaditi@grinnell.edu',
     :cmd => '_cart',
     :upload => 1,
-    :returnurl => return_url,
-    :noshipping => 1,
+    :return_url => return_url,
+    :no_shipping => 1,
     :invoice => id
   }
   cart_items.each_with_index do |item, index|
@@ -29,11 +29,9 @@ def paypal_url(return_url)
   "https://www.sandbox.paypal.com/cgi-bin/webscr?" + values.to_query
 end
 
-def clear_all_items
-  cart_items.each do |cart_item|
-    cart_item.destroy
+  def clear_all_items
+    cart_items.each do |cart_item|
+      cart_item.destroy
+    end
   end
-end
-
-
 end

@@ -69,6 +69,7 @@ Localfoods::Application.routes.draw do
   match '/admin_coord_createitem', :to => 'items#admin_create'
   match '/editorderstate', :to => 'application_states#editorderstate' 
   match '/all_orders', :to => 'purchases#all_orders'
+  match '/process_order', :to => 'purchases#process_order'
 
   resources :password_resets
   resources :inventory_photos, :only => [:destroy]

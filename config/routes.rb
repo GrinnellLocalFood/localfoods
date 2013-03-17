@@ -17,7 +17,7 @@ Localfoods::Application.routes.draw do
 
 
 # How to make a link to a path like /inventories/:id/foo:
-# 
+#
 # inventory = Inventory.find(1)
 # link_to inventory(foo) will produce localhost/inventories/1/foo
 
@@ -42,7 +42,7 @@ Localfoods::Application.routes.draw do
     end
 
   end
-
+  resources :purchases, :only => [:new, :create, :index]
   resources :cart_items
   resources :cart do
     member do
@@ -62,12 +62,14 @@ Localfoods::Application.routes.draw do
   resources :application_states
  
  
-  match '/register',  :to => 'users#new'
-  match '/login',  :to => 'sessions#new'
+  match '/register', :to => 'users#new'
+  match '/login', :to => 'sessions#new'
   match '/logout', :to => 'sessions#destroy'
   match '/admin_coord_newitem', :to => 'items#admin_coord_new'
   match '/admin_coord_createitem', :to => 'items#admin_create'
-  match '/editorderstate', :to => 'application_states#editorderstate' 
+  match '/editorderstate', :to => 'application_states#editorderstate'
+  match '/all_orders', :to => 'purchases#all_orders'
+  match '/process_order', :to => 'purchases#process_order'
 
   resources :password_resets
   resources :inventory_photos, :only => [:destroy]
@@ -89,48 +91,48 @@ Localfoods::Application.routes.draw do
   # first created -> highest priority.
 
   # Sample of regular route:
-  #   match 'products/:id' => 'catalog#view'
+  # match 'products/:id' => 'catalog#view'
   # Keep in mind you can assign values other than :controller and :action
 
   # Sample of named route:
-  #   match 'products/:id/purchase' => 'catalog#purchase', :as => :purchase
+  # match 'products/:id/purchase' => 'catalog#purchase', :as => :purchase
   # This route can be invoked with purchase_url(:id => product.id)
 
   # Sample resource route (maps HTTP verbs to controller actions automatically):
-  #   resources :products
+  # resources :products
 
   # Sample resource route with options:
-  #   resources :products do
-  #     member do
-  #       get 'short'
-  #       post 'toggle'
-  #     end
+  # resources :products do
+  # member do
+  # get 'short'
+  # post 'toggle'
+  # end
   #
-  #     collection do
-  #       get 'sold'
-  #     end
-  #   end
+  # collection do
+  # get 'sold'
+  # end
+  # end
 
   # Sample resource route with sub-resources:
-  #   resources :products do
-  #     resources :comments, :sales
-  #     resource :seller
-  #   end
+  # resources :products do
+  # resources :comments, :sales
+  # resource :seller
+  # end
 
   # Sample resource route with more complex sub-resources
-  #   resources :products do
-  #     resources :comments
-  #     resources :sales do
-  #       get 'recent', :on => :collection
-  #     end
-  #   end
+  # resources :products do
+  # resources :comments
+  # resources :sales do
+  # get 'recent', :on => :collection
+  # end
+  # end
 
   # Sample resource route within a namespace:
-  #   namespace :admin do
-  #     # Directs /admin/products/* to Admin::ProductsController
-  #     # (app/controllers/admin/products_controller.rb)
-  #     resources :products
-  #   end
+  # namespace :admin do
+  # # Directs /admin/products/* to Admin::ProductsController
+  # # (app/controllers/admin/products_controller.rb)
+  # resources :products
+  # end
 
   # You can have the root of your site routed with "root"
   # just remember to delete public/index.html.

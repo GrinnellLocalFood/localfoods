@@ -1,2 +1,0 @@
-$('#producer_info').html('<%= escape_javascript render(:partial =>
-"show")%>')

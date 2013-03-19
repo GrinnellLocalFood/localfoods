@@ -1,7 +1,6 @@
 //= require jquery
-//= require bootstrap
-//= require_tree
-//= require jquery-tablesorter/jquery.metadata
-//= require jquery-tablesorter/jquery.tablesorter
-//= require jquery-tablesorter/jquery.tablesorter.widgets
-//= require jquery-tablesorter/addons/pager/jquery.tablesorter.pager
+//= require jquery_ujs
+//= require bootstrap.min
+//= require bootstrap-fileupload.min
+
+//= require show_in_index

@@ -1,6 +1,7 @@
 source 'http://rubygems.org'
 
 gem 'rails', '3.2.11'
+gem 'jquery-rails'
 gem 'paperclip', '2.7.0'
 gem 'cocaine', '0.3.2'
 gem 'sunspot_rails'
@@ -14,7 +15,6 @@ group :development, :test do
   gem 'sqlite3','1.3.5'
   gem 'rspec-rails', '2.11.0'
   gem 'factory_girl_rails', '1.4.0'
-  gem 'jquery-rails', '2.0.2'
   gem 'capybara'
   gem 'ffaker'
   

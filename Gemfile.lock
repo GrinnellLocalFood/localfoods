@@ -220,5 +220,6 @@ DEPENDENCIES
   sunspot_test
   sunspot_with_kaminari
   therubyracer
+  tilt
   uglifier
   yui-compressor

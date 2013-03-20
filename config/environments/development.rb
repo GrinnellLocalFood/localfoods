@@ -36,18 +36,15 @@ Localfoods::Application.configure do
   config.less.compress = false
 
   # Expands the lines which load the assets
-   # config.assets.debug = false
+   config.assets.debug = true
 
-   # config.assets.digest = false
-   # config.assets.initialize_on_precompile = true
-
-
-   # config.less.paths << "#{Rails.root}/app/assets/stylesheets/bootstrap"
+  config.assets.digest = true
+  # config.assets.initialize_on_precompile = true
 
   # path for development environment
   config.action_mailer.default_url_options = {:host => "localhost:3000"}
 
- Paperclip.options[:command_path] = '/usr/bin/'
+  Paperclip.options[:command_path] = '/usr/bin/'
 
 end
 

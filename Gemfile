@@ -9,6 +9,7 @@ gem 'progress_bar'
 gem 'sunspot_with_kaminari'
 gem 'kaminari'
 gem 'foreman'
+gem 'tilt'
 
 gem 'jquery-rails'
 

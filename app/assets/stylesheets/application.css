@@ -1,5 +1,7 @@
 /* 
-*= require bootstrap/bootstrap.less
+*= require bootstrap
 *= require bootstrap-fileupload
+*= require bootstrap-changes
 *= require custom
 */
+

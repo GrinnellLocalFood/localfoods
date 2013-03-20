@@ -13,6 +13,7 @@ gem 'foreman'
 gem 'jquery-rails'
 
 # It seems production needs at least the LESS gem
+gem 'less'
 gem 'less-rails'
 
 group :development, :test do
@@ -26,7 +27,7 @@ end
 group :assets do
    gem 'uglifier'
    gem 'execjs'
-   gem 'therubyracer', :platforms => :ruby
+   gem 'therubyracer'
    gem 'yui-compressor'
 end
 

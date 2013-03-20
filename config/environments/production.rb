@@ -16,6 +16,7 @@ Localfoods::Application.configure do
 
   # Use YUI instead of default LESS compressor
   config.assets.css_compressor = :yui
+  # config.assets.js_compressor = :yui
 
   # Compress LESS
   config.less.compress = true

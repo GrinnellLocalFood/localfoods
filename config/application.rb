@@ -56,11 +56,17 @@ module Localfoods
     # Enable the asset pipeline
     config.assets.enabled = true
 
-    config.assets.initialize_on_precompile = true
+    # told to do this somewhere
+    
+    # config.assets.initialize_on_precompile = false
+    # config.app_generators.stylesheet_engine :less
+    # config.less.compress = false
+
+
 
     # Pretty sure don't actually need this, but leaving for now in case
     config.less.paths << "#{Rails.root}/app/assets/stylesheets/bootstrap"
-    config.less.compress = true
+    # config.less.compress = true
 
     # Version of your assets, change this if you want to expire all your assets
     config.assets.version = '1.0'

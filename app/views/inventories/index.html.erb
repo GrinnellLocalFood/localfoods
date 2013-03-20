@@ -3,11 +3,11 @@
 $(document).ready(function() {
 
 // make active or inactive whatever producer link you click
-	$('.producer_link a').click(function() {
-		$('li').each(function() {
-			$(this).removeClass('active')
-		});
-		$(this).parent().addClass('active');
+$('.producer_link a').click(function() {
+	$('li').each(function() {
+		$(this).removeClass('active')
+	});
+	$(this).parent().addClass('active');
 
 // hide all the old categories if you're just clicking between producers
 $('.category_filter').hide();
@@ -23,8 +23,7 @@ $('.category_list').show();
 	<div class="row-fluid">
 		<div class="tabbable tabs-left">
 
-
-			<ul class="span2 nav nav-tabs" style="width: 100px;">
+			<ul class="nav nav-tabs" style="width: 100px;">
 
 				<li class="producer_link active"> 
 					<%= link_to("All Products", show_all_categories_path, 
@@ -41,19 +40,23 @@ $('.category_list').show();
 				
 				<% end %>
 
-					<li class="nav-header category_list">Categories</li>
-				</ul>
+				<li class="nav-header category_list">
+					Categories
+				</li>
+			</ul>
 
-
-		<div class="tab-content span10 custom-block" style="width: 820px;">
-			<span id="producer_info">
-				<div align="center">
-					<%= render :partial => 'categories/show', :locals => {:@items => Item.all} %>
+			<div class="tab-content custom-block">
+				<div id="producer_info">
+					<div align="center">
+						<%= render :partial => 'categories/show', :locals => {:@items => Item.all} %>
+					</div>
 				</div>
-			</span>
+			</div>
+
 		</div>
 	</div>
 </div>
+
 
 
 

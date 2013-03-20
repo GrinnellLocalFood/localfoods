@@ -1,7 +1,11 @@
 /* 
 *= require bootstrap
 *= require bootstrap-fileupload
-*= require custom
+*
 *= require bootstrap-changes
+*= require custom
+*
+*= require responsive
+*= require custom-responsive
 */
 

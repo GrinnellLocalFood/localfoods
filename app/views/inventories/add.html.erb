@@ -50,15 +50,21 @@
           <% if item_form.object.new_record? %>
           <tr>
 
-            <td>
+            <td style="max-width: 60px">
             <div class="fileupload fileupload-new" data-provides="fileupload" style="margin-bottom: 0px;">
               <div class="fileupload-new thumbnail" style="width: 50px; height: 50px;">
 
                 <% if (item_form.object.item_photo_file_name.nil?) %>
               </div>
-              <div class="fileupload-preview fileupload-exists thumbnail" style="width: 50px; height: 50px;"></div>
+
+              <div class="fileupload-preview fileupload-exists thumbnail" style="width: 50px; height: 50px;">
+              </div>
+
               <span class="btn btn-file" style="padding: 0px; margin-top: -6px; ">
-                <span class="fileupload-new" style="padding: 0px 22px 0px 22px;"><i class="icon-upload"></i></span>
+                <span class="fileupload-new" style="padding: 0px 22px 0px 22px;">
+                  <i class="icon-upload"></i>
+                </span>
+
                 <span class="fileupload-exists" style="padding: 0px 6px 0px 6px;"><i class="icon-upload"></i></span>
                 <%= item_form.file_field :item_photo %>
               </span>

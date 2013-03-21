@@ -17,6 +17,10 @@
   width: 180px;
 }
 
+.span8-half {
+  width: 660px;
+}
+
 .span10-half {
   width: 820px;
 }
@@ -57,6 +61,7 @@ margin-top: 4px;
   /*background-size: cover;*/
 }
 
+
 #hero-image-unit {
   position:absolute;
   left:0px;
@@ -67,59 +72,39 @@ margin-top: 4px;
   background-repeat: no-repeat;
   width:100%;
   height:400px;
+  z-index: -1;
 }
 
 .hero-text {
   margin-top: 85px;
   margin-left: 20%;
   margin-right: 5%;
-  width: 690px;
-  text-align: justify;
- /* margin-right: 10%;*/
-  /*margin-left: 500px;*/
+  max-width: 720px;
+  text-align: left;
   color: white;
 }
 
-.hero-text h2{
-  font-size: 35px;
-  line-height: 1;
-  letter-spacing: -1px;
+.hero-text h1 {
+  font-size: 250%;
 }
 
-.hero-text p{
-  font-size: 20px;
-  line-height: 1.5;
-  letter-spacing: -1px;
+.hero-text p {
+  font-size: 125%;
 }
 
-#hero-image-unit h2 {
-  min-width: 800px;
-  margin-top: 60px;
-  margin-right: 10%;
-  font-size: 35px;
-  line-height: 1;
-  letter-spacing: -1px;
-  color: white;
-
+#user-sidebar {
+  padding-bottom: 20px; 
+  padding-top: 10px;"
 }
 
-#hero-image-unit li {
-  line-height: 30px;
+#inventory-sidebar {
+  width: 100px;
+  position:fixed;
 }
 
-#hero-image-unit p {
-  min-width: 450px;
-  text-align: justify;
-  margin-top: 20px;
-  margin-left: 40%;
-  margin-right: 10%;
-  font-size: 20px;
-  line-height: 1.5;
-  letter-spacing: -1px;
-  color: white;
-
+#inventory-panel {
+  margin-left: 100px;
 }
-
 
 #error_explanation {
  -moz-border-radius: 7px;

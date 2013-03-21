@@ -19,10 +19,6 @@
 
     <h1 align="center">Edit Account</h1>
 
-
-
-
-    <!-- <h4 align="center" style="color:gray; margin-top:20px; margin-bottom:0px">Member Information</h4> -->
     <br>
 
     <% if current_user.admin || current_user.coordinator %>
@@ -123,7 +119,7 @@
 
 
 <div class="control-group">
-  <label class="control-label" style="margin-left: 0px; margin-right: 0px;">
+  <label class="control-label">
   <%= photo_form.label(:photo, "Gallery Photo") %>
   </label>
 

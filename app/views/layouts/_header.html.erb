@@ -80,7 +80,7 @@ $('#cart_link').html('Cart (<%= current_user.cart.cart_items.size %>) ');
         </li>   
         <% else %>
 
-
+        <span id="header-login">
         <%= form_for(:session, :url => sessions_path, 
         :html=>{:class=>'navbar-form pull-right'}) do |f| %>
 
@@ -95,6 +95,7 @@ $('#cart_link').html('Cart (<%= current_user.cart.cart_items.size %>) ');
         <% end %>
 
         <% end %>
+      </span>
 
       </ul>
 

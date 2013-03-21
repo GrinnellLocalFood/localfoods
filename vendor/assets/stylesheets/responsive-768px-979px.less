@@ -18,19 +18,36 @@
 
 
 // Make all grid-sized elements block level again
-  [class*="span"],
-  .uneditable-input[class*="span"], // Makes uneditable inputs full-width when using grid sizing
-  .row-fluid [class*="span"] {
-    float: none;
-    display: block;
-    width: 100%;
-    margin-left: 0;
-    .box-sizing(border-box);
+  // [class*="span"],
+  // .uneditable-input[class*="span"], // Makes uneditable inputs full-width when using grid sizing
+  // .row-fluid [class*="span"] {
+  //   float: none;
+  //   display: block;
+  //   width: 100%;
+  //   margin-left: 0;
+  //   .box-sizing(border-box);
+  // }
+
+  .form-horizontal .control-label {
+    width: 160px;
   }
 
- .row-fluid [class*="offset"]:first-child {
-    margin-left: 0;
+  .form-horizontal .controls {
+    margin-left: 180px;
   }
+
+  #header-login input{
+    display: inline;
+  }
+
+  #session_email, #session_password {
+    width: 100px;
+  }
+
+
+ // .row-fluid [class*="offset"]:first-child {
+ //    margin-left: 0;
+ //  }
 
 
     // FORM FIELDS

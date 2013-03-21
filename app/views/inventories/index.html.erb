@@ -23,7 +23,7 @@ $('.category_list').show();
 	<div class="row-fluid">
 		<div class="tabbable tabs-left">
 
-			<ul class="nav nav-tabs" style="width: 100px;">
+			<ul id="inventory-sidebar" class="nav nav-tabs">
 
 				<li class="producer_link active"> 
 					<%= link_to("All Products", show_all_categories_path, 
@@ -45,7 +45,7 @@ $('.category_list').show();
 				</li>
 			</ul>
 
-			<div class="tab-content custom-block">
+			<div id="inventory-panel" class="tab-content custom-block">
 				<div id="producer_info">
 					<div align="center">
 						<%= render :partial => 'categories/show', :locals => {:@items => Item.all} %>

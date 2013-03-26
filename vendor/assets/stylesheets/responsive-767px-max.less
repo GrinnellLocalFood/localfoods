@@ -5,21 +5,13 @@
 // this is the width that everything collapses to 100% width
 @media (max-width: 767px) {
 
-  // Padding to set content in a bit
-  body {
-    padding-left: 20px;
-    padding-right: 20px;
-  }
-  // Negative indent the now static "fixed" navbar
-  .navbar-fixed-top,
-  .navbar-fixed-bottom,
-  .navbar-static-top {
-    margin-left: -20px;
-    margin-right: -20px;
-  }
   // Remove padding on container given explicit padding set on body
   .container-fluid {
     padding: 0;
+  }
+
+  .navbar-fixed-top, {
+    margin-bottom: 10px;
   }
 
   // TYPOGRAPHY
@@ -37,26 +29,33 @@
     }
   }
 
-  .hero-text {
+  #hero-image-unit {
+    margin-top: -10px;
+  }
+
+  #hero-text {
     margin-left: 10%;
     margin-right: 10%;
   }
 
-  .hero-text h1 {
+  #hero-text h1 {
     font-size: 200%;
     line-height: 110%;
   }
 
-  .hero-text p {
+  #hero-text p {
    font-size: 110%;
-  }
+ }
 
 
   // GRID & CONTAINERS
   // -----------------
   // Remove width from containers
+  // Along with padding to set content in a bit
   .container {
     width: auto;
+    padding-left: 20px;
+    padding-right: 20px;
   }
   // Fluid rows
   .row-fluid {
@@ -120,29 +119,29 @@
     vertical-align: top;
   }
 
-.form-horizontal {
+  .form-horizontal {
     .control-label {
       width: 180px;
       margin-right: 10px;
     }
     .controls {
      margin-left: 200px;
-    }
-  }
+   }
+ }
 
  #header-login input{
-    display: inline;
-    margin-top: 15px;
-  }
+  display: inline;
+  margin-top: 15px;
+}
 
-  #session_email, #session_password {
-    width: 100px;
-  }
+#session_email, #session_password {
+  width: 100px;
+}
 
-  .navbar-inner-table {
-    top: -30px;
-    margin-bottom: -50px;
-  }
+.navbar-inner-table {
+  top: -30px;
+  margin-bottom: -50px;
+}
 
 
   // Modals
@@ -159,7 +158,21 @@
 
 
 
-// hero stuff
+  #logohead {
+  }
+
+  #nav-collapse {
+    display: block;
+  }
+
+  #top-nav {
+    margin-top: 10px;
+  }
+
+#search-header {
+  width: 120px;
+}
+
 }
 
 

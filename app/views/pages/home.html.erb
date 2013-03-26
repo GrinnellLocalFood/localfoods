@@ -14,21 +14,30 @@
 
 
 
-<div id ="hero-image-unit">
+<div id="hero-image-unit">
 	<div class="container-fluid" align="right">
-	<div class="row-fluid">
-		<div class="hero-text" style="max-width: 720px;">
-			<h1>Welcome to the Grinnell Local Foods Coop</h1>
-			<p>Support local farmers, local economy, and environmental sustainability by purchasing quality food grown right here in central Iowa.
+		<div class="row-fluid">
+			<div id="hero-text">
+				<h1>Welcome to the Grinnell Local Foods Coop</h1>
+				<p>Support local farmers, local economy, and environmental sustainability by purchasing quality food grown right here in central Iowa.
 
-				<br><br>
-				<% if !signed_in? %>
-				<%= link_to "Sign Up!", register_path,
-				:class=>"btn btn-large" %>
+					<br><br>
+					<% if !signed_in? %>
+					<%= link_to "Sign Up!", register_path,
+					:class=>"btn btn-large" %>
 
-				<% end %>
+					<% end %>
 				</p>
 			</div>
+		</div>
+	</div>
+</div>
+
+
+<div class="container">
+	<div class="row-fluid">
+		<div id="announcements" class="span12 well" style="">
+			<h2>Announcements (Temp)</h2>
 		</div>
 	</div>
 </div>

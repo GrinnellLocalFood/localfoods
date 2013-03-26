@@ -1,5 +1,5 @@
 body {
- padding-top: 100px;
+ padding-top: 120px;
 }
 
 /*The width change here and the margin change below
@@ -36,6 +36,11 @@ body {
   float: left;
   margin-right: 0px;
   border-right: 1px solid #ddd;
+}
+
+.navbar .btn-navbar {
+ margin-right: 0px;
+ margin-left: 0px;
 }
 
 .navbar-form .input-append,

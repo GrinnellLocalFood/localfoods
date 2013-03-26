@@ -70,6 +70,9 @@ Localfoods::Application.routes.draw do
   match '/editorderstate', :to => 'application_states#editorderstate'
   match '/all_orders', :to => 'purchases#all_orders'
   match '/process_order', :to => 'purchases#process_order'
+  match '/about', :to => 'pages#about'
+  match '/pickup_info', :to => 'pages#pickup_info'
+
 
   resources :password_resets
   resources :inventory_photos, :only => [:destroy]
@@ -85,6 +88,8 @@ Localfoods::Application.routes.draw do
   end
 
   root :to => 'pages#home'
+
+
 
 
   # The priority is based upon order of creation:

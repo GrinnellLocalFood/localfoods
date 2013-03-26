@@ -45,7 +45,8 @@ $('.category_list').show();
 				</li>
 			</ul>
 
-			<div id="inventory-panel" class="tab-content custom-block">
+<!-- temporary min width -->
+			<div id="inventory-panel" class="tab-content custom-block" style="min-width: 600px;">
 				<div id="producer_info">
 					<div align="center">
 						<%= render :partial => 'categories/show', :locals => {:@items => Item.all} %>

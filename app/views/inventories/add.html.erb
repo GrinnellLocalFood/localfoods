@@ -1,14 +1,14 @@
-<div class="container">
-  <div class="row-fluid">
+<div class="container" style="min-width: 940px;">
+  <div class="row">
     <div class="span12">
 
       <%= form_for(@inventory, :url => url_for(:controller => 'inventories', :action => 'update', :add => true), :html=>{:class=>'form-horizontal', :multipart => true}) do |f| %>
 
       <header class="navbar navbar-fixed-top" style="z-index: 1000;">
         <div class="navbar-inner-table">
-          <div class="container" style="margin-top: -8px;">
+          <div class="container" style="margin-top: -8px; min-width: 940px;">
 
-            <table class="big-table-header">
+            <table class="big-table-header" style="min-width: 940px;">
               <thead>
                 <tr>
                   <th style="width: 60px;">Photo</th>
@@ -29,7 +29,6 @@
       </header>
 
       <table class="big-table" style="margin-top: 30px;">
-
         <tbody>
           <%= f.fields_for :item do |item_form| %>
 
@@ -48,6 +47,7 @@
   		   <% end %>
 
           <% if item_form.object.new_record? %>
+        
           <tr>
 
             <td style="max-width: 60px">

@@ -18,9 +18,9 @@
 
 
 				<% if current_user.admin %>
-					<li><%= link_to 'Add User', new_user_path %></li>
-					<li><%= link_to 'Open/Close Orders', '/editorderstate' %></li>
-					<li><%= link_to 'Categories', categories_path %></li>
+				<li><%= link_to 'Add User', new_user_path %></li>
+				<li><%= link_to 'Open/Close Orders', '/editorderstate' %></li>
+				<li><%= link_to 'Categories', categories_path %></li>
 				<% end %>
 
 				<% if @user.producer %>
@@ -39,7 +39,7 @@
 		</div>
 		<% end %>
 
-		<div class="span8 custom-block">
+		<div class="span8 custom-block" style="">
 
 			<% if notice %>
 			<div class="alert alert-success fade in">
@@ -67,72 +67,85 @@
 		<br>
 
 		<table class="table" style="width: 85%;" align="center">
+			<tr>
+				<th style="color: gray">Name</th>
+				<td style="text-align:right"><%= @user.first_name + " " + @user.last_name %></td>
+			</tr>
+
+			<tr>
+				<th style="color: gray">Email</th>
+				<td style="text-align:right"><%= @user.email %></td>
+			</tr>
+
+			<tr>
+				<th style="color: gray">Phone</th>
+				<td style="text-align:right"><%= @user.phone %></td>
+			</tr>
+
+			<tr>
+				<th style="color: gray">Roles</th>
+				<td style="text-align:right">
+
+					<% if @user.member %>
+					Member
+					<% end %>
+
+					<% if @user.producer %>
+					, Producer 
+					<% end %>
+
+					<% if @user.coordinator %>
+					, Coordinator 
+					<% end %>
+
+					<% if @user.admin %>
+					, Admin 
+					<% end %>
+
+				</td>
+			</table>
+
+
+			<% if @user.producer %>
+			<br>
+			<ul class="nav nav-list">
+				<li class="divider"></li>
+			</ul>
+			<br>
+			<h4 style="margin-left: 7.5%;">Producer Information</h4>	
+			<br>			
+			<table class="table" style="width:85%;" align="center">
 				<tr>
-					<th style="color: gray">Name</th>
-					<td style="text-align:right"><%= @user.first_name + " " + @user.last_name %></td>
+					<th style="color: gray">Producer Name</th>
+					<td style="text-align:right"><%= @user.inventory.display_name %></td>
 				</tr>
 
 				<tr>
-					<th style="color: gray">Email</th>
-					<td style="text-align:right"><%= @user.email %></td>
+					<th style="color: gray">Website</th>
+					<td style="text-align:right"><%= @user.inventory.url %></td>
 				</tr>
 
 				<tr>
-					<th style="color: gray">Phone</th>
-					<td style="text-align:right"><%= @user.phone %></td>
+					<th style="color: gray">Description</th>
+					<td style="text-align:right"><%= @user.inventory.description %></td>
 				</tr>
 
+
+				<% if !(@user.inventory.inventory_photos.empty?) %>
 				<tr>
-					<th style="color: gray">Roles</th>
+					<th style="color: gray">Gallery Photos</th>
 					<td style="text-align:right">
-
-						<% if @user.member %>
-						Member
+						<% @user.inventory.inventory_photos.each do |inventory_photo| %>
+						<%= image_tag inventory_photo.photo.url(:thumb), :style=>"margin-bottom: 4px;" %>
 						<% end %>
-
-						<% if @user.producer %>
-						, Producer 
-						<% end %>
-
-						<% if @user.coordinator %>
-						, Coordinator 
-						<% end %>
-
-						<% if @user.admin %>
-						, Admin 
-						<% end %>
-
 					</td>
-				</table>
+				</tr>
 
+				<% end %>
 
-				<% if @user.producer %>
-				<br>
-				<ul class="nav nav-list">
-					<li class="divider"></li>
-				</ul>
-				<br>
-				<h4 style="margin-left: 7.5%;">Producer Information</h4>	
-				<br>			
-				<table class="table" style="width:85%;" align="center">
-					<tr>
-						<th style="color: gray">Producer Name</th>
-						<td style="text-align:right"><%= @user.inventory.display_name %></td>
-					</tr>
+			</table>
 
-					<tr>
-						<th style="color: gray">Website</th>
-						<td style="text-align:right"><%= @user.inventory.url %></td>
-					</tr>
-
-					<tr>
-						<th style="color: gray">Description</th>
-						<td style="text-align:right"><%= @user.inventory.description %></td>
-					</tr>
-
-				</table>
-
-			</div>
-			<% end %>
 		</div>
+		<% end %>
 	</div>
+</div>

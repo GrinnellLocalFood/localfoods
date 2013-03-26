@@ -107,7 +107,9 @@ $('#cart_link').html('Cart (<%= current_user.cart.cart_items.size %>) ');
     <div class="container">
      <ul class="sub-nav pull-left">
 
-      <li><%= link_to("Browse Products", inventories_path, :style=>"color:white") %> </li>
+      <li><%= link_to("Browse Products", inventories_path, :style=>"color: white;") %> </li>
+      <li><a href="#" style="color: white;">Pickup Info</a></li>
+      <li><a href="#" style="color: white;">About Us</a></li>
 
     </ul>
 

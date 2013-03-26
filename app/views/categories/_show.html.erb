@@ -11,12 +11,20 @@ var list_of_categories = new Array();
 $('.category_label').each(function() {
     // save the category name for easy use
     var category_name = $(this).text();
-        // if the current category isn't there, add it
-        if (($.inArray(category_name, list_of_categories)) == -1) {
-            $('.category_list').after('<li class="category_filter"><a style="padding-left: 4px;">' + category_name + '</a></li>');
+        // if the current category isn't there & it isn't Other, add it
+        if (($.inArray(category_name, list_of_categories) == -1) && (category_name != 'Other')) {
             list_of_categories.push(category_name);
         }
 }); // end each
+
+// sort the array & push Other to the end
+list_of_categories.sort().push('Other');
+
+for (var i = list_of_categories.length - 1; i >= 0; i--) {
+ $('.category_list').after('<li class="category_filter"><a style="padding-left: 4px;">' + 
+    list_of_categories[i] + '</a></li>');
+};
+
 
 // add the 'All' option to the category list
 $('.category_list').after('<li class="category_filter active"><a style="padding-left: 4px;">' + 'All' + '</a></li>');
@@ -26,6 +34,13 @@ list_of_categories.push('All');
 $('.category_filter').click(function() {
     // save the category name for easy use
     var category_name = $(this).text();
+
+    // change the title name of the page
+    if (category_name == 'All') {
+        $('#all_title').html('All Products');
+    } else {
+    $('#all_title').html('All ' + category_name);
+}
 
     // go through all the inventory on the to decide what to hide/show
     $('.category_label').each(function() {
@@ -101,7 +116,7 @@ $('.show_link').click(function() {
 
 
 
-<h2 align="center">All Products</h2>
+<h2 id= "all_title" align="center">All Products</h2>
 <table class="producer-table table-hover" align="center">
 
     <tr>

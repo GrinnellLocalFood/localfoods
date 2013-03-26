@@ -84,7 +84,7 @@ $('.show_link').click(function() {
     var url_string = "/inventories/" + $(this).attr('data-inventory') + "/items/" + $(this).attr('data-id') + "/show_in_modal";
 
     // fire the modal
-    $('#item_modal').modal({  
+    $('#item-modal').modal({  
       remote: url_string
   });
     // refresh the modal so you can go to multiple items without refreshing the whole page
@@ -104,8 +104,9 @@ $('.show_link').click(function() {
 
 
 <!-- Modal for items -->
-<div id="item_modal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<div id="item-modal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
     <h3 id="itemModalLabel"></h3>
     </div>
     <div class="modal-body">
@@ -122,11 +123,11 @@ $('.show_link').click(function() {
     <tr>
         <th>Name</th>
         <th>Producer</th>
-        <th>Description</th>
+        <th class="hidden-phone">Description</th>
         <th>Price</th>
-        <th>Min Order</th>
+        <th class="hidden-phone">Min Order</th>
         <th>Category</th>
-        <th>Available</th> 
+        <th class="hidden-phone">Available</th> 
         <th></th>
     </tr>
 
@@ -136,12 +137,12 @@ $('.show_link').click(function() {
 
         <td class="item_row" data-id="<%= item.id %>" data-inventory ="<%= item.inventory.id %>"><%= item.name %></td>
         <td><%= link_to(item.inventory.display_name, inventory_path(item.inventory)) %></td>
-        <td class="item_row" data-id="<%= item.id %>"><%= item.description.size < 50 ? item.description : item.description[0..50] + "..." %></td>
+        <td class="item_row hidden-phone" data-id="<%= item.id %>"><%= item.description.size < 50 ? item.description : item.description[0..50] + "..." %></td>
         <td class="item_row" data-id="<%= item.id %>">
             <%= number_to_currency(item.price) %><b>/<%= item.units.singularize %></b></td>
-        <td class="item_row" data-id="<%= item.id %>"><%= item.minorder %></td>
+        <td class="item_row hidden-phone" data-id="<%= item.id %>"><%= item.minorder %></td>
         <td class="category_label item_row" data-id="<%= item.id %>"><%= Category.find(item.category_id).name %></td>
-        <td class="item_row" data-id="<%= item.id %>"><%= item.is_available? %></td>
+        <td class="item_row hidden-phone" data-id="<%= item.id %>"><%= item.is_available? %></td>
         <td class="classic_show"><%= link_to "Show", 
             inventory_item_path({ :inventory_id => item.inventory_id, :id => item.id }) %></td>
 

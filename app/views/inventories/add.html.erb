@@ -1,4 +1,4 @@
-<div class="container" style="min-width: 940px;">
+<div class="container" style="min-width: 940px; padding-left: 0px; padding-right: 0px;">
   <div class="row">
     <div class="span12">
 
@@ -6,6 +6,11 @@
 
       <header class="navbar navbar-fixed-top" style="z-index: 1000;">
         <div class="navbar-inner-table">
+
+          <div class="hidden-desktop big-form-warning">
+            Be warned, this form is best used on a larger screen  
+          </div>
+
           <div class="container" style="margin-top: -8px; min-width: 940px;">
 
             <table class="big-table-header" style="min-width: 940px;">
@@ -28,29 +33,31 @@
         </div>
       </header>
 
-      <table class="big-table" style="margin-top: 30px;">
+      <div class="hidden-desktop warning-spacing"></div>
+
+      <table class="big-table">
         <tbody>
           <%= f.fields_for :item do |item_form| %>
 
 
-      <% if item_form.object.errors.any? %>
-			<div class="big_form_alert big_form_alert-error fade in">
-  			<a class="close" data-dismiss="alert" href="#">&times;</a>
-  			<h4><%= pluralize(item_form.object.errors.count, "error") %> prohibited the following items from being saved:</h4>
+          <% if item_form.object.errors.any? %>
+          <div class="big_form_alert big_form_alert-error fade in">
+           <a class="close" data-dismiss="alert" href="#">&times;</a>
+           <h4><%= pluralize(item_form.object.errors.count, "error") %> prohibited the following items from being saved:</h4>
 
- 			 <br>
-  			<% item_form.object.errors.full_messages.each do |msg| %>
-  			<li><%= msg %></li>
-  			<% end %>
+           <br>
+           <% item_form.object.errors.full_messages.each do |msg| %>
+           <li><%= msg %></li>
+           <% end %>
 
-  			</div>
-  		   <% end %>
+         </div>
+         <% end %>
 
-          <% if item_form.object.new_record? %>
-        
-          <tr>
+         <% if item_form.object.new_record? %>
 
-            <td style="max-width: 60px">
+         <tr>
+
+          <td style="max-width: 60px">
             <div class="fileupload fileupload-new" data-provides="fileupload" style="margin-bottom: 0px;">
               <div class="fileupload-new thumbnail" style="width: 50px; height: 50px;">
 
@@ -97,7 +104,7 @@
         </tbody>
       </table>
 
-<br><br>
+      <br><br>
 
       <footer class="navbar navbar-fixed-bottom" style="z-index: 0;">
         <div class="navbar-bottom">

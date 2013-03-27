@@ -43,10 +43,6 @@
 
 }
 
-/*#top-nav > li {
-  float: right;
-}*/
-
 .center {
   display:inline-block;
 }
@@ -89,7 +85,8 @@
 }
 
 #hero-text h1 {
-  font-size: 250%;
+  font-size: 230%;
+  color: white;
 }
 
 #hero-text p {
@@ -302,7 +299,8 @@
   padding-right: 20px;
   padding-left: 20px;
   color: white;
-  background-color: #595959;
+  /*background-color: #595959;*/
+  background-color: #555;
   -webkit-box-shadow: 0 5px 4px rgba(0, 0, 0, 0.085);
   -moz-box-shadow: 0 5px 4px rgba(0, 0, 0, 0.085);
   box-shadow: 0 5px 4px rgba(0, 0, 0, 0.085);

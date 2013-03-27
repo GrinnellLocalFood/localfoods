@@ -44,18 +44,24 @@
 
 // Typography
 // -------------------------
-@sansFontFamily: "Helvetica Neue", Helvetica, Arial, sans-serif;
+// @sansFontFamily: "Helvetica Neue", Helvetica, Arial, sans-serif;
+@sansFontFamily: "Open Sans";
 @serifFontFamily: Georgia, "Times New Roman", Times, serif;
 @monoFontFamily: Monaco, Menlo, Consolas, "Courier New", monospace;
+
+
 
 @baseFontSize: 14px;
 @baseFontFamily: @sansFontFamily;
 @baseLineHeight: 20px;
 @altFontFamily: @serifFontFamily;
 
-@headingsFontFamily: inherit; // empty to use BS default, @baseFontFamily
+@headingsLetterSpacing: -1px;
+
+// @headingsFontFamily: inherit; // empty to use BS default, @baseFontFamily
+@headingsFontFamily: inherit;
 @headingsFontWeight: bold; // instead of browser default, bold
-@headingsColor: inherit; // empty to use BS default, @textColor
+@headingsColor: @gray; // empty to use BS default, @textColor
 
 
 // Component sizing

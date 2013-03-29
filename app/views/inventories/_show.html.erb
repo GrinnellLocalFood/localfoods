@@ -17,7 +17,7 @@ $('.show_link').click(function() {
     var url_string = "/inventories/<%= @producer.inventory.id %>/items/" + $(this).attr('data-id') + "/show_in_modal";
 
     // fire the modal
-    $('#item-modal').modal({  
+    $('#item_modal').modal({  
       remote: url_string
   });
     // refresh the modal so you can go to multiple items without refreshing the whole page
@@ -64,20 +64,12 @@ var list_of_categories = new Array();
 $('.category_label').each(function() {
     // save the category name for easy use
     var category_name = $(this).text();
-        // if the current category isn't there & it isn't Other, add it
-        if (($.inArray(category_name, list_of_categories) == -1) && (category_name != 'Other')) {
+        // if the current category isn't there, add it
+        if (($.inArray(category_name, list_of_categories)) == -1) {
+            $('.category_list').after('<li class="category_filter"><a style="padding-left: 4px;">' + category_name + '</a></li>');
             list_of_categories.push(category_name);
         }
 }); // end each
-
-// sort the array & push Other to the end
-list_of_categories.sort().push('Other');
-
-for (var i = list_of_categories.length - 1; i >= 0; i--) {
- $('.category_list').after('<li class="category_filter"><a style="padding-left: 4px;">' + 
-    list_of_categories[i] + '</a></li>');
-};
-
 
 // add the 'All' option to the category list
 $('.category_list').after('<li class="category_filter active"><a style="padding-left: 4px;">' + 'All' + '</a></li>');
@@ -118,9 +110,9 @@ $('.category_filter').click(function() {
 
 
 <!-- Modal for items -->
-<div id="item-modal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<div id="item_modal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-header">
-    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+    <!-- <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button> -->
     <h3 id="itemModalLabel"></h3>
 </div>
 <div class="modal-body">
@@ -144,17 +136,18 @@ margin-top: -5px">
 <% end %>
 
 <% if !(@producer.inventory.inventory_photos.empty?) %>
-<div id="inventory-carousel" class="carousel slide" data-interval="4000">
+<div id="myCarousel" class="carousel slide" data-interval="4000" 
+    style="float:left; margin-bottom: 0px; margin-right: 10px; margin-top: -20px;" >
 
         <% if @producer.inventory.inventory_photos.length > 1 %>
 
-        <ol class="carousel-indicators hidden-phone">
+        <ol class="carousel-indicators">
             <% @producer.inventory.inventory_photos.each_with_index do |inventory_photo, index| %>
 
             <% if index == 0 %>
-            <li data-target="#inventory-carousel" data-slide-to="<%= index %>" class="active"></li>
+            <li data-target="#myCarousel" data-slide-to="<%= index %>" class="active"></li>
             <% else %>
-            <li data-target="#inventory-carousel" data-slide-to="<%= index %>"></li>
+            <li data-target="#myCarousel" data-slide-to="<%= index %>"></li>
               <% end %>
             <% end %>
         </ol>
@@ -178,8 +171,8 @@ margin-top: -5px">
     <!-- Carousel nav -->
 
     <% if (@producer.inventory.inventory_photos.length > 1) %>
-    <a class="carousel-control left hidden-phone" href="#inventory-carousel" data-slide="prev">&lsaquo;</a>
-    <a class="carousel-control right hidden-phone" href="#inventory-carousel" data-slide="next">&rsaquo;</a>
+    <a class="carousel-control left" href="#myCarousel" data-slide="prev">&lsaquo;</a>
+    <a class="carousel-control right" href="#myCarousel" data-slide="next">&rsaquo;</a>
     <% end %>
 </div>
 <% end %>
@@ -216,17 +209,17 @@ margin-top: -5px">
     <tr>
         <th></th>
         <th>Name</th>
-        <th class="hidden-phone">Description</th>
+        <th>Description</th>
         <th>Price</th>
-        <th class="hidden-phone">Min Order</th>
+        <th>Min Order</th>
         <th>Category</th>    
-        <th class="hidden-phone">Available</th>
+        <th>Available</th>
         <% if @producer != current_user %>
-        <th class="hidden-phone"></th>
+        <th></th>
         <% end %>
         <% if current_user && (current_user.admin || current_user.coordinator || current_user == @producer) %>
         <th></th>
-        <th class="hidden-phone"></th>
+        <th></th>
         <% end %>
   
     </tr>
@@ -243,19 +236,19 @@ margin-top: -5px">
         </td>
 
         <td class="item_row" data-id="<%= item.id %>"><%= item.name %></td>
-        <td class="item_row hidden-phone" data-id="<%= item.id %>"><%= item.description.size < 50 ? item.description : item.description[0..50] + "..." %></td>
+        <td class="item_row" data-id="<%= item.id %>"><%= item.description.size < 50 ? item.description : item.description[0..50] + "..." %></td>
         <td class="item_row" data-id="<%= item.id %>">
             <%= number_to_currency(item.price) %><b>/<%= item.units.singularize %></b></td>
-        <td class="item_row hidden-phone" data-id="<%= item.id %>"><%= item.minorder %></td>
+        <td class="item_row" data-id="<%= item.id %>"><%= item.minorder %></td>
         <td class="item_row category_label" data-id="<%= item.id %>"><%= Category.find(item.category_id).name %></td>
-        <td class="item_row hidden-phone" data-id="<%= item.id %>"><%= item.is_available? %></td>
+        <td class="item_row" data-id="<%= item.id %>"><%= item.is_available? %></td>
 
         <td class="clasic_show"><%= link_to "Show", inventory_item_path({ :inventory_id => params[:id], :id => item.id })%></td>
 
         <!-- add to cart -->
         <% if current_user && (@producer != current_user) && item.cartable %>
 
-        <td class="hidden-phone" style="width: 100px;">
+        <td style="width: 100px;">
             <%= link_to "Add to Cart", cart_items_path(:item_id => item), :remote => false, :method => :post, 
         :class => "add_to_cart btn" %>
         <% end %>
@@ -264,7 +257,7 @@ margin-top: -5px">
 
         <!-- inventory controls -->
         <% if current_user && (current_user.admin || current_user.coordinator || current_user == @producer) %>
-        <td class="hidden-phone">
+        <td>
             <%= link_to edit_inventory_item_path({ :inventory_id => params[:id], :id => item.id }), :'data-toggle'=>"tooltip", :title=>"Edit Item" do %>
             <i class="icon-wrench"></i>
             <% end %>

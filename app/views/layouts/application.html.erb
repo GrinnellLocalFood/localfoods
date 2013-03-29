@@ -2,15 +2,17 @@
 <html>
 
 <head>
-	<link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
-
 	<title><%= title %></title>
 
+	<%= stylesheet_link_tag '/stylesheets/bootstrap-v2.3.1.css' %>	
+	<%= stylesheet_link_tag '/stylesheets/bootstrap-fileupload.css' %>
+	<%= stylesheet_link_tag '/stylesheets/custom.css' %>
+	<%= stylesheet_link_tag '/stylesheets/bootstrap-changes.css' %>		
 
-
-	<%= stylesheet_link_tag :application %>		
-<!-- '' -->
-	<%= javascript_include_tag :application %>
+	<!-- :defaults MUST come after jquery.js, as rails.js has to be loaded after jquery -->
+	<script src="https:/ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js">
+	</script>
+	<%= javascript_include_tag 'bootstrap.min.js', 'bootstrap-fileupload.js', :defaults%>
 	<%= csrf_meta_tag %>
 
 <script type="text/javascript">
@@ -25,6 +27,7 @@ $('[data-toggle="tooltip"]').tooltip();
 </head>
 	<body>
 	<%= render 'layouts/header' %>
+	<br style="margin-bottom:10px">
 
 	<%= yield %>
 

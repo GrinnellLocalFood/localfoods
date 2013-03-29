@@ -1,42 +1,43 @@
 <footer class="footer">
 	<small>
 		<div style="position: fixed; bottom: 5px; right: 0; margin-right: 2%; min-width: 75px">
-			
-			<meta property="og:title" content="title" />
-			<meta property="og:description" content="description" />
-			<meta property="og:image" content="image" />
+	
 
-			<script>
-			function fbs_click()
-			{
-				u=location.href;
-				t=document.title;
-				window.open('http://www.facebook.com/sharer.php?u='+encodeURIComponent(u)+'&t='+encodeURIComponent(t),'sharer', 'toolbar=0, status=0, width=626, height=436'); return false;
-			}
-			</script>
+		<meta property="og:title" content="title" />
+		<meta property="og:description" content="description" />
+		<meta property="og:image" content="image" />
 
-			<script>
-			function twitter_click()
-			{
-				message = encodeURIComponent(document.title);
-				url = encodeURIComponent(location.href);
-				link = 'http://www.twitter.com/share?text=' +message+'&url='+url;
-				window.open(link,'sharer', 'toolbar=0, status=0, width=626, height=436'); return false;
-			}
-			</script>
+		<script>
+		function fbs_click()
+		{
+			u=location.href;
+			t=document.title;
+			window.open('http://www.facebook.com/sharer.php?u='+encodeURIComponent(u)+'&t='+encodeURIComponent(t),'sharer', 'toolbar=0, status=0, width=626, height=436'); return false;
+		}
+		</script>
 
-			<a rel="nofollow" href="javascript://" onclick="return fbs_click();" class="meta">
-				<img alt="Share On Facebook" border="0" class="dock-item" src="/img/f_logo.png" width="30px" height="30px">
-			</a>
-
-
-
-			<a rel="nofollow" href="javascript://" onclick="return twitter_click();" class="meta">
-				<img alt="Share On Twitter" border="0" class="dock-item" src="https://twitter.com/images/resources/twitter-bird-white-on-blue.png"  width="30px" height="30px">
-			</a>
+		<script>
+		function twitter_click()
+		{
+			message = encodeURIComponent(document.title);
+			url = encodeURIComponent(location.href);
+			link = 'http://www.twitter.com/share?text=' +message+'&url='+url;
+			window.open(link,'sharer', 'toolbar=0, status=0, width=626, height=436'); return false;
+		}
+		</script>
+		<a rel="nofollow"
+		 href="javascript://" 
+		 onclick="return fbs_click();" 
+		 class="meta" ><img alt="Share On Facebook" border="0" class="dock-item" 
+		src="/img/f_logo.png" width="30px" height="30px" /></a>
 
 
-		</div>
+
+		<a rel="nofollow"
+		 href="javascript://" 
+		 onclick="return twitter_click();" 
+		 class="meta" ><img alt="Share On Twitter" border="0" class="dock-item" 
+		src="https://twitter.com/images/resources/twitter-bird-white-on-blue.png"  width="30px" height="30px"/></a>
 	</small>
 </footer>
 

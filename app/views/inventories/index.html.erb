@@ -3,11 +3,11 @@
 $(document).ready(function() {
 
 // make active or inactive whatever producer link you click
-$('.producer_link a').click(function() {
-	$('li').each(function() {
-		$(this).removeClass('active')
-	});
-	$(this).parent().addClass('active');
+	$('.producer_link a').click(function() {
+		$('li').each(function() {
+			$(this).removeClass('active')
+		});
+		$(this).parent().addClass('active');
 
 // hide all the old categories if you're just clicking between producers
 $('.category_filter').hide();
@@ -19,11 +19,12 @@ $('.category_list').show();
 
 </script>
 
-<div id="all-products-container" class="container">
+<div class="container">
 	<div class="row-fluid">
 		<div class="tabbable tabs-left">
 
-			<ul id="inventory-sidebar" class="nav nav-tabs">
+
+			<ul class="span2 nav nav-tabs" style="width: 100px;">
 
 				<li class="producer_link active"> 
 					<%= link_to("All Products", show_all_categories_path, 
@@ -40,24 +41,19 @@ $('.category_list').show();
 				
 				<% end %>
 
-				<li class="nav-header category_list">
-					Categories
-				</li>
-			</ul>
+					<li class="nav-header category_list">Categories</li>
+				</ul>
 
-<!-- temporary min width -->
-			<div id="inventory-panel" class="tab-content custom-block">
-				<div id="producer_info">
-					<div align="center">
-						<%= render :partial => 'categories/show', :locals => {:@items => Item.all} %>
-					</div>
+
+		<div class="tab-content span10 custom-block" style="width: 820px;">
+			<span id="producer_info">
+				<div align="center">
+					<%= render :partial => 'categories/show', :locals => {:@items => Item.all} %>
 				</div>
-			</div>
-
+			</span>
 		</div>
 	</div>
 </div>
-
 
 
 

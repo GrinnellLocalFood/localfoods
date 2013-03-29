@@ -38,8 +38,7 @@ describe SessionsController do
   describe "with valid email and password" do
 
     before(:each) do
-      @attr = { :user_id => -1, 
-        :first_name => "Example", 
+      @attr = { :first_name => "Example", 
         :last_name => "User", 
         :email => "user@example.com", 
         :password => "password",

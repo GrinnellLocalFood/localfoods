@@ -57,12 +57,68 @@
   background-color: white;
 }
 
-#editpassword {
-  background-image:url(/img/apple_blah.jpg);
-  background-repeat: no-repeat;
+
+#all-image-unit {
   background-position: center;
+  margin-top: -30px;
+  margin-bottom: -1px;
+  background-size: cover;
+  background-image:url(/img/all_2000.jpg);\
+  background-repeat: no-repeat;
+  width:100%;
+  height:140px;
+  z-index: -1;
 }
 
+#all-title {
+  text-align: left;
+  padding-top: 95px;
+  padding-left: 2.5%;
+}
+
+#pickup-image-unit {
+  background-position: bottom;
+  margin-top: -30px;
+  background-size: cover;
+  background-image:url(/img/bag3_2000.jpg);\
+  background-repeat: no-repeat;
+  width:100%;
+  height:140px;
+  z-index: -1;
+}
+
+#pickup-title {
+  padding-top: 90px;
+  padding-right: 2.5%;
+  text-align: right;
+}
+
+#about, #pickup-info {
+  margin-left: 10%;
+  margin-right: 10%;
+  padding-bottom: 20px;
+}
+
+#about {
+  margin-top: 20px;
+}
+
+#about-image-unit {
+  background-position: top;
+  margin-top: -30px;
+  margin-bottom: -1px;
+  background-size: cover;
+  background-image:url(/img/foot_2000.jpg);\
+  background-repeat: no-repeat;
+  width:100%;
+  height:140px;
+  z-index: -1;
+}
+
+#about-title {
+  text-align: center;
+  padding-top: 90px;
+}
 
 #hero-image-unit {
   background-position: center;
@@ -262,15 +318,14 @@
 }
 
 .item-image {
-  margin-bottom: 10px;
-  margin-right: 10px;
+  margin-bottom: 20px;
+  margin-right: 20px;
   float: left;
 }
 
 .item-search-image {
   margin-bottom: 0px;
   margin-top: 0px;
-  /*float: left;*/
 }
 
 .item-name{
@@ -286,6 +341,7 @@
 }
 
 .item-table {
+  margin-bottom: 10px;
 }
 
 .email-display {
@@ -299,7 +355,6 @@
   padding-right: 20px;
   padding-left: 20px;
   color: white;
-  /*background-color: #595959;*/
   background-color: #555;
   -webkit-box-shadow: 0 5px 4px rgba(0, 0, 0, 0.085);
   -moz-box-shadow: 0 5px 4px rgba(0, 0, 0, 0.085);
@@ -641,13 +696,6 @@
 .navbar-fixed-bottom .navbar-inner-redux {
   padding-right: 0;
   padding-left: 0;
-}
-
-
-#about, #pickup-info {
-  margin-left: 10%;
-  margin-right: 10%;
-  padding-bottom: 20px;
 }
 
 /*credit to http://niklausgerber.com/blog/responsive-google-or-bing-maps/ for this fix*/

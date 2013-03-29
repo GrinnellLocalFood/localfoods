@@ -45,7 +45,7 @@ $('#user_first_name').focus();
 
 
 <% if signed_in? && (current_user.admin || current_user.coordinator) %>
-<div class="controls" style="margin-left:200px; color:maroon">
+<div style="color:maroon" align="center">
   <% if current_user.admin %>
   <label class="checkbox inline">
     Admin
@@ -125,7 +125,7 @@ $('#user_first_name').focus();
 
 
  <div class="control-group controls">
-  <%= f.submit "Submit!", :class=>"squared btn-large btn-primary" %>
+  <%= f.submit "Sign Up", :class=>"squared btn-large btn-primary" %>
 </div>
 
 <div align="center" style="color: gray;">

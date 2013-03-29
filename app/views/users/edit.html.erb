@@ -1,5 +1,5 @@
 <div class="container">
-  <div class="row">
+  <div class="row-fluid">
     <div class="span8 offset2 custom-block">
 
       <%= form_for(@user, :html=>{:class=>'form-horizontal', :multipart => true}) do |f| %>
@@ -19,14 +19,10 @@
 
     <h1 align="center">Edit Account</h1>
 
-
-
-
-    <!-- <h4 align="center" style="color:gray; margin-top:20px; margin-bottom:0px">Member Information</h4> -->
     <br>
 
     <% if current_user.admin || current_user.coordinator %>
-    <div class="controls" style="margin-left:200px; color:maroon;">
+    <div style="color:maroon;" align="center">
       <% if current_user.admin %>
       <label class="checkbox inline">
         Admin
@@ -123,11 +119,11 @@
 
 
 <div class="control-group">
-  <label class="control-label" style="margin-left: -50px; margin-right: -40px;">
+  <label class="control-label">
   <%= photo_form.label(:photo, "Gallery Photo") %>
   </label>
 
- <div align="center">
+<div class="controls">
 
 <div class="fileupload fileupload-new" data-provides="fileupload">
   <div class="input-append">
@@ -143,8 +139,8 @@
     <a href="#" class="btn fileupload-exists" data-dismiss="fileupload">Cancel</a>
   </div>
 </div>
-
 </div>
+
 </div>
 
     <% end %>

@@ -22,6 +22,7 @@ $('#cart_link').html('Cart (<%= current_user.cart.cart_items.size %>) ');
 <!-- Modal for cart -->
 <div id="cart_modal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
     <h3 id="myModalLabel" style="margin-top: 10px;">Shopping Cart</h3>
   </div>
   <div class="modal-body">
@@ -42,8 +43,20 @@ $('#cart_link').html('Cart (<%= current_user.cart.cart_items.size %>) ');
 
       <%= link_to image_tag("/img/partial_localfood_clear_horizontal_40.png", :width=>"400", :id=>"logohead"), root_path %>
       
+
+
+   <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+     <span class="icon-bar"></span>
+<span class="icon-bar"></span>
+<span class="icon-bar"></span>
+</a>
+
+
+<div id="nav-collapse" class="nav-collapse collapse">
+
+
       <% if signed_in? %>
-      <ul class="nav pull-right">
+      <ul id="top-nav" class="nav pull-right">
         
         <li>
           <a href="#" id="cart_link"></a>
@@ -65,7 +78,7 @@ $('#cart_link').html('Cart (<%= current_user.cart.cart_items.size %>) ');
         </li>   
         <% end %>
 
-        <li class="dropdown nav pull-right">
+        <li class="dropdown nav">
           <a class="dropdown-toggle" data-toggle="dropdown" href="#">
             Account
             <span class="caret"></span>
@@ -80,7 +93,7 @@ $('#cart_link').html('Cart (<%= current_user.cart.cart_items.size %>) ');
         </li>   
         <% else %>
 
-
+        <span id="header-login">
         <%= form_for(:session, :url => sessions_path, 
         :html=>{:class=>'navbar-form pull-right'}) do |f| %>
 
@@ -95,8 +108,14 @@ $('#cart_link').html('Cart (<%= current_user.cart.cart_items.size %>) ');
         <% end %>
 
         <% end %>
+      </span>
 
       </ul>
+
+
+
+
+    </div>
 
 
     </div>
@@ -106,7 +125,9 @@ $('#cart_link').html('Cart (<%= current_user.cart.cart_items.size %>) ');
     <div class="container">
      <ul class="sub-nav pull-left">
 
-      <li><%= link_to("Browse Products", inventories_path, :style=>"color:white") %> </li>
+      <li><%= link_to ("Browse Products", inventories_path) %></li>
+      <li><%= link_to ("Pickup Info", pickup_info_path) %></li>
+      <li><%= link_to ("About Us", about_path) %></li>
 
     </ul>
 
@@ -114,7 +135,7 @@ $('#cart_link').html('Cart (<%= current_user.cart.cart_items.size %>) ');
       <div class="input-append">
 
         <%= form_tag :controller => 'items', :action => :search do %>
-        <input class="span2" type="text" name="search" placeholder="Search Products" style="width: 200px;">
+        <input id="search-header" class="span2" type="text" name="search" placeholder="Search Products">
         <button class="btn" type="submit" value="Search">
           <i class="icon-search"></i>
         </button>

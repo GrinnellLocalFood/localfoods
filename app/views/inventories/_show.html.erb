@@ -34,10 +34,10 @@ $('.show_link').click(function() {
 
 // ADD TO CART BEHAVIOR
 // replace default link behavior
-$('.add_to_cart').attr('data-remote', true);
+$('.add-to-cart').attr('data-remote', true);
 
 
-$('.add_to_cart').click(function() {
+$('.add-to-cart').click(function() {
 
   $('#cart_modal').modal({
     remote: '<%= show_in_modal_cart_path(current_user.cart.id) %>'
@@ -246,9 +246,9 @@ margin-top: -5px">
         <!-- add to cart -->
         <% if current_user && (@producer != current_user) %>
 
-        <td class="hidden-phone" style="width: 100px;">
+        <td class="hidden-phone">
             <%= link_to "Add to Cart", cart_items_path(:item_id => item), :remote => false, :method => :post, 
-        :class => "add_to_cart btn" %>
+        :class => "btn add-to-cart" %>
         <% end %>
         <!-- end add to cart -->
 

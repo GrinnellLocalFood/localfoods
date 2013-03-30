@@ -397,29 +397,25 @@
 
 }
 
-
-
 .big-table {
   width: 100%;
   margin-top: 30px;
 }
 
-.big-table th,
 .big-table td {
-  padding: 6px;
   line-height: 20px;
   text-align: left;
   vertical-align: top;
   border-top: 1px solid #dddddd;
 }
 
+.big-table td {
+  padding: 6px;
+}
+
 .big-table th {
   font-weight: bold;
 }
-
-
-
-
 
 .big-table-header {
   width: 100%;
@@ -427,21 +423,11 @@
 }
 
 .big-table-header th {
-  padding-left: 6px;
-  padding-right: 6px;
-  line-height: 20px;
-  text-align: left;
-  vertical-align: top;
-  font-weight: bold;
+
 }
-
-
 
 .producer-table {
   width: 95%;
-  /*margin-left: 20px;*/
-  /*margin-right: 20px;*/
-  /*margin-top:100px;*/
 }
 
 .producer-table th,
@@ -472,6 +458,11 @@
 
 .producer-table tbody + tbody {
   border-top: 2px solid #dddddd;
+}
+
+.add-to-cart {
+  min-width: 70px;
+  font-size: 12px;
 }
 
 

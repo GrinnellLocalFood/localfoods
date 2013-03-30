@@ -17,16 +17,20 @@
             <table class="big-table-header" style="min-width: 940px;">
               <thead>
                 <tr>
-                  <th style="width: 60px;">Photo</th>
-                  <th style="width: 130px;">Name</th>
-                  <th style="width: 110px;">Category</th>
-                  <th style="width: 190px;">Description</th>
-                  <th style="width: 80px;">Price</th>
-                  <th style="width: 30px;">Unit</th>
-                  <th style="width: 58px; font-size: 12px; padding-top:2px;">Min Order</th>
-                  <th style="width: 62px; font-size: 12px; padding-top:2px;">Max Order</th>
-                  <th style="width: 40px; font-size: 12px; padding-top:2px;">Quantity</th>
-                  <th style="width: 40px; font-size: 12px; padding-top:2px;">Available</th>
+                  <th style="text-align: left; width: 60px;">Photo</th>
+                  <th style="text-align: left; width: 100px;">Name</th>
+                  <th style="text-align: left; width: 100px;">Category</th>
+                  <th style="text-align: left; width: 140px;">Description</th>
+                  <th style="text-align: left; width: 70px;">Price</th>
+                  <th style="text-align: left; width: 30px;">Unit</th>
+                  <th style="text-align: right;width: 30px; font-size: 10px; 
+                  line-height: 10px;">Min Order</th>
+                  <th style="text-align: right; width: 30px; font-size: 10px;
+                  line-height: 10px;">Max Order</th>
+                  <th style="text-align: right; width: 40px; font-size: 11px; padding-top:2px;
+                  ">Quantity</th>
+                  <th style="text-align: right; width: 40px; font-size: 11px; padding-top:2px;
+                  ">Available</th>
                 </tr>
               </thead>
             </table>
@@ -101,8 +105,8 @@
                 </div>
               </td>
               <td><%= item_form.text_field :units, :style => "width: 45px;" %></td>
-              <td><%= item_form.text_field :minorder, :style => "width: 45px;" %></td>
-              <td><%= item_form.text_field :maxorder, :style => "width: 45px;" %></td>
+              <td><%= item_form.text_field :minorder, :style => "width: 35px;" %></td>
+              <td><%= item_form.text_field :maxorder, :style => "width: 35px;" %></td>
               <td><%= item_form.text_field :totalquantity, :style => "width: 45px;" %></td>
               <td><%= item_form.check_box :available %></td>
 

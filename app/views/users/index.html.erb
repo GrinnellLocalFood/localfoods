@@ -12,23 +12,30 @@
     </div>
     <% end %>
 
+<!-- likely temporary warning, but if not at least it's here -->
+    <div class="hidden-desktop big-form-warning" style="margin-top: -14px;">
+        Be warned, this table is best viewed on a larger screen  
+    </div>
+
     <div class="container">
         <div class="row-fluid">
             <div class="span12">
 
-                <h1>Listing users</h1>
+                <h1>All Users
+                    <% if current_user.admin || current_user.coordinator %>
+                    <%= link_to 'Add New User', new_user_path, :id=>"add-user-button", :class=>"btn" %>
+                    <% end %> 
+                </h1>
 
-                <table class="table table-hover">
+                <table id="user-table" class="table table-hover">
                   <tr>
                     <th>User</th>
                     <th>Name</th>
                     <th>Email</th>
                     <th>Phone</th>
-                    <th>Member</th>
-                    <th>Coordinator</th>
-                    <th>Producer</th>
-                    <th>Admin</th>
-                    <th></th>
+                    <th style="font-size: 12px;">Coordinator</th>
+                    <th style="font-size: 12px;">Producer</th>
+                    <th style="font-size: 12px;">Admin</th>
                     <th></th>
                     <th></th>
                 </tr>
@@ -40,28 +47,39 @@
                     <td><%= user.first_name + " " +user.last_name %></td>
                     <td><%= user.email %></td>
                     <td><%= user.phone %></td>
-                    <td><%= user.member %></td>
                     <td><%= user.coordinator %></td>
-                    <td><%= user.producer %></td>
+
+                    <td style="padding-right: 0px;">
+                        <% if user.producer %>
+                        <%= link_to(user.inventory.display_name, inventory_path(user.inventory)) %>
+                        <% else %>
+                        <%= user.producer %>
+                        <% end %>
+                    </td>
+
                     <td><%= user.admin %></td>
                     <% end %>
-                    <td><%= link_to 'Show', user %></td>
+
                     <% if current_user.admin || (!user.admin && current_user.coordinator) %>
-                    <td><%= link_to 'Edit', edit_user_path(user) %></td>
+                    <td>
+                        <%= link_to edit_user_path(user), :'data-toggle'=>"tooltip", :title=>"Edit User" do %>
+                        <i class="icon-wrench"></i>
+                        <% end %>
+                    </td>
+
                     <% end %>
                     
                     <% if current_user.admin %>
-                    <td><%= link_to "Delete", user, :confirm => 'Are you sure?', :method=>:delete, :class=>:Destroy %></td>
+                    <td>
+                        <%= link_to user, :confirm => 'Are you sure?', :method=>:delete, :class=>:Destroy, :'data-toggle'=>"tooltip", :title=>"Delete User" do %>
+                        <i class="icon-trash"></i>
+                        <% end %>
+                    </td>
                     <% end %>
 
                 </tr>
                 <% end %>
             </table>
-
-            <br />
-            <% if current_user.admin || current_user.coordinator %>
-            <%= link_to 'New User', new_user_path, :class=>"btn" %>
-            <% end %>  
 
         </div>
     </div>

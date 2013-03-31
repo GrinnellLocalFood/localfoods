@@ -26,7 +26,13 @@ $('.show_link').click(function() {
      },
      100)
  }); // end click
+
+// keep the search term in the search box
+$('#search-header').attr('value', '<%= params[:search] %>');
+
 }); // end ready
+
+
 </script>
 
 <!-- Modal for items -->

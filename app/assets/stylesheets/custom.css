@@ -40,7 +40,8 @@
 
 #logohead {
   margin-top: 4px;
-
+  width: 85%;
+  max-width: 400px;
 }
 
 .center {

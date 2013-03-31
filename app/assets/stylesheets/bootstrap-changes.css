@@ -47,6 +47,7 @@ body {
 .navbar-form .input-append,
 .navbar-form .input-prepend {
   margin-top: 3px;
+  margin-bottom: 3px;
 }
 
 .modal {

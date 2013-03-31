@@ -41,7 +41,7 @@ $('#cart_link').html('Cart (<%= current_user.cart.cart_items.size %>) ');
   <div class="navbar-inner-redux">
     <div class="container">
 
-      <%= link_to image_tag("/img/partial_localfood_clear_horizontal_40.png", :width=>"400", :id=>"logohead"), root_path %>
+      <a href="/"><img id="logohead" src="/img/partial_localfood_clear_horizontal_40.png", width="400"></a>
       
 
 
@@ -131,8 +131,10 @@ $('#cart_link').html('Cart (<%= current_user.cart.cart_items.size %>) ');
 
     </ul>
 
-    <div class="navbar-form pull-right" style="margin-bottom: -40px; margin-left: 10px;">
-      <div class="input-append" style="display: inherit;">
+
+
+    <div id="search-header-form" class="navbar-form pull-right">
+      <div id="search-header-append" class="input-append">
 
         <%= form_tag :controller => 'items', :action => :search do %>
         <input id="search-header" class="span2" type="text" name="search" placeholder="Search Products">

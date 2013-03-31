@@ -118,11 +118,11 @@ $('.show_link').click(function() {
 
     <tr>
         <th>Name</th>
-        <th>Producer</th>
-        <th class="hidden-phone">Description</th>
-        <th>Price</th>
+        <th class="hidden-phone">Producer</th>
+        <th>Description</th>
+        <th class="hidden-phone">Price</th>
         <th class="hidden-phone">Min Order</th>
-        <th>Category</th>
+        <th class="hidden-phone">Category</th>
         <th class="hidden-phone">Available</th> 
         <th></th>
     </tr>
@@ -132,12 +132,12 @@ $('.show_link').click(function() {
     <tr>
 
         <td class="item_row" data-id="<%= item.id %>" data-inventory ="<%= item.inventory.id %>"><%= item.name %></td>
-        <td><%= link_to(item.inventory.display_name, inventory_path(item.inventory)) %></td>
-        <td class="item_row hidden-phone" data-id="<%= item.id %>"><%= item.description.size < 50 ? item.description : item.description[0..50] + "..." %></td>
-        <td class="item_row" data-id="<%= item.id %>">
+        <td class="hidden-phone"><%= link_to(item.inventory.display_name, inventory_path(item.inventory)) %></td>
+        <td class="item_row " data-id="<%= item.id %>"><%= item.description.size < 50 ? item.description : item.description[0..50] + "..." %></td>
+        <td class="item_row hidden-phone" data-id="<%= item.id %>">
             <%= number_to_currency(item.price) %><b>/<%= item.units.singularize %></b></td>
         <td class="item_row hidden-phone" data-id="<%= item.id %>"><%= item.minorder %></td>
-        <td class="category_label item_row" data-id="<%= item.id %>"><%= Category.find(item.category_id).name %></td>
+        <td class="category_label item_row hidden-phone" data-id="<%= item.id %>"><%= Category.find(item.category_id).name %></td>
         <td class="item_row hidden-phone" data-id="<%= item.id %>"><%= item.is_available? %></td>
         <td class="classic_show"><%= link_to "Show", 
             inventory_item_path({ :inventory_id => item.inventory_id, :id => item.id }) %></td>

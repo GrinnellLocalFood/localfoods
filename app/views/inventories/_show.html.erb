@@ -129,7 +129,9 @@ $('.category_filter').click(function() {
 margin-top: -5px">
 <%= link_to edit_user_path(params[:id]), :class=>"link", :'data-toggle'=>"tooltip", :title=>"Edit Account" do %>
 
+<div class="visible-desktop">
 <i class="icon-wrench"></i>
+</div>
 <% end %>
 </div>
 <% end %>
@@ -178,39 +180,31 @@ margin-top: -5px">
 
 
 
-<div style="text-align: left; margin-right: 20px; margin-left: 20px; margin-top: 0px">
+<div id="inventory-info">
 
-    <h1><%= @producer.inventory.display_name %></h1>
+    <h1 id="inventory-title"><%= @producer.inventory.display_name %></h1>
 
     <% if @producer.inventory.url != nil %>
     <%= link_to @producer.inventory.url, url_with_protocol(@producer.inventory.url) %>
     <% end %>
 
-</div>
-
-
-<div style="text-indent: 2.5%; margin-right: 10px; margin-left: 10px; margin-top: 5px;">
     <%= @producer.inventory.description %>
+
 </div>
-
-
 
 
 <% if @item.count != 0 %>
 
-<h3 class="inventory_title">Current Inventory</h3>
+<h3 id="current-inventory-title">Current Inventory</h3>
 
 <table class="producer-table table-hover" align="center">
-
-    <!-- ADD QTY REMAINING HERE ONCE WE MERGE WITH NEW ITEM MODEL -->
-
     <tr>
-        <th></th>
+        <th class="hidden-phone"></th>
         <th>Name</th>
-        <th class="hidden-phone">Description</th>
-        <th>Price</th>
+        <th>Description</th>
+        <th class="hidden-phone">Price</th>
         <th class="hidden-phone">Min Order</th>
-        <th>Category</th>    
+        <th class="hidden-phone">Category</th>    
         <th class="hidden-phone">Available</th>
         <% if @producer != current_user %>
         <th class="hidden-phone"></th>
@@ -225,7 +219,7 @@ margin-top: -5px">
     <% @item.each do |item| %>
     <tr>
 
-        <td>
+        <td class="hidden-phone">
             <% if !(item.item_photo_file_name.nil?) %>
             <media class="item_row" data-id="<%= item.id %>">
                 <%= image_tag(item.item_photo.url(:thumb)) %>
@@ -234,11 +228,11 @@ margin-top: -5px">
         </td>
 
         <td class="item_row" data-id="<%= item.id %>"><%= item.name %></td>
-        <td class="item_row hidden-phone" data-id="<%= item.id %>"><%= item.description.size < 50 ? item.description : item.description[0..50] + "..." %></td>
-        <td class="item_row" data-id="<%= item.id %>">
+        <td class="item_row" data-id="<%= item.id %>"><%= item.description.size < 50 ? item.description : item.description[0..50] + "..." %></td>
+        <td class="item_row hidden-phone" data-id="<%= item.id %>">
             <%= number_to_currency(item.price) %><b>/<%= item.units.singularize %></b></td>
         <td class="item_row hidden-phone" data-id="<%= item.id %>"><%= item.minorder %></td>
-        <td class="item_row category_label" data-id="<%= item.id %>"><%= Category.find(item.category_id).name %></td>
+        <td class="item_row category_label hidden-phone" data-id="<%= item.id %>"><%= Category.find(item.category_id).name %></td>
         <td class="item_row hidden-phone" data-id="<%= item.id %>"><%= item.is_available? %></td>
 
         <td class="clasic_show"><%= link_to "Show", inventory_item_path({ :inventory_id => params[:id], :id => item.id })%></td>
@@ -272,9 +266,9 @@ margin-top: -5px">
     <% end %> 
 </table>
 
-
+<!-- fix this -->
 <% else %>
-<h4 class="inventory_title">
+<h4 id="empty-inventory-title">
     Currently Nothing For Sale
 </h4>
 <% end %> 

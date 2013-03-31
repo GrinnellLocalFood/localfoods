@@ -2,21 +2,24 @@
 <html>
 
 <head>
+	<link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 	<title><%= title %></title>
 
-<%= stylesheet_link_tag :application %>	
+	<%= stylesheet_link_tag :application %>	
 
-<script type="text/javascript">
+	<script type="text/javascript">
 
-$(document).ready(function() {
-$('[data-toggle="tooltip"]').tooltip();
+	$(document).ready(function() {
+		$('[data-toggle="tooltip"]').tooltip();
 
 }); //end ready
 
-</script>
+	</script>
 
 </head>
-	<body>
+<body>
 	<%= yield %>
-	</body>
+</body>
 </html>

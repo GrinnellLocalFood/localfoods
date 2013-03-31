@@ -39,7 +39,7 @@
 		</div>
 		<% end %>
 
-		<div class="span8 custom-block" style="">
+		<div class="span8 custom-block">
 
 			<% if notice %>
 			<div class="alert alert-success fade in">
@@ -63,29 +63,29 @@
 		</div>
 		<% end %>
 		
-		<h2 style="margin-left: 7.5%;">Hello <%= @user.first_name %>!</h2>
-		<br>
 
-		<table class="table" style="width: 85%;" align="center">
+		<h2 style="margin-left: 7.5%; margin-bottom: 20px;">Hello <%= @user.first_name %>!</h2>
+	
+
+		<table id ="user-profile-table" class="table" align="center">
 			<tr>
-				<th style="color: gray">Name</th>
-				<td style="text-align:right"><%= @user.first_name + " " + @user.last_name %></td>
+				<th>Name</th>
+				<td><%= @user.first_name + " " + @user.last_name %></td>
 			</tr>
 
 			<tr>
-				<th style="color: gray">Email</th>
-				<td style="text-align:right"><%= @user.email %></td>
+				<th>Email</th>
+				<td><%= @user.email %></td>
 			</tr>
 
 			<tr>
-				<th style="color: gray">Phone</th>
-				<td style="text-align:right"><%= @user.phone %></td>
+				<th>Phone</th>
+				<td><%= @user.phone %></td>
 			</tr>
 
 			<tr>
-				<th style="color: gray">Roles</th>
-				<td style="text-align:right">
-
+				<th>Roles</th>
+				<td>
 					<% if @user.member %>
 					Member
 					<% end %>
@@ -101,42 +101,44 @@
 					<% if @user.admin %>
 					, Admin 
 					<% end %>
-
 				</td>
 			</table>
 
 
 			<% if @user.producer %>
 			<br>
+
 			<ul class="nav nav-list">
 				<li class="divider"></li>
 			</ul>
 			<br>
+
 			<h4 style="margin-left: 7.5%;">Producer Information</h4>	
-			<br>			
-			<table class="table" style="width:85%;" align="center">
+			<br>
+
+			<table id="producer-profile-table" class="table" align="center">
 				<tr>
-					<th style="color: gray">Producer Name</th>
-					<td style="text-align:right"><%= @user.inventory.display_name %></td>
+					<th>Producer Name</th>
+					<td><%= @user.inventory.display_name %></td>
 				</tr>
 
 				<tr>
-					<th style="color: gray">Website</th>
-					<td style="text-align:right"><%= @user.inventory.url %></td>
+					<th>Website</th>
+					<td><%= @user.inventory.url %></td>
 				</tr>
 
 				<tr>
-					<th style="color: gray">Description</th>
-					<td style="text-align:right"><%= @user.inventory.description %></td>
+					<th>Description</th>
+					<td><%= @user.inventory.description %></td>
 				</tr>
 
 
 				<% if !(@user.inventory.inventory_photos.empty?) %>
 				<tr>
-					<th style="color: gray">Gallery Photos</th>
-					<td style="text-align:right">
+					<th>Gallery Photos</th>
+					<td>
 						<% @user.inventory.inventory_photos.each do |inventory_photo| %>
-						<%= image_tag inventory_photo.photo.url(:thumb), :style=>"margin-bottom: 4px;" %>
+						<%= image_tag inventory_photo.photo.url(:thumb), :class=>"profile-gallery-photo", :style=>"margin-bottom: 4px;" %>
 						<% end %>
 					</td>
 				</tr>

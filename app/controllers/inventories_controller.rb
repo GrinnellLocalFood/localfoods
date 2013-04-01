@@ -1,4 +1,5 @@
 class InventoriesController < ApplicationController
+  helper_method :sort_column, :sort_direction
 
 skip_before_filter :require_login, :only => [:show, :index, :show_in_index, :show_all]
 
@@ -6,8 +7,11 @@ skip_before_filter :require_login, :only => [:show, :index, :show_in_index, :sho
   def show
     #need to add permissions checking
       @title = "View Inventory"
+      @remote = false
       @producer = User.find(params[:id])
-      @item = Item.where("inventory_id = ?", params[:id])
+      @item = Item.where("inventory_id = ?", params[:id]).order(sort_column + " " + sort_direction)
+      @sort_c = nil
+      @sort_d = nil
       respond_to do |format|
         format.html
         format.xml  { render :xml => @item }
@@ -16,10 +20,11 @@ skip_before_filter :require_login, :only => [:show, :index, :show_in_index, :sho
 
   def show_in_index
       @title = "Our Producers"
+      @remote = true
       @producer = User.find(params[:id])
-      @item = Item.where("inventory_id = ?", params[:id])
+      @item = Item.where("inventory_id = ?", params[:id]).order(sort_column + " " + sort_direction)
       respond_to do |format|
-           format.js { render :locals => { :item => @item } }
+           format.js { render :locals => { :item => @item, :@sort_c => sort_column, :@sort_d => sort_direction } }
       end
   end
 
@@ -65,6 +70,15 @@ skip_before_filter :require_login, :only => [:show, :index, :show_in_index, :sho
     if (!params[:reload])
       20.times {@inventory.item.build}
     end
+  end
+
+  
+  def sort_column
+    Item.column_names.include?(params[:sort]) ? params[:sort] : "name"
+  end
+  
+  def sort_direction
+    %w[asc desc].include?(params[:direction]) ? params[:direction] : "asc"
   end
 
 end

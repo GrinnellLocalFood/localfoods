@@ -192,6 +192,9 @@ margin-top: -5px">
 
 </div>
 
+<%= @sort_c %>
+<%= @sort_d %>
+<% @item.reload %>
 
 <% if @item.count != 0 %>
 
@@ -200,9 +203,9 @@ margin-top: -5px">
 <table class="producer-table table-hover" align="center">
     <tr>
         <th class="hidden-phone"></th>
-        <th>Name</th>
+        <th><%= sortable "name", @remote, @producer %></th>
         <th>Description</th>
-        <th class="hidden-phone">Price</th>
+        <th class="hidden-phone"><%= sortable "price", @remote, @producer %></th>
         <th class="hidden-phone">Min Order</th>
         <th class="hidden-phone">Category</th>    
         <th class="hidden-phone">Available</th>

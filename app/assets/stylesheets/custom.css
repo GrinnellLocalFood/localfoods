@@ -501,6 +501,20 @@ margin-left: 5px;
   border-top: 2px solid #dddddd;
 }
 
+.producer-table th .current {
+  padding-right: 12px;
+  background-repeat: no-repeat;
+  background-position: right center;
+}
+
+.producer-table th .asc {
+  background-image: url(/img/up_arrow.gif);
+}
+
+.producer-table th .desc {
+  background-image: url(/img/down_arrow.gif);
+}
+
 .add-to-cart {
   min-width: 70px;
   font-size: 12px;

@@ -1,10 +1,8 @@
 <script type="text/javascript">
 $(document).ready(function() {
 
-
 // update doesn't currently work right without javascript
 $('.cart_update, .cart_delete').attr('data-remote', true);
-
 
 $('.cart_update, .cart_delete').click(function() {
 // the timeout needs to happen so rails can update the cart...I think
@@ -41,7 +39,6 @@ $(this).attr('disabled', true);
 
       <div class="input-append">
         <%= f.text_field :quantity, :style => "width:40px", :class => "quantity_field"%>
-
 
        <!-- <%= f.submit "Update" %> -->
         <button class="btn cart_update" type="submit" value="Update" name="commit" data-remote="false">   

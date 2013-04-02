@@ -9,9 +9,7 @@ skip_before_filter :require_login, :only => [:show, :index, :show_in_index, :sho
       @title = "View Inventory"
       @remote = false
       @producer = User.find(params[:id])
-      @item = Item.where("inventory_id = ?", params[:id]).order(sort_column + " " + sort_direction)
-      @sort_c = nil
-      @sort_d = nil
+      @item = sorted_items
       respond_to do |format|
         format.html
         format.xml  { render :xml => @item }
@@ -22,7 +20,7 @@ skip_before_filter :require_login, :only => [:show, :index, :show_in_index, :sho
       @title = "Our Producers"
       @remote = true
       @producer = User.find(params[:id])
-      @item = Item.where("inventory_id = ?", params[:id]).order(sort_column + " " + sort_direction)
+      @item = sorted_items
       respond_to do |format|
            format.js { render :locals => { :item => @item, :@sort_c => sort_column, :@sort_d => sort_direction } }
       end
@@ -72,7 +70,20 @@ skip_before_filter :require_login, :only => [:show, :index, :show_in_index, :sho
     end
   end
 
-  
+private
+
+  def sorted_items
+    if sort_column == "category_id"
+      @item = Item.where("inventory_id = ?", params[:id])
+      if sort_direction == "asc"
+        return @item.sort_by{|i| i.category.name }
+      else
+        return @item.sort_by{|i| i.category.name }.reverse
+      end
+    end
+    return Item.where("inventory_id = ?", params[:id]).order(sort_column + " " + sort_direction)
+  end
+
   def sort_column
     Item.column_names.include?(params[:sort]) ? params[:sort] : "name"
   end

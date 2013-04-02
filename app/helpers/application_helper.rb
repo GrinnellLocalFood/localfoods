@@ -22,5 +22,4 @@ def sortable(column, remote, producer, title = nil)
   end
 end
 
-
 end

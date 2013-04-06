@@ -100,14 +100,14 @@
               <td>
                 <div class="input-prepend">
                   <span class="add-on">$</span>
-                  <%= item_form.text_field :price, :class=>"span2", :id=>"inv_price_field",
+                  <%= item_form.text_field :price, :placeholder => "Price", :class=>"span2", :id=>"inv_price_field",
                   :style => "width: 45px;" %>
                 </div>
               </td>
-              <td><%= item_form.text_field :units, :style => "width: 45px;" %></td>
-              <td><%= item_form.text_field :minorder, :style => "width: 35px;" %></td>
-              <td><%= item_form.text_field :maxorder, :style => "width: 35px;" %></td>
-              <td><%= item_form.text_field :totalquantity, :style => "width: 45px;" %></td>
+              <td><%= item_form.text_field :units, :placeholder => "Unit", :style => "width: 45px;" %></td>
+              <td><%= item_form.text_field :minorder, :placeholder => "Min", :style => "width: 35px;" %></td>
+              <td><%= item_form.text_field :maxorder, :placeholder => "Max", :style => "width: 35px;" %></td>
+              <td><%= item_form.text_field :totalquantity, :placeholder => "Qty", :style => "width: 45px;" %></td>
               <td><%= item_form.check_box :available %></td>
 
             </tr>
@@ -121,10 +121,10 @@
 
         <br><br>
 
-        <footer class="navbar navbar-fixed-bottom" style="z-index: 0;">
+        <footer class="navbar navbar-fixed-bottom" style="z-index: 1;">
           <div class="navbar-bottom">
             <div class="container">
-              <%= f.submit "Save Inventory", :class=>"btn btn-primary" %>
+              <%= f.submit "Save Inventory", :class=>"btn btn-primary", :style=>"float:right; "%>
             </div>
           </div>
         </footer>

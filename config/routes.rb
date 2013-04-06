@@ -72,6 +72,7 @@ Localfoods::Application.routes.draw do
   match '/process_order', :to => 'purchases#process_order'
   match '/about', :to => 'pages#about'
   match '/pickup_info', :to => 'pages#pickup_info'
+  match '/acknowledgements', :to => 'pages#acknowledgements'
 
 
   resources :password_resets

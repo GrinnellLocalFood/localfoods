@@ -149,18 +149,9 @@ $('#category-sort').after('<th id="temp-category" class="temp">Category</th>');
 // END OF CATEGORY LIST //
 
 
-
-
-// $('.sort > a').click(function() {
-//     if($(this).hasClass('asc')) {
-//         if($(this).next('i')) {
-//             $(this).next().remove();
-//         }
-//         $(this).append('<i class="icon-arrow-up"></i>');
-//     }
-
-// }); // end sort click
-
+// sorting arrows
+$('.asc').append('<i class="icon-arrow-up sort-arrow"></i>');
+$('.desc').append('<i class="icon-arrow-down sort-arrow"></i>');
 
 
 }); // end ready
@@ -290,7 +281,7 @@ margin-top: -5px">
         <td class="clasic_show"><%= link_to "Show", inventory_item_path({ :inventory_id => params[:id], :id => item.id })%></td>
 
         <!-- add to cart -->
-        <% if current_user && (@producer != current_user) %>
+        <% if current_user && (@producer != current_user) && (item.is_available? == 'Yes') %>
 
         <td class="hidden-phone">
             <%= link_to "Add to Cart", cart_items_path(:item_id => item), :remote => false, :method => :post, 

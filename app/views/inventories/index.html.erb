@@ -21,7 +21,6 @@ $('.producer_link a').click(function() {
 		<div class="tabbable tabs-left">
 
 			<ul id="inventory-sidebar" class="nav nav-tabs">
-
 				<li class="producer_link active"> 
 					<%= link_to("All Products", show_all_categories_path, 
 					:remote => true)%>
@@ -46,7 +45,7 @@ $('.producer_link a').click(function() {
 			<div id="inventory-panel" class="tab-content custom-block">
 				<div id="producer_info">
 					<div align="center">
-						<%= render :partial => 'categories/show', :locals => {:@items => Item.all} %>
+						<%= render :partial => 'categories/show', :locals => {:@items => @items} %>
 					</div>
 				</div>
 			</div>

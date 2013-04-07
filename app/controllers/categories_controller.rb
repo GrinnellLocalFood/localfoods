@@ -35,20 +35,12 @@ def index
 	@category = Category.new
 end
 
-def show_by_category
-    @category = Category.find(params[:id])
-    @items = @category.items
-    respond_to do |format|
-      format.js { render :locals => { :items => @items, :category => @category } }
-    end
- end
-
- def show_all
- 	@items = Item.all
- 	respond_to do |format|
+def show_all
+    @items = Kaminari.paginate_array(Item.all.to_a).page(params[:page]).per(10)
+   	respond_to do |format|
       format.js { render :locals => { :items => @items } }
   end
- end
+end
 
   def destroy   
     @category = Category.find(params[:id])

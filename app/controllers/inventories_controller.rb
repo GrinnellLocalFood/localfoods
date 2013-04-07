@@ -9,7 +9,7 @@ skip_before_filter :require_login, :only => [:show, :index, :show_in_index, :sho
       @title = "View Inventory"
       @remote = false
       @producer = User.find(params[:id])
-      @item = sorted_items
+      @item = Kaminari.paginate_array(sorted_items.to_a).page(params[:page]).per(10)
       respond_to do |format|
         format.html
         format.xml  { render :xml => @item }
@@ -20,23 +20,24 @@ skip_before_filter :require_login, :only => [:show, :index, :show_in_index, :sho
       @title = "Our Producers"
       @remote = true
       @producer = User.find(params[:id])
-      @item = sorted_items
+      @item = Kaminari.paginate_array(sorted_items.to_a).page(params[:page]).per(10)
       respond_to do |format|
-           format.js { render :locals => { :item => @item, :@sort_c => sort_column, :@sort_d => sort_direction } }
+           format.js { render :locals => { :item => @item} }
       end
   end
 
   def show_all
   @items = Item.all
   respond_to do |format|
-      format.js { render :locals => { :items => Item.all } }
+      format.js { render :locals => { :items => @items } }
+    end
   end
- end
 
   def index
     @title = "Our Producers"
     @producers = Inventory.all
     @categories = Category.all
+    @items = Kaminari.paginate_array(Item.all.to_a).page(params[:page]).per(10)
   end
 
   def edit

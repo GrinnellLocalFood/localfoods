@@ -222,9 +222,6 @@ margin-top: -5px">
 </div>
 <% end %>
 
-
-
-
 <div id="inventory-info">
 
     <h1 id="inventory-title"><%= @producer.inventory.display_name %></h1>
@@ -240,6 +237,8 @@ margin-top: -5px">
 <% if @item.count != 0 %>
 
 <h3 id="current-inventory-title">Current Inventory</h3>
+
+ <div class="pagination" align="left"><%= paginate @item, :remote => true %></div>
 
 <table class="producer-table table-hover" align="center">
     <tr>

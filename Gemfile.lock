@@ -82,7 +82,6 @@ GEM
       activesupport (>= 2.3.2)
       cocaine (>= 0.0.2)
       mime-types
-    pg (0.14.1)
     polyglot (0.3.3)
     pr_geohash (1.0.0)
     progress_bar (0.4.0)
@@ -182,7 +181,6 @@ DEPENDENCIES
   jquery-rails (= 2.0.2)
   kaminari
   paperclip (= 2.7.0)
-  pg
   progress_bar
   rails (= 3.2.11)
   rspec-rails (= 2.11.0)

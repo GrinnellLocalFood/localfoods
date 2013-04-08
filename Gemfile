@@ -22,9 +22,6 @@ group :development, :test do
   #gem 'annotate-models'
 end
 
-group :production, :staging do
-  gem 'pg'
-end
 
 group :test do
   gem 'shoulda'

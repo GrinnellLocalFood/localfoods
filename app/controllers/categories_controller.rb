@@ -27,9 +27,6 @@ def create
 	end
 end
 
-def edit
-end
-
 def index
 	@categories = Category.all
 	@category = Category.new

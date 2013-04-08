@@ -9,31 +9,20 @@ gem 'progress_bar'
 gem 'sunspot_with_kaminari'
 gem 'kaminari'
 gem 'foreman'
-gem 'tilt'
-
-gem 'jquery-rails'
-
-# It seems production needs at least the LESS gem
-gem 'less'
-gem 'less-rails'
 
 group :development, :test do
   gem 'sqlite3','1.3.5'
   gem 'rspec-rails', '2.11.0'
   gem 'factory_girl_rails', '1.4.0'
+  gem 'jquery-rails', '2.0.2'
   gem 'capybara'
   gem 'ffaker'
-end
-
-group :assets do
-   gem 'uglifier'
-   gem 'execjs'
-   gem 'therubyracer'
-   gem 'yui-compressor'
+  
+  #leaving out annotate gem, it could not be found in sources
+  #gem 'annotate-models'
 end
 
 group :production, :staging do
-  gem 'sqlite3','1.3.5'
   gem 'pg'
 end
 

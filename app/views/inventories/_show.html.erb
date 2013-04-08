@@ -123,6 +123,8 @@ $('.category_filter').click(function() {
 <!-- End modal for items -->
 
 
+
+
 <% if signed_in? && (current_user.admin || current_user.coordinator || current_user == @producer) %>
 
 <div align="right" style="margin-right:20px; margin-bottom: -20px;
@@ -190,7 +192,11 @@ margin-top: -5px">
 
     <%= @producer.inventory.description %>
 
+
+
 </div>
+
+
 
 
 <% if @item.count != 0 %>
@@ -198,6 +204,9 @@ margin-top: -5px">
 <h3 id="current-inventory-title">Current Inventory</h3>
 
 <table class="producer-table table-hover" align="center">
+
+    
+
     <tr>
         <th class="hidden-phone"></th>
         <th>Name</th>
@@ -266,7 +275,7 @@ margin-top: -5px">
     <% end %> 
 </table>
 
-<!-- fix this -->
+
 <% else %>
 <h4 id="empty-inventory-title">
     Currently Nothing For Sale

@@ -1,0 +1,17 @@
+<table class="table table-hover">
+  <tr>
+    <th>Product</th>
+    <th>Qty</th>
+    <th>Full Price</th>
+    <th>Paid For</th>
+  </tr>
+  <% for purchase in @purchases %>
+  <td><%= purchase.item.name %></td>
+  <td><%= purchase.quantity %></td>
+  <td><%= number_to_currency(purchase.quantity*purchase.item.price) %></td>
+  <td><%= purchase.paid ? "Yes" : "No" %></td>
+</tr>
+</tr>
+<% end %>
+</table>
+<h5 id="cart_total" style="float:right; margin-right: 10px">Total: <%= number_to_currency current_user.pending_payment %></h5>

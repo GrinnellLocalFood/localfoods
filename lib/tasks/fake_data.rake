@@ -67,6 +67,7 @@ def make_items
       minorder = rand(100)
       maxorder = minorder + rand(100)
       price = rand(100)
+      totalquantity = rand(500)
       available = (rand(2) > 1) ? true : false
       category_id = sampled_category_id
       inventory_id = user.inventory.id
@@ -75,6 +76,7 @@ def make_items
         :minorder => minorder,
         :maxorder => maxorder,
         :price => price,
+        :totalquantity => totalquantity,
         :available => available,
         :category_id => category_id,
         :inventory_id => inventory_id)

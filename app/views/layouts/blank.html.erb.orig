@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<title><%= title %></title>
+
+<<<<<<< HEAD
+	<%= stylesheet_link_tag :application %>	
+=======
+	<%= stylesheet_link_tag '/stylesheets/bootstrap-v2.3.1.css' %>		
+	<%= stylesheet_link_tag '/stylesheets/bootstrap-fileupload.css' %>	
+	<%= stylesheet_link_tag '/stylesheets/custom.css' %>
+	<%= stylesheet_link_tag '/stylesheets/bootstrap-changes.css' %>	
+>>>>>>> 28e4d9e818ba77ee3608649b1904ad5cb8664140
+
+	<script type="text/javascript">
+
+	$(document).ready(function() {
+		$('[data-toggle="tooltip"]').tooltip();
+
+}); //end ready
+
+	</script>
+
+</head>
+<body>
+	<%= yield %>
+</body>
+</html>

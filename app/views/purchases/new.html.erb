@@ -1,0 +1,4 @@
+<%= form_for(@purchase, :url => url_for({:controller => "purchases", :action => "create"})) do |f| %>
+<%= f.submit "Pay by Check" %>
+<% end %>
+<%= link_to "Pay Online", current_user.cart.paypal_url(inventories_path) %>

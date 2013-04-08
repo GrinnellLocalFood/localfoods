@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130307212726) do
+ActiveRecord::Schema.define(:version => 20130314163731) do
 
   create_table "application_states", :force => true do |t|
     t.boolean  "orders_open", :default => false
@@ -83,6 +83,16 @@ ActiveRecord::Schema.define(:version => 20130307212726) do
     t.integer  "item_photo_file_size"
     t.datetime "item_photo_updated_at"
     t.integer  "category_id"
+  end
+
+  create_table "purchases", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "item_id"
+    t.integer  "quantity"
+    t.decimal  "unit_price"
+    t.datetime "created_at",                    :null => false
+    t.datetime "updated_at",                    :null => false
+    t.boolean  "paid",       :default => false
   end
 
   create_table "users", :force => true do |t|

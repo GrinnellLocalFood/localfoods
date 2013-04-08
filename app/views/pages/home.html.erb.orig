@@ -1,0 +1,79 @@
+<div id ="hero-image-unit" style="z-index: -1">
+</div>
+
+<% if notice %>
+<div class="home_notice home_notice-success fade in">
+	<a class="close" data-dismiss="alert" href="#">&times;</a>
+	<%= notice %>
+</div>
+<% end %>
+
+<% if alert %>
+<div class="home_alert home_alert-success fade in">
+	<a class="close" data-dismiss="alert" href="#">&times;</a>
+	<%= alert %>
+</div>
+<% end %>
+
+
+<div class="container-fluid" align="right">
+	<div class="row">
+		<div class="hero-text">
+			<h2>Welcome to the Grinnell Local Foods Coop!</h2>
+			<p>Support local farmers, local economy, and environmental sustainability by purchasing quality food grown right here in central Iowa.
+
+				<br><br>
+				<% if !signed_in? %>
+				<%= link_to "Sign Up!", register_path,
+				:class=>"btn btn-large" %>
+
+				<% end %>
+				</p>
+			</div>
+		</div>
+	</div>
+
+<<<<<<< HEAD
+<div style="background-color: #eee; padding-bottom: 30px;">
+<div id="announcements-container" class="container">
+	<div class="row-fluid">
+		<div id="announcements" class="span12" style="text-align: justify;">
+			<h3>Announcements</h3>
+			<p>
+				Welcome to the Grinnell Local Foods Coop! Orders will be open Jan 31 to Feb 7. Pickup will be on Feb 14 in the Quad. New members may create and account and place an order by following the link in the upper right corner. You will be asked to pay a membership fee when you pick up your order (see pickup information for more details). Happy ordering! Questions or comments? Send us an email!
+			</p>
+			<p>
+				If you are not on our email list, contact coordinators at <strong>localfood@grinnell.edu</strong>.
+			</p>
+		</div>
+	</div>
+</div>
+</div>
+=======
+
+	<!-- <div class="container">
+		<div class="row">
+	
+
+			<div style="margin-bottom:121px;">
+			</div>
+
+
+			<div class="span4 custom-block">
+				<p align="center">blah 1</p>
+			</div>
+
+			<div class="span4 custom-block">
+				<p align="center">blah 2</p>
+			</div>
+
+			<div class="span4 custom-block">
+				<p align="center">blah 3</p>
+			</div>
+
+		</div>
+	</div>
+ -->
+
+
+>>>>>>> 28e4d9e818ba77ee3608649b1904ad5cb8664140

@@ -1,0 +1,363 @@
+//
+// Responsive: Landscape phone to desktop/tablet
+// --------------------------------------------------
+
+// this is the width that everything collapses to 100% width
+@media (max-width: 767px) {
+
+  // Remove padding on container given explicit padding set on body
+  .container-fluid {
+    padding: 0;
+  }
+
+  .navbar-fixed-top, {
+    margin-bottom: 10px;
+  }
+
+  // TYPOGRAPHY
+  // ----------
+  // Reset horizontal dl
+  .dl-horizontal {
+    dt {
+      float: none;
+      clear: none;
+      width: auto;
+      text-align: left;
+    }
+    dd {
+      margin-left: 0;
+    }
+  }
+
+  #hero-image-unit {
+    margin-top: -10px;
+  }
+
+  #hero-text {
+    margin-left: 5%;
+    margin-right: 5%;
+  }
+
+  #hero-text h1 {
+    font-size: 195%;
+    line-height: 110%;
+  }
+
+  #hero-text p {
+   font-size: 110%;
+ }
+
+
+  // GRID & CONTAINERS
+  // -----------------
+  // Remove width from containers
+  // Along with padding to set content in a bit
+  .container {
+    width: auto;
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+  // Fluid rows
+  .row-fluid {
+    width: 100%;
+  }
+  // Undo negative margin on rows and thumbnails
+  .row,
+  .thumbnails {
+    margin-left: 0;
+  }
+  .thumbnails > li {
+    float: none;
+    margin-left: 0; // Reset the default margin for all li elements when no .span* classes are present
+  }
+  // Make all grid-sized elements block level again
+  [class*="span"],
+  .uneditable-input[class*="span"], // Makes uneditable inputs full-width when using grid sizing
+  .row-fluid [class*="span"] {
+    float: none;
+    display: block;
+    width: 100%;
+    margin-left: 0;
+    margin-bottom: 10px;
+    .box-sizing(border-box);
+  }
+  .span12,
+  .row-fluid .span12 {
+    width: 100%;
+    .box-sizing(border-box);
+  }
+  .row-fluid [class*="offset"]:first-child {
+    margin-left: 0;
+  }
+
+  // FORM FIELDS
+  // -----------
+  // Make span* classes full width
+  .input-large,
+  .input-xlarge,
+  .input-xxlarge,
+  input[class*="span"],
+  select[class*="span"],
+  textarea[class*="span"],
+  .uneditable-input {
+    .input-block-level();
+  }
+  // But don't let it screw up prepend/append inputs
+  .input-prepend input,
+  .input-append input,
+  .input-prepend input[class*="span"],
+  .input-append input[class*="span"] {
+    display: inline-block; // redeclare so they don't wrap to new lines
+    width: auto;
+  }
+  .controls-row [class*="span"] + [class*="span"] {
+    margin-left: 0;
+  }
+
+
+  .fileupload .btn {
+    vertical-align: top;
+  }
+
+  .form-horizontal {
+    .control-label {
+      width: 180px;
+      margin-right: 10px;
+    }
+    .controls {
+     margin-left: 200px;
+   }
+ }
+
+// this shouldn't have to be here, but for some reason it does
+ #inv_price_field {
+    width: 193px;
+  }
+
+ #header-login input{
+  display: inline;
+  margin-top: 15px;
+}
+
+#session_email, #session_password {
+  width: 100px;
+}
+
+.navbar-inner-table {
+  top: -10px;
+  margin-bottom: -40px;
+}
+
+.big-form-warning {
+  text-align: left;
+  padding-left: 18px;
+}
+
+.warning-spacing {
+  margin-bottom: 36px;
+}
+
+#inventory-sidebar {
+  position: static;
+}
+
+
+#inventory-info {
+  clear: both;
+}
+
+#inventory-title {
+  font-size: 210%;
+}
+
+#current-inventory-title {
+  font-size: 140%;
+}
+
+#inventory-carousel {
+    width: 100%;
+  }
+
+
+#all-products-container {
+  padding-left: 0px;
+  padding-right: 0px;
+}
+
+#announcements-container {
+  padding-left: 5%;
+  padding-right: 5%;
+}
+
+  // Modals
+  .modal {
+    position: fixed;
+    top:   20px;
+    left:  20px;
+    right: 20px;
+    width: auto;
+    margin: 0;
+    &.fade  { top: -100px; }
+    &.fade.in { top: 20px; }
+  }
+
+
+
+  #logohead {
+  }
+
+  #nav-collapse {
+    display: block;
+  }
+
+  #top-nav {
+    margin-top: 10px;
+  }
+
+  #search-header {
+    // width: 120px;
+  }
+
+  .sub-nav > li > a {
+    padding-left: 6px;
+    padding-right: 6px;
+  }
+
+}
+
+
+@media (max-width: 570px) {
+  #search-header-form {
+    float: left;
+    width: 100%;
+  }
+
+  #search-header-append {
+    margin-top: 0px;
+    margin-bottom: 8px;
+    width: 100%;
+    // margin-left: 6px;
+  }
+
+  #search-header {
+    // janky fix, but at this point much easier than the alternative
+    // (which is rewriting how bootstrap appends icons to forms)
+    width: 88%;
+  }
+
+  .sub-nav {
+    text-align: center;
+    float: inherit;
+    margin: 0px;
+  }
+
+  .sub-nav > li {
+    float: inherit;
+    display: inline;
+  }
+
+  .sub-nav > li > a {
+    float: inherit;
+    display: inline-block;
+    padding-left: 5px;
+    padding-right: 5px;
+  }
+
+}
+
+
+
+// UP TO LANDSCAPE PHONE
+// ---------------------
+
+@media (max-width: 480px) {
+
+  // // This is probably a terrible practice
+  // body {
+  //   min-width: 320px;
+  // }
+
+  // Smooth out the collapsing/expanding nav
+  .nav-collapse {
+    -webkit-transform: translate3d(0, 0, 0); // activate the GPU
+  }
+
+  // Block level the page header small tag for readability
+  .page-header h1 small {
+    display: block;
+    line-height: @baseLineHeight;
+  }
+
+  // Update checkboxes for iOS
+  input[type="checkbox"],
+  input[type="radio"] {
+    border: 1px solid #ccc;
+  }
+
+  // Remove the horizontal form styles
+  .form-horizontal {
+    .control-label {
+      float: none;
+      width: auto;
+      padding-top: 0;
+      text-align: left;
+      margin-left: 10px;
+    }
+    // Move over all input controls and content
+    .controls {
+      margin-left: 20px;
+    }
+    // Move the options list down to align with labels
+    .control-list {
+      padding-top: 0; // has to be padding because margin collaspes
+    }
+    // Move over buttons in .form-actions to align with .controls
+    .form-actions {
+      padding-left: 10px;
+      padding-right: 10px;
+    }
+  }
+
+  // Medias
+  // Reset float and spacing to stack
+  .media .pull-left,
+  .media .pull-right  {
+    float: none;
+    display: block;
+    margin-bottom: 10px;
+  }
+  // Remove side margins since we stack instead of indent
+  .media-object {
+    margin-right: 0;
+    margin-left: 0;
+  }
+
+  // Modals
+  .modal {
+    top:   10px;
+    left:  10px;
+    right: 10px;
+  }
+  .modal-header .close {
+    padding: 10px;
+    margin: -10px;
+  }
+
+  // Carousel
+  .carousel-caption {
+    position: static;
+  }
+
+  #all-title {
+    font-size: 210%;
+  }
+
+}
+
+
+@media (max-width: 429px) {
+  #pickup-title,
+  #about-title {
+    padding-top: 50px;
+  }
+}

@@ -71,15 +71,15 @@ Localfoods::Application.routes.draw do
   match '/editorderstate', :to => 'application_states#editorderstate' 
   match '/all_orders', :to => 'purchases#all_orders'
   match '/process_order', :to => 'purchases#process_order'
-<<<<<<< HEAD
   match '/about', :to => 'pages#about'
   match '/pickup_info', :to => 'pages#pickup_info'
+<<<<<<< HEAD
   match '/paypal', :to => 'payment_notifications#create'
-
 
 =======
-  match '/paypal', :to => 'payment_notifications#create'
->>>>>>> 864a4529bd5e2c9ff30010e43c1a535d3af88473
+  match '/acknowledgments', :to => 'pages#acknowledgments'
+>>>>>>> 4a313cfb8cd192105a019d1e0e16e4da17ccbda9
+
 
   resources :password_resets
   resources :inventory_photos, :only => [:destroy]

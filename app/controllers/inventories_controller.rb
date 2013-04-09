@@ -17,7 +17,7 @@ skip_before_filter :require_login, :only => [:show, :index, :show_in_index, :sho
   def show_in_index
       @title = "Our Producers"
       @producer = User.find(params[:id])
-      @item = Item.where("inventory_id = ?", params[:id])
+      @item = Kaminari.paginate_array(sorted_items.to_a).page(params[:page]).per(10)
       respond_to do |format|
         format.js { render :locals => { :item => @item } }
       end
@@ -34,6 +34,7 @@ skip_before_filter :require_login, :only => [:show, :index, :show_in_index, :sho
     @title = "Our Producers"
     @producers = Inventory.all
     @categories = Category.all
+    @items = Kaminari.paginate_array(Item.all.to_a).page(params[:page]).per(10)
   end
 
   def edit
@@ -65,6 +66,28 @@ skip_before_filter :require_login, :only => [:show, :index, :show_in_index, :sho
     if (!params[:reload])
       20.times {@inventory.item.build}
     end
+  end
+
+private
+
+  def sorted_items
+    if sort_column == "category_id"
+      @item = Item.where("inventory_id = ?", params[:id])
+      if sort_direction == "asc"
+        return @item.sort_by{|i| i.category.name }
+      else
+        return @item.sort_by{|i| i.category.name }.reverse
+      end
+    end
+    return Item.where("inventory_id = ?", params[:id]).order(sort_column + " " + sort_direction)
+  end
+
+  def sort_column
+    Item.column_names.include?(params[:sort]) ? params[:sort] : "name"
+  end
+  
+  def sort_direction
+    %w[asc desc].include?(params[:direction]) ? params[:direction] : "asc"
   end
 
 end

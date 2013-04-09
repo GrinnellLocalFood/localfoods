@@ -22,7 +22,6 @@ $(this).attr('disabled', true);
 }); // close document ready
 </script>
 
-
 <div id="cart">
 
 <table class="table table-hover">
@@ -36,6 +35,9 @@ $(this).attr('disabled', true);
   <% for cart_item in @cart.cart_items %>
   <td><%= cart_item.item.name %></td>
   <td>
+    <%= form_for(cart_item, :url => url_for({ :controller => "cart_items", :action => "update", :cart_item_id => cart_item.id}), :remote => true,
+    :html => {:class => 'form-horizontal'} ) do |f| %>
+    <div>
 
     <%= render :partial => 'cart_items/edit', :locals => {:cart_item => cart_item} %>
     

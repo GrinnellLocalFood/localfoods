@@ -49,12 +49,12 @@ $('#search-header').attr('value', '<%= params[:search] %>');
             <table class="producer-table table-hover" align="center">
                 <tr>
                     <th class="hidden-phone"></th>
-                    <th>Name</th>
-                    <th>Inventory</th>
+                    <th> <%= search_sortable "name" , params[:search] %></th>
+                    <th><%= search_sortable "inventory", params[:search] %></th>
                     <th class="hidden-phone">Description</th>
-                    <th class="hidden-phone">Price</th>
+                    <th class="hidden-phone"> <%= search_sortable "price", params[:search] %></th>
                     <th class="hidden-phone">Min Order</th>   
-                    <th>Category</th>   
+                    <th> <%= search_sortable "category", params[:search] %></th>   
                     <th class="hidden-phone">Available</th>
                     <th></th>        
                 </tr>

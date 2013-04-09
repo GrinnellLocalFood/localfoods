@@ -21,11 +21,19 @@ class Item < ActiveRecord::Base
 	before_validation :format_values
 
    searchable do
-    text :name, :boost => 5
-    text :inventory, :boost => 3 do inventory.display_name end
-    text :inventory_description, :boost => 1 do inventory.description end
-    text :category, :boost => 2  do category.name end
-    text :description, :boost => 3
+    text :name
+    text :inventory do inventory.display_name end
+    text :inventory_description do inventory.description end
+    text :category  do category.name end
+    text :description
+    string :name
+   	string :category do
+   		category.name
+   	end
+   	string :inventory do
+   	    inventory.display_name
+   	end
+   	float :price
    end
 
 	def is_available?

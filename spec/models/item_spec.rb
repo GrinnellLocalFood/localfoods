@@ -47,6 +47,14 @@ describe Item do
     producer.inventory.item.where("description = ?","new desc").first.should_not be_nil
   end 
 
+  it "should delete item if user is deleted" do
+    producer = User.create!(@attr.merge(:producer => true))
+    @item1 = Item.new(@item.merge(:description => "apple1"))
+    producer.inventory.item << @item1
+    producer.destroy
+    Item.all.should_not include(@item1)
+  end
+
 
 
   it { should validate_presence_of :category_id}

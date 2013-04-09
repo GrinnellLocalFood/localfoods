@@ -6,6 +6,7 @@ class PurchasesController < ApplicationController
 
 	def create
 		create_purchase(false)
+		redirect_to :action => 'index'
 	end		
 
 	def index
@@ -19,12 +20,7 @@ class PurchasesController < ApplicationController
 	end
 
 	def process_order
-		if(params[:st] == "Completed")
-			create_purchase(true)
-			redirect_to :action => 'index'
-		else
-			redirect_to '/'			
-		end
+		redirect_to :action => 'index'
 	end
 
 	private
@@ -33,7 +29,7 @@ class PurchasesController < ApplicationController
 		current_cart = current_user.cart
 		current_cart.cart_items.each do |cart_item|
 			@old_purchase = Purchase.where("user_id =? AND item_id = ?", current_user.id, cart_item.item.id).first
-			if @old_purchase.nil?
+			if @old_purchase.nil? || @old_purchase.paid != paid
 				@purchase = Purchase.new(:item_id => cart_item.item_id, 
 							 :user_id => current_user.id, 
 							 :quantity => cart_item.quantity,

@@ -1,11 +1,13 @@
 <script type="text/javascript">
-
-
 $(document).ready(function() {
 
 
 // something about the partial makes this need to be here too
 $('[data-toggle="tooltip"]').tooltip();
+
+
+
+// CATEGORY LIST //
 // make an array to store the list of categories for a producer
 var list_of_categories = new Array();
 $('.category_label').each(function() {
@@ -20,14 +22,16 @@ $('.category_label').each(function() {
 // sort the array & push Other to the end
 list_of_categories.sort().push('Other');
 
+// burn whatever is already there
+$('.category_list').nextAll().remove();
+
 for (var i = list_of_categories.length - 1; i >= 0; i--) {
- $('.category_list').after('<li class="category_filter"><a style="padding-left: 4px;">' + 
+ $('.category_list').after('<li class="category_filter"><a>' + 
     list_of_categories[i] + '</a></li>');
 };
 
-
 // add the 'All' option to the category list
-$('.category_list').after('<li class="category_filter active"><a style="padding-left: 4px;">' + 'All' + '</a></li>');
+$('.category_list').after('<li class="category_filter active"><a>' + 'All' + '</a></li>');
 list_of_categories.push('All');
 
 // click behavior for when you select a present category
@@ -40,7 +44,7 @@ $('.category_filter').click(function() {
         $('#all-title').html('All Products');
     } else {
     $('#all-title').html('All ' + category_name);
-}
+    }
 
     // go through all the inventory on the to decide what to hide/show
     $('.category_label').each(function() {
@@ -63,7 +67,22 @@ $('.category_filter').click(function() {
     }); // end each
         } // end else
     }); // end each
+
+// add or remove sortable links if a category filter is active
+if(category_name != 'All') {
+
+$('.temp').remove();
+$('.sort').hide();
+$('#name-sort').after('<th id="temp-name" class="temp">Name</th>');
+$('#price-sort').after('<th id="temp-price" class="temp">Price</th>');
+
+} else {
+    $('.temp').remove();
+    $('.sort').show();
+}
+
 }); // end click
+// END OF CATEGORY LIST //
 
 
 
@@ -95,9 +114,6 @@ $('.show_link').click(function() {
      100)
 
  }); // end click
-
-
-
 }); // end ready
 
 </script>
@@ -113,7 +129,7 @@ $('.show_link').click(function() {
 <div id="all-image-unit">
 <h1 id="all-title">All Products</h1>
 </div>
-
+<div class="pagination" align="left"><%= paginate @items, :remote => true %></div>
 <table class="producer-table table-hover" align="center">
 
     <tr>

@@ -5,6 +5,11 @@ $(document).ready(function() {
 
 // hide the non-javascript show link
 $('.classic_show').hide();
+
+// sorting arrows
+$('.asc').append('<i class="icon-arrow-up sort-arrow"></i>');
+$('.desc').append('<i class="icon-arrow-down sort-arrow"></i>');
+
 // make the item rows clickable and have a pointer hover-over
 $('.item_row').css('cursor', 'pointer').addClass('show_link');
 
@@ -49,12 +54,12 @@ $('#search-header').attr('value', '<%= params[:search] %>');
             <table class="producer-table table-hover" align="center">
                 <tr>
                     <th class="hidden-phone"></th>
-                    <th>Name</th>
-                    <th>Inventory</th>
+                    <th class="sort"> <%= search_sortable "name" , params[:search] %></th>
+                    <th class="sort"><%= search_sortable "inventory", params[:search] %></th>
                     <th class="hidden-phone">Description</th>
-                    <th class="hidden-phone">Price</th>
+                    <th class="hidden-phone sort"> <%= search_sortable "price", params[:search] %></th>
                     <th class="hidden-phone">Min Order</th>   
-                    <th>Category</th>   
+                    <th class="sort"> <%= search_sortable "category", params[:search] %></th>   
                     <th class="hidden-phone">Available</th>
                     <th></th>        
                 </tr>

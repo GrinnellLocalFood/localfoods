@@ -9,9 +9,6 @@ $('.producer_link a').click(function() {
 	});
 	$(this).parent().addClass('active');
 
-// hide all the old categories if you're just clicking between producers
-$('.category_filter').hide();
-$('.category_list').show();
 	}); // end click
 
 }); // end ready
@@ -24,10 +21,9 @@ $('.category_list').show();
 		<div class="tabbable tabs-left">
 
 			<ul id="inventory-sidebar" class="nav nav-tabs">
-
 				<li class="producer_link active"> 
 					<%= link_to("All Products", show_all_categories_path, 
-					:remote => true, :style=>'padding-left: 4px; font-size: 13px;')%>
+					:remote => true)%>
 				</li>
 
 				<li class="nav-header">Producers</li>
@@ -35,7 +31,7 @@ $('.category_list').show();
 				<% @producers.each do |producer| %>
 				<li class="producer_link"> 
 					<%= link_to(producer.display_name, show_in_index_inventory_path(producer), 
-					:remote => true, :style=>'padding-left: 4px; font-size: 13px;')%>
+					:remote => true)%>
 				</li>
 				
 				<% end %>
@@ -49,7 +45,7 @@ $('.category_list').show();
 			<div id="inventory-panel" class="tab-content custom-block">
 				<div id="producer_info">
 					<div align="center">
-						<%= render :partial => 'categories/show', :locals => {:@items => Item.all} %>
+						<%= render :partial => 'categories/show', :locals => {:@items => @items} %>
 					</div>
 				</div>
 			</div>

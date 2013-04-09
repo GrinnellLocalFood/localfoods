@@ -1,3 +1,4 @@
+<!-- inventory show partial -->
 <script type="text/javascript">
 $(document).ready(function() {
 
@@ -39,9 +40,24 @@ $('.add-to-cart').attr('data-remote', true);
 
 $('.add-to-cart').click(function() {
 
+  // doesn't work but whatever I guess
+    
+
   $('#cart_modal').modal({
     remote: '<%= show_in_modal_cart_path(current_user.cart.id) %>'
+  
+
+  
+  
 });
+
+
+setTimeout(
+  function() {
+     $('#cart_link').html('Cart(<%= cart_size %>)');
+     $('#cart_link').load();
+ },
+ 100)
 
 // note: concern about the delay here too
 // load the modal, but delay it slightly for time to add to cart
@@ -58,6 +74,11 @@ setTimeout(
 
 // something about the partial makes this need to be here too
 $('[data-toggle="tooltip"]').tooltip();
+
+
+
+
+// CATEGORY LIST //
 // make an array to store the list of categories for a producer
 var list_of_categories = new Array();
 $('.category_label').each(function() {
@@ -72,20 +93,34 @@ $('.category_label').each(function() {
 // sort the array & push Other to the end
 list_of_categories.sort().push('Other');
 
+// burn whatever is already there
+$('.category_list').nextAll().remove();
+
 for (var i = list_of_categories.length - 1; i >= 0; i--) {
- $('.category_list').after('<li class="category_filter"><a style="padding-left: 4px;">' + 
+ $('.category_list').after('<li class="category_filter"><a>' + 
     list_of_categories[i] + '</a></li>');
 };
 
 
 // add the 'All' option to the category list
-$('.category_list').after('<li class="category_filter active"><a style="padding-left: 4px;">' + 'All' + '</a></li>');
+$('.category_list').after('<li class="category_filter active"><a>' + 'All' + '</a></li>');
 list_of_categories.push('All');
 
 // click behavior for when you select a present category
 $('.category_filter').click(function() {
     // save the category name for easy use
     var category_name = $(this).text();
+
+
+    // change the current inventory title
+    if (category_name == 'All') {
+        $('#current-inventory-title').html('Current Inventory');
+    } else {
+    $('#current-inventory-title').html('Current Inventory > ' + category_name);
+    }
+
+
+
 
     // go through all the inventory on the to decide what to hide/show
     $('.category_label').each(function() {
@@ -108,7 +143,28 @@ $('.category_filter').click(function() {
     }); // end each
         } // end else
     }); // end each
+
+
+// add or remove sortable links if a category filter is active
+if(category_name != 'All') {
+
+$('.temp').remove();
+$('.sort').hide();
+$('#name-sort').after('<th id="temp-name" class="temp">Name</th>');
+$('#price-sort').after('<th id="temp-price" class="temp">Price</th>');
+$('#category-sort').after('<th id="temp-category" class="temp">Category</th>');
+
+} else {
+    $('.temp').remove();
+    $('.sort').show();
+}
+
 }); // end click
+
+// sorting arrows
+$('.asc').append('<i class="icon-arrow-up sort-arrow"></i>');
+$('.desc').append('<i class="icon-arrow-down sort-arrow"></i>');
+
 }); // end ready
 
 </script>
@@ -121,8 +177,6 @@ $('.category_filter').click(function() {
     <div class="modal-body"></div>
 </div>
 <!-- End modal for items -->
-
-
 
 
 <% if signed_in? && (current_user.admin || current_user.coordinator || current_user == @producer) %>
@@ -192,28 +246,23 @@ margin-top: -5px">
 
     <%= @producer.inventory.description %>
 
-
-
 </div>
-
-
 
 
 <% if @item.count != 0 %>
 
 <h3 id="current-inventory-title">Current Inventory</h3>
 
+ <div class="pagination" align="left"><%= paginate @item, :remote => true %></div>
+
 <table class="producer-table table-hover" align="center">
-
-    
-
     <tr>
         <th class="hidden-phone"></th>
-        <th>Name</th>
+        <th id="name-sort" class="sort"><%= sortable "name", @remote, @producer %></th>
         <th>Description</th>
-        <th class="hidden-phone">Price</th>
+        <th id="price-sort" class="sort hidden-phone"><%= sortable "price", @remote, @producer %></th>
         <th class="hidden-phone">Min Order</th>
-        <th class="hidden-phone">Category</th>    
+        <th id="category-sort" class="sort hidden-phone"><%= sortable "category_id", @remote, @producer, Category %></th>    
         <th class="hidden-phone">Available</th>
         <% if @producer != current_user %>
         <th class="hidden-phone"></th>
@@ -247,7 +296,7 @@ margin-top: -5px">
         <td class="clasic_show"><%= link_to "Show", inventory_item_path({ :inventory_id => params[:id], :id => item.id })%></td>
 
         <!-- add to cart -->
-        <% if current_user && (@producer != current_user) %>
+        <% if current_user && (@producer != current_user) && (item.is_available? == 'Yes') %>
 
         <td class="hidden-phone">
             <%= link_to "Add to Cart", cart_items_path(:item_id => item), :remote => false, :method => :post, 
@@ -275,7 +324,7 @@ margin-top: -5px">
     <% end %> 
 </table>
 
-
+<!-- fix this -->
 <% else %>
 <h4 id="empty-inventory-title">
     Currently Nothing For Sale

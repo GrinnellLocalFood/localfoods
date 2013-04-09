@@ -1,4 +1,5 @@
 class ItemsController < ApplicationController
+  helper_method :sort_column, :sort_direction
   before_filter :check_permissions, :except => [:show, :show_in_modal, :index, :search]
   skip_before_filter :require_login, :only => [:show, :show_in_modal, :index, :search]
   
@@ -14,6 +15,7 @@ class ItemsController < ApplicationController
     @search = Item.search do
       fulltext params[:search]
       paginate :page => params[:page], :per_page => 10
+      order_by sort_column.to_sym, sort_direction.to_sym
     end
     @items = @search.results
   end
@@ -122,5 +124,14 @@ end
     end
   end
 
+  private
+
+  def sort_column
+    Item.column_names.include?(params[:sort]) ? params[:sort] : "name"
+  end
+  
+  def sort_direction
+    %w[asc desc].include?(params[:direction]) ? params[:direction] : "asc"
+  end
 
 end

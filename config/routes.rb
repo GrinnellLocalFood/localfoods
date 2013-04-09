@@ -17,7 +17,7 @@ Localfoods::Application.routes.draw do
 
 
 # How to make a link to a path like /inventories/:id/foo:
-# 
+#
 # inventory = Inventory.find(1)
 # link_to inventory(foo) will produce localhost/inventories/1/foo
 
@@ -49,6 +49,9 @@ Localfoods::Application.routes.draw do
     member do
       get 'show_in_modal'
     end
+    member do
+      get 'cart_size'
+    end
   end
 
 
@@ -63,18 +66,18 @@ Localfoods::Application.routes.draw do
   resources :application_states
  
  
-  match '/register',  :to => 'users#new'
-  match '/login',  :to => 'sessions#new'
+  match '/register', :to => 'users#new'
+  match '/login', :to => 'sessions#new'
   match '/logout', :to => 'sessions#destroy'
   match '/admin_coord_newitem', :to => 'items#admin_coord_new'
   match '/admin_coord_createitem', :to => 'items#admin_create'
-  match '/editorderstate', :to => 'application_states#editorderstate' 
+  match '/editorderstate', :to => 'application_states#editorderstate'
   match '/all_orders', :to => 'purchases#all_orders'
   match '/process_order', :to => 'purchases#process_order'
   match '/about', :to => 'pages#about'
   match '/pickup_info', :to => 'pages#pickup_info'
+  match '/acknowledgments', :to => 'pages#acknowledgments'
   match '/paypal', :to => 'payment_notifications#create'
-
 
 
   resources :password_resets
@@ -91,6 +94,8 @@ Localfoods::Application.routes.draw do
   end
 
   root :to => 'pages#home'
+
+
 
 
   # The priority is based upon order of creation:

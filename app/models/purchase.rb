@@ -40,4 +40,18 @@ class Purchase < ActiveRecord::Base
   	return total
   end
 
+  def self.create_purchases(cart, paid, transcation = nil)
+      transaction ||= "unpaid"
+      cart.cart_items.each do |cart_item|
+        @purchase = Purchase.new(:item_id => cart_item.item_id, 
+               :user_id => cart.user.id,
+               :quantity => cart_item.quantity,
+               :unit_price => cart_item.item.price,
+               :paid => paid,
+              :order_set => transaction)
+        @purchase.save
+      end
+      cart.clear_all_items
+  end
+
 end

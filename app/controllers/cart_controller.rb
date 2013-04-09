@@ -10,4 +10,8 @@ class CartController < ApplicationController
 		@cart = current_cart
 	end
 
+	def cart_size
+		@cart_size = current_cart.cart_items.size
+	end
+
 end

@@ -1,7 +1,7 @@
 class CartItemsController < ApplicationController
 	def create
 		@item = Item.find(params[:item_id])
-		@cart_item = CartItem.where("cart_id = ? AND item_id = ?", current_user.cart, @item).first
+	 	@cart_item = CartItem.where("cart_id = ? AND item_id = ?", current_user.cart, @item).first
 		if @cart_item.nil?
 			@cart_item = CartItem.create!(:cart_id => current_user.cart.id, :quantity => @item.minorder, :item_id => @item.id)
 			if @item.minorder > 1
@@ -15,6 +15,8 @@ class CartItemsController < ApplicationController
 				flash[:notice] = "Updated #{@item.name} in cart"
 			end
 		end
+
+		session[:cart_size] = current_user.cart.cart_items.size
 
 		# redirect_to url_for :controller => 'cart', :action => 'show_in_modal', :id => current_user.cart
 			respond_to do |format|
@@ -36,6 +38,7 @@ class CartItemsController < ApplicationController
         	format.html { redirect_to(cart_path(current_user), :notice => 'Item successfully deleted.')}
         	format.xml  { head :ok }
     	end
+    session[:cart_size] = current_user.cart.cart_items.size
 
 	end
 
@@ -62,5 +65,6 @@ class CartItemsController < ApplicationController
 				format.xml  { render :xml => @cart_item.errors, :status => :unprocessable_entity }
 			end
 		end
+		session[:cart_size] = current_user.cart.cart_items.size
 	end
 end

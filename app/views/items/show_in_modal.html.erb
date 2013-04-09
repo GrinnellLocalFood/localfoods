@@ -28,7 +28,7 @@ $('.modal_add_to_cart').click(function() {
 	<div class="modal-footer" style="margin-left: -15px; margin-right: -15px; margin-bottom: -15px;">
 		<button class="btn" data-dismiss="modal" aria-hidden="true">Continue Shopping</button>
 
-		<% if signed_in? && (@item.is_available? == 'Yes') %> 
+		<% if signed_in? && @item.cartable %> 
 		<%= link_to "Add to Cart", cart_items_path(:item_id => @item), :remote => false, :method => :post, 
 		:class => "modal_add_to_cart btn btn-primary" %>
 		<% end %>

@@ -1,37 +1,25 @@
 <script type="text/javascript">
+
+
 $(document).ready(function() {
 
 
 // something about the partial makes this need to be here too
 $('[data-toggle="tooltip"]').tooltip();
-
-
-
-// CATEGORY LIST //
 // make an array to store the list of categories for a producer
 var list_of_categories = new Array();
 $('.category_label').each(function() {
     // save the category name for easy use
     var category_name = $(this).text();
-        // if the current category isn't there & it isn't Other, add it
-        if (($.inArray(category_name, list_of_categories) == -1) && (category_name != 'Other')) {
+        // if the current category isn't there, add it
+        if (($.inArray(category_name, list_of_categories)) == -1) {
+            $('.category_list').after('<li class="category_filter"><a style="padding-left: 4px;">' + category_name + '</a></li>');
             list_of_categories.push(category_name);
         }
 }); // end each
 
-// sort the array & push Other to the end
-list_of_categories.sort().push('Other');
-
-// burn whatever is already there
-$('.category_list').nextAll().remove();
-
-for (var i = list_of_categories.length - 1; i >= 0; i--) {
- $('.category_list').after('<li class="category_filter"><a>' + 
-    list_of_categories[i] + '</a></li>');
-};
-
 // add the 'All' option to the category list
-$('.category_list').after('<li class="category_filter active"><a>' + 'All' + '</a></li>');
+$('.category_list').after('<li class="category_filter active"><a style="padding-left: 4px;">' + 'All' + '</a></li>');
 list_of_categories.push('All');
 
 // click behavior for when you select a present category
@@ -39,13 +27,16 @@ $('.category_filter').click(function() {
     // save the category name for easy use
     var category_name = $(this).text();
 
+<<<<<<< HEAD
     // change the title name of the page
     if (category_name == 'All') {
         $('#all-title').html('All Products');
     } else {
     $('#all-title').html('All ' + category_name);
-    }
+}
 
+=======
+>>>>>>> 28e4d9e818ba77ee3608649b1904ad5cb8664140
     // go through all the inventory on the to decide what to hide/show
     $('.category_label').each(function() {
 
@@ -67,22 +58,7 @@ $('.category_filter').click(function() {
     }); // end each
         } // end else
     }); // end each
-
-// add or remove sortable links if a category filter is active
-if(category_name != 'All') {
-
-$('.temp').remove();
-$('.sort').hide();
-$('#name-sort').after('<th id="temp-name" class="temp">Name</th>');
-$('#price-sort').after('<th id="temp-price" class="temp">Price</th>');
-
-} else {
-    $('.temp').remove();
-    $('.sort').show();
-}
-
 }); // end click
-// END OF CATEGORY LIST //
 
 
 
@@ -103,7 +79,7 @@ $('.show_link').click(function() {
     var url_string = "/inventories/" + $(this).attr('data-inventory') + "/items/" + $(this).attr('data-id') + "/show_in_modal";
 
     // fire the modal
-    $('#item-modal').modal({  
+    $('#item_modal').modal({  
       remote: url_string
   });
     // refresh the modal so you can go to multiple items without refreshing the whole page
@@ -114,14 +90,27 @@ $('.show_link').click(function() {
      100)
 
  }); // end click
+
+
+
 }); // end ready
 
 </script>
 
 
 <!-- Modal for items -->
+<<<<<<< HEAD
 <div id="item-modal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-body"></div>
+=======
+<div id="item_modal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-header">
+    <h3 id="itemModalLabel"></h3>
+    </div>
+    <div class="modal-body">
+    <p></p>
+    </div>
+>>>>>>> 28e4d9e818ba77ee3608649b1904ad5cb8664140
 </div>
 <!-- End modal for items -->
 
@@ -129,22 +118,30 @@ $('.show_link').click(function() {
 <div id="all-image-unit">
 <h1 id="all-title">All Products</h1>
 </div>
-<<<<<<< HEAD
 
-<h2 id= "all_title" align="center">All Products</h2>
+<<<<<<< HEAD
 =======
-<div class="pagination" align="left"><%= paginate @items, :remote => true %></div>
->>>>>>> 4a313cfb8cd192105a019d1e0e16e4da17ccbda9
+<h2 align="center">All Products</h2>
+>>>>>>> 28e4d9e818ba77ee3608649b1904ad5cb8664140
 <table class="producer-table table-hover" align="center">
 
     <tr>
         <th>Name</th>
+<<<<<<< HEAD
         <th class="hidden-phone">Producer</th>
         <th>Description</th>
         <th class="hidden-phone">Price</th>
         <th class="hidden-phone">Min Order</th>
         <th class="hidden-phone">Category</th>
         <th class="hidden-phone">Available</th> 
+=======
+        <th>Producer</th>
+        <th>Description</th>
+        <th>Price</th>
+        <th>Min Order</th>
+        <th>Category</th>
+        <th>Available</th> 
+>>>>>>> 28e4d9e818ba77ee3608649b1904ad5cb8664140
         <th></th>
     </tr>
 
@@ -153,6 +150,7 @@ $('.show_link').click(function() {
     <tr>
 
         <td class="item_row" data-id="<%= item.id %>" data-inventory ="<%= item.inventory.id %>"><%= item.name %></td>
+<<<<<<< HEAD
         <td class="hidden-phone"><%= link_to(item.inventory.display_name, inventory_path(item.inventory)) %></td>
         <td class="item_row " data-id="<%= item.id %>"><%= item.description.size < 50 ? item.description : item.description[0..50] + "..." %></td>
         <td class="item_row hidden-phone" data-id="<%= item.id %>">
@@ -160,6 +158,15 @@ $('.show_link').click(function() {
         <td class="item_row hidden-phone" data-id="<%= item.id %>"><%= item.minorder %></td>
         <td class="category_label item_row hidden-phone" data-id="<%= item.id %>"><%= Category.find(item.category_id).name %></td>
         <td class="item_row hidden-phone" data-id="<%= item.id %>"><%= item.is_available? %></td>
+=======
+        <td><%= link_to(item.inventory.display_name, inventory_path(item.inventory)) %></td>
+        <td class="item_row" data-id="<%= item.id %>"><%= item.description.size < 50 ? item.description : item.description[0..50] + "..." %></td>
+        <td class="item_row" data-id="<%= item.id %>">
+            <%= number_to_currency(item.price) %><b>/<%= item.units.singularize %></b></td>
+        <td class="item_row" data-id="<%= item.id %>"><%= item.minorder %></td>
+        <td class="category_label item_row" data-id="<%= item.id %>"><%= Category.find(item.category_id).name %></td>
+        <td class="item_row" data-id="<%= item.id %>"><%= item.is_available? %></td>
+>>>>>>> 28e4d9e818ba77ee3608649b1904ad5cb8664140
         <td class="classic_show"><%= link_to "Show", 
             inventory_item_path({ :inventory_id => item.inventory_id, :id => item.id }) %></td>
 

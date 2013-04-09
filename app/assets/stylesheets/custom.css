@@ -1,24 +1,26 @@
-@import "variables.less";
-@import "sprites.less";
-
 #notice {
   color: green;
 }
 
 .field_with_errors {
   color: #b94a48;
+
 }
 
 /* Middle span distances */
+
 .span1-half {
   width: 100px;
 }
+
 .span2-half {
   width: 180px;
 }
+
 .span8-half {
   width: 660px;
 }
+
 .span10-half {
   width: 820px;
 }
@@ -26,8 +28,10 @@
 .offset2-half {
   margin-left: 220px;
 }
+
 .offset1-half {
   margin-left: 140px;
+
 }
 
 #nav-collapse {
@@ -45,6 +49,7 @@
 }
 
 .custom-block {
+  /*text-align: justify;*/
   -webkit-box-shadow: 0 0px 10px #C5C5C5;
   -moz-box-shadow: 0 0px 10px #C5C5C5;
   box-shadow: 0 0px 10px #C5C5C5;
@@ -59,7 +64,7 @@
   margin-top: -30px;
   margin-bottom: -1px;
   background-size: cover;
-  background-image:url(/img/all_2000.jpg);
+  background-image:url(/img/all_2000.jpg);\
   background-repeat: no-repeat;
   width:100%;
   height:140px;
@@ -76,7 +81,7 @@
   background-position: bottom;
   margin-top: -30px;
   background-size: cover;
-  background-image:url(/img/bag3_2000.jpg);
+  background-image:url(/img/bag3_2000.jpg);\
   background-repeat: no-repeat;
   width:100%;
   height:140px;
@@ -89,7 +94,7 @@
   text-align: right;
 }
 
-#about, #pickup-info, #acknowledgments {
+#about, #pickup-info {
   margin-left: 10%;
   margin-right: 10%;
   padding-bottom: 20px;
@@ -105,7 +110,7 @@
   margin-top: -30px;
   margin-bottom: -1px;
   background-size: cover;
-  background-image:url(/img/foot_2000.jpg);
+  background-image:url(/img/foot_2000.jpg);\
   background-repeat: no-repeat;
   width:100%;
   height:140px;
@@ -116,17 +121,6 @@
   text-align: center;
   padding-top: 90px;
 }
-
-#acknowledgments-title {
-  text-align: left;
-  padding-left: 2.5%;
-  padding-top: 90px;
-}
-
-#acknowledgments li {
-  margin-bottom: 10px; 
-}
-
 
 #hero-image-unit {
   background-position: center;
@@ -182,7 +176,7 @@ margin-left: 5px;
 
 #user-profile-table th,
 #producer-profile-table th {
-  color: @gray;
+  color: #555;
 }
 #user-profile-table td,
 #producer-profile-table td {
@@ -207,7 +201,8 @@ margin-left: 5px;
 #inventory-carousel {
   float:left; 
   margin-right: 10px; 
-  margin-top: -20px;
+  margin-top: -30px;
+  margin-bottom: 10px;
 }
 #inventory-info {
   text-align: left; 
@@ -401,7 +396,7 @@ margin-left: 5px;
   padding-right: 20px;
   padding-left: 20px;
   color: white;
-  background-color: @gray;
+  background-color: #555;
   -webkit-box-shadow: 0 5px 4px rgba(0, 0, 0, 0.085);
   -moz-box-shadow: 0 5px 4px rgba(0, 0, 0, 0.085);
   box-shadow: 0 5px 4px rgba(0, 0, 0, 0.085);
@@ -468,6 +463,9 @@ margin-left: 5px;
   margin-top:20px;
 }
 
+.big-table-header th {
+
+}
 
 .producer-table {
   width: 95%;
@@ -486,10 +484,6 @@ margin-left: 5px;
   font-weight: bold;
 }
 
-.producer-table th > a {
-  /*color: @grayDark;*/
-}
-
 .producer-table thead th {
   vertical-align: bottom;
 }
@@ -505,22 +499,6 @@ margin-left: 5px;
 
 .producer-table tbody + tbody {
   border-top: 2px solid #dddddd;
-}
-
-.producer-table th .current {
-  padding-right: 12px;
-  background-repeat: no-repeat;
-  background-position: right center;
-}
-
-.producer-table th .asc {
-  /*background-image: url(/img/up_arrow.gif);*/
- /* background-image: url("@{iconSpritePath}");
-  .icon-arrow-up;  */ 
-}
-
-.producer-table th .desc {
-  /*background-image: url(/img/down_arrow.gif);*/
 }
 
 .add-to-cart {
@@ -558,6 +536,8 @@ margin-left: 5px;
 .sub-nav {
   float: none;
   text-decoration: none;
+ /* margin-bottom: 0px;
+  margin-left: 0px;*/
   margin: 0px;
   list-style: none;
 }
@@ -576,8 +556,7 @@ margin-left: 5px;
 
 .sub-nav > li > a:focus,
 .sub-nav > li > a:hover {
-  /*background-color: black;*/
-  color: @grayLight;
+  background-color: black;
 }
 
 #current-inventory-title,
@@ -586,19 +565,13 @@ margin-left: 5px;
  text-indent: 2.5%; 
  margin-bottom: 15px; 
  margin-right: 0px;
- background-color: @gray; 
+ background-color: #555; 
  color: white; 
  padding: 5px; 
 }
 
-.category_filter a {
- padding-left: 4px !important;
-   font-size: 13px !important;
-}
-
-.producer_link a {
-  padding-left: 4px !important;
-  font-size: 13px !important;
+.category_filter {
+  font-size: 13px;
 }
 
 #suggested_email {
@@ -671,6 +644,7 @@ margin-left: 5px;
   border-radius: 0;
 }
 
+
 .navbar-bottom {
   min-height: 0px;
   padding-right: 20px;
@@ -690,26 +664,15 @@ margin-left: 5px;
   background-color: rgb(245, 245, 245);
 }
 
-#social-icons {
-  position: fixed; 
-  bottom: 10px; 
-  right: 10px; 
-  display: none;
-}
-
-#footer-text {
-   text-align: center; 
-   color: @gray; 
-   margin-top: 30px;
-}
-
 
 .navbar-inner-redux {
   min-height: 40px;
   padding-right: 20px;
   padding-left: 20px;
+
   padding-top: 15px;
   padding-bottom: 15px;
+
   background-color: white;
 }
 
@@ -738,16 +701,6 @@ margin-left: 5px;
   padding-right: 0;
   padding-left: 0;
 }
-
-.sort {
-  /*text-decoration: underline;*/
-}
-
-.sort-arrow {
-  margin-top: 3px;
-  margin-left: 5px;
-}
-
 
 /*credit to http://niklausgerber.com/blog/responsive-google-or-bing-maps/ for this fix*/
 .flexible-iframe {
@@ -799,7 +752,7 @@ margin-left: 5px;
 }
 
 .flat-btn:focus {
-  outline: thin dotted @grayDark;
+  outline: thin dotted #333;
   outline: 5px auto -webkit-focus-ring-color;
   outline-offset: -2px;
 }

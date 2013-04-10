@@ -1,6 +1,0 @@
-sunspot: bundle exec rake sunspot:solr:run
-<<<<<<< HEAD
-web: bundle exec rails server -p 80
-=======
-web: bundle exec rails server -p 443
->>>>>>> 864a4529bd5e2c9ff30010e43c1a535d3af88473

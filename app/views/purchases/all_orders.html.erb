@@ -1,13 +1,32 @@
+<script type="text/javascript">
+$(document).ready(function() {
+
+// If it's paid for give color indication
+$('.paid').each(function() {
+  if ($(this).text() == 'Yes') {
+    $(this).addClass('success-cell');
+  } else {
+    // Will make unpaid items have red cell
+    // $(this).addClass('danger-cell');
+  }
+  });
+
+}); // end ready
+</script>
+
 <div class="container">
   <div class="row-fluid">
     <div class="span12 custom-block">
-      <div id="all-orders-table" style="margin-right: 2%; margin-left: 2%;">
-        <table class="table table-hover" >
+      <div id="all-orders-table" class="margin-five">
+
+        <h2>All Orders</h2>
+
+        <table class="table" >
           <tr>
             <th>Buyer</th>
             <th>Producer</th>
             <th>Product</th>
-            <th>Qty</th>
+            <th>Quantity</th>
             <th>Unit Price</th>
             <th>Full Price</th>
             <th>Paid For</th>
@@ -19,7 +38,7 @@
           <td><%= purchase.quantity %> <%= purchase.item.units.pluralize %></td>
           <td><%= number_to_currency(purchase.unit_price) %></td>
           <td><%= number_to_currency(purchase.full_price) %></td>
-          <td><%= purchase.paid ? "Yes" : "No" %></td>
+          <td class="paid"><%= purchase.paid ? "Yes" : "No" %></td>
         </tr>
       </tr>
       <% end %>
@@ -31,9 +50,9 @@
 </ul>
 
     <div id="order-totals" style=" text-align: right;">
-    <h5 id="total">Total Revenue: <%= number_to_currency Purchase.total_payment %></h5>
-    <h5 id="pending total"> Pending Payment: <%= number_to_currency  Purchase.pending_payment %></h5>
-    <h5 id="processed total"> Processed Payment: <%= number_to_currency Purchase.processed_payment %></h5>
+    <h4 id="total">Total Revenue: <%= number_to_currency Purchase.total_payment %></h4>
+    <h4 id="pending total"> Pending Payment: <%= number_to_currency  Purchase.pending_payment %></h4>
+    <h4 id="processed total"> Processed Payment: <%= number_to_currency Purchase.processed_payment %></h4>
     </div>
 
   </div>

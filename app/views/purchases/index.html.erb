@@ -1,3 +1,19 @@
+<script type="text/javascript">
+$(document).ready(function() {
+
+// If it's paid for give color indication
+$('.paid').each(function() {
+  if ($(this).text() == 'Yes') {
+    $(this).addClass('success-cell');
+  } else {
+    // Will make unpaid items have red cell
+    // $(this).addClass('danger-cell');
+  }
+  });
+
+}); // end ready
+</script>
+
 <div class="container">
   <div class="row">
     <div class="span12 custom-block">
@@ -16,11 +32,13 @@
       </div>
       <% end %>
 
-      <div class="margin-five">
+      <div id="purchases-table" class="margin-five">
+
         <h2>Ordered Items</h2>
-        <table class="table table-hover">
+
+        <table class="table">
           <tr>
-            <th></th>
+            <th class="hidden-phone"></th>
             <th>Product</th>
             <th>Qty</th>
             <th>Full Price</th>
@@ -29,15 +47,15 @@
           <% for purchase in @purchases %>
           <td class="hidden-phone">
             <% if !(purchase.item.item_photo_file_name.nil?) %>
-            <media class="item_row">
+            <media>
               <%= image_tag(purchase.item.item_photo.url(:thumb)) %>
             </media>
             <%end%>
           </td>
-          <td class="hidden-phone item_row"><%= purchase.item.name %></td>
-          <td class="hidden-phone item_row"><%= purchase.quantity %></td>
-          <td class="hidden-phone item_row"><%= number_to_currency(purchase.quantity*purchase.item.price) %></td>
-          <td class="hidden-phone item_row"><%= purchase.paid ? "Yes" : "No" %></td>
+          <td><%= purchase.item.name %></td>
+          <td><%= purchase.quantity %></td>
+          <td><%= number_to_currency(purchase.quantity*purchase.item.price) %></td>
+          <td class="paid"><%= purchase.paid ? "Yes" : "No" %></td>
         </tr>
       </tr>
       <% end %>
@@ -45,12 +63,12 @@
 
 
     <!-- Divider -->
-<ul class="nav nav-list">
-<li class="divider"></li>
-</ul>
+    <ul class="nav nav-list">
+      <li class="divider"></li>
+    </ul>
 
 
-    <h5 id="cart_total" style="text-align: right;">Total: <%= number_to_currency current_user.pending_payment %></h5>
+    <h4 style="text-align: right;">Total: <%= number_to_currency current_user.pending_payment %></h4>
   </div>
 
 </div>

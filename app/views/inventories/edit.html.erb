@@ -1,6 +1,6 @@
-<div class="container" style="min-width: 940px; padding-left: 0px; padding-right: 0px;">
+<div class="container" style="width: 940px; padding-left: 0px; padding-right: 0px;">
   <div class="row">
-    <div class="span12">
+    <div class="span12" style="width: 940px;">
 
       <%= form_for(@inventory, :html=>{:class=>'form-horizontal', :multipart => true}) do |f| %>
 
@@ -12,125 +12,126 @@
             Be warned, this form is best used on a larger screen  
           </div>
 
-          <div class="container" style="margin-top: -8px; min-width: 940px;">
+          <div class="container" style="margin-top: -8px; width: 940px;">
 
-            <table class="big-table-header" style="min-width: 940px;">
+            <table class="big-table-header">
               <thead>
                 <tr>
-                  <th style="text-align: left; width: 60px;">Photo</th>
-                  <th style="text-align: left; width: 100px;">Name</th>
-                  <th style="text-align: left; width: 100px;">Category</th>
-                  <th style="text-align: left; width: 140px;">Description</th>
-                  <th style="text-align: left; width: 70px;">Price</th>
-                  <th style="text-align: left; width: 30px;">Unit</th>
-                  <th style="text-align: right;width: 30px; font-size: 10px; 
-                  line-height: 10px;">Min Order</th>
-                  <th style="text-align: right; width: 30px; font-size: 10px;
-                  line-height: 10px;">Max Order</th>
-                  <th style="text-align: right; width: 40px; font-size: 11px; padding-top:2px;
-                  ">Quantity</th>
-                  <th style="text-align: right; width: 40px; font-size: 11px; padding-top:2px;
-                  ">Available</th>
-                </tr>
-              </thead>
-            </table>
-          </div>
-        </div>
-      </header>
-
-      <div class="hidden-desktop warning-spacing"></div>
-
-      <table class="big-table">
-        <tbody>
-          <%= f.fields_for :item do |item_form| %>
-
-
-          <% if item_form.object.errors.any? %>
-          <div class="big_form_alert big_form_alert-error fade in">
-            <a class="close" data-dismiss="alert" href="#">&times;</a>
-            <h4><%= pluralize(item_form.object.errors.count, "error") %> prohibited the following items from being saved:</h4>
-
-            <br>
-            <% item_form.object.errors.full_messages.each do |msg| %>
-            <li><%= msg %></li>
-            <% end %>
-
-          </div>
-          <% end %>
-
-
-          <tr>
-            <td style="max-width: 60px">
-              <div class="fileupload fileupload-new" data-provides="fileupload" style="margin-bottom: 0px;">
-                <div class="fileupload-new thumbnail" style="width: 50px; height: 50px;">
-
-                  <% if (item_form.object.item_photo_file_name.nil?) %>
+                  <th style="position: fixed; margin-left: 5px;">Photo</th>
+                  <th style="position: fixed; margin-left: 75px;">Name</th>
+                  <th style="position: fixed; margin-left: 220px;">Category</th>
+                  <th style="position: fixed; margin-left: 345px;">Description</th>
+                  <th style="position: fixed; margin-left: 550px;">Price</th>
+                  <th style="position: fixed; margin-left: 650px;">Unit</th>
+                  <th style="position: fixed; margin-left: 700px; font-size: 70%; white-space: nowrap;">
+                    Min Order</th>
+                    <th style="position: fixed; margin-left: 765px; font-size: 70%; white-space: nowrap;">
+                      Max Order</th>
+                      <th style="position: fixed; margin-left: 830px; font-size: 70%;">Quantity</th>
+                      <th style="position: fixed; margin-left: 885px; font-size: 70%;">Available</th>
+                      <th style="position: fixed; margin-left: 940px; margin-top: 2px;">
+                        <i class="icon-trash"></i></th>
+                      </tr>
+                    </thead>
+                  </table>
                 </div>
-                <div class="fileupload-preview fileupload-exists thumbnail" style="width: 50px; height: 50px;"></div>
-                <span class="btn btn-file" style="padding: 0px; margin-top: -6px; ">
-                  <span class="fileupload-new" style="padding: 0px 22px 0px 22px;"><i class="icon-upload"></i></span>
-                  <span class="fileupload-exists" style="padding: 0px 6px 0px 6px;"><i class="icon-upload"></i></span>
-                  <%= item_form.file_field :item_photo %>
-                </span>
-                <a href="#" class="btn fileupload-exists" data-dismiss="fileupload" 
-                style="padding: 0px 6px 0px 6px; margin-top: -6px;"><i class="icon-remove"></i></a>
-
-                <% else %>
-                <%= image_tag(item_form.object.item_photo.url(:thumb)) %>
               </div>
-              <div class="fileupload-preview fileupload-exists thumbnail" style="max-width: 50px; max-height: 50px;">
-              </div>
+            </header>
 
-              <div>
-                <span class="btn btn-file" style="padding: 0px; margin-top: -6px; ">
-                  <span class="fileupload-new" style="padding: 0px 22px 0px 22px;"><i class="icon-upload"></i></span>
-                  <span class="fileupload-exists" style="padding: 0px 6px 0px 6px;"><i class="icon-upload"></i></span>
+            <div class="hidden-desktop warning-spacing"></div>
 
-                  <%= item_form.file_field :item_photo %>
-                </span>
-                <a href="#" class="btn fileupload-exists" data-dismiss="fileupload" 
-                style="padding: 0px 6px 0px 6px; margin-top: -6px;"><i class="icon-remove"></i></a>
+            <table class="big-table">
+              <tbody>
+                <%= f.fields_for :item do |item_form| %>
+
+
+                <% if item_form.object.errors.any? %>
+                <div class="big_form_alert big_form_alert-error fade in">
+                  <a class="close" data-dismiss="alert" href="#">&times;</a>
+                  <h4><%= pluralize(item_form.object.errors.count, "error") %> prohibited the following items from being saved:</h4>
+
+                  <br>
+                  <% item_form.object.errors.full_messages.each do |msg| %>
+                  <li><%= msg %></li>
+                  <% end %>
+
+                </div>
                 <% end %>
-              </td>
 
 
-              <td><%= item_form.text_field :name, :style => "width: 120px;" %></td>
-              <td><%= item_form.collection_select(:category_id, Category.all, :id, :name, {}, {:style => "width:110px;"}) %></td>
-              <td><%= item_form.text_area :description, :style => "width: 180px; height: 75px;" %></td>
-              <td>
-                <div class="input-prepend">
-                  <span class="add-on">$</span>
-                  <%= item_form.text_field :price, :placeholder => "Price", :class=>"span2", :id=>"inv_price_field",
-                  :style => "width: 45px;" %>
+                <tr>
+                  <td style="max-width: 60px">
+                    <div class="fileupload fileupload-new" data-provides="fileupload" style="margin-bottom: 0px;">
+                      <div class="fileupload-new thumbnail" style="width: 50px; height: 50px;">
+
+                        <% if (item_form.object.item_photo_file_name.nil?) %>
+                      </div>
+                      <div class="fileupload-preview fileupload-exists thumbnail" style="width: 50px; height: 50px;"></div>
+                      <span class="btn btn-file" style="padding: 0px; margin-top: -6px; ">
+                        <span class="fileupload-new" style="padding: 0px 22px 0px 22px;"><i class="icon-upload"></i></span>
+                        <span class="fileupload-exists" style="padding: 0px 6px 0px 6px;"><i class="icon-upload"></i></span>
+                        <%= item_form.file_field :item_photo %>
+                      </span>
+                      <a href="#" class="btn fileupload-exists" data-dismiss="fileupload" 
+                      style="padding: 0px 6px 0px 6px; margin-top: -6px;"><i class="icon-remove"></i></a>
+
+                      <% else %>
+                      <%= image_tag(item_form.object.item_photo.url(:thumb)) %>
+                    </div>
+                    <div class="fileupload-preview fileupload-exists thumbnail" style="max-width: 50px; max-height: 50px;">
+                    </div>
+
+                    <div>
+                      <span class="btn btn-file" style="padding: 0px; margin-top: -6px; ">
+                        <span class="fileupload-new" style="padding: 0px 22px 0px 22px;"><i class="icon-upload"></i></span>
+                        <span class="fileupload-exists" style="padding: 0px 6px 0px 6px;"><i class="icon-upload"></i></span>
+
+                        <%= item_form.file_field :item_photo %>
+                      </span>
+                      <a href="#" class="btn fileupload-exists" data-dismiss="fileupload" 
+                      style="padding: 0px 6px 0px 6px; margin-top: -6px;"><i class="icon-remove"></i></a>
+                      <% end %>
+                    </td>
+
+
+                    <td><%= item_form.text_field :name, :style => "width: 120px;" %></td>
+                    <td><%= item_form.collection_select(:category_id, Category.all, :id, :name, {}, {:style => "width:110px;"}) %></td>
+                    <td><%= item_form.text_area :description, :style => "width: 180px; height: 75px;" %></td>
+                    <td>
+                      <div class="input-prepend">
+                        <span class="add-on">$</span>
+                        <%= item_form.text_field :price, :placeholder => "Price", :class=>"span2", :id=>"inv_price_field",
+                        :style => "width: 45px;" %>
+                      </div>
+                    </td>
+                    <td><%= item_form.text_field :units, :placeholder => "Unit", :style => "width: 45px;" %></td>
+                    <td><%= item_form.text_field :minorder, :placeholder => "Min", :style => "width: 35px;" %></td>
+                    <td><%= item_form.text_field :maxorder, :placeholder => "Max", :style => "width: 35px;" %></td>
+                    <td><%= item_form.text_field :totalquantity, :placeholder => "Qty", :style => "width: 45px;" %></td>
+                    <td><%= item_form.check_box :available %></td>
+                    <td><input type="checkbox" style=""></input></td>
+
+                  </tr>
+                  <% end %>
+
+
+
+
+                </tbody>
+              </table>
+
+              <br><br>
+
+              <footer class="navbar navbar-fixed-bottom" style="z-index: 1;">
+                <div class="navbar-bottom">
+                  <div class="container" style="width: 940px;">
+                    <%= f.submit "Save Inventory", :class=>"btn btn-primary", :style=>"float:right; "%>
+                  </div>
                 </div>
-              </td>
-              <td><%= item_form.text_field :units, :placeholder => "Unit", :style => "width: 45px;" %></td>
-              <td><%= item_form.text_field :minorder, :placeholder => "Min", :style => "width: 35px;" %></td>
-              <td><%= item_form.text_field :maxorder, :placeholder => "Max", :style => "width: 35px;" %></td>
-              <td><%= item_form.text_field :totalquantity, :placeholder => "Qty", :style => "width: 45px;" %></td>
-              <td><%= item_form.check_box :available %></td>
+              </footer>
 
-            </tr>
-            <% end %>
+              <% end %>
 
-
-
-
-          </tbody>
-        </table>
-
-        <br><br>
-
-        <footer class="navbar navbar-fixed-bottom" style="z-index: 1;">
-          <div class="navbar-bottom">
-            <div class="container">
-              <%= f.submit "Save Inventory", :class=>"btn btn-primary", :style=>"float:right; "%>
             </div>
           </div>
-        </footer>
-
-        <% end %>
-
-      </div>
-    </div>
-  </div>
+        </div>

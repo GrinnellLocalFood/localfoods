@@ -1,25 +1,42 @@
-<table class="table table-hover">
-  <tr>
-    <th>Buyer</th>
-    <th>Producer</th>
-    <th>Product</th>
-    <th>Qty</th>
-    <th>Unit Price</th>
-    <th>Full Price</th>
-    <th>Paid For</th>
-  </tr>
-  <% for purchase in @purchases %>
-  <td><%= link_to purchase.user.name, user_path(purchase.user.id)  %></td>
-  <td><%= link_to purchase.item.inventory.display_name, inventory_path(purchase.item.inventory.id) %></td>
-  <td><%= purchase.item.name %></td>
-  <td><%= purchase.quantity %> <%= purchase.item.units.pluralize %></td>
-  <td><%= number_to_currency(purchase.unit_price) %></td>
-  <td><%= number_to_currency(purchase.full_price) %></td>
-  <td><%= purchase.paid ? "Yes" : "No" %></td>
-</tr>
-</tr>
-<% end %>
-</table>
-<h5 id="total", style="float:right; margin-right: 10px">Total Revenue: <%= number_to_currency Purchase.total_payment %></h5>
-<h5 id="pending total", style="float:right; margin-right: 10px"> Pending Payment: <%= number_to_currency  Purchase.pending_payment %></h5>
-<h5 id="processed total", style="float:right; margin-right: 10px"> Processed Payment: <%= number_to_currency Purchase.processed_payment %></h5>
+<div class="container">
+  <div class="row-fluid">
+    <div class="span12 custom-block">
+      <div id="all-orders-table" style="margin-right: 2%; margin-left: 2%;">
+        <table class="table table-hover" >
+          <tr>
+            <th>Buyer</th>
+            <th>Producer</th>
+            <th>Product</th>
+            <th>Qty</th>
+            <th>Unit Price</th>
+            <th>Full Price</th>
+            <th>Paid For</th>
+          </tr>
+          <% for purchase in @purchases %>
+          <td><%= link_to purchase.user.name, user_path(purchase.user.id)  %></td>
+          <td><%= link_to purchase.item.inventory.display_name, inventory_path(purchase.item.inventory.id) %></td>
+          <td><%= purchase.item.name %></td>
+          <td><%= purchase.quantity %> <%= purchase.item.units.pluralize %></td>
+          <td><%= number_to_currency(purchase.unit_price) %></td>
+          <td><%= number_to_currency(purchase.full_price) %></td>
+          <td><%= purchase.paid ? "Yes" : "No" %></td>
+        </tr>
+      </tr>
+      <% end %>
+    </table>
+
+<!-- Divider -->
+<ul class="nav nav-list">
+<li class="divider"></li>
+</ul>
+
+    <div id="order-totals" style=" text-align: right;">
+    <h5 id="total">Total Revenue: <%= number_to_currency Purchase.total_payment %></h5>
+    <h5 id="pending total"> Pending Payment: <%= number_to_currency  Purchase.pending_payment %></h5>
+    <h5 id="processed total"> Processed Payment: <%= number_to_currency Purchase.processed_payment %></h5>
+    </div>
+
+  </div>
+</div>
+</div>
+</div>

@@ -1,6 +1,13 @@
 @import "variables.less";
 @import "sprites.less";
 
+
+.margin-five {
+  margin-left: 5%; 
+  margin-right: 5%;
+}
+
+
 #notice {
   color: green;
 }
@@ -59,7 +66,7 @@
   margin-top: -30px;
   margin-bottom: -1px;
   background-size: cover;
-  background-image:url(/img/all_2000.jpg);
+  background-image:url(all_2000.jpg);
   background-repeat: no-repeat;
   width:100%;
   height:140px;
@@ -76,7 +83,7 @@
   background-position: bottom;
   margin-top: -30px;
   background-size: cover;
-  background-image:url(/img/bag3_2000.jpg);
+  background-image:url(bag3_2000.jpg);
   background-repeat: no-repeat;
   width:100%;
   height:140px;
@@ -105,7 +112,7 @@
   margin-top: -30px;
   margin-bottom: -1px;
   background-size: cover;
-  background-image:url(/img/foot_2000.jpg);
+  background-image:url(foot_2000.jpg);
   background-repeat: no-repeat;
   width:100%;
   height:140px;
@@ -131,7 +138,7 @@
 #hero-image-unit {
   background-position: center;
   background-size: cover;
-  background-image:url(/img/DSC_2825-4-small-edit.jpg);
+  background-image:url(DSC_2825-4-small-edit.jpg);
   background-repeat: no-repeat;
   width:100%;
   height:400px;
@@ -167,12 +174,12 @@
   padding-right: 4px;
 }
 #add-user-button {
-float: right; 
-font-weight: normal;
-letter-spacing: 0px;
-margin-top: 5px;
-margin-bottom: 5px;
-margin-left: 5px;
+  float: right; 
+  font-weight: normal;
+  letter-spacing: 0px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  margin-left: 5px;
 }
 
 #user-profile-table,
@@ -461,12 +468,30 @@ margin-left: 5px;
 
 .big-table th {
   font-weight: bold;
+  background-color: white;
+  z-index: 1;
 }
 
 .big-table-header {
-  width: 100%;
   margin-top:20px;
+  width: 940px; 
+  height: 24px;
 }
+
+
+
+   .th-inner {
+      position: fixed;
+      top: 1;
+      line-height: 40px; /* height of header */
+      text-align: left;
+      padding-left: 5px;
+      background-color: @grayLighter;
+      font-size: 95%;
+      z-index: 1;
+      width: 100%;
+    }
+
 
 
 .producer-table {
@@ -511,16 +536,6 @@ margin-left: 5px;
   padding-right: 12px;
   background-repeat: no-repeat;
   background-position: right center;
-}
-
-.producer-table th .asc {
-  /*background-image: url(/img/up_arrow.gif);*/
- /* background-image: url("@{iconSpritePath}");
-  .icon-arrow-up;  */ 
-}
-
-.producer-table th .desc {
-  /*background-image: url(/img/down_arrow.gif);*/
 }
 
 .add-to-cart {
@@ -584,7 +599,7 @@ margin-left: 5px;
 #empty-inventory-title {
  clear: both;
  text-indent: 2.5%; 
- margin-bottom: 15px; 
+ margin-bottom: 0px; 
  margin-right: 0px;
  background-color: @gray; 
  color: white; 
@@ -593,7 +608,7 @@ margin-left: 5px;
 
 .category_filter a {
  padding-left: 4px !important;
-   font-size: 13px !important;
+ font-size: 13px !important;
 }
 
 .producer_link a {
@@ -642,7 +657,7 @@ margin-left: 5px;
   margin-bottom: 0;
   border-bottom: 1px solid #dddddd;
   color: black;
-  background-color: rgb(245, 245, 245);
+  background-color: @grayLighter;
 
 }
 
@@ -687,7 +702,7 @@ margin-left: 5px;
 
   border-top: 1px solid #dddddd;
   color: black;
-  background-color: rgb(245, 245, 245);
+  background-color: @grayLighter;
 }
 
 #social-icons {
@@ -697,10 +712,14 @@ margin-left: 5px;
   display: none;
 }
 
+.footer {
+  margin-bottom: 40px;
+}
+
 #footer-text {
-   text-align: center; 
-   color: @gray; 
-   margin-top: 30px;
+ text-align: center; 
+ color: @gray; 
+ margin-top: 30px;
 }
 
 
@@ -770,6 +789,21 @@ margin-left: 5px;
   height: 100%;
 }
 /*end credit*/
+
+
+.inventory-pagination {
+  margin-left: 2.5%; 
+  float:left; 
+  margin-bottom: 4px; 
+  margin-top: 10px;
+
+  .pagination {
+    margin: 0;
+  }
+}
+
+
+
 
 
 

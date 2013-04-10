@@ -253,7 +253,9 @@ margin-top: -5px">
 
 <h3 id="current-inventory-title">Current Inventory</h3>
 
- <div class="pagination" align="left"><%= paginate @item, :remote => true %></div>
+ <div class="inventory-pagination">
+    <%= paginate @item, :remote => true %>
+</div>
 
 <table class="producer-table table-hover" align="center">
     <tr>

@@ -31,23 +31,34 @@
   <% end %>
 
 
-  <h1 align="center" style="margin-bottom: 20px;">Categories</h1>
-  <table class="table table-hover" align="center" style="width: 400px;">
-     <td style="min-width: 190px;"><b>Other</b></td> 
-     <td style="text-align:right"></td>
-    <% @categories.each do |category| %>
-    <tr>
-	  <% unless category.name == "Other" %>
-      <td style="min-width: 190px;"><b><%= category.name %></b></td>
-      <td style="text-align:right"><%= link_to "Delete", category, :confirm => "You are about to delete the #{ category.name } category. Any items in #{ category.name } will be placed in 'Other'. Delete?", :method=>:delete, :class=>:Destroy %></td>
-    <% end %>
-	</tr>
-    <% end %>
+<div class="margin-ten">
 
-  </table>
-  <%= render 'categories_addform' %>
+  <h1>Categories</h1>
+  <table class="table table-bordered table-striped">
+      <% @categories.each do |category| %>
+
+       <tr>
+        <td>
+          <strong><%= category.name %></strong>
+        </td>
+        <% if category.name != "Other" %>
+        <td style="text-align: right;"><%= link_to "Delete", category, :confirm => "You are about to delete the #{ category.name } category. Any items in #{ category.name } will be placed in 'Other'. Delete?", :method=>:delete, :class=>:Destroy %>
+          <% else %>
+          <td></td>
+          <% end %>
+        </td>
+
+      </tr>
+      <% end %>
+
+    </table>
+
+    <%= render 'categories_addform' %>
+
 
 </div>
 
+
+  </div>
 </div>
 </div>

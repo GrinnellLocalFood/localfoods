@@ -27,17 +27,18 @@
                     <% end %> 
                 </h1>
 
-                <table id="user-table" class="table table-hover">
+                <table id="user-table" class="table table-striped table-bordered">
                   <tr>
-                    <th>User</th>
+                    <th style="font-size: 75%;">User ID</th>
                     <th>Name</th>
                     <th>Email</th>
                     <th>Phone</th>
-                    <th style="font-size: 12px;">Coordinator</th>
-                    <th style="font-size: 12px;">Producer</th>
-                    <th style="font-size: 12px;">Admin</th>
+                    <th style="font-size: 75%;">Coordinator</th>
+                    <th style="font-size: 75%;">Producer</th>
+                    <th style="font-size: 75%;">Admin</th>
+                    <% if current_user.admin || (!user.admin && current_user.coordinator) %>
                     <th></th>
-                    <th></th>
+                    <% end %>
                 </tr>
 
                 <% @users.each do |user| %>
@@ -49,7 +50,7 @@
                     <td><%= user.phone %></td>
                     <td><%= user.coordinator %></td>
 
-                    <td style="padding-right: 0px;">
+                    <td>
                         <% if user.producer %>
                         <%= link_to(user.inventory.display_name, inventory_path(user.inventory)) %>
                         <% else %>
@@ -65,17 +66,19 @@
                         <%= link_to edit_user_path(user), :'data-toggle'=>"tooltip", :title=>"Edit User" do %>
                         <i class="icon-wrench"></i>
                         <% end %>
-                    </td>
 
-                    <% end %>
-                    
-                    <% if current_user.admin %>
-                    <td>
-                        <%= link_to user, :confirm => 'Are you sure?', :method=>:delete, :class=>:Destroy, :'data-toggle'=>"tooltip", :title=>"Delete User" do %>
+
+                        <% if current_user.admin %>
+                        <%= link_to user, :confirm => 'Are you sure?', :method=>:delete, :class=>:Destroy, :'data-toggle'=>"tooltip", :title=>"Delete User", :style=>"margin-left: 10px;" do %>
                         <i class="icon-trash"></i>
                         <% end %>
+                  
+                    <% end %>
+
                     </td>
                     <% end %>
+                    
+                    
 
                 </tr>
                 <% end %>

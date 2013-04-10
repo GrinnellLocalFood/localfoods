@@ -1,6 +1,27 @@
+<div class="container">
+	<div class="row-fluid">
+		<div class="span8 offset2 custom-block">
+
+			<!-- What is this? -->
+<!-- 
 <%= form_for(@purchase, :url => url_for({:controller => "purchases", :action => "create"})) do |f| %>
 <%= f.submit "Pay by Check" %>
 <% end %>
+-->
+<div class=" margin-ten" align="center">
+	<h2>Payment Choices</h2>
+	<p>
+		If you pay by check, you're committing to pay for the items at pick-up. If you pay online, you'll be directed to Paypal to complete the transaction.
+	</p>
+	<br>
 
-<%= link_to "Pay by Check", :controller => "purchases", :action => "create" %>
-<%= link_to "Pay Online", current_user.cart.paypal_url(inventories_path) %>
+
+	<%= link_to "Pay by Check", { :controller => "purchases", :action => "create" }, :class=>"btn btn-large", :style=>"margin-bottom: 10px;"  %>
+	<%= link_to "Pay Online", current_user.cart.paypal_url(inventories_path), :class=>"btn btn-primary btn-large", :style=>"margin-bottom: 10px;" %>
+</div>
+
+</div>
+
+</div>
+</div>
+</div>

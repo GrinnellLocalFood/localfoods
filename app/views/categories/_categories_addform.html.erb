@@ -1,26 +1,22 @@
 <script type="text/javascript">
 
 $(document).ready(function() {
-$('#category_field').focus();
+$('#category-field').focus();
 
 }); //end ready
 
 </script>
 
-<%= form_for(@category, :url => url_for(:controller => 'categories', :action => 'create'), :html=>{:class=>'form-horizontal'}) do |f| %>
+<%= form_for(@category, :url => url_for(:controller => 'categories', :action => 'create')) do |f| %>
 
 
-<div class="control-group" style="margin-top: 20px">
-  <label class="control-label">
-    <%= f.label :name, "Category Name *" %>
-  </label>
-  <div class="controls">
-    <%= f.text_field :name, :placeholder=>"Category Name", :id=>"category_field" %>
-  </div>
-</div>
+<div style="margin-bottom: 20px;" align="center">
+    <label style="display: inline; padding-right: 20px;">
+    	Category Name *
+    </label>
+    <%= f.text_field :name, :placeholder=>"Category Name", :id=>"category-field", :style=>"margin-top: 8px; margin-right: -4px;" %>
 
-<div class="control-group controls">
-<%= f.submit "Add Category", :class=>"btn btn-primary" %>
+    <%= f.submit "Add Category", :class=>"btn btn-primary", :style=>"margin-top: -2px;" %>
 </div>
 
 <div align="center" style="color: gray">

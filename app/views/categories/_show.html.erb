@@ -134,7 +134,7 @@ $('.show_link').click(function() {
 <%= paginate @items, :remote => true%>
 </div>
 
-<table class="producer-table table-hover" align="center">
+<table class="producer-table table-hover">
 
     <tr>
         <th>Name</th>
@@ -144,7 +144,7 @@ $('.show_link').click(function() {
         <th class="hidden-phone">Min Order</th>
         <th class="hidden-phone">Category</th>
         <th class="hidden-phone">Available</th> 
-        <th></th>
+        <!-- <th></th> -->
     </tr>
 
     <% @items.each do |item| %>

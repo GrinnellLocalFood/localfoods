@@ -7,6 +7,11 @@
   margin-right: 5%;
 }
 
+.margin-ten {
+  margin-left: 10%; 
+  margin-right: 10%;
+}
+
 
 #notice {
   color: green;
@@ -806,11 +811,20 @@
 /* Purchases*/
 
 .success-cell {
-  background-color: @btnSuccessBackground;
+  background-color: @btnSuccessBackgroundHighlight !important;
+  color: white !important;
 }
 
 .danger-cell {
-  background-color: @btnDangerBackground;
+  background-color: @btnDangerBackground !important;
+}
+
+#order-totals {
+  text-align: right;
+}
+
+#processed-total {
+  color: @btnSuccessBackgroundHighlight;
 }
 
 /* End Purchases*/

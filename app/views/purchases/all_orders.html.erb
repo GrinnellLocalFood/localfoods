@@ -5,11 +5,9 @@ $(document).ready(function() {
 $('.paid').each(function() {
   if ($(this).text() == 'Yes') {
     $(this).addClass('success-cell');
-    $(this).css('color', 'white');
   } else {
     // Will make unpaid items have red cell
     // $(this).addClass('danger-cell');
-    $(this).css('color', 'white');
   }
   });
 

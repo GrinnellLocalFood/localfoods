@@ -5,13 +5,11 @@ $(document).ready(function() {
 $('.paid').each(function() {
   if ($(this).text() == 'Yes') {
     $(this).addClass('success-cell');
-    $(this).css('color', 'white');
   } else {
     // Will make unpaid items have red cell
     // $(this).addClass('danger-cell');
-    // $(this).css('color', 'white');
   }
-  });
+});
 
 }); // end ready
 </script>
@@ -27,6 +25,7 @@ $('.paid').each(function() {
       </div>
       <% end %>
 
+
       <% if alert %>
       <div class="alert alert-success fade in">
         <a class="close" data-dismiss="alert" href="#">&times;</a>
@@ -34,19 +33,26 @@ $('.paid').each(function() {
       </div>
       <% end %>
 
+
+
       <div id="purchases-table" class="margin-five">
 
         <h2>Ordered Items</h2>
 
+        <% for order in @orders %>
+        <h3><%= order == "unpaid" ? order.titleize : "Order Id:" + order %></h3>
         <table class="table table-bordered">
           <tr>
             <th class="hidden-phone"></th>
             <th>Product</th>
             <th>Qty</th>
             <th>Full Price</th>
-            <th>Paid For</th>
+            <!-- <th>Paid For</th> -->
+            <th>Purchase Time</th>
           </tr>
-          <% for purchase in @purchases %>
+
+          <% purchases = Purchase.where("user_id = ? AND order_set = ?", current_user.id, order) %>
+          <% for purchase in purchases %>
           <td class="hidden-phone">
             <% if !(purchase.item.item_photo_file_name.nil?) %>
             <media>
@@ -57,20 +63,15 @@ $('.paid').each(function() {
           <td><%= purchase.item.name %></td>
           <td><%= purchase.quantity %></td>
           <td><%= number_to_currency(purchase.quantity*purchase.item.price) %></td>
-          <td class="paid"><%= purchase.paid ? "Yes" : "No" %></td>
+          <!-- <td class="paid"><%= purchase.paid ? "Yes" : "No" %></td> -->
+          <!-- <td><%= purchase.created_at.in_time_zone("Central Time (US & Canada)")  %></td> -->
+          <td><%= time_ago_in_words(purchase.created_at.in_time_zone("Central Time (US & Canada)"))  %> ago</td>
         </tr>
       </tr>
       <% end %>
     </table>
-
-
-    <!-- Divider -->
-    <ul class="nav nav-list">
-      <li class="divider"></li>
-    </ul>
-
-
-    <h4 style="text-align: right;">Total: <%= number_to_currency current_user.pending_payment %></h4>
+    <% end %>
+    <h4 id="cart_total" style="text-align: right;">Total: <%= number_to_currency current_user.pending_payment %></h4>
   </div>
 
 </div>

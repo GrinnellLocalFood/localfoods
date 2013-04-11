@@ -17,6 +17,8 @@
 <% end %>
 <div style="margin-left: 40px; margin-right: 40px">
 <h2>Ordered Items</h2>
+<% for order in @orders %>
+<h3><%= order == "unpaid" ? order.titleize : "Order Id:" + order %></h3>
 <table class="table table-hover">
   <tr>
     <th></th>
@@ -24,8 +26,11 @@
     <th>Qty</th>
     <th>Full Price</th>
     <th>Paid For</th>
+    <th>Purchase Time</th>
   </tr>
-  <% for purchase in @purchases %>
+  
+  <% purchases = Purchase.where("user_id = ? AND order_set = ?", current_user.id, order) %>
+  <% for purchase in purchases %>
   <td class="hidden-phone">
             <% if !(purchase.item.item_photo_file_name.nil?) %>
             <media class="item_row">
@@ -37,9 +42,11 @@
   <td class="hidden-phone item_row"><%= purchase.quantity %></td>
   <td class="hidden-phone item_row"><%= number_to_currency(purchase.quantity*purchase.item.price) %></td>
   <td class="hidden-phone item_row"><%= purchase.paid ? "Yes" : "No" %></td>
+  <td class="hidden-phone item_row"><%= purchase.created_at.in_time_zone("Central Time (US & Canada)")  %></td>
 </tr>
 </tr>
 <% end %>
 </table>
+<% end %>
 <h5 id="cart_total" style="float:right; margin-right: 10px">Total: <%= number_to_currency current_user.pending_payment %></h5>
 </div>

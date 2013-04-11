@@ -1,5 +1,5 @@
 class PaymentNotification < ActiveRecord::Base
-  attr_accessible :cart_id, :params, :status, :transaction
+  attr_accessible :cart_id, :params, :status, :transaction_id
 
   belongs_to :cart
   serialize :params
@@ -9,7 +9,7 @@ class PaymentNotification < ActiveRecord::Base
 	def create_purchases
 		cart = Cart.find(cart_id)
 		if(status == "Completed")
-			Purchase.create_purchases(cart, true, transaction)
+			Purchase.create_purchases(cart, true, transaction_id)
 		end		
 	end
 

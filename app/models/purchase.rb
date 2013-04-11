@@ -1,5 +1,5 @@
 class Purchase < ActiveRecord::Base
-  attr_accessible :item_id, :quantity, :unit_price, :user_id, :paid
+  attr_accessible :item_id, :quantity, :unit_price, :user_id, :paid, :order_set, :created_at
 
   belongs_to :item
   belongs_to :user
@@ -40,15 +40,19 @@ class Purchase < ActiveRecord::Base
   	return total
   end
 
-  def self.create_purchases(cart, paid, transcation = nil)
-      transaction ||= "unpaid"
+  def self.create_purchases(cart, paid, transaction)
+      
+      if(transaction.nil?)
+        transaction = "unpaid"
+      end
+
       cart.cart_items.each do |cart_item|
         @purchase = Purchase.new(:item_id => cart_item.item_id, 
                :user_id => cart.user.id,
                :quantity => cart_item.quantity,
                :unit_price => cart_item.item.price,
                :paid => paid,
-              :order_set => transaction)
+               :order_set => transaction)
         @purchase.save
       end
       cart.clear_all_items

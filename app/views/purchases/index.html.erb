@@ -71,7 +71,9 @@ $('.paid').each(function() {
       <% end %>
     </table>
     <% end %>
-    <h4 id="cart_total" style="text-align: right;">Total: <%= number_to_currency current_user.pending_payment %></h4>
+    <% if current_user.pending_payment > 0 %>
+    <h4 id="cart_total" style="text-align: right;">Total Pending: <%= number_to_currency current_user.pending_payment %></h4>
+    <% end %>
   </div>
 
 </div>

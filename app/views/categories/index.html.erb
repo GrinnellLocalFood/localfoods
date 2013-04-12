@@ -42,7 +42,7 @@
           <strong><%= category.name %></strong>
         </td>
         <% if category.name != "Other" %>
-        <td style="text-align: right;"><%= link_to "Delete", category, :confirm => "You are about to delete the #{ category.name } category. Any items in #{ category.name } will be placed in 'Other'. Delete?", :method=>:delete, :class=>:Destroy %>
+        <td style="text-align: right;"><%= link_to "Delete", category, :confirm => "You are about to delete the #{ category.name } category. Any items in #{ category.name } will be placed in 'Other'. Delete?", :method=>:delete, :class=>"btn btn-danger" %>
           <% else %>
           <td></td>
           <% end %>

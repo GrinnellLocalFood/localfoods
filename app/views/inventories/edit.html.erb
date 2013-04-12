@@ -6,7 +6,7 @@
 
 
       <header class="navbar navbar-fixed-top" style="z-index: 1000;">
-        <div class="navbar-inner-table">
+        <div class="navbar-inner-table big-nav">
 
           <div class="hidden-desktop big-form-warning">
             Be warned, this form is best used on a larger screen  
@@ -19,10 +19,10 @@
                 <tr>
                   <th style="position: fixed; margin-left: 5px;">Photo</th>
                   <th style="position: fixed; margin-left: 75px;">Name</th>
-                  <th style="position: fixed; margin-left: 220px;">Category</th>
-                  <th style="position: fixed; margin-left: 345px;">Description</th>
-                  <th style="position: fixed; margin-left: 550px;">Price</th>
-                  <th style="position: fixed; margin-left: 650px;">Unit</th>
+                  <th style="position: fixed; margin-left: 210px;">Category</th>
+                  <th style="position: fixed; margin-left: 335px;">Description</th>
+                  <th style="position: fixed; margin-left: 540px;">Price</th>
+                  <th style="position: fixed; margin-left: 640px;">Unit</th>
                   <th style="position: fixed; margin-left: 700px; font-size: 70%; white-space: nowrap;">
                     Min Order</th>
                     <th style="position: fixed; margin-left: 765px; font-size: 70%; white-space: nowrap;">
@@ -94,14 +94,14 @@
                     </td>
 
 
-                    <td><%= item_form.text_field :name, :style => "width: 120px;" %></td>
+                    <td><%= item_form.text_field :name, :style => "width: 105px;" %></td>
                     <td><%= item_form.collection_select(:category_id, Category.all, :id, :name, {}, {:style => "width:110px;"}) %></td>
                     <td><%= item_form.text_area :description, :style => "width: 180px; height: 75px;" %></td>
                     <td>
                       <div class="input-prepend">
                         <span class="add-on">$</span>
                         <%= item_form.text_field :price, :placeholder => "Price", :class=>"span2", :id=>"inv_price_field",
-                        :style => "width: 45px;" %>
+                        :style => "width: 35px;" %>
                       </div>
                     </td>
                     <td><%= item_form.text_field :units, :placeholder => "Unit", :style => "width: 45px;" %></td>
@@ -123,7 +123,7 @@
               <br><br>
 
               <footer class="navbar navbar-fixed-bottom" style="z-index: 1;">
-                <div class="navbar-bottom">
+                <div class="navbar-bottom big-nav">
                   <div class="container" style="width: 940px;">
                     <%= f.submit "Save Inventory", :class=>"btn btn-primary", :style=>"float:right; "%>
                   </div>

@@ -4,7 +4,7 @@
 $(document).ready(function() {
 
 // hide the non-javascript show link
-$('.classic_show').hide();
+$('.classic_show, .classic_th').hide();
 
 // sorting arrows
 $('.asc').append('<i class="icon-arrow-up sort-arrow"></i>');
@@ -61,7 +61,7 @@ $('#search-header').attr('value', '<%= params[:search] %>');
                     <th class="hidden-phone">Min Order</th>   
                     <th class="sort"> <%= search_sortable "category", params[:search] %></th>   
                     <th class="hidden-phone">Available</th>
-                    <th></th>        
+                    <th class="classic_th"></th>        
                 </tr>
 
                 <% @search.results.each do |item| %>

@@ -257,6 +257,12 @@ margin-top: -5px">
     <%= paginate @item, :remote => true %>
 </div>
 
+<!-- If the current user is an admin, coordinator, or the producer whose page this is -->
+<% if signed_in? && (current_user.admin || current_user.coordinator || current_user == @producer) %>
+<%= link_to 'Add Item', producer_new_inventory_items_path(params[:id]), :class=>"btn btn-info", 
+        :style => "margin-top: 8px; margin-right: 2.5%; margin-left: 2.5%; float: right;" %>
+<% end %>
+
 <table class="producer-table table-hover" align="center">
     <tr>
         <th class="hidden-phone"></th>
@@ -334,10 +340,7 @@ margin-top: -5px">
 <% end %> 
 <br>
 
-<!-- If the current user is an admin, coordinator, or the producer whose page this is -->
-<% if signed_in? && (current_user.admin || current_user.coordinator || current_user == @producer) %>
-<%= link_to 'Add Item', producer_new_inventory_items_path(params[:id]), :class=>"btn", :style=>"margin-left: 2.5%" %>
-<% end %>
+
 
 <!-- closing div's from the main show erb file -->
 </div>

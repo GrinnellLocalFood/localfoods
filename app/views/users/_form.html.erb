@@ -45,7 +45,7 @@ $('#user_first_name').focus();
 
 
 <% if signed_in? && (current_user.admin || current_user.coordinator) %>
-<div class="controls" style="margin-left:200px; color:maroon">
+<div align="center" style="color: maroon;">
   <% if current_user.admin %>
   <label class="checkbox inline">
     Admin
@@ -63,6 +63,7 @@ $('#user_first_name').focus();
     <%= f.check_box :producer %>
 </label>
 </div>
+
 <br>
 <% end %>
 
@@ -124,8 +125,8 @@ $('#user_first_name').focus();
   </div>
 
 
- <div class="control-group controls">
-  <%= f.submit "Submit!", :class=>"squared btn-large btn-primary" %>
+ <div align="center" style="margin-bottom: 20px;">
+  <%= f.submit "Create Account", :class=>"btn-large btn-primary" %>
 </div>
 
 <div align="center" style="color: gray;">

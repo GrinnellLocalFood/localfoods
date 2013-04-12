@@ -131,8 +131,8 @@ $(document).ready(function() {
       <div id="search-header-append" class="input-append">
 
         <%= form_tag :controller => 'items', :action => :search do %>
-        <input id="search-header" class="span" type="text" name="search" placeholder="Search Products">
-        <button class="btn" type="submit" value="Search">
+        <input id="search-header-input" class="span" type="text" name="search" placeholder="Search Products">
+        <button id="search-header-button" class="btn" type="submit" value="Search">
           <i class="icon-search"></i>
         </button>
         <% end %>

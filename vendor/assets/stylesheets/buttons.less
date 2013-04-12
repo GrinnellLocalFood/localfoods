@@ -8,7 +8,7 @@
 // Base styles
 // --------------------------------------------------
 
-// Core
+// Core 
 .btn {
   display: inline-block;
   .ie7-inline-block();
@@ -29,7 +29,7 @@
 
 // new btn code
 border: 0;
-background-color: @blue;
+background-color: @grayLighter;
 // padding: 5px 13px; //check this
 padding: 6px 14px;
 color: @grayDarker;
@@ -42,7 +42,7 @@ color: @grayDarker;
     // color: @grayDark;
     text-decoration: none;
     // background-position: 0 -15px;
-    background-color: @concrete;
+    background-color: @grayLight;
     color: @black;
 
     // transition is only when going to hover/focus, otherwise the background
@@ -159,26 +159,50 @@ input[type="button"] {
 // -------------------------
 .btn-primary {
   // .buttonBackground(@btnPrimaryBackground, @btnPrimaryBackgroundHighlight);
-  background-color: @mist;
+  background-color: @blue;
   color: white;
 
   &:hover,
   &:focus {
-    background-color: @deep;
+    background-color: @blueDark;
     color: white;
   }
 }
 // Warning appears are orange
 .btn-warning {
-  .buttonBackground(@btnWarningBackground, @btnWarningBackgroundHighlight);
+  // .buttonBackground(@btnWarningBackground, @btnWarningBackgroundHighlight);
+  background-color: @orange;
+  color: white;
+
+  &:hover,
+  &:focus {
+    background-color: @orangeDark;
+    color: white;
+  }
 }
 // Danger and error appear as red
 .btn-danger {
-  .buttonBackground(@btnDangerBackground, @btnDangerBackgroundHighlight);
+  // .buttonBackground(@btnDangerBackground, @btnDangerBackgroundHighlight);
+  background-color: @red;
+  color: white;
+
+  &:hover,
+  &:focus {
+    background-color: @redDark;
+    color: white;
+  }
 }
 // Success appears as green
 .btn-success {
-  .buttonBackground(@btnSuccessBackground, @btnSuccessBackgroundHighlight);
+  // .buttonBackground(@btnSuccessBackground, @btnSuccessBackgroundHighlight);
+  background-color: @green;
+  color: white;
+
+  &:hover,
+  &:focus {
+    background-color: @greenDark;
+    color: white;
+  }
 }
 // Info appears as a neutral blue
 .btn-info {
@@ -191,6 +215,8 @@ input[type="button"] {
     background-color: @greensea;
     color: white;
   }
+}
+
 
 
 .btn-gray {
@@ -202,8 +228,6 @@ input[type="button"] {
     background-color: @grayDarker;
     color: white;
   }
-
-}
 
 
 }

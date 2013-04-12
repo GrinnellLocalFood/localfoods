@@ -11,16 +11,9 @@ $('#category-field').focus();
 
 
 <div style="margin-bottom: 20px;" align="center">
-    <label style="display: inline; padding-right: 20px;">
-    	Category Name *
-    </label>
-    <%= f.text_field :name, :placeholder=>"Category Name", :id=>"category-field", :style=>"margin-top: 8px; margin-right: -4px;" %>
+    <%= f.text_field :name, :placeholder=>"Category Name", :id=>"category-field", :style=>"margin-top: 8px;" %>
 
-    <%= f.submit "Add Category", :class=>"btn btn-primary", :style=>"margin-top: -2px;" %>
-</div>
-
-<div align="center" style="color: gray">
-  * Denotes required field
+    <%= f.submit "Add Category", :class=>"btn btn-info", :style=>"margin-top: -2px;" %>
 </div>
 
 <% end %>

@@ -24,7 +24,7 @@ $(this).attr('disabled', true);
 
 <div id="cart">
 
-<table class="table table-hover">
+<table class="table">
   <tr>
     <th>Product</th>
     <th>Qty</th>
@@ -41,7 +41,7 @@ $(this).attr('disabled', true);
   </td>
   <td class="cart_item_price"><%= number_to_currency(cart_item.item.price) %></td>
   <td class="cart_full_price"><%= number_to_currency(cart_item.quantity*cart_item.item.price) %></td>
-  <td><%= link_to "Remove", cart_item, :remote => false, :method=>:delete, :class=>'cart_delete' %></td>
+  <td><%= link_to "Remove", cart_item, :remote => false, :method=>:delete, :class=>"cart_delete btn btn-danger" %></td>
 </tr>
 </tr>
 <% end %>

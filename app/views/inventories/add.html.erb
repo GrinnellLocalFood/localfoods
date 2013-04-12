@@ -5,7 +5,7 @@
       <%= form_for(@inventory, :url => url_for(:controller => 'inventories', :action => 'update', :add => true), :html=>{:class=>'form-horizontal', :multipart => true}) do |f| %>
 
       <header class="navbar navbar-fixed-top" style="z-index: 1000;">
-        <div class="navbar-inner-table">
+        <div class="navbar-inner-table big-nav">
 
           <div class="hidden-desktop big-form-warning">
             Be warned, this form is best used on a larger screen  
@@ -18,16 +18,16 @@
                 <tr>
                   <th style="position: fixed; margin-left: 5px;">Photo</th>
                   <th style="position: fixed; margin-left: 75px;">Name</th>
-                  <th style="position: fixed; margin-left: 220px;">Category</th>
-                  <th style="position: fixed; margin-left: 345px;">Description</th>
-                  <th style="position: fixed; margin-left: 555px;">Price</th>
-                  <th style="position: fixed; margin-left: 650px;">Unit</th>
-                  <th style="position: fixed; margin-left: 715px; font-size: 75%; white-space: nowrap;">
+                  <th style="position: fixed; margin-left: 210px;">Category</th>
+                  <th style="position: fixed; margin-left: 335px;">Description</th>
+                  <th style="position: fixed; margin-left: 545px;">Price</th>
+                  <th style="position: fixed; margin-left: 645px;">Unit</th>
+                  <th style="position: fixed; margin-left: 710px; font-size: 75%; white-space: nowrap;">
                     Min Order</th>
-                    <th style="position: fixed; margin-left: 780px; font-size: 75%; white-space: nowrap;">
+                    <th style="position: fixed; margin-left: 775px; font-size: 75%; white-space: nowrap;">
                       Max Order</th>
-                      <th style="position: fixed; margin-left: 850px; font-size: 75%;">Quantity</th>
-                      <th style="position: fixed; margin-left: 910px; font-size: 75%;">Available</th>
+                      <th style="position: fixed; margin-left: 845px; font-size: 75%;">Quantity</th>
+                      <th style="position: fixed; margin-left: 905px; font-size: 75%;">Available</th>
                     </tr>
                   </thead>
                 </table>
@@ -73,22 +73,22 @@
                 </div>
 
                 <span class="btn btn-file" style="padding: 0px; margin-top: -6px; ">
-                  <span class="fileupload-new" style="padding: 0px 22px 0px 22px;">
+                  <span class="fileupload-new" style="padding: 0px 23px 0px 23px;">
                     <i class="icon-upload"></i>
                   </span>
 
-                  <span class="fileupload-exists" style="padding: 0px 6px 0px 6px;"><i class="icon-upload"></i></span>
+                  <span class="fileupload-exists" style="padding: 0px 7px 0px 7px;"><i class="icon-upload"></i></span>
                   <%= item_form.file_field :item_photo %>
                 </span>
                 <a href="#" class="btn fileupload-exists" data-dismiss="fileupload" 
-                style="padding: 0px 6px 0px 6px; margin-top: -6px;"><i class="icon-remove"></i></a>
+                style="padding: 1px 7px 0px 7px; margin-top: -6px;"><i class="icon-remove"></i></a>
 
                 <% end %>
               </td>
 
 
 
-              <td><%= item_form.text_field :name, :placeholder => "Name", :style => "width: 120px;" %></td>
+              <td><%= item_form.text_field :name, :placeholder => "Name", :style => "width: 105px;" %></td>
               <td><%= item_form.collection_select(:category_id, Category.all, :id, :name, {}, {:style => "width:110px;"}) %></td>
               <td><%= item_form.text_area :description, :placeholder => "Description",:style => "width: 180px; height: 75px;" %></td>
               <td>
@@ -112,7 +112,7 @@
         <br><br>
 
         <footer class="navbar navbar-fixed-bottom" style="z-index: 1;">
-          <div class="navbar-bottom">
+          <div class="navbar-bottom big-nav">
             <div class="container" style="width: 940px;">
               <%= f.submit "Save Inventory", :class=>"btn btn-primary", :style=>"float:right; "%>
             </div>

@@ -3,6 +3,8 @@
 // --------------------------------------------------
 
 
+
+
 // Base styles
 // --------------------------------------------------
 
@@ -10,31 +12,42 @@
 .btn {
   display: inline-block;
   .ie7-inline-block();
-  padding: 4px 12px;
+  // padding: 4px 12px;
   margin-bottom: 0; // For input.btn
   font-size: @baseFontSize;
   line-height: @baseLineHeight;
   text-align: center;
   vertical-align: middle;
   cursor: pointer;
-  .buttonBackground(@btnBackground, @btnBackgroundHighlight, @grayDark, 0 1px 1px rgba(255,255,255,.75));
-  border: 1px solid @btnBorder;
-  *border: 0; // Remove the border to prevent IE7's black border on input:focus
-  border-bottom-color: darken(@btnBorder, 10%);
-  .border-radius(@baseBorderRadius);
-  .ie7-restore-left-whitespace(); // Give IE7 some love
-  .box-shadow(~"inset 0 1px 0 rgba(255,255,255,.2), 0 1px 2px rgba(0,0,0,.05)");
+  // .buttonBackground(@btnBackground, @btnBackgroundHighlight, @grayDark, 0 1px 1px rgba(255,255,255,.75));
+  // border: 1px solid @btnBorder;
+  // *border: 0; // Remove the border to prevent IE7's black border on input:focus
+  // border-bottom-color: darken(@btnBorder, 10%);
+  // .border-radius(@baseBorderRadius);
+  // .ie7-restore-left-whitespace(); // Give IE7 some love
+  // .box-shadow(~"inset 0 1px 0 rgba(255,255,255,.2), 0 1px 2px rgba(0,0,0,.05)");
+
+// new btn code
+border: 0;
+background-color: @nothing;
+// padding: 5px 13px; //check this
+padding: 6px 14px;
+color: @grayDarker;
+
+
 
   // Hover/focus state
   &:hover,
   &:focus {
-    color: @grayDark;
+    // color: @grayDark;
     text-decoration: none;
-    background-position: 0 -15px;
+    // background-position: 0 -15px;
+    background-color: @cold;
+    color: @black;
 
     // transition is only when going to hover/focus, otherwise the background
     // behind the gradient (there for IE<=9 fallback) gets mismatched
-    .transition(background-position .1s linear);
+    // .transition(background-position .1s linear);
   }
 
   // Focus state for keyboard and accessibility
@@ -70,7 +83,9 @@
 .btn-large {
   padding: @paddingLarge;
   font-size: @fontSizeLarge;
-  .border-radius(@borderRadiusLarge);
+  // .border-radius(@borderRadiusLarge);
+  border: 0;
+
 }
 .btn-large [class^="icon-"],
 .btn-large [class*=" icon-"] {
@@ -143,7 +158,15 @@ input[type="button"] {
 // Set the backgrounds
 // -------------------------
 .btn-primary {
-  .buttonBackground(@btnPrimaryBackground, @btnPrimaryBackgroundHighlight);
+  // .buttonBackground(@btnPrimaryBackground, @btnPrimaryBackgroundHighlight);
+  background-color: @mist;
+  color: white;
+
+  &:hover,
+  &:focus {
+    background-color: @deep;
+    color: white;
+  }
 }
 // Warning appears are orange
 .btn-warning {
@@ -159,7 +182,30 @@ input[type="button"] {
 }
 // Info appears as a neutral blue
 .btn-info {
-  .buttonBackground(@btnInfoBackground, @btnInfoBackgroundHighlight);
+  // .buttonBackground(@btnInfoBackground, @btnInfoBackgroundHighlight);
+   background-color: @turquoise;
+  color: white;
+
+  &:hover,
+  &:focus {
+    background-color: @greensea;
+    color: white;
+  }
+
+
+.btn-gray {
+  background-color: @gray;
+  color: white;
+
+  &:hover,
+  &:focus {
+    background-color: @grayDarker;
+    color: white;
+  }
+
+}
+
+
 }
 // Inverse appears as dark gray
 .btn-inverse {

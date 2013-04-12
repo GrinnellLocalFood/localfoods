@@ -16,7 +16,6 @@
 				<% end %>
 				<% end %>
 
-
 				<% if current_user.admin %>
 				<li><%= link_to 'Add User', new_user_path %></li>
 				<li><%= link_to 'Open/Close Orders', '/editorderstate' %></li>
@@ -55,15 +54,18 @@
 			</div>
 			<% end %>
 
-			<div align="right" style="margin-right: 7.5%; margin-bottom:-40px;
+		
+		<div class="margin-five">
+
+			<div align="right" style="margin-bottom:-40px;
 			margin-top: 20px">
 			<%= link_to edit_user_path(params[:id]), :class=>"link", :'data-toggle'=>"tooltip", :title=>"Edit Account" do %>
 
 			<i class="icon-wrench"></i>
 		</div>
 		<% end %>
-		
-		<h2 style="margin-left: 7.5%;">Hello <%= @user.first_name %>!</h2>
+
+		<h2>Hello <%= @user.first_name %>!</h2>
 		<br>
 
 		<table id ="user-profile-table" class="table" align="center">
@@ -112,7 +114,7 @@
 			</ul>
 			<br>
 
-			<h4 style="margin-left: 7.5%;">Producer Information</h4>	
+			<h4>Producer Information</h4>	
 			<br>
 
 			<table id="producer-profile-table" class="table" align="center">
@@ -145,6 +147,7 @@
 				<% end %>
 
 			</table>
+		</div>
 
 		</div>
 		<% end %>

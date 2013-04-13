@@ -72,6 +72,7 @@ $(document).ready(function() {
           <ul class="dropdown-menu">
             <li><%= link_to("View Inventory", inventory_path(current_user)) %></li>
             <li><%= link_to("Add Item", producer_new_inventory_items_path(current_user)) %></li>
+            <li class="divider"></li>
             <li><%= link_to 'Add Multiple Items', add_inventory_path(current_user) %></li>
             <li><%= link_to 'Edit Multiple Items', edit_inventory_path(current_user) %></li>
           </ul>
@@ -85,6 +86,8 @@ $(document).ready(function() {
           </a>
           <ul class="dropdown-menu">
             <li><%= link_to "Profile", current_user %></li>
+            <li><%= link_to "Orders", purchases_path(current_user) %></li>
+            <li class="divider"></li>
             <li><%= link_to "Edit Account", edit_user_path(current_user, :origin => "header") %></li>
             <li><%= link_to "Change Password", editpassword_user_path(current_user) %></li>
             <li class="divider"></li>

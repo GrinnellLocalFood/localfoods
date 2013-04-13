@@ -28,12 +28,9 @@ $('#application_state_email_users_false').click(function() {
   <div class="row">
     <div class="span8 offset2 custom-block">
 
-      <!-- <div class="custom-block"> -->
-
-      <%= form_for(@application_state, :html=>{:class=>'form-horizontal', :multipart => true}) do |f| %>
+      <%= form_for(@application_state, :html=>{:multipart => true}) do |f| %>
 
       <% if @application_state.errors.any? %>
-      <!-- <div id="error_explanation"> -->
       <div class="alert alert-error">
         <h4><%= pluralize(@application_state.errors.count, "error") %> prohibited this application_state from being saved:</h4>
 
@@ -51,53 +48,51 @@ $('#application_state_email_users_false').click(function() {
     <% end %>
 
     <div align="center">
-      Open orders?
-      &nbsp;&nbsp;
-      Yes
-      <%= f.radio_button :orders_open, true, :class=>"radio-control"%> 
-      &nbsp;&nbsp;
-      No
-      <%= f.radio_button :orders_open, false, :class=>"radio-control"%> 
 
-    </div>
+      <div style="margin-bottom: 20px;">
+        Open orders?
+        &nbsp;&nbsp;
+        Yes
+        <%= f.radio_button :orders_open, true, :class=>"radio-control"%> 
+        &nbsp;&nbsp;
+        No
+        <%= f.radio_button :orders_open, false, :class=>"radio-control"%> 
+      </div>
 
-    <br>
+      <div>
+        Email users?
+        &nbsp;&nbsp;
+        Yes
+        <%= f.radio_button :email_users, true, :class=>"radio-control" %> 
+        &nbsp;&nbsp;
+        No
+        <%= f.radio_button :email_users, false, :class=>"radio-control", :checked => true %> 
+      </div>
 
 
+      <div id="email_section" style="width: 230px; margin-top: 20px; text-align: left;">
+        <p>
+         Hi [User],
+       </p>
 
-    <div align="center">
-
-      Email users?
-      &nbsp;&nbsp;
-      Yes
-      <%= f.radio_button :email_users, true, :class=>"radio-control" %> 
-      &nbsp;&nbsp;
-      No
-      <%= f.radio_button :email_users, false, :class=>"radio-control", :checked => true %> 
-
-    </div>
-    <br> 
-
-    <div id="email_section" class="controls" style="margin-left:215px">
-      <div class="email-display">Hi [User],
-        <br><br>
-        <div id="email_content">
-          <%= f.text_area :email_content, :placeholder=>"Write your message here" %>
-        </div>
-        <br>
+       <div id="email_content">
+        <%= f.text_area :email_content, :placeholder=>"Write your message here" %>
+      </div>
+      <p>
         Have a great day!
         <br>
         Grinnell Local Foods Admins
-      </div>
+      </p>
+
     </div>
+
 
     <br>
-    <div align="center">
-      <%= f.submit "Change State", :class=>"btn btn-primary"%>
-    </div>
-
-
-    <% end %>
+    <%= f.submit "Change State", :class=>"btn btn-primary"%>
   </div>
+
+
+  <% end %>
+</div>
 </div>
 </div>

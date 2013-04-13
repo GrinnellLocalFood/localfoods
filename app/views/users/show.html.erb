@@ -10,17 +10,24 @@
 				<% if current_user.admin || current_user.coordinator %>
 				<li class="nav-header" style="padding-left: 12px">Administration</li>
 				<li><%= link_to 'All Users', users_path %></li>
-
-				<% if current_user == @user %>
-				<li><%= link_to 'Add Item for Producer', admin_coord_newitem_path %></li>
-				<% end %>
+				<li><%= link_to 'Add User', new_user_path %></li>
 				<% end %>
 
 				<% if current_user.admin %>
-				<li><%= link_to 'Add User', new_user_path %></li>
+				<li><%= link_to 'All Orders', all_orders_path %></li>
 				<li><%= link_to 'Open/Close Orders', '/editorderstate' %></li>
+				<% end %>
+
+
+				<% if (current_user.admin || current_user.coordinator) && (current_user == @user) %>
+				<li><%= link_to 'Add Item for Producer', admin_coord_newitem_path %></li>
+				<% end %>	
+				<% if current_user.admin %>
 				<li><%= link_to 'Categories', categories_path %></li>
 				<% end %>
+				<% if current_user.admin || current_user.coordinator %>
+				<% end %>
+				
 
 				<% if @user.producer %>
 				<li class="nav-header" style="padding-left: 12px">Producer Options</li>
@@ -29,6 +36,7 @@
 				<li><%= link_to 'Add Multiple Items', add_inventory_path(@user.id) %></li>
 				<li><%= link_to 'Edit Multiple Items', edit_inventory_path(@user.id) %></li>
 				<% end %>
+
 			</ul>
 		</div>
 

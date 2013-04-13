@@ -3,7 +3,7 @@
 $(document).ready(function() {
 
 // hide the non-javascript show link
-$('.clasic_show').hide();
+$('.classic_show').hide();
 
 // make the item rows clickable and have a pointer hover-over
 $('.item_row').css('cursor', 'pointer').addClass('show_link');
@@ -301,7 +301,7 @@ margin-top: -5px">
         <td class="item_row category_label hidden-phone" data-id="<%= item.id %>"><%= Category.find(item.category_id).name %></td>
         <td class="item_row hidden-phone" data-id="<%= item.id %>"><%= item.is_available? %></td>
 
-        <td class="clasic_show"><%= link_to "Show", inventory_item_path({ :inventory_id => params[:id], :id => item.id })%></td>
+        <td class="classic_show"><%= link_to "Show", inventory_item_path({ :inventory_id => params[:id], :id => item.id })%></td>
 
         <!-- add to cart -->
         <% if current_user && (@producer != current_user) && (item.is_available? == 'Yes') %>

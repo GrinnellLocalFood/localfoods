@@ -3,35 +3,36 @@
 <div class="container">
 	<div class="row">
 
-		<div class="span8 offset2 custom-block" >
+		<div class="span8 offset2 custom-block">
+			<div class="margin-five" style="margin-top: 20px;">
 
-			<% if notice %>
-			<div class="alert alert-success fade in">
-				<a class="close" data-dismiss="alert" href="#">&times;</a>
-				<%= notice %>
-			</div>
-			<% end %>
-
-			<% if alert %>
-			<div class="alert alert-success fade in">
-				<a class="close" data-dismiss="alert" href="#">&times;</a>
-				<%= alert %>
-			</div>
-			<% end %>
-
-			<%= render :partial => 'show'%>
-
-
-			<div align="right" style="margin-top: 40px; margin-bottom: 40px; margin-right: 60px;">
-				<%= link_to("Continue Shopping", inventories_path, :class=>"btn") %>
-
-				<% if signed_in? && @item.cartable %> 
-				<%= link_to "Add to Cart", cart_items_path(:item_id => @item), :remote => false, :method => :post, 
-				:class => "add_to_cart btn btn-primary", :style=>"float:right; margin-left: 8px;" %>
+				<% if notice %>
+				<div class="alert alert-success fade in">
+					<a class="close" data-dismiss="alert" href="#">&times;</a>
+					<%= notice %>
+				</div>
 				<% end %>
 
-			</div>
+				<% if alert %>
+				<div class="alert alert-success fade in">
+					<a class="close" data-dismiss="alert" href="#">&times;</a>
+					<%= alert %>
+				</div>
+				<% end %>
 
+				<%= render :partial => 'show'%>
+
+
+				<div align="right">
+					<%= link_to("Continue Shopping", inventories_path, :class=>"btn") %>
+
+					<% if signed_in? && @item.cartable %> 
+					<%= link_to "Add to Cart", cart_items_path(:item_id => @item), :remote => false, :method => :post, 
+					:class => "add_to_cart btn btn-primary", :style=>"float:right; margin-left: 8px;" %>
+					<% end %>
+
+				</div>
+			</div>
 		</div>
 	</div>
 </div>

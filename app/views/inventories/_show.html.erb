@@ -246,16 +246,26 @@ margin-top: -5px">
 
     <%= @producer.inventory.description %>
 
-</div>
-
 
 <% if @item.count != 0 %>
 
+ <%= form_for @producer.inventory, :url => url_for(:controller => 'inventories', :action => @put_action), :remote => @remote do |f| %>
+    <%= collection_select(:inventory, :category, @producer.inventory.categories, :name, :name, :selected => @category.nil? ? "Other" : @category) %>
+    <%= f.submit "Find" %>
+<% end %>
+
 <h3 id="current-inventory-title">Current Inventory</h3>
 
+ <% if @remote %>
  <div class="inventory-pagination">
     <%= paginate @item, :remote => true %>
 </div>
+<% else %>
+<div class="inventory-pagination">
+    <%= paginate @item %>
+</div>
+<% end %>
+
 
 <!-- If the current user is an admin, coordinator, or the producer whose page this is -->
 <% if signed_in? && (current_user.admin || current_user.coordinator || current_user == @producer) %>
@@ -263,14 +273,16 @@ margin-top: -5px">
         :style => "margin-top: 8px; margin-right: 2.5%; margin-left: 2.5%; float: right;" %>
 <% end %>
 
+
+
 <table class="producer-table table-hover" align="center">
     <tr>
         <th class="hidden-phone"></th>
-        <th id="name-sort" class="sort"><%= sortable "name", @remote, @producer %></th>
+        <th id="name-sort" class="sort"><%= sortable "name", @remote, @producer, @category %></th>
         <th>Description</th>
-        <th id="price-sort" class="sort hidden-phone"><%= sortable "price", @remote, @producer %></th>
+        <th id="price-sort" class="sort hidden-phone"><%= sortable "price", @remote, @producer, @category %></th>
         <th class="hidden-phone">Min Order</th>
-        <th id="category-sort" class="sort hidden-phone"><%= sortable "category_id", @remote, @producer, Category %></th>    
+        <th id="category-sort" class="sort hidden-phone"><%= sortable "category_id", @remote, @producer, @category, Category %></th>    
         <th class="hidden-phone">Available</th>
         <% if @producer != current_user %>
         <th class="hidden-phone"></th>

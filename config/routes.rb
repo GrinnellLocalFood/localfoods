@@ -24,6 +24,8 @@ Localfoods::Application.routes.draw do
   resources :inventories do
     member do
         get 'show_in_index'
+        put 'show_in_index'
+        put 'show'
       end
 
     member do

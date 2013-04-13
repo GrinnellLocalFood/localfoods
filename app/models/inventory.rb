@@ -1,5 +1,6 @@
 class Inventory < ActiveRecord::Base
-	attr_accessible :inventory_photos_attributes, :inventory_photos
+	attr_accessor :category
+	attr_accessible :inventory_photos_attributes, :inventory_photos, :category
 	belongs_to :user, :foreign_key => "id" #a user's "id" column is the foreign key# :autosave => false 
 	has_many :item, :foreign_key => "inventory_id", :autosave => true, :dependent => :destroy
 	has_many :inventory_photos, :dependent => :destroy
@@ -16,6 +17,10 @@ class Inventory < ActiveRecord::Base
   
 	def hide
 		self.hidden = true
+	end
+
+	def categories
+		Item.where("inventory_id = ?", id).uniq.pluck(:category_id).map{ |id| Category.find(id) }
 	end
 
 	private

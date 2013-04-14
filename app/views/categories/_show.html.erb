@@ -127,8 +127,17 @@ $('.show_link').click(function() {
 
 
 <div id="all-image-unit">
-<h1 id="all-title">All Products</h1>
+<h1 id="all-title">All <%= @category.nil? ? "Products" : @category.titleize %></h1>
 </div>
+
+<% if @items.count != 0 %>
+
+ <%= form_tag show_all_categories_path, :method => :put, :remote => true do |f| %>
+    <%= select_tag :category, options_from_collection_for_select(Category.all.sort {|x,y| x.name <=> y.name} , :name, :name, @category), :prompt => "All" %>
+    <%= submit_tag "Find" %>
+<% end %>
+
+<% end %>
 
 <div class="inventory-pagination">
 <%= paginate @items, :remote => true%>
@@ -138,12 +147,12 @@ $('.show_link').click(function() {
 
     <tr>
         <th class="hidden-phone"></th>
-        <th>Name</th>
-        <th class="hidden-phone">Producer</th>
+        <th class="sort"><%= category_sortable "name", @category %></th>
+        <th class="hidden-phone"><%= category_sortable "producer", @category %></th>
         <th>Description</th>
-        <th class="hidden-phone">Price</th>
-        <th class="hidden-phone">Category</th>
-        <th class="hidden-phone">Available</th> 
+        <th class="hidden-phone sort"><%= category_sortable "price", @category %></th>
+        <th class="hidden-phone sort"><%= category_sortable "category", @category %></th>
+        <th class="hidden-phone sort"><%= category_sortable "available", @category %></th> 
         <!-- <th></th> -->
     </tr>
 

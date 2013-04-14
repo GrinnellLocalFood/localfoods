@@ -92,6 +92,7 @@ Localfoods::Application.routes.draw do
 
     collection do
       get 'show_all'
+      put 'show_all'
     end
   end
 

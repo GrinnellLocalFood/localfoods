@@ -250,7 +250,7 @@ margin-top: -5px">
 <% if @item.count != 0 %>
 
  <%= form_for @producer.inventory, :url => url_for(:controller => 'inventories', :action => @put_action), :remote => @remote do |f| %>
-    <%= collection_select(:inventory, :category, @producer.inventory.categories, :name, :name, :selected => @category.nil? ? "Other" : @category) %>
+    <%= collection_select(:inventory, :category, @producer.inventory.categories, :name, :name, :prompt => "All", :selected => @category.nil? ? "" : @category) %>
     <%= f.submit "Find" %>
 <% end %>
 
@@ -281,9 +281,9 @@ margin-top: -5px">
         <th id="name-sort" class="sort"><%= sortable "name", @remote, @producer, @category %></th>
         <th>Description</th>
         <th id="price-sort" class="sort hidden-phone"><%= sortable "price", @remote, @producer, @category %></th>
-        <th class="hidden-phone">Min Order</th>
-        <th id="category-sort" class="sort hidden-phone"><%= sortable "category_id", @remote, @producer, @category, Category %></th>    
-        <th class="hidden-phone">Available</th>
+        <th class="hidden-phone sort"><%= sortable "minorder", @remote, @producer, @category, "Min Order" %></th>
+        <th id="category-sort" class="sort hidden-phone"><%= sortable "category_id", @remote, @producer, @category, "Category" %></th>    
+        <th id="available-sort" class="sort hidden-phone"><%= sortable "available", @remote, @producer, @category, "Available" %></th>
         <% if @producer != current_user %>
         <th class="hidden-phone"></th>
         <% end %>

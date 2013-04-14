@@ -10,12 +10,12 @@ skip_before_filter :require_login, :only => [:show, :index, :show_in_index, :sho
       @put_action = 'show'
       @producer = User.find(params[:id])
 
-      if !params[:inventory].nil?
-        @category = params[:inventory][:category]
-        @category_id = Category.find_by_name(@category).id
-      else
+      if params[:inventory].nil? || params[:inventory][:category].blank?
         @category = nil
         @category_id = nil
+      else
+        @category = params[:inventory][:category]
+        @category_id = Category.find_by_name(@category).id        
       end
 
       @item = Kaminari.paginate_array(sorted_items.to_a).page(params[:page]).per(10)
@@ -30,12 +30,13 @@ skip_before_filter :require_login, :only => [:show, :index, :show_in_index, :sho
       @remote = true
       @producer = User.find(params[:id])
       @put_action = 'show_in_index'
-      if !params[:inventory].nil?
-        @category = params[:inventory][:category]
-        @category_id = Category.find_by_name(@category).id
-      else
+     
+      if params[:inventory].nil? || params[:inventory][:category].blank?
         @category = nil
         @category_id = nil
+      else
+        @category = params[:inventory][:category]
+        @category_id = Category.find_by_name(@category).id        
       end
       
       @item = Kaminari.paginate_array(sorted_items.to_a).page(params[:page]).per(10)
@@ -97,14 +98,24 @@ private
   end
 
   def sorted_items
+    @item = filtered_items
+
     if sort_column == "category_id"
-      @item = filtered_items
       if sort_direction == "asc"
         return @item.sort_by{|i| i.category.name }
       else
         return @item.sort_by{|i| i.category.name }.reverse
       end
     end
+
+    if sort_column == "available"
+      if sort_direction == "asc"
+        return @item.sort_by{|i| i.is_available? }
+      else
+        return @item.sort_by{|i| i.is_available? }.reverse
+      end
+    end
+
     return filtered_items.order(sort_column + " " + sort_direction)
   end
 

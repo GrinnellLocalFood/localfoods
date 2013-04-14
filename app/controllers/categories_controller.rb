@@ -1,5 +1,5 @@
 class CategoriesController < ApplicationController
-
+helper_method :sort_column, :sort_direction
 skip_before_filter :require_login, :only => [:show_by_category, :show_all]
 
 def new
@@ -33,7 +33,14 @@ def index
 end
 
 def show_all
-    @items = Kaminari.paginate_array(Item.all.to_a).page(params[:page]).per(10)
+    if params[:category].nil? || params[:category].blank?
+      @category = nil
+      @category_obj = nil
+    else
+      @category = params[:category]
+      @category_obj = Category.find_by_name(@category)
+    end
+    @items = Kaminari.paginate_array(sorted_items(@category_obj)).page(params[:page]).per(10)
    	respond_to do |format|
       format.js { render :locals => { :items => @items } }
   end
@@ -64,5 +71,52 @@ end
     end
   end
 
+  private 
+
+  def filtered_items(category)
+    if category.nil?
+      Item
+    else
+      Item.where("category_id = ?", category.id)
+    end
+  end
+
+  def sorted_items(category)
+    @item = filtered_items(category)
+
+    if params[:sort] == "available"
+      if sort_direction == "asc"
+        return @item.sort_by{|i| i.is_available? }
+      else
+        return @item.sort_by{|i| i.is_available? }.reverse
+      end
+    end
+
+    if params[:sort] == "producer"
+      if sort_direction == "asc"
+        return @item.sort_by{|i| i.inventory.display_name }
+      else
+        return @item.sort_by{|i| i.inventory.display_name }.reverse
+      end
+    end
+
+    if params[:sort] == "category"
+      if sort_direction == "asc"
+        return @item.sort_by{|i| i.category.name }
+      else
+        return @item.sort_by{|i| i.category.name }.reverse
+      end
+    end
+
+    return filtered_items(category).order(sort_column + " " + sort_direction)
+  end
+
+  def sort_column
+    Item.column_names.include?(params[:sort]) || ["producer", "category", "available"].include?(params[:sort]) ? params[:sort] : "name"
+  end
+  
+  def sort_direction
+    %w[asc desc].include?(params[:direction]) ? params[:direction] : "asc"
+  end
 
 end

@@ -20,7 +20,7 @@ class Inventory < ActiveRecord::Base
 	end
 
 	def categories
-		Item.where("inventory_id = ?", id).uniq.pluck(:category_id).map{ |id| Category.find(id) }
+		Item.where("inventory_id = ?", id).uniq.pluck(:category_id).map{ |id| Category.find(id) }.sort! { |x,y| x.name <=> y.name }
 	end
 
 	private

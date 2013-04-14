@@ -1,0 +1,17 @@
+development:
+  paypal_email: royaditi@grinnell.edu
+  paypal_secret: RTGFER45RT
+  paypal_cert_id: BUUXQ8VASR7XA
+  paypal_url: "https://www.sandbox.paypal.com/cgi-bin/webscr"
+
+test:
+  paypal_email: test@example.com
+  paypal_secret: testsecret
+  paypal_cert_id: 123456789
+  paypal_url: testpaypalurl
+
+production:
+  paypal_email: foo@example.com
+  paypal_secret: supersecret
+  paypal_cert_id: KLHZSK326HEDS
+  paypal_url: "https://www.paypal.com/cgi-bin/webscr"

@@ -132,9 +132,8 @@ $('.show_link').click(function() {
 
 <% if @items.count != 0 %>
 
- <%= form_tag show_all_categories_path, :method => :put, :remote => true do |f| %>
-    <%= select_tag :category, options_from_collection_for_select(Category.all.sort {|x,y| x.name <=> y.name} , :name, :name, @category), :prompt => "All" %>
-    <%= submit_tag "Find" %>
+ <%= form_tag show_all_categories_path, :method => :put, :id => 'category-dropdown', :remote => true do |f| %>
+    <%= select_tag :category, options_from_collection_for_select(Category.all.sort {|x,y| x.name <=> y.name} , :name, :name, @category), :prompt => "All", :onchange => '$("#category-dropdown").submit();' %>
 <% end %>
 
 <% end %>

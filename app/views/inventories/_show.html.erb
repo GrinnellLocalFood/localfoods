@@ -249,9 +249,8 @@ margin-top: -5px">
 
 <% if @item.count != 0 %>
 
- <%= form_for @producer.inventory, :url => url_for(:controller => 'inventories', :action => @put_action), :remote => @remote do |f| %>
-    <%= collection_select(:inventory, :category, @producer.inventory.categories, :name, :name, :prompt => "All", :selected => @category.nil? ? "" : @category) %>
-    <%= f.submit "Find" %>
+ <%= form_for @producer.inventory, :url => url_for(:controller => 'inventories', :action => @put_action), :html => {:id => 'category-dropdown'}, :remote => @remote do |f| %>
+    <%= collection_select(:inventory, :category, @producer.inventory.categories, :name, :name, {:prompt => "All", :selected => @category.nil? ? "" : @category}, {:onchange => '$("#category-dropdown").submit();'}) %>
 <% end %>
 
 <h3 id="current-inventory-title">Current Inventory</h3>

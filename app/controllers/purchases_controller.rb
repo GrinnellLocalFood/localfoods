@@ -11,7 +11,7 @@ class PurchasesController < ApplicationController
 
 	def index
 		@title = "Order History"
-		@orders = Purchase.where("user_id = ?", current_user.id).uniq.pluck(:order_set)
+		@orders = Purchase.where("user_id = ?", current_user.id).order("created_at desc").uniq.pluck(:order_set)
 
 		if @orders.include?("unpaid")
 			@orders.delete("unpaid")

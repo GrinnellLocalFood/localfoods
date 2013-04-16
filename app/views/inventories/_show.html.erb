@@ -76,7 +76,7 @@ $('[data-toggle="tooltip"]').tooltip();
 $('.close').click(function() {
   setTimeout(
   function() {
-     alert('<%= cart_size(current_user.cart.id).to_s %>');
+     
  },
  1000)
 });
@@ -167,7 +167,7 @@ margin-top: -5px">
     <%= link_to @producer.inventory.url, url_with_protocol(@producer.inventory.url) %>
     <% end %>
 
-    <%= @producer.inventory.description %>
+    <%= simple_format(@producer.inventory.description) %>
 
 
 
@@ -224,8 +224,7 @@ margin-top: -5px">
         <th></th>
         <th class="hidden-phone"></th>
         <% end %>
-  
-    </tr>
+     </tr>
 
     <% @item.each do |item| %>
     <tr>

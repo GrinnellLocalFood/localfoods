@@ -60,7 +60,7 @@ $('.desc').append('<i class="icon-arrow-down sort-arrow"></i>');
 <div class="margin-two-five">
 
 <div class="inventory-pagination">
-<%= paginate @items, :remote => true%>
+<%= paginate @items, :params => {:controller => :categories, :action => :show_all}, :remote => true%>
 </div>
 
 

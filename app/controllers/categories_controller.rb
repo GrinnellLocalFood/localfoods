@@ -82,7 +82,7 @@ end
   end
 
   def sorted_items(category)
-    @item = filtered_items(category)
+    @item = category.nil? ? Item.all : filtered_items(category)
 
     if params[:sort] == "available"
       if sort_direction == "asc"

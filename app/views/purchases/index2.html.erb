@@ -39,46 +39,36 @@ $('.paid').each(function() {
 
         <h2>Ordered Items</h2>
 
-                 
-          
         <% for order in @orders %>
-        <% purchases = Purchase.where("user_id = ? AND order_set = ?", current_user.id, order) %>
-        <% purchase_time = purchases.first.created_at.in_time_zone("Central Time (US & Canada)") %>
-
+        <h3><%= order == "unpaid" ? order.titleize : "Order Id:" + order %></h3>
         <table class="table table-bordered">
           <tr>
-            <th><%= purchase_time.today? ? "Today" : purchase_time.to_date.strftime('%a, %d %b %Y') %> </th>
-            <th>Details</th>
-          </tr>       
-          <tr>
-          <td><%= order == "unpaid" ? order.titleize : "Order Id:" + order %>
-            <p/>
-          Purchased <%= time_ago_in_words(purchase_time)  %> ago</td>
-          
-          <td>          
-          <table class="table table-bordered">
-          <tr>
-            <th></th>
-            <th>Item</th>
-            <th>Quantity Ordered</th>
-            <th>Price</th>
+            <th class="hidden-phone"></th>
+            <th>Product</th>
+            <th>Qty</th>
+            <th>Full Price</th>
+            <!-- <th>Paid For</th> -->
+            <th>Purchase Time</th>
           </tr>
+
+          <% purchases = Purchase.where("user_id = ? AND order_set = ?", current_user.id, order) %>
           <% for purchase in purchases %>
-           <td> <% if !(purchase.item.item_photo_file_name.nil?) %>
+          <td class="hidden-phone">
+            <% if !(purchase.item.item_photo_file_name.nil?) %>
             <media>
               <%= image_tag(purchase.item.item_photo.url(:thumb)) %>
             </media>
-            <%end%></td>
+            <%end%>
+          </td>
           <td><%= link_to purchase.item.name, inventory_item_path(purchase.item.inventory.id, purchase.item.id)%></td>
           <td><%= purchase.quantity %></td>
           <td><%= number_to_currency(purchase.quantity*purchase.item.price) %></td>
           <!-- <td class="paid"><%= purchase.paid ? "Yes" : "No" %></td> -->
-          <!-- <td><%= purchase.created_at.in_time_zone("Central Time (US & Canada)")  %></td> -->          
-        </td>
-
+          <!-- <td><%= purchase.created_at.in_time_zone("Central Time (US & Canada)")  %></td> -->
+          <td><%= time_ago_in_words(purchase.created_at.in_time_zone("Central Time (US & Canada)"))  %> ago</td>
         </tr>
+      </tr>
       <% end %>
-      </table>
     </table>
     <% end %>
     <% if current_user.pending_payment > 0 %>

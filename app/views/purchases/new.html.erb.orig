@@ -1,0 +1,40 @@
+<div class="container">
+	<div class="row-fluid">
+		<div class="span8 offset2 custom-block">
+
+<<<<<<< HEAD
+			<!-- What is this? -->
+
+
+
+<div class=" margin-ten" align="center">
+	<h2>Payment Choices</h2>
+	<p>
+		If you pay by check, you're committing to pay for the items at pick-up. If you pay online, you'll be directed to PayPal to complete the transaction.
+	</p>
+	<br>
+
+
+	<%= form_for(@purchase, :url => url_for({:controller => "purchases", :action => "create"})) do |f| %>
+	<%= f.submit "Pay by Check", :class=>"btn btn-large", :style=>"margin-bottom: 20px;" %>
+	<% end %>
+	 
+	<%= link_to "Pay Online", current_user.cart.paypal_url(inventories_path), :class=>"btn btn-primary btn-large", :style=>"margin-bottom: 10px; display: inline-block; padding-left: 33px; padding-right: 33px;" %>
+</div>
+
+</div>
+
+</div>
+</div>
+</div>
+=======
+<%= link_to "Pay by Check", :controller => "purchases", :action => "create" %>
+<%= link_to "Pay Online", current_user.cart.paypal_url %>
+
+
+<%= form_tag APP_CONFIG[:paypal_url] do %>
+<%= hidden_field_tag :cmd, "_s-xclick" %>
+<%= hidden_field_tag :encrypted, current_user.cart.paypal_encrypted %>
+<%= submit_tag "Pay Online!!!" %>
+<% end %>
+>>>>>>> PaymentNotifications

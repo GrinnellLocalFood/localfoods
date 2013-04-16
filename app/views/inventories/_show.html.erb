@@ -72,7 +72,7 @@ setTimeout(
 // something about the partial makes this need to be here too
 $('[data-toggle="tooltip"]').tooltip();
 
-
+<% if signed_in? %>
 $('.close').click(function() {
   setTimeout(
   function() {
@@ -80,6 +80,7 @@ $('.close').click(function() {
  },
  1000)
 });
+<% end %>
 
 
 

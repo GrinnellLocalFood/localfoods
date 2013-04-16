@@ -36,7 +36,7 @@
                     <th style="font-size: 75%;">Coordinator</th>
                     <th style="font-size: 75%;">Producer</th>
                     <th style="font-size: 75%;">Admin</th>
-                    <% if current_user.admin || (!user.admin && current_user.coordinator) %>
+                    <% if current_user.admin || current_user.coordinator %>
                     <th></th>
                     <% end %>
                 </tr>
@@ -61,8 +61,10 @@
                     <td><%= user.admin %></td>
                     <% end %>
 
-                    <% if current_user.admin || (!user.admin && current_user.coordinator) %>
+                    
                     <td>
+                    <% if current_user.admin || (!user.admin && current_user.coordinator) %>
+                    
                         <%= link_to edit_user_path(user), :'data-toggle'=>"tooltip", :title=>"Edit User" do %>
                         <i class="icon-wrench"></i>
                         <% end %>

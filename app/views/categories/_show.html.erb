@@ -50,18 +50,23 @@ $('.show_link').click(function() {
 <h1 id="all-title">All <%= @category.nil? ? "Products" : @category.titleize %></h1>
 </div>
 
-<% if @items.count != 0 %>
 
- <%= form_tag show_all_categories_path, :method => :put, :id => 'category-dropdown', :remote => true do |f| %>
-    <%= select_tag :category, options_from_collection_for_select(Category.all.sort {|x,y| x.name <=> y.name} , :name, :name, @category), :prompt => "All", :onchange => '$("#category-dropdown").submit();' %>
-<% end %>
-
-<% end %>
-
+<div class="margin-two-five">
 
 <div class="inventory-pagination">
 <%= paginate @items, :remote => true%>
 </div>
+
+
+
+<% if @items.count != 0 %>
+ <%= form_tag show_all_categories_path, :method => :put, :id => 'category-dropdown', :remote => true do |f| %>
+    <%= select_tag :category, options_from_collection_for_select(Category.all.sort {|x,y| x.name <=> y.name} , :name, :name, @category), :prompt => "All", :onchange => '$("#category-dropdown").submit();' %>
+    <% end %>
+<% end %>
+
+
+<br>
 
 <table class="producer-table table-hover" align="center">
 
@@ -73,7 +78,6 @@ $('.show_link').click(function() {
         <th class="hidden-phone sort"><%= category_sortable "price", @category %></th>
         <th class="hidden-phone sort"><%= category_sortable "category", @category %></th>
         <th class="hidden-phone sort"><%= category_sortable "available", @category %></th> 
-        <!-- <th></th> -->
     </tr>
 
     <% @items.each do |item| %>
@@ -106,5 +110,7 @@ $('.show_link').click(function() {
     <% end %>
 
 </table>
+
+</div>
 
 

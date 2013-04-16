@@ -158,7 +158,7 @@ margin-top: -5px">
 
 
 
-<div id="inventory-info">
+
 
     <h1 id="inventory-title"><%= @producer.inventory.display_name %></h1>
 
@@ -169,13 +169,22 @@ margin-top: -5px">
     <%= @producer.inventory.description %>
 
 
-<% if @item.count != 0 %>
 
- <%= form_for @producer.inventory, :url => url_for(:controller => 'inventories', :action => @put_action), :html => {:id => 'category-dropdown'}, :remote => @remote do |f| %>
-    <%= collection_select(:inventory, :category, @producer.inventory.categories, :name, :name, {:prompt => "All", :selected => @category.nil? ? "" : @category}, {:onchange => '$("#category-dropdown").submit();'}) %>
+
+<h3 id="current-inventory-title">Current Inventory
+
+
+
+<% if signed_in? && (current_user.admin || current_user.coordinator || current_user == @producer) %>
+<%= link_to 'Add Item', producer_new_inventory_items_path(params[:id]), :id=>"inventory-add-button", :class=>"btn btn-info hidden-phone" %>
 <% end %>
 
-<h3 id="current-inventory-title">Current Inventory</h3>
+
+</h3>
+
+
+<div class="margin-two-five">
+
 
  <% if @remote %>
  <div class="inventory-pagination">
@@ -188,13 +197,15 @@ margin-top: -5px">
 <% end %>
 
 
-<!-- If the current user is an admin, coordinator, or the producer whose page this is -->
-<% if signed_in? && (current_user.admin || current_user.coordinator || current_user == @producer) %>
-<%= link_to 'Add Item', producer_new_inventory_items_path(params[:id]), :class=>"btn btn-info", 
-        :style => "margin-top: 8px; margin-right: 2.5%; margin-left: 2.5%; float: right;" %>
+
+
+<% if @item.count != 0 %>
+ <%= form_for @producer.inventory, :url => url_for(:controller => 'inventories', :action => @put_action), :html => {:id => 'category-dropdown'}, :remote => @remote do |f| %>
+    <%= collection_select(:inventory, :category, @producer.inventory.categories, :name, :name, {:prompt => "All", :selected => @category.nil? ? "" : @category}, {:onchange => '$("#category-dropdown").submit();'}) %>
 <% end %>
 
 
+<br>
 
 <table class="producer-table table-hover" align="center">
     <tr>

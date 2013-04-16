@@ -37,8 +37,9 @@ def search_sortable(column, search, title = nil)
   link_to title, {:sort => column, :direction => direction, :search => search}, {:class => css_class}
 end
 
-def cart_size
-  current_user.cart.cart_items
+def cart_size(id)
+  cart = Cart.find(id).cart_items.reload
+  cart.size
 end
 
 end

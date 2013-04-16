@@ -52,12 +52,9 @@ $('.add-to-cart').click(function() {
 });
 
 
-setTimeout(
-  function() {
-     $('#cart_link').html('Cart(<%= cart_size %>)');
-     $('#cart_link').load();
- },
- 100)
+
+
+
 
 // note: concern about the delay here too
 // load the modal, but delay it slightly for time to add to cart
@@ -76,7 +73,13 @@ setTimeout(
 $('[data-toggle="tooltip"]').tooltip();
 
 
-
+$('.close').click(function() {
+  setTimeout(
+  function() {
+     alert('<%= cart_size(current_user.cart.id).to_s %>');
+ },
+ 1000)
+});
 
 // CATEGORY LIST //
 // make an array to store the list of categories for a producer

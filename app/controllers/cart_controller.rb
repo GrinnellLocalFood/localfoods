@@ -11,7 +11,7 @@ class CartController < ApplicationController
 	end
 
 	def cart_size
-		@cart_size = current_cart.cart_items.size
+		@cart_size = current_user.cart.cart_items.size
 	end
 
 end

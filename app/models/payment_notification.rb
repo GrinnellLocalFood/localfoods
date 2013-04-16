@@ -7,7 +7,7 @@ class PaymentNotification < ActiveRecord::Base
 
 
 	def create_purchases
-		cart = Cart.find(cart_id)
+
 		if(status == "Completed")
 			Purchase.create_purchases(cart, true, transaction_id)
 		end		

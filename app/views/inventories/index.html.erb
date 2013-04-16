@@ -35,18 +35,12 @@ $('.producer_link a').click(function() {
 				</li>
 				
 				<% end %>
-
-				<li class="nav-header category_list">
-					Categories
-				</li>
 			</ul>
 
 
 			<div id="inventory-panel" class="tab-content custom-block">
 				<div id="producer_info">
-					<div align="center">
-						<%= render :partial => 'categories/show', :locals => {:@items => @items} %>
-					</div>
+					<%= render :partial => 'categories/show', :locals => {:@items => @items} %>
 				</div>
 			</div>
 

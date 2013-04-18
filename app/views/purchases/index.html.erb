@@ -39,8 +39,8 @@ $('.paid').each(function() {
 
         <h2>Ordered Items</h2>
 
-                 
-          
+
+
         <% for order in @orders %>
         <% purchases = Purchase.where("user_id = ? AND order_set = ?", current_user.id, order) %>
         <% purchase_time = purchases.first.created_at.in_time_zone("Central Time (US & Canada)") %>
@@ -51,41 +51,53 @@ $('.paid').each(function() {
             <th>Details</th>
           </tr>       
           <tr>
-          <td><%= order == "unpaid" ? order.titleize : "Order Id:" + order %>
-            <p/>
-          Purchased <%= time_ago_in_words(purchase_time)  %> ago</td>
-          
-          <td>          
-          <table class="table table-bordered">
-          <tr>
-            <th></th>
-            <th>Item</th>
-            <th>Quantity Ordered</th>
-            <th>Price</th>
-          </tr>
-          <% for purchase in purchases %>
-           <td> <% if !(purchase.item.item_photo_file_name.nil?) %>
-            <media>
-              <%= image_tag(purchase.item.item_photo.url(:thumb)) %>
-            </media>
-            <%end%></td>
-          <td><%= link_to purchase.item.name, inventory_item_path(purchase.item.inventory.id, purchase.item.id)%></td>
-          <td><%= purchase.quantity %></td>
-          <td><%= number_to_currency(purchase.quantity*purchase.item.price) %></td>
-          <!-- <td class="paid"><%= purchase.paid ? "Yes" : "No" %></td> -->
-          <!-- <td><%= purchase.created_at.in_time_zone("Central Time (US & Canada)")  %></td> -->          
-        </td>
+            <td>
+              <strong>
+                <%= order == "unpaid" ? "Pay at pickup" : "Order Id:" + order %>
+              </strong>
+              <br>
+              Purchased <%= time_ago_in_words(purchase_time) %> ago
 
-        </tr>
-      <% end %>
-      </table>
-    </table>
-    <% end %>
-    <% if current_user.pending_payment > 0 %>
-    <h4 id="cart_total" style="text-align: right;">Total Pending: <%= number_to_currency current_user.pending_payment %></h4>
-    <% end %>
+            </td>
+
+            <td>          
+              <table class="table table-bordered">
+                <tr>
+                  <th></th>
+                  <th>Item</th>
+                  <th>Quantity Ordered</th>
+                  <th>Price</th>
+                </tr>
+                <% for purchase in purchases %>
+                <td> <% if !(purchase.item.item_photo_file_name.nil?) %>
+                  <media>
+                    <%= image_tag(purchase.item.item_photo.url(:thumb)) %>
+                  </media>
+                  <%end%></td>
+                  <td>
+                    <%= link_to purchase.item.name, inventory_item_path(purchase.item.inventory.id, purchase.item.id)%>
+                    <br>
+                    <em>
+                      <%= link_to purchase.item.inventory.display_name, inventory_path(purchase.item.inventory), :style=>"color:gray;"%>
+                    </em>
+                  </td>
+                  <td><%= purchase.quantity %></td>
+                  <td><%= number_to_currency(purchase.quantity*purchase.item.price) %></td>    
+                </td>
+
+              </tr>
+              <% end %>
+            </table>
+          </td>
+        </table>
+        <% end %>
+
+
+        <% if current_user.pending_payment > 0 %>
+        <h4 id="cart_total" style="text-align: right;">Total Pending: <%= number_to_currency current_user.pending_payment %></h4>
+        <% end %>
+      </div>
+
+    </div>
   </div>
-
-</div>
-</div>
 </div>

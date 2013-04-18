@@ -23,13 +23,13 @@ $('.paid').each(function() {
 
         <table class="table table-bordered table-striped" >
           <tr>
-            <th>Buyer</th>
-            <th>Producer</th>
-            <th>Product</th>
+            <th class="hidden-phone sort"><%= order_sortable "buyer"%></th>
+            <th class="hidden-phone sort"><%= order_sortable "producer"%></th>
+            <th class="hidden-phone sort"><%= order_sortable "product"%></th>
             <th>Quantity</th>
             <th>Unit Price</th>
             <th>Full Price</th>
-            <th>Paid For</th>
+            <th class="hidden-phone sort"><%= order_sortable "paid_for", "Paid For" %></th>
           </tr>
           <% for purchase in @purchases %>
           <td><%= link_to purchase.user.name, user_path(purchase.user.id)  %></td>

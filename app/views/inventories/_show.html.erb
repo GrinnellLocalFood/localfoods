@@ -24,9 +24,9 @@ $('.show_link').click(function() {
     // refresh the modal so you can go to multiple items without refreshing the whole page
     setTimeout(
       function() {
-         $('#item_show').load(url_string);
-     },
-     100)
+       $('#item_show').load(url_string);
+   },
+   100)
 
  }); // end click
 
@@ -41,14 +41,14 @@ $('.add-to-cart').attr('data-remote', true);
 $('.add-to-cart').click(function() {
 
   // doesn't work but whatever I guess
-    
+  
 
   $('#cart_modal').modal({
     remote: '<%= show_in_modal_cart_path(current_user.cart.id) %>'
-  
+    
 
-  
-  
+    
+    
 });
 
 
@@ -60,9 +60,9 @@ $('.add-to-cart').click(function() {
 // load the modal, but delay it slightly for time to add to cart
 setTimeout(
   function() {
-     $('#cart').load('<%= show_in_modal_cart_path(current_user.cart.id) %>');
- },
- 100)
+   $('#cart').load('<%= show_in_modal_cart_path(current_user.cart.id) %>');
+},
+100)
 
  }); // end click
 // END ADD TO CART BEHAVIOR
@@ -75,10 +75,10 @@ $('[data-toggle="tooltip"]').tooltip();
 <% if signed_in? %>
 $('.close').click(function() {
   setTimeout(
-  function() {
-     
- },
- 1000)
+      function() {
+       
+      },
+      1000)
 });
 <% end %>
 
@@ -109,7 +109,7 @@ margin-top: -5px">
 <%= link_to edit_user_path(params[:id]), :class=>"link", :'data-toggle'=>"tooltip", :title=>"Edit Account" do %>
 
 <div class="visible-desktop">
-<i class="icon-wrench"></i>
+    <i class="icon-wrench"></i>
 </div>
 <% end %>
 </div>
@@ -118,35 +118,35 @@ margin-top: -5px">
 <% if !(@producer.inventory.inventory_photos.empty?) %>
 <div id="inventory-carousel" class="carousel slide" data-interval="4000">
 
-        <% if @producer.inventory.inventory_photos.length > 1 %>
+    <% if @producer.inventory.inventory_photos.length > 1 %>
 
-        <ol class="carousel-indicators hidden-phone">
-            <% @producer.inventory.inventory_photos.each_with_index do |inventory_photo, index| %>
+    <ol class="carousel-indicators hidden-phone">
+        <% @producer.inventory.inventory_photos.each_with_index do |inventory_photo, index| %>
 
-            <% if index == 0 %>
-            <li data-target="#inventory-carousel" data-slide-to="<%= index %>" class="active"></li>
-            <% else %>
-            <li data-target="#inventory-carousel" data-slide-to="<%= index %>"></li>
-              <% end %>
-            <% end %>
-        </ol>
+        <% if index == 0 %>
+        <li data-target="#inventory-carousel" data-slide-to="<%= index %>" class="active"></li>
+        <% else %>
+        <li data-target="#inventory-carousel" data-slide-to="<%= index %>"></li>
         <% end %>
+        <% end %>
+    </ol>
+    <% end %>
 
-        <!-- Carousel items -->
-        <div class="carousel-inner">
-            <% @producer.inventory.inventory_photos.each_with_index do |inventory_photo, index| %>
-            <% if index == 0 %>    
-              <div class="active item">
-                <%= image_tag inventory_photo.photo.url(:gallery_size) %>
-              </div>
-            <% else %>
-            <div class="item">
-                <%= image_tag inventory_photo.photo.url(:gallery_size) %>
-            </div>
-            <% end %>  
-            <% end %>  
+    <!-- Carousel items -->
+    <div class="carousel-inner">
+        <% @producer.inventory.inventory_photos.each_with_index do |inventory_photo, index| %>
+        <% if index == 0 %>    
+        <div class="active item">
+            <%= image_tag inventory_photo.photo.url(:gallery_size) %>
         </div>
- 
+        <% else %>
+        <div class="item">
+            <%= image_tag inventory_photo.photo.url(:gallery_size) %>
+        </div>
+        <% end %>  
+        <% end %>  
+    </div>
+    
     <!-- Carousel nav -->
 
     <% if (@producer.inventory.inventory_photos.length > 1) %>
@@ -161,13 +161,13 @@ margin-top: -5px">
 
 
 
-    <h1 id="inventory-title"><%= @producer.inventory.display_name %></h1>
+<h1 id="inventory-title"><%= @producer.inventory.display_name %></h1>
 
-    <% if @producer.inventory.url != nil %>
-    <%= link_to @producer.inventory.url, url_with_protocol(@producer.inventory.url) %>
-    <% end %>
+<% if @producer.inventory.url != nil %>
+<%= link_to @producer.inventory.url, url_with_protocol(@producer.inventory.url) %>
+<% end %>
 
-    <%= simple_format(@producer.inventory.description) %>
+<%= simple_format(@producer.inventory.description) %>
 
 
 
@@ -176,9 +176,9 @@ margin-top: -5px">
 
 
 
-<% if signed_in? && (current_user.admin || current_user.coordinator || current_user == @producer) %>
-<%= link_to 'Add Item', producer_new_inventory_items_path(params[:id]), :id=>"inventory-add-button", :class=>"btn btn-info hidden-phone" %>
-<% end %>
+    <% if signed_in? && (current_user.admin || current_user.coordinator || current_user == @producer) %>
+    <%= link_to 'Add Item', producer_new_inventory_items_path(params[:id]), :id=>"inventory-add-button", :class=>"btn btn-info hidden-phone" %>
+    <% end %>
 
 
 </h3>
@@ -187,8 +187,8 @@ margin-top: -5px">
 <div class="margin-two-five">
 
 
- <% if @remote %>
- <div class="inventory-pagination">
+   <% if @remote %>
+   <div class="inventory-pagination">
     <%= paginate @item, :remote => true %>
 </div>
 <% else %>
@@ -201,8 +201,8 @@ margin-top: -5px">
 
 
 <% if @item.count != 0 %>
- <%= form_for @producer.inventory, :url => url_for(:controller => 'inventories', :action => @put_action), :html => {:id => 'category-dropdown'}, :remote => @remote do |f| %>
-    <%= collection_select(:inventory, :category, @producer.inventory.categories, :name, :name, {:prompt => "All", :selected => @category.nil? ? "" : @category}, {:onchange => '$("#category-dropdown").submit();'}) %>
+<%= form_for @producer.inventory, :url => url_for(:controller => 'inventories', :action => @put_action), :html => {:id => 'category-dropdown'}, :remote => @remote do |f| %>
+<%= collection_select(:inventory, :category, @producer.inventory.categories, :name, :name, {:prompt => "All", :selected => @category.nil? ? "" : @category}, {:onchange => '$("#category-dropdown").submit();'}) %>
 <% end %>
 
 
@@ -224,7 +224,7 @@ margin-top: -5px">
         <th></th>
         <th class="hidden-phone"></th>
         <% end %>
-     </tr>
+    </tr>
 
     <% @item.each do |item| %>
     <tr>
@@ -241,53 +241,49 @@ margin-top: -5px">
         <td class="item_row" data-id="<%= item.id %>"><%= item.description.size < 50 ? item.description : item.description[0..50] + "..." %></td>
         <td class="item_row hidden-phone" data-id="<%= item.id %>">
             <%= number_to_currency(item.price) %><b>/<%= item.units.singularize %></b></td>
-        <td class="item_row hidden-phone" data-id="<%= item.id %>"><%= item.minorder %></td>
-        <td class="item_row category_label hidden-phone" data-id="<%= item.id %>"><%= Category.find(item.category_id).name %></td>
-        <td class="item_row hidden-phone" data-id="<%= item.id %>"><%= item.is_available? %></td>
+            <td class="item_row hidden-phone" data-id="<%= item.id %>"><%= item.minorder %></td>
+            <td class="item_row category_label hidden-phone" data-id="<%= item.id %>"><%= Category.find(item.category_id).name %></td>
+            <td class="item_row hidden-phone" data-id="<%= item.id %>"><%= item.is_available? %></td>
 
-        <td class="classic_show"><%= link_to "Show", inventory_item_path({ :inventory_id => params[:id], :id => item.id })%></td>
+            <td class="classic_show"><%= link_to "Show", inventory_item_path({ :inventory_id => params[:id], :id => item.id })%></td>
 
-        <!-- add to cart -->
-        <% if current_user && (@producer != current_user) && (item.is_available? == 'Yes') %>
+            <!-- add to cart -->
+            <% if current_user && (@producer != current_user) && (item.is_available? == 'Yes') %>
 
-        <td class="hidden-phone">
-            <%= link_to "Add to Cart", cart_items_path(:item_id => item), :remote => false, :method => :post, 
-        :class => "btn add-to-cart" %>
-        <% end %>
-        <!-- end add to cart -->
+            <td class="hidden-phone">
+                <%= link_to "Add to Cart", cart_items_path(:item_id => item), :remote => false, :method => :post, 
+                :class => "btn add-to-cart" %>
+                <% end %>
+                <!-- end add to cart -->
 
 
-        <!-- inventory controls -->
-        <% if current_user && (current_user.admin || current_user.coordinator || current_user == @producer) %>
-        <td class="hidden-phone">
-            <%= link_to edit_inventory_item_path({ :inventory_id => params[:id], :id => item.id }), :'data-toggle'=>"tooltip", :title=>"Edit Item" do %>
-            <i class="icon-wrench"></i>
-            <% end %>
-        
-            <%= link_to inventory_item_path({ :inventory_id => params[:id], :id => item.id }), :confirm => 'Are you sure?', :method => :delete, :'data-toggle'=>"tooltip", :title=>"Delete Item" do %>
-            <i class="icon-trash"></i>
-            <% end %>
-        </td>
+                <!-- inventory controls -->
+                <% if current_user && (current_user.admin || current_user.coordinator || current_user == @producer) %>
+                <td class="hidden-phone">
+                    <%= link_to edit_inventory_item_path({ :inventory_id => params[:id], :id => item.id }), :'data-toggle'=>"tooltip", :title=>"Edit Item" do %>
+                    <i class="icon-wrench"></i>
+                    <% end %>
+                    
+                    <%= link_to inventory_item_path({ :inventory_id => params[:id], :id => item.id }), :confirm => 'Are you sure?', :method => :delete, :'data-toggle'=>"tooltip", :title=>"Delete Item" do %>
+                    <i class="icon-trash"></i>
+                    <% end %>
+                </td>
 
-        <% end %>
-        <!-- end inventory controls -->
+                <% end %>
+                <!-- end inventory controls -->
 
-    </tr>
-    <% end %> 
-</table>
+            </tr>
+            <% end %> 
+        </table>
 
-<!-- fix this -->
-<% else %>
-<h4 id="empty-inventory-title">
-    Currently Nothing For Sale
-</h4>
-<% end %> 
-<br>
+
+        <% end %> 
 
 
 
-<!-- closing div's from the main show erb file -->
-</div>
+
+        <!-- closing div's from the main show erb file -->
+    </div>
 </div>
 </div>
 

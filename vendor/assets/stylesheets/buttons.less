@@ -228,9 +228,18 @@ input[type="button"] {
     background-color: @grayDarker;
     color: white;
   }
-
-
 }
+
+.btn-light-gray {
+  background-color: @grayLightest;
+
+  &:hover,
+  &:focus {
+    background-color: @grayLighter;
+  }
+}
+
+
 // Inverse appears as dark gray
 .btn-inverse {
   .buttonBackground(@btnInverseBackground, @btnInverseBackgroundHighlight);

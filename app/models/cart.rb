@@ -61,4 +61,10 @@ end
       cart_item.destroy
     end
   end
+
+def self.clear_all
+  Cart.all.each do |cart|
+    cart.clear_all_items
+  end
+end
 end

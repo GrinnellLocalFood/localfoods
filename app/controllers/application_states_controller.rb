@@ -17,6 +17,9 @@ def update
         UserMailer.order_status_change(user, params[:application_state][:email_content], @application_state.orders_open).deliver
       end
     end
+    if(params[:application_state][:clear_carts] == "true" && params[:application_state][:open_orders] == "false")
+      Cart.clear_all
+    end
     if(@application_state.orders_open)
       format.html { redirect_to(current_user, :notice => 'Order status changed to open') }
     else

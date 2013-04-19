@@ -1,6 +1,18 @@
 <script type="text/javascript">
 
 $(document).ready(function() {
+
+
+$('#application_state_orders_open_true').click(function() {
+    $('#clear_cart').hide()
+
+}); // end click
+
+$('#application_state_orders_open_false').click(function() {
+  
+   $('#clear_cart').show()
+}); // end click
+
   // hide these sections on page load
   $('#application_state_email_content').attr('disabled', true);
   $('#email_section').hide();
@@ -18,6 +30,7 @@ $('#application_state_email_users_false').click(function() {
   $('#email_section').slideUp();
 
 }); // end click
+
 
       }); // end ready
 
@@ -59,7 +72,18 @@ $('#application_state_email_users_false').click(function() {
         <%= f.radio_button :orders_open, false, :class=>"radio-control"%> 
       </div>
 
-      <div>
+      <div id="clear_cart" style="margin-bottom: 20px">
+        Clear all carts?
+        &nbsp;&nbsp;
+        Yes
+        <%= f.radio_button :clear_carts, true, :class=>"radio-control" %> 
+        &nbsp;&nbsp;
+        No
+        <%= f.radio_button :clear_carts, false, :class=>"radio-control", :checked => true %> 
+      </div>
+
+
+      <div style="margin-bottom: 20px;">
         Email users?
         &nbsp;&nbsp;
         Yes
@@ -69,8 +93,8 @@ $('#application_state_email_users_false').click(function() {
         <%= f.radio_button :email_users, false, :class=>"radio-control", :checked => true %> 
       </div>
 
-
-      <div id="email_section" style="width: 230px; margin-top: 20px; text-align: left;">
+     
+      <div id="email_section" style="width: 230px; margin-top: 20px; text-align: left; ">
         <p>
          Hi [User],
        </p>
@@ -85,7 +109,6 @@ $('#application_state_email_users_false').click(function() {
       </p>
 
     </div>
-
 
     <br>
     <%= f.submit "Change State", :class=>"btn btn-primary"%>

@@ -9,6 +9,11 @@ class ApplicationState < ActiveRecord::Base
 		ApplicationState.first.orders_open
 	end
 
+	def self.get_state
+		create_row_if_absent
+		ApplicationState.first
+	end
+
 	#returns yes/no
 	def self.orders_open
 		if self.orders_open

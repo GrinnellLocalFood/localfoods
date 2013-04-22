@@ -25,7 +25,9 @@ class CartItem < ActiveRecord::Base
   end
 
   def quantity_less_than_maxorder
-  	errors.add(:quantity, "entered is greater than the maximum order which is #{item.maxorder}") unless item.maxorder >= quantity
+    if !item.maxorder.nil?
+  	 errors.add(:quantity, "entered is greater than the maximum order which is #{item.maxorder}") unless item.maxorder >= quantity
+    end
   end
 
   def quantity_is_available

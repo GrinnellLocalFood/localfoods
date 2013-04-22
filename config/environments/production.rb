@@ -16,7 +16,7 @@ Localfoods::Application.configure do
 
   # Use YUI instead of default LESS compressor
   config.assets.css_compressor = :yui
-  # config.assets.js_compressor = :yui
+  config.assets.js_compressor = :yui
 
   # Compress LESS
   config.less.compress = true
@@ -78,15 +78,5 @@ Localfoods::Application.configure do
   # default path for action mailer
   config.action_mailer.default_url_options = {:host => "localfood.herokuapp.com"}
 
-ActionMailer::Base.smtp_settings = {
-  :port           => ENV['MAILGUN_SMTP_PORT'], 
-  :address        => ENV['MAILGUN_SMTP_SERVER'],
-  :user_name      => ENV['MAILGUN_SMTP_LOGIN'],
-  :password       => ENV['MAILGUN_SMTP_PASSWORD'],
-  :domain         => 'localfood.heroku.com',
-  :authentication => :plain,
-}
-
-ActionMailer::Base.delivery_method = :smtp
 
 end

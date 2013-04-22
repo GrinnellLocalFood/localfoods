@@ -1,14 +1,14 @@
 class ApplicationStatesController < ApplicationController
 	def editorderstate
    @title = "Open or Close Orders"
-   @application_state = ApplicationState.first
+   @application_state = ApplicationState.get_state
    if(!current_user.admin)
     redirect_to current_user
   end
 end
 
 def update
-  @application_state = ApplicationState.first
+  @application_state = ApplicationState.get_state
 
   respond_to do |format|
    if @application_state.update_attributes(params[:application_state])

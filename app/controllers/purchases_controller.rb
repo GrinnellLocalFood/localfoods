@@ -22,7 +22,7 @@ class PurchasesController < ApplicationController
 
 	def all_orders
 		@title = "All Orders"
-		@purchases = Purchase.all
+		@purchases = Purchase.all(:include => [:user, :item => :inventory])
 		@purchases = sorted_purchases
 	end
 

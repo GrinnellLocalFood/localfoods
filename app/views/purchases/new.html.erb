@@ -10,7 +10,9 @@
 				</p>
 				<br>
 
-
+			
+				 <%= render :partial => 'cart_change' unless @changed_items.empty? %>
+			
 
 				<div id="purchase-buttons">
 					<%= form_for(@purchase, :url => url_for({:controller => "purchases", :action => "create"})) do |f| %>

@@ -2,7 +2,13 @@ class PurchasesController < ApplicationController
 	helper_method :sort_column, :sort_direction
 	
 	def new
-		@purchase = Purchase.new
+		# The following validates whether itams still exist
+		@changed_items = current_user.cart.invalid_items
+		if(current_user.cart.is_empty?)
+			render "error"			
+		else
+		 @purchase = Purchase.new
+		end	
 	end
 
 	def create
@@ -21,9 +27,27 @@ class PurchasesController < ApplicationController
 	end
 
 	def all_orders
-		@title = "All Orders"
-		@purchases = Purchase.all(:include => [:user, :item => :inventory])
-		@purchases = sorted_purchases
+		@title = "All Orders"		
+		if params[:order_view].nil?
+			@purchases = Purchase.all(:include => [:user, :item => :inventory])
+			@purchases = sorted_purchases
+			render "all_orders"
+		elsif params[:order_view] == "Buyer"
+			@title = "All Orders > By Buyer"
+			@purchases_by_user = Hash.new
+			Purchase.uniq.pluck(:user_id).map {|id| @purchases_by_user[User.find(id)] = 
+				Purchase.where("user_id = ?", id).order("paid asc")}
+			@purchases_by_user.keys.sort
+			render "buyer"
+		elsif params[:order_view] == "Producer"
+			@title = "All Orders > By Producer"
+			@purchases_by_producer = Hash.new
+			Purchase.uniq.pluck(:inventory_id).map {|id| @purchases_by_producer[Inventory.find(id)] = 
+				Purchase.where("inventory_id = ?", id).order("paid asc")}
+			@purchases_by_producer.keys.sort
+			render "producer"
+		end
+		
 	end
 
 	def process_order

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130409220323) do
+ActiveRecord::Schema.define(:version => 20130424005500) do
 
   create_table "application_states", :force => true do |t|
     t.boolean  "orders_open", :default => false
@@ -100,10 +100,11 @@ ActiveRecord::Schema.define(:version => 20130409220323) do
     t.integer  "item_id"
     t.integer  "quantity"
     t.decimal  "unit_price"
-    t.datetime "created_at",                    :null => false
-    t.datetime "updated_at",                    :null => false
-    t.boolean  "paid",       :default => false
+    t.datetime "created_at",                      :null => false
+    t.datetime "updated_at",                      :null => false
+    t.boolean  "paid",         :default => false
     t.string   "order_set"
+    t.integer  "inventory_id"
   end
 
   create_table "users", :force => true do |t|

@@ -19,7 +19,12 @@ $('.paid').each(function() {
     <div class="span12 custom-block">
       <div id="all-orders-table" class="margin-five">
 
-        <h2>All Orders</h2>
+        <h2><%= @title %></h2>
+
+         <ul>
+          <p><%= view_link "View By Buyer", "Buyer" %></p>
+          <p><%= view_link "View By Producer", "Producer" %></p>
+        </ul>
 
         <table class="table table-bordered table-striped" >
           <tr>

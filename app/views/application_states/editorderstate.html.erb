@@ -2,6 +2,9 @@
 
 $(document).ready(function() {
 
+if ($('#application_state_orders_open_true:checked').val() == 'true') { 
+  $('#clear_cart').hide()        
+}
 
 $('#application_state_orders_open_true').click(function() {
     $('#clear_cart').hide()

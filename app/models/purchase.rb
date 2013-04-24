@@ -1,12 +1,20 @@
 class Purchase < ActiveRecord::Base
-  attr_accessible :item_id, :quantity, :unit_price, :user_id, :paid, :order_set, :created_at
+  attr_accessible :item_id, :quantity, :inventory_id, :unit_price, :user_id, :paid, :order_set, :created_at
 
   belongs_to :item
   belongs_to :user
+  belongs_to :inventory
+
+  after_create :set_inventory_id
 
   before_save :increment_total_ordered
 
   before_destroy :decrement_total_ordered
+
+  def set_inventory_id
+    self.inventory_id = Item.find(self.item_id).inventory_id
+    self.save
+  end
 
   def increment_total_ordered
     item.totalordered += (quantity - self.changed_attributes['quantity'].to_i)

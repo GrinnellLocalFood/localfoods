@@ -65,11 +65,23 @@ class User < ActiveRecord::Base
   end
 
   def pending_payment
-    pending = 0.0
-    Purchase.where("user_id = ? AND paid = ?", id, false).each do |purchase|
-      pending += purchase.full_price
+   return total_payment - processed_payment
+  end
+
+  def total_payment
+    total = 0.0
+    Purchase.where("user_id = ? ", id).each do |purchase|
+      total += purchase.full_price
     end
-    return pending
+    return total
+  end
+
+  def processed_payment
+    paid = 0.0
+    Purchase.where("user_id = ? AND paid = ?", id, true).each do |purchase|
+      paid += purchase.full_price
+    end
+    return paid
   end
 
   private

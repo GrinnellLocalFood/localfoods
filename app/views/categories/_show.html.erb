@@ -12,6 +12,39 @@ $('.classic_show').hide();
 // make the item rows clickable and have a pointer hover-over
 $('.item_row').css('cursor', 'pointer').addClass('show_link');
 
+<% if signed_in? %>
+
+// ADD TO CART BEHAVIOR
+// replace default link behavior
+$('.add-to-cart').attr('data-remote', true);
+
+
+$('.add-to-cart').click(function() {
+
+  // doesn't work but whatever I guess
+    
+
+  $('#cart_modal').modal({
+    remote: '<%= show_in_modal_cart_path(current_user.cart.id) %>'
+  
+
+  
+  
+});
+
+// note: concern about the delay here too
+// load the modal, but delay it slightly for time to add to cart
+setTimeout(
+  function() {
+     $('#cart').load('<%= show_in_modal_cart_path(current_user.cart.id) %>');
+ },
+ 100)
+
+ }); // end click
+// END ADD TO CART BEHAVIOR
+
+<% end %>
+
 
 // SHOW ITEM BEHAVIOR
 
@@ -108,6 +141,12 @@ $('.desc').append('<i class="icon-arrow-down sort-arrow"></i>');
         <td class="item_row hidden-phone" data-id="<%= item.id %>"><%= item.is_available? %></td>
         <td class="classic_show"><%= link_to "Show", 
             inventory_item_path({ :inventory_id => item.inventory_id, :id => item.id }) %></td>
+
+        <% if current_user && item.cartable? %>
+        <td class="hidden-phone">
+            <%= link_to "Add to Cart", cart_items_path(:item_id => item), :remote => false, :method => :post, 
+        :class => "btn add-to-cart" %>
+        <% end %>
 
     </tr>
 

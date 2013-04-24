@@ -3,6 +3,8 @@
 <script type="text/javascript">
 $(document).ready(function() {
 
+
+
 // hide the non-javascript show link
 $('.classic_show, .classic_th').hide();
 
@@ -85,6 +87,13 @@ $('#search-header').attr('value', '<%= params[:search] %>');
                     <td class="classic_show">
                         <%= link_to "Show", inventory_item_path({ :inventory_id => item.inventory.id, :id => item.id }) %>
                     </td>
+                    <!-- add to cart -->
+                    <% if current_user && (@producer != current_user) && item.cartable? %>
+
+                    <td class="hidden-phone">
+                    <%= link_to "Add to Cart", cart_items_path(:item_id => item), :remote => false, :method => :post,:class => "btn add-to-cart" %>
+                    <% end %>
+                    <!-- end add to cart -->
 
 
                     <% end %>

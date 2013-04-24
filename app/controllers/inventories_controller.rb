@@ -4,6 +4,24 @@ skip_before_filter :require_login, :only => [:show, :index, :show_in_index, :sho
 
   #PUT
   def show
+
+      if(params[:editform] == "true")
+        @inventory = Inventory.find(params[:id])
+
+    respond_to do |format|
+      if @inventory.update_attributes(params[:inventory])
+          format.html { redirect_to(inventory_path(params[:id]), :notice => 'Items were successfully updated.') }
+          format.xml  { head :ok }
+      else
+        if(params[:add])
+          format.html { render :action => "add", :reload => true }
+        else
+          format.html { render :action => "edit" }
+        end
+        format.xml  { render :xml => @inventory.errors, :status => :unprocessable_entity }
+      end
+    end
+    else
     #need to add permissions checking
       @title = "View Inventory"
       @remote = false
@@ -24,8 +42,27 @@ skip_before_filter :require_login, :only => [:show, :index, :show_in_index, :sho
         format.xml  { render :xml => @item }
     end
   end
+  end
 
   def show_in_index
+      if(params[:editform] == "true")
+        @inventory = Inventory.find(params[:id])
+
+    respond_to do |format|
+      if @inventory.update_attributes(params[:inventory])
+          format.html { redirect_to(inventory_path(params[:id]), :notice => 'Items were successfully updated.') }
+          format.xml  { head :ok }
+      else
+        if(params[:add])
+          format.html { render :action => "add", :reload => true }
+        else
+          format.html { render :action => "edit" }
+        end
+        format.xml  { render :xml => @inventory.errors, :status => :unprocessable_entity }
+      end
+    end
+      else
+
       @title = "Our Producers"
       @remote = true
       @producer = User.find(params[:id])
@@ -43,6 +80,7 @@ skip_before_filter :require_login, :only => [:show, :index, :show_in_index, :sho
       respond_to do |format|
            format.js { render :locals => { :item => @item} }
       end
+    end
   end
 
    def index

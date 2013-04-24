@@ -34,4 +34,12 @@ class CartItem < ActiveRecord::Base
     errors.add(:quantity, "is not available. Remaining available quantity is #{item.num_remaining}") unless item.num_remaining >= quantity
   end
 
+  def still_available?
+    item.num_remaining <= quantity && item.minorder >= quantity && item.maxorder <= quantity
+  end
+
+  def find_quantity_available
+    item.num_remaining < item.maxorder ? item.num_remaining : item.maxorder
+  end
+
 end

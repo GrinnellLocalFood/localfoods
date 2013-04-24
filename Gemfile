@@ -10,6 +10,8 @@ gem 'sunspot_with_kaminari'
 gem 'kaminari'
 gem 'foreman'
 gem 'tilt'
+gem 'prawn'
+gem 'prawnto'
 
 gem 'jquery-rails'
 

@@ -26,7 +26,7 @@
 				<div align="right">
 					<%= link_to("Continue Shopping", inventories_path, :class=>"btn") %>
 
-					<% if signed_in? && @item.cartable %> 
+					<% if signed_in? && @item.cartable? %> 
 					<%= link_to "Add to Cart", cart_items_path(:item_id => @item), :remote => false, :method => :post, 
 					:class => "add_to_cart btn btn-primary", :style=>"float:right; margin-left: 8px;" %>
 					<% end %>

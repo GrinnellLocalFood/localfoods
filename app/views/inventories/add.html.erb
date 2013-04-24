@@ -2,7 +2,7 @@
   <div class="row">
     <div class="span12" style="width: 940px;">
 
-      <%= form_for(@inventory, :url => url_for(:controller => 'inventories', :action => 'update', :add => true), :html=>{:class=>'form-horizontal', :multipart => true}) do |f| %>
+      <%= form_for(@inventory, :url => url_for(:controller => 'inventories', :action => 'update', :add => true, :editform => true), :html=>{:class=>'form-horizontal', :multipart => true}) do |f| %>
 
       <header class="navbar navbar-fixed-top" style="z-index: 1000;">
         <div class="navbar-inner-table big-nav">

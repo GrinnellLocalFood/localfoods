@@ -50,7 +50,7 @@ class Item < ActiveRecord::Base
 		end
 	end
 
-	def cartable
+	def cartable?
 		num_remaining > minorder && ApplicationState.orders_open? && self.available
 	end
 

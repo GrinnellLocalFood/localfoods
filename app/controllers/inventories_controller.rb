@@ -5,22 +5,8 @@ skip_before_filter :require_login, :only => [:show, :index, :show_in_index, :sho
   #PUT
   def show
 
-      if(params[:editform] == "true")
-        @inventory = Inventory.find(params[:id])
-
-    respond_to do |format|
-      if @inventory.update_attributes(params[:inventory])
-          format.html { redirect_to(inventory_path(params[:id]), :notice => 'Items were successfully updated.') }
-          format.xml  { head :ok }
-      else
-        if(params[:add])
-          format.html { render :action => "add", :reload => true }
-        else
-          format.html { render :action => "edit" }
-        end
-        format.xml  { render :xml => @inventory.errors, :status => :unprocessable_entity }
-      end
-    end
+    if(params[:editform] == "true")
+        update
     else
     #need to add permissions checking
       @title = "View Inventory"
@@ -46,21 +32,7 @@ skip_before_filter :require_login, :only => [:show, :index, :show_in_index, :sho
 
   def show_in_index
       if(params[:editform] == "true")
-        @inventory = Inventory.find(params[:id])
-
-    respond_to do |format|
-      if @inventory.update_attributes(params[:inventory])
-          format.html { redirect_to(inventory_path(params[:id]), :notice => 'Items were successfully updated.') }
-          format.xml  { head :ok }
-      else
-        if(params[:add])
-          format.html { render :action => "add", :reload => true }
-        else
-          format.html { render :action => "edit" }
-        end
-        format.xml  { render :xml => @inventory.errors, :status => :unprocessable_entity }
-      end
-    end
+        update
       else
 
       @title = "Our Producers"

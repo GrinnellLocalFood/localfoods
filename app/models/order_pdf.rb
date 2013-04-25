@@ -27,7 +27,7 @@ class OrderPdf < Prawn::Document
   def purchase_rows
     [["Buyer", "Producer", "Product", "Qty", "Unit Price", "Full Price", "Paid"]] +
     @purchases.map do |purchase|
-      [purchase.user.name, purchase.item.inventory.display_name, purchase.item.name, purchase.quantity, price(purchase.unit_price), price(purchase.full_price)]
+      [purchase.user.name, purchase.item.inventory.display_name, purchase.item.name, purchase.quantity, price(purchase.unit_price), price(purchase.full_price), purchase.paid ? "Yes" : "No" ]
     end
   end
   

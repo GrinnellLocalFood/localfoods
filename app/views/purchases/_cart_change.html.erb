@@ -1,0 +1,10 @@
+<div class=" margin-ten" align="center">
+	<div class="alert alert-success fade in" style="margin-top: -20px; margin-bottom: 25px;">
+    	<a class="close" data-dismiss="alert" href="#">&times;</a>
+    		<p>The following items in your cart have changed:</p>
+    		<% @changed_items.each_pair do |item, reason| %>
+    	    <p><%= item.name + " : " + reason %></p>
+    		<% end %>
+    		<a href="#" id="cart_link" >View Modified Cart</a>
+	</div>
+</div>

@@ -1,5 +1,6 @@
 class PurchasesController < ApplicationController
 	helper_method :sort_column, :sort_direction
+	prawnto :prawn => { :top_margin => 75 }
 	
 	def new
 		# The following validates whether itams still exist
@@ -26,12 +27,27 @@ class PurchasesController < ApplicationController
 		end
 	end
 
+	
+
 	def all_orders
 		@title = "All Orders"		
 		if params[:order_view].nil?
 			@purchases = Purchase.all(:include => [:user, :item => :inventory])
 			@purchases = sorted_purchases
-			render "all_orders"
+
+			respond_to do |format|
+      		format.html do
+      			render "all_orders"
+      		end
+
+      		format.pdf do
+        		pdf = OrderPdf.new(@purchases, @title, view_context)
+        		send_data pdf.render, filename: "all_orders.pdf",
+                              type: "application/pdf",
+                              disposition: "inline"
+      		end
+    	end
+			
 		elsif params[:order_view] == "Buyer"
 			@title = "All Orders > By Buyer"
 			@purchases_by_user = Hash.new
@@ -46,7 +62,7 @@ class PurchasesController < ApplicationController
 				Purchase.where("inventory_id = ?", id).order("paid asc")}
 			@purchases_by_producer.keys.sort
 			render "producer"
-		end
+		end		
 		
 	end
 

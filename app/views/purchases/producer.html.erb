@@ -20,25 +20,24 @@ $('.paid').each(function() {
       <div id="all-orders-table" class="margin-five">
 
         <h2><%= @title %></h2>
-
-         <ul>
+        <ul>
+          <p><%= view_link "View All Orders" %></p>
           <p><%= view_link "View By Buyer", "Buyer" %></p>
-          <p><%= view_link "View By Producer", "Producer" %></p>
         </ul>
 
+       <% for producer in @purchases_by_producer.keys %>
+        <h3 style="text-align:left"><%= producer.display_name %></h3>
         <table class="table table-bordered table-striped" >
           <tr>
-            <th class="hidden-phone sort"><%= order_sortable "buyer"%></th>
-            <th class="hidden-phone sort"><%= order_sortable "producer"%></th>
-            <th class="hidden-phone sort"><%= order_sortable "product"%></th>
+            <th>Buyer</th>
+            <th>Product</th>
             <th>Quantity</th>
             <th>Unit Price</th>
             <th>Full Price</th>
-            <th class="hidden-phone sort"><%= order_sortable "paid_for", "Paid For" %></th>
+            <th class="hidden-phone sort">Paid For</th>
           </tr>
-          <% for purchase in @purchases %>
-          <td><%= link_to purchase.user.name, user_path(purchase.user.id)  %></td>
-          <td><%= link_to purchase.item.inventory.display_name, inventory_path(purchase.item.inventory.id) %></td>
+          <% for purchase in @purchases_by_producer[producer] %>
+          <td><%= link_to purchase.user.name, user_path(purchase.user.id) %></td>
           <td><%= link_to purchase.item.name, inventory_item_path(purchase.item.inventory.id, purchase.item.id)%></td>
           <td><%= purchase.quantity %> <%= purchase.item.units.pluralize %></td>
           <td><%= number_to_currency(purchase.unit_price) %></td>
@@ -49,22 +48,19 @@ $('.paid').each(function() {
       <% end %>
     </table>
 
+
 <!-- Divider -->
 <ul class="nav nav-list">
 <li class="divider"></li>
 </ul>
 
     <div id="order-totals">
-    <h4 id="total">Total Revenue: <%= number_to_currency Purchase.total_payment %></h4>
-    <h4 id="pending-total"> Pending Payment: <%= number_to_currency  Purchase.pending_payment %></h4>
-    <h4 id="processed-total"> Processed Payment: <%= number_to_currency Purchase.processed_payment %></h4>
+    <h4 id="total">Total Revenue: <%= number_to_currency producer.total_payment %></h4>
+
+    <% end %>
+
+
     </div>
-
-
-
-<p><%= link_to "Printable Invoice (PDF)", all_orders_path(:format => 'pdf') %></p>
-
-
 
   </div>
 </div>

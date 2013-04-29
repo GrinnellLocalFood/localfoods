@@ -76,7 +76,7 @@ Localfoods::Application.configure do
   config.path = "http://localhost.herokuapp.com/"
 
   # default path for action mailer
-  config.action_mailer.default_url_options = {:host => "localfood.herokuapp.com"}
+  config.action_mailer.default_url_options = {:host => "weiser.cs.grinnell.edu"}
 
 
 end

@@ -8,7 +8,7 @@ class PurchasesController < ApplicationController
 		if(current_user.cart.is_empty?)
 			render "error"			
 		else
-		 @purchase = Purchase.new
+			@purchase = Purchase.new
 		end	
 	end
 
@@ -36,84 +36,84 @@ class PurchasesController < ApplicationController
 			@purchases = sorted_purchases
 
 			respond_to do |format|
-      		format.html do
-      			render "all_orders"
-      		end
+				format.html do
+					render "all_orders"
+				end
 
-      		format.pdf do
-        		pdf = OrderPdf.new(@purchases, @title, view_context)
-        		send_data pdf.render, filename: "all_orders.pdf",
-                              type: "application/pdf",
-                              disposition: "inline"
-      		end
-    	end
+				format.pdf do
+					pdf = OrderPdf.new(@purchases, @title, view_context)
+					send_data pdf.render, filename: "all_orders.pdf",
+					type: "application/pdf",
+					disposition: "inline"
+				end
+			end
 			
 		elsif params[:order_view] == "Buyer"
 			@title = "All Orders > By Buyer"
 			@purchases_by_user = Hash.new
 			Purchase.uniq.pluck(:user_id).map {|id| @purchases_by_user[User.find(id)] = 
 				Purchase.where("user_id = ?", id).order("paid asc")}
-			@purchases_by_user.keys.sort
-			render "buyer"
-		elsif params[:order_view] == "Producer"
-			@title = "All Orders > By Producer"
-			@purchases_by_producer = Hash.new
-			Purchase.uniq.pluck(:inventory_id).map {|id| @purchases_by_producer[Inventory.find(id)] = 
-				Purchase.where("inventory_id = ?", id).order("paid asc")}
-			@purchases_by_producer.keys.sort
-			render "producer"
-		end		
-		
-	end
+				@purchases_by_user.keys.sort
+				render "buyer"
+			elsif params[:order_view] == "Producer"
+				@title = "All Orders > By Producer"
+				@purchases_by_producer = Hash.new
+				Purchase.uniq.pluck(:inventory_id).map {|id| @purchases_by_producer[Inventory.find(id)] = 
+					Purchase.where("inventory_id = ?", id).order("paid asc")}
+					@purchases_by_producer.keys.sort
+					render "producer"
+				end		
 
-	def process_order
-		redirect_to :action => 'index'
-	end
-
-	def sorted_purchases
-
-		if sort_column == "buyer"
-			if sort_direction == "asc"
-				return @purchases.sort_by{|i| i.user.name }
-			else
-				return @purchases.sort_by{|i| i.user.name }.reverse
 			end
-		end
 
-		if sort_column == "producer"
-			if sort_direction == "asc"
-				return @purchases.sort_by{|i| i.item.inventory.display_name }
-			else
-				return @purchases.sort_by{|i| i.item.inventory.display_name }.reverse
+			def process_order
+				redirect_to :action => 'index'
 			end
-		end
 
-		if sort_column == "product"
-			if sort_direction == "asc"
-				return @purchases.sort_by{|i| i.item.name }
-			else
-				return @purchases.sort_by{|i| i.item.name }.reverse
+			def sorted_purchases
+
+				if sort_column == "buyer"
+					if sort_direction == "asc"
+						return @purchases.sort_by{|i| i.user.name }
+					else
+						return @purchases.sort_by{|i| i.user.name }.reverse
+					end
+				end
+
+				if sort_column == "producer"
+					if sort_direction == "asc"
+						return @purchases.sort_by{|i| i.item.inventory.display_name }
+					else
+						return @purchases.sort_by{|i| i.item.inventory.display_name }.reverse
+					end
+				end
+
+				if sort_column == "product"
+					if sort_direction == "asc"
+						return @purchases.sort_by{|i| i.item.name }
+					else
+						return @purchases.sort_by{|i| i.item.name }.reverse
+					end
+				end
+
+				if sort_column == "paid_for"
+					if sort_direction == "asc"
+						return @purchases.sort_by{|i| i.paid.to_s }
+					else
+						return @purchases.sort_by{|i| i.paid.to_s }.reverse
+					end
+				end
+				return @purchases
 			end
-		end
 
-		if sort_column == "paid_for"
-			if sort_direction == "asc"
-				return @purchases.sort_by{|i| i.paid.to_s }
-			else
-				return @purchases.sort_by{|i| i.paid.to_s }.reverse
+
+
+			def sort_column
+				["buyer", "producer", "product", "paid_for"].include?(params[:sort]) ? params[:sort] : "product"
 			end
+
+			def sort_direction
+				%w[asc desc].include?(params[:direction]) ? params[:direction] : "asc"
+			end
+
 		end
-		return @purchases
-	end
-
-
-    
-  def sort_column
-    ["buyer", "producer", "product", "paid_for"].include?(params[:sort]) ? params[:sort] : "product"
-  end
-  
-  def sort_direction
-    %w[asc desc].include?(params[:direction]) ? params[:direction] : "asc"
-  end
-
-end

@@ -151,7 +151,8 @@ $('.desc').append('<i class="icon-arrow-down sort-arrow"></i>');
             <% if current_user && item.cartable? %>
             <%= link_to "Add to Cart", cart_items_path(:item_id => item), :remote => false, :method => :post, 
         :class => "btn add-to-cart" %>
-        <% end %>
+            <% end %>
+        </td>
         <% end %>
 
     </tr>

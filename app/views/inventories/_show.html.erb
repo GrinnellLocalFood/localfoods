@@ -24,9 +24,9 @@ $('.show_link').click(function() {
     // refresh the modal so you can go to multiple items without refreshing the whole page
     setTimeout(
       function() {
-       $('#item_show').load(url_string);
-   },
-   100)
+         $('#item_show').load(url_string);
+     },
+     100)
 
  }); // end click
 
@@ -60,9 +60,9 @@ $('.add-to-cart').click(function() {
 // load the modal, but delay it slightly for time to add to cart
 setTimeout(
   function() {
-   $('#cart').load('<%= show_in_modal_cart_path(current_user.cart.id) %>');
-},
-100)
+     $('#cart').load('<%= show_in_modal_cart_path(current_user.cart.id) %>');
+ },
+ 100)
 
  }); // end click
 // END ADD TO CART BEHAVIOR
@@ -76,7 +76,7 @@ $('[data-toggle="tooltip"]').tooltip();
 $('.close').click(function() {
   setTimeout(
       function() {
-       
+
       },
       1000)
 });
@@ -160,15 +160,15 @@ margin-top: -5px">
 
 
 
+<div class="margin-two-five">
+    <h1 id="inventory-title"><%= @producer.inventory.display_name %></h1>
 
-<h1 id="inventory-title"><%= @producer.inventory.display_name %></h1>
+    <% if @producer.inventory.url != nil %>
+    <%= link_to @producer.inventory.url, url_with_protocol(@producer.inventory.url) %>
+    <% end %>
 
-<% if @producer.inventory.url != nil %>
-<%= link_to @producer.inventory.url, url_with_protocol(@producer.inventory.url) %>
-<% end %>
-
-<%= simple_format(@producer.inventory.description) %>
-
+    <%= simple_format(@producer.inventory.description) %>
+</div>
 
 
 
@@ -187,8 +187,8 @@ margin-top: -5px">
 <div class="margin-two-five">
 
 
-   <% if @remote %>
-   <div class="inventory-pagination">
+ <% if @remote %>
+ <div class="inventory-pagination">
     <%= paginate @item, :remote => true %>
 </div>
 <% else %>
@@ -248,12 +248,16 @@ margin-top: -5px">
             <td class="classic_show"><%= link_to "Show", inventory_item_path({ :inventory_id => params[:id], :id => item.id })%></td>
 
             <!-- add to cart -->
+            <% if signed_in? %>
+                        <td class="hidden-phone">
             <% if current_user && (@producer != current_user) && (item.is_available? == 'Yes') %>
 
-            <td class="hidden-phone">
+        
                 <%= link_to "Add to Cart", cart_items_path(:item_id => item), :remote => false, :method => :post, 
                 :class => "btn add-to-cart" %>
                 <% end %>
+                    </td>
+        <% end %>
                 <!-- end add to cart -->
 
 

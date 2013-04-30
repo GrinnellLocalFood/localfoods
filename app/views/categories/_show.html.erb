@@ -112,11 +112,15 @@ $('.desc').append('<i class="icon-arrow-down sort-arrow"></i>');
     <tr>
         <th class="hidden-phone"></th>
         <th class="sort"><%= category_sortable "name", @category %></th>
-        <th class="hidden-phone"><%= category_sortable "producer", @category %></th>
+        <th class="hidden-phone hidden-tablet"><%= category_sortable "producer", @category %></th>
         <th>Description</th>
-        <th class="hidden-phone sort"><%= category_sortable "price", @category %></th>
+        <th class="hidden-phone hidden-tablet sort"><%= category_sortable "price", @category %></th>
         <th class="hidden-phone sort"><%= category_sortable "category", @category %></th>
         <th class="hidden-phone sort"><%= category_sortable "available", @category %></th> 
+        <% if signed_in? %>
+        <th></th>
+        <% end %>
+
     </tr>
 
     <% @items.each do |item| %>
@@ -133,19 +137,21 @@ $('.desc').append('<i class="icon-arrow-down sort-arrow"></i>');
 
 
         <td class="item_row" data-id="<%= item.id %>" data-inventory ="<%= item.inventory.id %>"><%= item.name %></td>
-        <td class="hidden-phone"><%= link_to(item.inventory.display_name, inventory_path(item.inventory)) %></td>
+        <td class="hidden-phone hidden-tablet"><%= link_to(item.inventory.display_name, inventory_path(item.inventory)) %></td>
         <td class="item_row " data-id="<%= item.id %>"><%= item.description.size < 50 ? item.description : item.description[0..50] + "..." %></td>
-        <td class="item_row hidden-phone" data-id="<%= item.id %>">
+        <td class="item_row hidden-phone hidden-tablet" data-id="<%= item.id %>">
             <%= number_to_currency(item.price) %><b>/<%= item.units.singularize %></b></td>
         <td class="category_label item_row hidden-phone" data-id="<%= item.id %>"><%= Category.find(item.category_id).name %></td>
         <td class="item_row hidden-phone" data-id="<%= item.id %>"><%= item.is_available? %></td>
         <td class="classic_show"><%= link_to "Show", 
             inventory_item_path({ :inventory_id => item.inventory_id, :id => item.id }) %></td>
 
-        <% if current_user && item.cartable? %>
+        <% if signed_in? %>
         <td class="hidden-phone">
+            <% if current_user && item.cartable? %>
             <%= link_to "Add to Cart", cart_items_path(:item_id => item), :remote => false, :method => :post, 
         :class => "btn add-to-cart" %>
+        <% end %>
         <% end %>
 
     </tr>

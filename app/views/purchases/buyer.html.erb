@@ -19,11 +19,14 @@ $('.paid').each(function() {
     <div class="span12 custom-block">
       <div id="all-orders-table" class="margin-five">
 
+
+        <div style="float: right; margin-top: 3px;">
+          <%= view_link "View By Buyer", "Buyer" %>
+          <%= view_link "View By Producer", "Producer" %>
+        </div>
+
         <h2><%= @title %></h2>
-        <ul>
-          <p><%= view_link "View All Orders" %></p>
-          <p><%= view_link "View By Producer", "Producer" %></p>
-        </ul>
+     
 
         <% for buyer in @purchases_by_user.keys %>
         <h3 style="text-align:left"><%= buyer.name %></h3>

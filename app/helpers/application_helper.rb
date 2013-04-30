@@ -48,7 +48,7 @@ def cart_size(id)
 end
 
 def view_link(title, view = nil)
-  link_to title, {:order_view => view}
+  link_to title, {:order_view => view}, {:class=> "btn btn-info"}
 end
 
 end

@@ -19,12 +19,12 @@ $('.paid').each(function() {
     <div class="span12 custom-block">
       <div id="all-orders-table" class="margin-five">
 
-        <h2><%= @title %></h2>
+        <div style="float: right; margin-top: 3px;">
+          <%= view_link "View By Buyer", "Buyer" %>
+          <%= view_link "View By Producer", "Producer" %>
+        </div>
 
-         <ul>
-          <p><%= view_link "View By Buyer", "Buyer" %></p>
-          <p><%= view_link "View By Producer", "Producer" %></p>
-        </ul>
+        <h2><%= @title %></h2>
 
         <table class="table table-bordered table-striped" >
           <tr>
@@ -62,8 +62,8 @@ $('.paid').each(function() {
 
 
 
-<p><%= link_to "View as PDF", all_orders_path(:format => 'pdf') %></p>
 
+ <%= link_to "View as PDF", all_orders_path(:format => 'pdf'), :class=>"btn btn-gray" %>
 
 
   </div>

@@ -51,11 +51,6 @@ $('.add-to-cart').click(function() {
     
 });
 
-
-
-
-
-
 // note: concern about the delay here too
 // load the modal, but delay it slightly for time to add to cart
 setTimeout(
@@ -224,7 +219,12 @@ margin-top: -5px">
         <th></th>
         <th class="hidden-phone"></th>
         <% end %>
+<<<<<<< HEAD
+        <th></th>
+     </tr>
+=======
     </tr>
+>>>>>>> 1e7b9cc4d303fc99f465c4de0181e4c527dd06b8
 
     <% @item.each do |item| %>
     <tr>
@@ -247,8 +247,13 @@ margin-top: -5px">
 
             <td class="classic_show"><%= link_to "Show", inventory_item_path({ :inventory_id => params[:id], :id => item.id })%></td>
 
+<<<<<<< HEAD
+        <!-- add to cart -->
+        <% if current_user && (@producer != current_user) && item.cartable? %>
+=======
             <!-- add to cart -->
             <% if current_user && (@producer != current_user) && (item.is_available? == 'Yes') %>
+>>>>>>> 1e7b9cc4d303fc99f465c4de0181e4c527dd06b8
 
             <td class="hidden-phone">
                 <%= link_to "Add to Cart", cart_items_path(:item_id => item), :remote => false, :method => :post, 

@@ -41,7 +41,7 @@ class PurchasesController < ApplicationController
 				end
 
 				format.pdf do
-					pdf = OrderPdf.new(@purchases, @title, view_context)
+					pdf = OrderPdf.new(params[:order_view], @purchases, @title, view_context)
 					send_data pdf.render, filename: "all_orders.pdf",
 					type: "application/pdf",
 					disposition: "inline"
@@ -54,16 +54,41 @@ class PurchasesController < ApplicationController
 			Purchase.uniq.pluck(:user_id).map {|id| @purchases_by_user[User.find(id)] = 
 				Purchase.where("user_id = ?", id).order("paid asc")}
 				@purchases_by_user.keys.sort
-				render "buyer"
+
+				respond_to do |format|
+					format.html do
+						render "buyer"
+					end
+
+					format.pdf do
+						pdf = OrderPdf.new(params[:order_view], @purchases_by_user, @title, view_context)
+						send_data pdf.render, filename: "all_orders_by_buyer.pdf",
+						type: "application/pdf",
+						disposition: "inline"
+					end
+				end
+
 			elsif params[:order_view] == "Producer"
 				@title = "All Orders > By Producer"
 				@purchases_by_producer = Hash.new
 				Purchase.uniq.pluck(:inventory_id).map {|id| @purchases_by_producer[Inventory.find(id)] = 
 					Purchase.where("inventory_id = ?", id).order("paid asc")}
 					@purchases_by_producer.keys.sort
-					render "producer"
-				end		
 
+					respond_to do |format|
+						format.html do
+							render "producer"
+						end
+
+						format.pdf do
+							pdf = OrderPdf.new(params[:order_view], @purchases_by_producer, @title, view_context)
+							send_data pdf.render, filename: "all_orders_by_producer.pdf",
+							type: "application/pdf",
+							disposition: "inline"
+						end
+					end		
+
+				end
 			end
 
 			def process_order

@@ -4,6 +4,10 @@ skip_before_filter :require_login, :only => [:show, :index, :show_in_index, :sho
 
   #PUT
   def show
+
+    if(params[:editform] == "true")
+        update
+    else
     #need to add permissions checking
       @title = "View Inventory"
       @remote = false
@@ -24,8 +28,13 @@ skip_before_filter :require_login, :only => [:show, :index, :show_in_index, :sho
         format.xml  { render :xml => @item }
     end
   end
+  end
 
   def show_in_index
+      if(params[:editform] == "true")
+        update
+      else
+
       @title = "Our Producers"
       @remote = true
       @producer = User.find(params[:id])
@@ -43,6 +52,7 @@ skip_before_filter :require_login, :only => [:show, :index, :show_in_index, :sho
       respond_to do |format|
            format.js { render :locals => { :item => @item} }
       end
+    end
   end
 
    def index

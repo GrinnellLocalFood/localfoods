@@ -10,6 +10,8 @@ gem 'sunspot_with_kaminari'
 gem 'kaminari'
 gem 'foreman'
 gem 'tilt'
+gem 'prawn'
+gem 'prawnto'
 
 gem 'jquery-rails'
 
@@ -23,6 +25,7 @@ group :development, :test do
   gem 'factory_girl_rails', '1.4.0'
   gem 'capybara'
   gem 'ffaker'
+  gem 'bullet'
 end
 
 group :assets do

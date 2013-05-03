@@ -29,28 +29,26 @@
     }
   }
 
-  #home-container {
-    padding-left: 0px;
-    padding-right: 0px;
-  }
-
-  #hero-image-unit {
-    // margin-top: -10px;
-  }
 
   #hero-text {
     margin-left: 5%;
     margin-right: 5%;
+    margin-top: 70px;
+    text-align: center;
+
+    h2 {
+      font-size: 180%;
+    }
+
+    p {
+      font-size: 120%;
+    }
+
   }
 
-  #hero-text h1 {
-    font-size: 195%;
-    line-height: 110%;
-  }
+  #sign-up-button {
 
-  #hero-text p {
-   font-size: 110%;
- }
+  }
 
 
   // GRID & CONTAINERS
@@ -133,6 +131,12 @@
      margin-left: 200px;
    }
  }
+
+
+  #search-header-input {
+    min-height: 32px;
+  }
+
 
 // this shouldn't have to be here, but for some reason it does
  #inv_price_field {
@@ -273,10 +277,9 @@
 
 @media (max-width: 480px) {
 
-  // // This is probably a terrible practice
-  // body {
-  //   min-width: 320px;
-  // }
+#hero-text {
+   margin-top: 50px;
+}
 
   // Smooth out the collapsing/expanding nav
   .nav-collapse {

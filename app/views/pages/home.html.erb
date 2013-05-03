@@ -12,73 +12,71 @@
 </div>
 <% end %>
 
-<div id="home-container" class="container custom-block">
+
+<div class="container">
+	<div class="row-fluid">
+		<div class="span12 custom-block">
 
 
-	<div id="hero-image-unit">
+			<div id="hero-image-unit">
 
-		<div class="row-fluid" align="right">
-			<div id="hero-text">
-				<h1>Welcome to the Grinnell Local Foods Coop</h1>
-				<p>Support local farmers, local economy, and environmental sustainability by purchasing quality food grown right here in central Iowa.
+				<div class="row-fluid">
+					<div id="hero-text">
+						<h2>Welcome to the Grinnell Local Foods Coop</h2>
+						<p style="margin: 20px; line-height: 25px;">
+							Support local farmers, local economy, and environmental sustainability by purchasing quality food grown right here in central Iowa.
+						</p>
 
-					<br><br>
-					<% if !signed_in? %>
-					<%= link_to "Sign Up!", register_path,
-					:class=>"btn btn-large btn-light-gray"%>
+						<% if !signed_in? %>
+						<p style="margin: 20px;">
+						<%= link_to "Sign Up!", register_path, :id=>"sign-up-button", :class=>"btn btn-large btn-light-gray", :style=>" padding-left: 35px; padding-right: 35px;"%>
+						</p>
+						<% end %>
+						
+					</div>
+				</div>
 
-					<% end %>
-				</p>
 			</div>
-		</div>
-
-	</div>
 
 
-
-
-
-
-
-
-	<div id="info-graphic" class="row-fluid">
-		<div id="info-left" class="span4" align="center">
-			<div class="margin-five">
-				<img src="assets/flat/clipboard.png" width="70"></img>
-				<h3>Join the Coop</h3>
-				<p>
-					By signing up on this website or in person, and buying a $5 annual membership.
-				</p>
+			<div style="background-color:#485556; margin-top: -10px;">
+				<h3 class="margin-two-five" style="color: white; font-size: 150%;">Orders are currently closed (TEMP)
+				</h3>
 			</div>
-		</div>
-		<div id="info-center" class="span4" align="center">
-			<div class="margin-five">
-				<img src="assets/flat/bag.png" width="70"></img>
-				<h3>Place your order</h3>
-				<p>
-					Find what you want, add it to cart, and pay either online or at pickup.
-				</p>
+
+
+
+
+
+			<div id="info-graphic" class="row-fluid">
+				<div id="info-left" class="span4" align="center">
+					<div class="margin-five">
+						<img src="assets/flat/clipboard.png" width="70"></img>
+						<h3>Join the Coop</h3>
+						<p>
+							By signing up on this website or in person, and buying a $5 annual membership.
+						</p>
+					</div>
+				</div>
+				<div id="info-center" class="span4" align="center">
+					<div class="margin-five">
+						<img src="assets/flat/bag.png" width="70"></img>
+						<h3>Place your order</h3>
+						<p>
+							Find what you want, add it to cart, and pay either online or at pickup.
+						</p>
+					</div>
+				</div>
+				<div id="info-right"class="span4" align="center">
+					<div class="margin-five">
+						<img src="assets/flat/map.png" width="70"></img>
+						<h3>Pickup your goods</h3>
+						<p>
+							After receiving an email about times and location at the end of each order period.
+						</p>
+					</div>
+				</div>
 			</div>
-		</div>
-		<div id="info-right"class="span4" align="center">
-			<div class="margin-five">
-				<img src="assets/flat/map.png" width="70"></img>
-				<h3>Pickup your goods</h3>
-				<p>
-					After receiving an email about times and location at the end of each order period.
-				</p>
-			</div>
-		</div>
-	</div>
-
-
-
-<!-- <div style="background-color:#485556; margin-bottom: -10px;">
-<h3 class="margin-two-five" style="color: white; font-size: 150%;">Orders are currently closed
-</h3>
-</div>
-
- -->
 
 
 
@@ -91,7 +89,7 @@
 <div id="announcements-unit" style="padding-top: 10px; padding-bottom: 40px; margin-bottom: -30px;">
 	<div class="row-fluid">
 		<div id="announcements" class="margin-five">
-			<h3 align="left">Announcements</h3>
+			<h3 align="left">Announcements (TEMP)</h3>
 			<p>
 				Orders will be open Jan 31 to Feb 7. Pickup will be on Feb 14 in the Quad. New members may create and account and place an order by following the link above. You will be asked to pay a membership fee when you pick up your order (see pickup information for more details). Happy ordering! Questions or comments? Send us an email!
 			</p>
@@ -101,7 +99,11 @@
 		</div>
 	</div>
 </div>
+
+
+
 </div>
 
-
+</div>
+</div>
 </div>

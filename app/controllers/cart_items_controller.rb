@@ -1,4 +1,5 @@
 class CartItemsController < ApplicationController
+	
 	def create
 		@item = Item.find(params[:item_id])
 	 	@cart_item = CartItem.where("cart_id = ? AND item_id = ?", current_user.cart, @item).first
@@ -16,8 +17,7 @@ class CartItemsController < ApplicationController
 			end
 		end
 
-		session[:cart_size] = current_user.cart.cart_items.size
-
+		
 		# redirect_to url_for :controller => 'cart', :action => 'show_in_modal', :id => current_user.cart
 			respond_to do |format|
         	format.html { redirect_to(cart_path(current_user))}

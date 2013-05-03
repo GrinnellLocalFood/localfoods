@@ -3,6 +3,8 @@
 <script type="text/javascript">
 $(document).ready(function() {
 
+
+
 // hide the non-javascript show link
 $('.classic_show, .classic_th').hide();
 
@@ -48,49 +50,65 @@ $('#search-header').attr('value', '<%= params[:search] %>');
 
 <div class="container">
     <div class="row">
-        <div class="span12">
-            <h2>Search Results</h2>
-            <div class="pagination" align="left"><%= paginate @search %></div>
-            <table class="producer-table table-hover" align="center">
-                <tr>
-                    <th class="hidden-phone"></th>
-                    <th class="sort"> <%= search_sortable "name" , params[:search] %></th>
-                    <th class="sort"><%= search_sortable "inventory", params[:search] %></th>
-                    <th class="hidden-phone">Description</th>
-                    <th class="hidden-phone sort"> <%= search_sortable "price", params[:search] %></th>
-                    <th class="hidden-phone">Min Order</th>   
-                    <th class="sort"> <%= search_sortable "category", params[:search] %></th>   
-                    <th class="hidden-phone">Available</th>
-                    <th class="classic_th"></th>        
-                </tr>
+        <div class="span12 custom-block">
+            <div class="margin-two-five">
 
-                <% @search.results.each do |item| %>
-                <tr>
-                    <td class="hidden-phone">
-                    <% if !(item.item_photo_file_name.nil?) %>
-                    <media class="item-search-image item_row" data-id="<%= item.id %>">
-                        <%= image_tag(item.item_photo.url(:grid)) %>
-                    </media>
-                    <%end%>
-                </td>
-
-                    <td class="item_row" data-id="<%= item.id %>"><%= item.name %></td>
-                    <td><%= link_to(item.inventory.display_name, inventory_path(item.inventory)) %></td>
-                    <td class="item_row hidden-phone" data-id="<%= item.id %>"><%= item.description %></td>
-                    <td class="item_row hidden-phone" data-id="<%= item.id %>">
-                        <%= number_to_currency(item.price) %><b>/<%= item.units.singularize %></b></td>
-                    <td class="item_row hidden-phone" data-id="<%= item.id %>"><%= item.minorder %></td>
-                    <td class="item_row" data-id="<%= item.id %>"><%= Category.find(item.category_id).name %></td>
-                    <td class="item_row hidden-phone" data-id="<%= item.id %>"><%= item.is_available? %></td>
-                    <td class="classic_show">
-                        <%= link_to "Show", inventory_item_path({ :inventory_id => item.inventory.id, :id => item.id }) %>
-                    </td>
-
-
-                    <% end %>
-                </table>
-
+                <h2>Search Results</h2>
                 <div class="pagination" align="left"><%= paginate @search %></div>
+                <table class="producer-table table-hover" align="center">
+                    <tr>
+                        <th class="hidden-phone"></th>
+                        <th class="sort"> <%= search_sortable "name" , params[:search] %></th>
+                        <th class="sort"><%= search_sortable "inventory", params[:search] %></th>
+                        <th class="hidden-phone">Description</th>
+                        <th class="hidden-phone sort"> <%= search_sortable "price", params[:search] %></th>
+                        <th class="hidden-phone">Min Order</th>   
+                        <th class="sort"> <%= search_sortable "category", params[:search] %></th>   
+                        <th class="hidden-phone">Available</th>
+                        <th class="classic_th"></th> 
+                        <% if signed_in? %>
+                        <th></th>
+                        <% end %>       
+                    </tr>
 
+                    <% @search.results.each do |item| %>
+                    <tr>
+                        <td class="hidden-phone">
+                            <% if !(item.item_photo_file_name.nil?) %>
+                            <media class="item-search-image item_row" data-id="<%= item.id %>">
+                                <%= image_tag(item.item_photo.url(:grid)) %>
+                            </media>
+                            <%end%>
+                        </td>
+
+                        <td class="item_row" data-id="<%= item.id %>"><%= item.name %></td>
+                        <td><%= link_to(item.inventory.display_name, inventory_path(item.inventory)) %></td>
+                        <td class="item_row hidden-phone" data-id="<%= item.id %>"><%= item.description %></td>
+                        <td class="item_row hidden-phone" data-id="<%= item.id %>">
+                            <%= number_to_currency(item.price) %><b>/<%= item.units.singularize %></b></td>
+                            <td class="item_row hidden-phone" data-id="<%= item.id %>"><%= item.minorder %></td>
+                            <td class="item_row" data-id="<%= item.id %>"><%= Category.find(item.category_id).name %></td>
+                            <td class="item_row hidden-phone" data-id="<%= item.id %>"><%= item.is_available? %></td>
+                            <td class="classic_show">
+                                <%= link_to "Show", inventory_item_path({ :inventory_id => item.inventory.id, :id => item.id }) %>
+                            </td>
+                            <!-- add to cart -->
+                            <% if signed_in? %>
+                            <td class="hidden-phone">
+                                <% if current_user && (@producer != current_user) && item.cartable? %>
+                                <%= link_to "Add to Cart", cart_items_path(:item_id => item), :remote => false, :method => :post,:class => "btn add-to-cart" %>
+                                <% end %>
+                            </td>
+                            <% end %>
+                            <!-- end add to cart -->
+
+
+                            <% end %>
+                        </table>
+
+                        <div class="pagination" align="left"><%= paginate @search %></div>
+
+                    </div>
+                </div>
             </div>
         </div>

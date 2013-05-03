@@ -10,7 +10,6 @@ class Item < ActiveRecord::Base
 	attr_accessible :name, :description, :totalquantity, :minorder, :maxorder, :item_photo ,:price, :available, :units, :category_id, :inventory_id
 
 	validates :name, :presence => true
-	validates :description, :presence => true
 	validates :minorder, :presence => true, :numericality => { :only_integer => true }
 	validates :price, :presence => true
 	validates :units, :presence => true, :format => { :with => /[a-zA-Z.\s]/, :message => "cannot contain special or numeric characters." }
@@ -50,7 +49,7 @@ class Item < ActiveRecord::Base
 		end
 	end
 
-	def cartable
+	def cartable?
 		num_remaining > minorder && ApplicationState.orders_open? && self.available
 	end
 
@@ -69,6 +68,10 @@ class Item < ActiveRecord::Base
 	private
 
 	def format_values
+		if(self.description.nil?)
+			self.description = ""
+		end
+		
 		if(self.units.nil? || self.units.empty?)
 			self.units = "units"
 		end

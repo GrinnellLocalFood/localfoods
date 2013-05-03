@@ -127,7 +127,7 @@ end
   private
 
   def sort_column
-    Item.column_names.include?(params[:sort]) ? params[:sort] : "name"
+    ["name","inventory","category","price"].include?(params[:sort]) ? params[:sort] : "name"
   end
   
   def sort_direction

@@ -1,0 +1,23 @@
+<div class="container">
+	<div class="row-fluid">
+		<div class="span8 offset2 custom-block">
+
+			<%= render :partial => 'cart_change' unless @changed_items.empty? %>
+
+			<div class=" margin-ten" align="center">
+				<h2>Empty Cart!</h2>
+				<p>
+					You have nothing in you cart right now!
+				</p>
+				<br>
+				<div id="purchase-buttons">
+					<%= link_to "Continue Shopping", inventories_path , :class=>"btn btn-large" %>
+
+				</div>
+
+			</div>
+
+		</div>
+
+	</div>
+</div>

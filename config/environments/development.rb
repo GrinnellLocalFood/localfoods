@@ -42,7 +42,9 @@ Localfoods::Application.configure do
   # config.assets.initialize_on_precompile = true
 
   # path for development environment
-  config.action_mailer.default_url_options = {:host => "localhost:3000"}
+  config.action_mailer.default_url_options = {:host => "localhost"}
+
+  config.action_mailer.raise_delivery_errors = true
 
   Paperclip.options[:command_path] = '/usr/bin/'
 

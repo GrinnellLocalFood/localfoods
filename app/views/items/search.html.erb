@@ -37,6 +37,38 @@ $('.show_link').click(function() {
 // keep the search term in the search box
 $('#search-header').attr('value', '<%= params[:search] %>');
 
+
+<% if signed_in? %>
+
+// ADD TO CART BEHAVIOR
+// replace default link behavior
+$('.add-to-cart').attr('data-remote', true);
+
+
+$('.add-to-cart').click(function() {
+
+  // doesn't work but whatever I guess
+  
+
+  $('#cart_modal').modal({
+    remote: '<%= show_in_modal_cart_path(current_user.cart.id) %>'
+       
+});
+
+// note: concern about the delay here too
+// load the modal, but delay it slightly for time to add to cart
+setTimeout(
+  function() {
+     $('#cart').load('<%= show_in_modal_cart_path(current_user.cart.id) %>');
+ },
+ 100)
+
+ }); // end click
+// END ADD TO CART BEHAVIOR
+
+<% end %>
+
+
 }); // end ready
 
 
@@ -76,7 +108,7 @@ $('#search-header').attr('value', '<%= params[:search] %>');
                         <td class="hidden-phone">
                             <% if !(item.item_photo_file_name.nil?) %>
                             <media class="item-search-image item_row" data-id="<%= item.id %>">
-                                <%= image_tag(item.item_photo.url(:grid)) %>
+                                <%= image_tag(item.item_photo.url(:grid), :style=>"max-width: none;") %>
                             </media>
                             <%end%>
                         </td>

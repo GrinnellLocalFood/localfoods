@@ -45,16 +45,8 @@ $('.add-to-cart').click(function() {
 
   $('#cart_modal').modal({
     remote: '<%= show_in_modal_cart_path(current_user.cart.id) %>'
-    
-
-    
-    
+       
 });
-
-
-
-
-
 
 // note: concern about the delay here too
 // load the modal, but delay it slightly for time to add to cart

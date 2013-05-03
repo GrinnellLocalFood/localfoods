@@ -37,6 +37,7 @@ end
 
 group :production, :staging do
   gem 'sqlite3','1.3.5'
+  gem 'passenger'
 end
 
 group :test do

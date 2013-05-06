@@ -7,13 +7,7 @@
 			</div>
 
 			<div id="about">
-				<p>
-					Support local farmers, local economy, and environmental sustainability by purchasing quality food grown right here in central Iowa. The Grinnell Local Foods Coop connects you to farmers, making it convenient for you to buy fresh, local, sustainably grown foods. In our monthly orders, we offer everything our farmers have in season: produce, grains, honey, herbs, certified Organic products and more!
-				</p>
-				<p>
-					If you'd like to order, simply <%= link_to "create an account", register_path %>. We will notify you via email when the website is open for orders. Then you can log in to your account and select the items you'd like to purchase. Once we collect the fresh produce from our farmers, we'll notify you again and you can come and pick up your food at the Grinnell Local Foods Coop located behind Main Hall on the southeast corner of campus. 
-				</p>
-
+				<%= simple_format(ApplicationState.about_text) %>
 			</div>
 		</div>
 	</div>

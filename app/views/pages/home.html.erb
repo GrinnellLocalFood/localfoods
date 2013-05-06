@@ -90,12 +90,7 @@
 	<div class="row-fluid">
 		<div id="announcements" class="margin-five">
 			<h3 align="left">Announcements (TEMP)</h3>
-			<p>
-				Orders will be open Jan 31 to Feb 7. Pickup will be on Feb 14 in the Quad. New members may create and account and place an order by following the link above. You will be asked to pay a membership fee when you pick up your order (see pickup information for more details). Happy ordering! Questions or comments? Send us an email!
-			</p>
-			<p>
-				If you are not on our email list, contact coordinators at <strong>localfood@grinnell.edu</strong>.
-			</p>
+			<%= simple_format(ApplicationState.announcements) %>
 		</div>
 	</div>
 </div>

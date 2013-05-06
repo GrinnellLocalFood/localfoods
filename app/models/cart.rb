@@ -69,17 +69,18 @@ end
   def invalid_items
     changed_items = Hash.new
     cart_items.all.each do |cart_item|
-      cart_item.still_available?
-
-      if cart_item.find_quantity_available > 0
-        cart_item.quantity = cart_item.find_quantity_available
-        changed_items[cart_item.item] = "Quantity available reduced"
-        cart_item.save
-      elsif cart_item.item.minorder > cart_item.quantity
-        changed_items[cart_item.item] = "The minimum order for this item was changed, re-add to cart"
-      else
-        changed_items[cart_item.item] = "Item no longer available"
-        cart_item.destroy
+      
+      if !cart_item.still_available?
+        if cart_item.find_quantity_available > 0
+          cart_item.quantity = cart_item.find_quantity_available
+          changed_items[cart_item.item] = "Quantity available reduced"
+          cart_item.save
+        elsif cart_item.item.minorder > cart_item.quantity
+          changed_items[cart_item.item] = "The minimum order for this item was changed, re-add to cart"
+        else
+          changed_items[cart_item.item] = "Item no longer available"
+          cart_item.destroy
+        end
       end
     end
     return changed_items

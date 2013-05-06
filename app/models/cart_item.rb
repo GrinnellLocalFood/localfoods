@@ -35,11 +35,11 @@ class CartItem < ActiveRecord::Base
   end
 
   def still_available?
-    item.num_remaining <= quantity && item.minorder >= quantity && item.maxorder <= quantity
+    item.num_remaining >= quantity && item.minorder <= quantity && (item.maxorder.nil? || item.maxorder >= quantity)
   end
 
   def find_quantity_available
-    item.num_remaining < item.maxorder ? item.num_remaining : item.maxorder
+    item.maxorder.nil? || (item.num_remaining < item.maxorder) ? item.num_remaining : item.maxorder
   end
 
 end

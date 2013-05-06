@@ -1,3 +1,20 @@
+<% if signed_in? %>
+<script type="text/javascript">
+$(document).ready(function() {
+
+   $('#modified_cart_link').click(function() {
+
+    $('#cart_modal').modal({
+      remote: '<%= show_in_modal_cart_path(current_user.cart.id) %>'
+    });
+
+ }); // close click
+
+}); // close document ready
+
+</script>
+<% end %>
+
 <div class=" margin-ten" align="center">
 	<div class="alert alert-success fade in" style="margin-top: -20px; margin-bottom: 25px;">
     	<a class="close" data-dismiss="alert" href="#">&times;</a>
@@ -5,6 +22,6 @@
     		<% @changed_items.each_pair do |item, reason| %>
     	    <p><%= item.name + " : " + reason %></p>
     		<% end %>
-    		<a href="#" id="cart_link" >View Modified Cart</a>
+    		<a href="#" id="modified_cart_link" >View Modified Cart</a>
 	</div>
 </div>

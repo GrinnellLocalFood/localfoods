@@ -1,0 +1,40 @@
+<div class="container">
+  <div class="row">
+    <div class="span8 offset2 custom-block">
+
+
+      <%= form_for(@application_state, :url => url_for(:controller => 'application_states', :action => 'update', :edit_form => true) , :html=>{:multipart => true}) do |f| %>
+
+      <% if @application_state.errors.any? %>
+      <div class="alert alert-error">
+        <h4><%= pluralize(@application_state.errors.count, "error") %> prohibited this application_state from being saved:</h4>
+
+        <br><ul>
+        <% @application_state.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+        <% end %>
+
+      </ul>
+    </div>
+    <% end %>
+    <div align="center">
+    <% if signed_in? && current_user.admin %>
+      <label>About Page Text</label>
+      <%= f.text_area :about, :style=>"width: 90%; height: 200px;" %>
+      <label>Pickup Info Text</label>
+      <%= f.text_area :pickup_info, :style=>"width: 90%; height: 200px;"%>
+      <label>Announcements Text</label>
+      <%= f.text_area :announcements, :style=>"width: 90%; height: 200px;" %>   
+
+    <br>
+    <%= f.submit "Save Changes", :class=>"btn btn-primary"%>
+  </div>
+  </div>
+
+  <% end %>
+
+
+  <% end %>
+</div>
+</div>
+</div>

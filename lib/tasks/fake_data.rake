@@ -97,7 +97,7 @@ end
 
 def item_name
   prefix_list = ["apple", "banana", "eggplant", "aloe vera", "tomato", "spice", "cumin", "garlic", "potato", "chocolate", "blueberry", "coriander"]
-  suffix_list = ["", "chips", "crisps", "cobbler", "bread", "parfait", "muffin", "cupcake", "pie", "pizza", "basket", "cookie", "mix"]
+  suffix_list = ["", "", "", "", "chips", "crisps", "cobbler", "bread", "parfait", "muffin", "cupcake", "pie", "pizza", "basket", "cookie", "mix"]
   (prefix_list.sample + " " + suffix_list.sample).titleize
 end
 

@@ -224,7 +224,7 @@ margin-top: -5px">
         <td class="hidden-phone">
             <% if !(item.item_photo_file_name.nil?) %>
             <media class="item_row" data-id="<%= item.id %>">
-                <%= image_tag(item.item_photo.url(:thumb)) %>
+                <%= image_tag(item.item_photo.url(:thumb), :style=>"max-width: none;") %>
             </media>
             <%end%>
         </td>

@@ -130,7 +130,7 @@ $('.desc').append('<i class="icon-arrow-down sort-arrow"></i>');
         <td class="hidden-phone">
             <% if !(item.item_photo_file_name.nil?) %>
             <media class="item_row" data-id="<%= item.id %>">
-                <%= image_tag(item.item_photo.url(:thumb)) %>
+                <%= image_tag(item.item_photo.url(:thumb), :style=>"max-width: none;") %>
             </media>
             <%end%>
         </td>
@@ -148,7 +148,7 @@ $('.desc').append('<i class="icon-arrow-down sort-arrow"></i>');
 
         <% if signed_in? %>
         <td class="hidden-phone">
-            <% if current_user && item.cartable? %>
+            <% if current_user && current_user.id != item.inventory.user.id && item.cartable? %>
             <%= link_to "Add to Cart", cart_items_path(:item_id => item), :remote => false, :method => :post, 
         :class => "btn add-to-cart" %>
             <% end %>

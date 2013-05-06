@@ -97,13 +97,13 @@ $('#application_state_email_users_false').click(function() {
       </div>
 
      
-      <div id="email_section" style="width: 230px; margin-top: 20px; text-align: left; ">
+      <div id="email_section" style="width: 75%; margin-top: 20px; text-align: left; ">
         <p>
          Hi [User],
        </p>
 
        <div id="email_content">
-        <%= f.text_area :email_content, :placeholder=>"Write your message here" %>
+        <%= f.text_area :email_content, :placeholder=>"Write your message here", :style=>"width: 100%; height: 200px;" %>
       </div>
       <p>
         Have a great day!

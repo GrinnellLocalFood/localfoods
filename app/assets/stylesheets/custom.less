@@ -48,10 +48,6 @@
   max-width: 400px;
 }
 
-.center {
-  display:inline-block;
-}
-
 .custom-block {
   -webkit-box-shadow: 0 0px 10px #C5C5C5;
   -moz-box-shadow: 0 0px 10px #C5C5C5;
@@ -67,7 +63,7 @@
   margin-top: -30px;
   margin-bottom: -1px;
   background-size: cover;
-  background-image:url(all_2000.jpg);
+  background-image:url(all_2000p.jpg);
   background-repeat: no-repeat;
   width:100%;
   height:140px;
@@ -84,7 +80,7 @@
   background-position: bottom;
   margin-top: -30px;
   background-size: cover;
-  background-image:url(bag3_2000.jpg);
+  background-image:url(bag_2000p.jpg);
   background-repeat: no-repeat;
   width:100%;
   height:140px;
@@ -93,7 +89,6 @@
 
 #pickup-title {
   padding-top: 90px;
-  padding-right: 2.5%;
   text-align: right;
 }
 
@@ -109,11 +104,11 @@
 }
 
 #about-image-unit {
-  background-position: top;
+  background-position: bottom;
   margin-top: -30px;
   margin-bottom: -1px;
   background-size: cover;
-  background-image:url(foot_2000.jpg);
+  background-image:url(barren_2000p.jpg);
   background-repeat: no-repeat;
   width:100%;
   height:140px;
@@ -121,8 +116,9 @@
 }
 
 #about-title {
-  text-align: center;
+  text-align: right;
   padding-top: 90px;
+  color: white;
 }
 
 #acknowledgments-title {
@@ -139,7 +135,7 @@
 #hero-image-unit {
   background-position: center;
   background-size: cover;
-  background-image:url(DSC_2825-4-small-edit.jpg);
+  background-image:url(heroapple_2000p.jpg);
   background-repeat: no-repeat;
   width:100%;
   height:400px;
@@ -171,7 +167,6 @@
 
 #info-graphic {
   margin-top: 35px; 
-  margin-bottom: 40px;
 }
 
 #info-left {
@@ -185,7 +180,23 @@
 
 #announcements-unit {
   background-color: @grayLightest; 
-  padding-bottom: 30px;
+  padding-top: 10px; 
+  padding-bottom: 40px; 
+  margin-bottom: -30px;
+}
+
+#current-order-state {
+  background-color: @grayDark; 
+  margin-top: -20px;
+
+  h3 {
+    color: white; 
+    font-size: 150%; 
+    margin-top: 0px; 
+    margin-bottom: 0px; 
+    text-align: right; 
+    font-weight: normal;
+  }
 }
 
 
@@ -329,31 +340,10 @@
 
 .home-alert,
 .home-notice { 
- position:absolute;
- left:0px;
- top:108px;
- padding: 8px 0px 8px 0px;
- width: 100%;
- text-align: center;
+ margin-top: -20px;
 }
 
-.home-alert .close {
-  position: relative;
-  top: -2px;
-  right: 10px;
-  line-height: 20px;
-}
 
-.home-alert-success,
-.home-notice-success {
-  color: @successText;
-  background-color: @successBackground;
-}
-
-.home-alert-danger,
-.home-alert-error,
-.home-notice-danger,
-.home-notice-error,
 .big-form-alert-danger,
 .big-form-alert-error {
   color: @errorText;
@@ -363,20 +353,6 @@
     color: @errorText;
   }
 
-}
-
-.home-alert-info,
-.home-notice-info {
-  color: @infoText;
-  background-color: @infoBackground;
-
-}
-
-.home-notice .close {
-  position: relative;
-  top: -2px;
-  right: 10px;
-  line-height: 20px;
 }
 
 // End Alerts & Notices

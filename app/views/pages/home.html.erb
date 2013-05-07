@@ -1,6 +1,6 @@
 <div class="container">
 	<div class="row-fluid">
-		<div class="span12 custom-block" style="padding-bottom: 0px; margin-bottom: 12px;">
+		<div id="home-unit-one" class="span12 custom-block">
 
 			<% if notice %>
 			<div class="alert alert-success fade in home-alert">
@@ -21,13 +21,13 @@
 				<div class="row-fluid">
 					<div id="hero-text">
 						<h2>Welcome to the Grinnell Local Foods Coop</h2>
-						<p style="margin: 20px; line-height: 25px;">
+						<p class="hero-blurb">
 							Support local farmers, local economy, and environmental sustainability by purchasing quality food grown right here in central Iowa.
 						</p>
 
 						<% if !signed_in? %>
-						<p style="margin: 20px;">
-							<%= link_to "Sign Up!", register_path, :id=>"sign-up-button", :class=>"btn btn-large btn-light-gray", :style=>" padding-left: 35px; padding-right: 35px;"%>
+						<p class="hero-blurb">
+							<%= link_to "Sign Up!", register_path, :id=>"sign-up-button", :class=>"btn btn-large btn-light-gray"%>
 						</p>
 						<% end %>
 						
@@ -49,9 +49,9 @@
 		</div>
 	</div>
 </div>
-<div class="container" style="">
+<div class="container">
 	<div class="row-fluid">
-		<div class="span12 custom-block" style="margin-bottom: 14px;">
+		<div id="home-unit-two" class="span12 custom-block">
 
 			<div id="info-graphic" class="row-fluid">
 				<div id="info-left" class="span4" align="center">
@@ -87,9 +87,9 @@
 		</div>
 	</div>
 </div>
-<div class="container" style="">
+<div class="container">
 	<div class="row-fluid">
-		<div class="span12 custom-block"  style="padding-top: 0px;">
+		<div id="home-unit-three" class="span12 custom-block">
 
 			<div id="announcements-unit">
 				<div class="row-fluid">

@@ -96,6 +96,10 @@ $('.desc').append('<i class="icon-arrow-down sort-arrow"></i>');
 
 <% if signed_in? && (current_user.admin || current_user.coordinator || current_user == @producer) %>
 
+<%= link_to 'Add Multiple Items', add_inventory_path(@producer) %>
+<%= link_to 'Edit Multiple Items', edit_inventory_path(@producer) %>
+
+
 <div align="right" style="margin-right:20px; margin-bottom: -20px;
 margin-top: -5px">
 <%= link_to edit_user_path(params[:id]), :class=>"link", :'data-toggle'=>"tooltip", :title=>"Edit Account" do %>

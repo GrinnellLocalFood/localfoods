@@ -11,12 +11,15 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130424005500) do
+ActiveRecord::Schema.define(:version => 20130503194625) do
 
   create_table "application_states", :force => true do |t|
-    t.boolean  "orders_open", :default => false
-    t.datetime "created_at",                     :null => false
-    t.datetime "updated_at",                     :null => false
+    t.boolean  "orders_open",   :default => false
+    t.datetime "created_at",                       :null => false
+    t.datetime "updated_at",                       :null => false
+    t.text     "announcements"
+    t.text     "pickup_info"
+    t.text     "about"
   end
 
   create_table "cart_items", :force => true do |t|

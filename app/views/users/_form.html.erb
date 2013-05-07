@@ -28,12 +28,12 @@ $('#user_first_name').focus();
 <%= form_for(@user, :html=>{:class=>'form-horizontal'}) do |f| %>
  
  <% if @user.errors.any? %>
-    <!-- <div id="error_explanation"> -->
+
     <div class="alert alert-error fade in">
       <a class="close" data-dismiss="alert" href="#">&times;</a>
       <h4><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</h4>
-
-      <br><ul>
+      <br>
+      <ul>
       <% @user.errors.full_messages.each do |msg| %>
         <li><%= msg %></li>
       <% end %>

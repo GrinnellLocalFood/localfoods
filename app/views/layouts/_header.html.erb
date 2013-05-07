@@ -23,14 +23,14 @@ $(document).ready(function() {
 <div id="cart_modal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-header">
     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-    <h3 id="myModalLabel" style="margin-top: 10px;">Shopping Cart</h3>
+    <h3 id="myModalLabel">Shopping Cart</h3>
   </div>
   <div class="modal-body">
     <p></p>
   </div>
   <div class="modal-footer">
     <button class="btn" data-dismiss="modal" aria-hidden="true">Continue Shopping</button>
-    <%= link_to("Checkout", url_for(:controller => "purchases", :action => "new"), :class=> "btn btn-primary", :style=>"float:right; margin-left:8px;") %>
+    <%= link_to("Checkout", url_for(:controller => "purchases", :action => "new"), :class=> "btn btn-primary", :id=>"checkout") %>
 
   </div>
 </div>
@@ -41,7 +41,9 @@ $(document).ready(function() {
   <div class="navbar-inner-redux">
     <div class="container">
 
-      <a href="/"><img id="logohead" src="/assets/partial_localfood_clear_horizontal_40.png", width="400"></a>
+      <a href="/">
+        <img id="logohead" src="/assets/partial_localfood_clear_horizontal_40.png">
+      </a>
 
 
 

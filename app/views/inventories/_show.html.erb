@@ -94,10 +94,10 @@ $('.desc').append('<i class="icon-arrow-down sort-arrow"></i>');
 <!-- End modal for items -->
 
 
-<% if signed_in? && (current_user.admin || current_user.coordinator || current_user == @producer) %>
+<% if signed_in? && 
+    (current_user.admin || current_user.coordinator || current_user == @producer) %>
 
-<%= link_to 'Add Multiple Items', add_inventory_path(@producer) %>
-<%= link_to 'Edit Multiple Items', edit_inventory_path(@producer) %>
+
 
 
 <div align="right" style="margin-right:20px; margin-bottom: -20px;
@@ -173,7 +173,15 @@ margin-top: -5px">
 
 
     <% if signed_in? && (current_user.admin || current_user.coordinator || current_user == @producer) %>
+
+    <%= link_to 'Edit Items', edit_inventory_path(@producer), :id=>"multiple-edit-button",  :class=>"btn hidden-phone" %>
+
+    <%= link_to 'Add Items', add_inventory_path(@producer), :id=>"multiple-add-button", :class=>"btn hidden-phone" %>
+
     <%= link_to 'Add Item', producer_new_inventory_items_path(params[:id]), :id=>"inventory-add-button", :class=>"btn btn-info hidden-phone" %>
+
+    
+
     <% end %>
 
 

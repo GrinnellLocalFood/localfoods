@@ -109,7 +109,7 @@
                     <td><%= item_form.text_field :maxorder, :placeholder => "Max", :style => "width: 35px;" %></td>
                     <td><%= item_form.text_field :totalquantity, :placeholder => "Qty", :style => "width: 45px;" %></td>
                     <td><%= item_form.check_box :available %></td>
-                    <td><input type="checkbox" style=""></input></td>
+                    <td><%= item_form.check_box :_destroy %></td>
 
                   </tr>
                   <% end %>
@@ -125,6 +125,7 @@
               <footer class="navbar navbar-fixed-bottom" style="z-index: 1;">
                 <div class="navbar-bottom big-nav">
                   <div class="container" style="width: 940px;">
+                    <h3 id="inventory-form-title"><%= @inventory.display_name %>'s Inventory</h3>
                     <%= f.submit "Save Inventory", :class=>"btn btn-primary", :style=>"float:right; "%>
                   </div>
                 </div>

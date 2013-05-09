@@ -1,0 +1,34 @@
+body {
+	padding-top: 0 !important;
+}
+
+.btn-navbar {
+	display: none !important;
+}
+
+#top-nav {
+	margin-bottom: 0 !important;
+}
+
+#top-nav li {
+	display: inline !important;
+}
+
+.big-nav {
+	position: inherit !important;
+}
+
+#old-ie-warning {
+  background-color: orange; 
+  color: white; 
+  text-align: center; 
+  font-size: 125%; 
+  padding-left: 15%; 
+  padding-right: 15%; 
+  padding-top: 20px; 
+  padding-bottom: 20px;
+}
+
+#ie-warning-note {
+  font-size: 80%;
+}

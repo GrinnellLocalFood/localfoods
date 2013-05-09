@@ -16,7 +16,7 @@ $('.producer_link a').click(function() {
 
 </script>
 
-<div id="all-products-container" class="container">
+<div class="container">
 	<div class="row-fluid">
 		<div class="tabbable tabs-left">
 
@@ -38,7 +38,7 @@ $('.producer_link a').click(function() {
 			</ul>
 
 
-			<div id="inventory-panel" class="tab-content custom-block">
+			<div id="inventory-panel" class="tab-content custom-block" style=" padding-top: 0;">
 				<div id="producer_info">
 					<%= render :partial => 'categories/show', :locals => {:@items => @items} %>
 				</div>

@@ -22,6 +22,17 @@ $('[data-toggle="tooltip"]').tooltip();
 
 </head>
 	<body>
+
+<!--[if lt IE 9]>
+ <div id="old-ie-warning">
+        <p>Uh oh...it looks like you're using a version of Internet Explorer below 9. We strongly STRONGLY encourage you to <a href="http://windows.microsoft.com/en-us/internet-explorer/download-ie">upgrade*</a> to at least IE9, or download <a href="http://www.mozilla.org/en-US/firefox/new/">Firefox</a> or <a href="http://www.google.com/chrome">Google Chrome</a>, as the site just isn't going to work properly otherwise.</p>
+
+        <p id="ie-warning-note">*If you're still using Windows XP you unfortunately won't be able to get a new enough version of IE, so go the Firefox or Chrome route instead.</p>
+
+    </div>
+<![endif]-->
+
+
 	<%= render 'layouts/header' %>
 
 	<%= yield %>

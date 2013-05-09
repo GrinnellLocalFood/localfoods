@@ -18,22 +18,24 @@
 
 
 // Make all grid-sized elements block level again
-  // [class*="span"],
-  // .uneditable-input[class*="span"], // Makes uneditable inputs full-width when using grid sizing
-  // .row-fluid [class*="span"] {
-  //   float: none;
-  //   display: block;
-  //   width: 100%;
-  //   margin-left: 0;
-  //   .box-sizing(border-box);
-  // }
+  [class*="span"],
+  .uneditable-input[class*="span"], // Makes uneditable inputs full-width when using grid sizing
+  .row-fluid [class*="span"] {
+    float: none;
+    display: block;
+    width: 100%;
+    margin-left: 0;
+    .box-sizing(border-box);
+  }
 
   .form-horizontal .control-label {
-    width: 160px;
+    // width: 160px;
+    width: 260px;
   }
 
   .form-horizontal .controls {
-    margin-left: 180px;
+    // margin-left: 180px;
+    margin-left: 280px;
   }
 
   #header-login input{

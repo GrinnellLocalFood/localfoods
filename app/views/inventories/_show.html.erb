@@ -24,9 +24,9 @@ $('.show_link').click(function() {
     // refresh the modal so you can go to multiple items without refreshing the whole page
     setTimeout(
       function() {
-         $('#item_show').load(url_string);
-     },
-     100)
+       $('#item_show').load(url_string);
+   },
+   100)
 
  }); // end click
 
@@ -45,16 +45,16 @@ $('.add-to-cart').click(function() {
 
   $('#cart_modal').modal({
     remote: '<%= show_in_modal_cart_path(current_user.cart.id) %>'
-       
+
 });
 
 // note: concern about the delay here too
 // load the modal, but delay it slightly for time to add to cart
 setTimeout(
   function() {
-     $('#cart').load('<%= show_in_modal_cart_path(current_user.cart.id) %>');
- },
- 100)
+   $('#cart').load('<%= show_in_modal_cart_path(current_user.cart.id) %>');
+},
+100)
 
  }); // end click
 // END ADD TO CART BEHAVIOR
@@ -100,16 +100,16 @@ $('.desc').append('<i class="icon-arrow-down sort-arrow"></i>');
 
 
 
-<div align="right" style="margin-right:20px; margin-bottom: -20px;
-margin-top: -5px">
-<%= link_to edit_user_path(params[:id]), :class=>"link", :'data-toggle'=>"tooltip", :title=>"Edit Account" do %>
+    <div id="inventory-edit-icon" align="right">
+    <%= link_to edit_user_path(params[:id]), :class=>"link", :'data-toggle'=>"tooltip",:'data-placement'=>"left", :title=>"Edit Account" do %>
 
-<div class="visible-desktop">
-    <i class="icon-wrench"></i>
+    <div class="visible-desktop">
+        <i class="icon-wrench"></i>
+    </div>
+    <% end %>
 </div>
 <% end %>
-</div>
-<% end %>
+
 
 <% if !(@producer.inventory.inventory_photos.empty?) %>
 <div id="inventory-carousel" class="carousel slide" data-interval="4000">
@@ -133,7 +133,7 @@ margin-top: -5px">
         <% @producer.inventory.inventory_photos.each_with_index do |inventory_photo, index| %>
         <% if index == 0 %>    
         <div class="active item">
-            <%= image_tag inventory_photo.photo.url(:gallery_size) %>
+            <%= image_tag inventory_photo.photo.url(:gallery_size), :id=>"carousel-active" %>
         </div>
         <% else %>
         <div class="item">
@@ -191,8 +191,8 @@ margin-top: -5px">
 <div class="margin-two-five">
 
 
- <% if @remote %>
- <div class="inventory-pagination">
+   <% if @remote %>
+   <div class="inventory-pagination">
     <%= paginate @item, :remote => true %>
 </div>
 <% else %>
@@ -253,45 +253,45 @@ margin-top: -5px">
 
             <!-- add to cart -->
             <% if signed_in? %>
-                        <td class="hidden-phone">
-            <% if current_user && (@producer != current_user) && (item.is_available? == 'Yes') %>
+            <td class="hidden-phone">
+                <% if current_user && (@producer != current_user) && (item.is_available? == 'Yes') %>
 
-        
+
                 <%= link_to "Add to Cart", cart_items_path(:item_id => item), :remote => false, :method => :post, 
                 :class => "btn add-to-cart" %>
                 <% end %>
-                    </td>
-        <% end %>
-                <!-- end add to cart -->
+            </td>
+            <% end %>
+            <!-- end add to cart -->
 
 
-                <!-- inventory controls -->
-                <% if current_user && (current_user.admin || current_user.coordinator || current_user == @producer) %>
-                <td class="hidden-phone">
-                    <%= link_to edit_inventory_item_path({ :inventory_id => params[:id], :id => item.id }), :'data-toggle'=>"tooltip", :title=>"Edit Item" do %>
-                    <i class="icon-wrench"></i>
-                    <% end %>
-                    
-                    <%= link_to inventory_item_path({ :inventory_id => params[:id], :id => item.id }), :confirm => 'Are you sure?', :method => :delete, :'data-toggle'=>"tooltip", :title=>"Delete Item" do %>
-                    <i class="icon-trash"></i>
-                    <% end %>
-                </td>
-
+            <!-- inventory controls -->
+            <% if current_user && (current_user.admin || current_user.coordinator || current_user == @producer) %>
+            <td class="hidden-phone">
+                <%= link_to edit_inventory_item_path({ :inventory_id => params[:id], :id => item.id }), :'data-toggle'=>"tooltip", :title=>"Edit Item" do %>
+                <i class="icon-wrench"></i>
                 <% end %>
-                <!-- end inventory controls -->
 
-            </tr>
-            <% end %> 
-        </table>
+                <%= link_to inventory_item_path({ :inventory_id => params[:id], :id => item.id }), :confirm => 'Are you sure?', :method => :delete, :'data-toggle'=>"tooltip", :title=>"Delete Item" do %>
+                <i class="icon-trash"></i>
+                <% end %>
+            </td>
 
+            <% end %>
+            <!-- end inventory controls -->
 
+        </tr>
         <% end %> 
+    </table>
+
+
+    <% end %> 
 
 
 
 
-        <!-- closing div's from the main show erb file -->
-    </div>
+    <!-- closing div's from the main show erb file -->
+</div>
 </div>
 </div>
 

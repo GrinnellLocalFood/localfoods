@@ -12,6 +12,7 @@ gem 'foreman'
 gem 'tilt'
 gem 'prawn'
 gem 'prawnto'
+gem 'thin'
 
 gem 'jquery-rails'
 

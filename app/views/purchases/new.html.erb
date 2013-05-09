@@ -2,17 +2,13 @@
 	<div class="row-fluid">
 		<div class="span8 offset2 custom-block">
 
+ <%= render :partial => 'cart_change' unless @changed_items.empty? %>
 
 			<div class=" margin-ten" align="center">
 				<h2>Payment Choices</h2>
 				<p>
 					If you pay by cash or check, you're committing to pay for the items at pick-up. If you pay online, you'll be directed to PayPal to complete the transaction.
 				</p>
-				<br>
-
-			
-				 <%= render :partial => 'cart_change' unless @changed_items.empty? %>
-			
 
 				<div id="purchase-buttons">
 					<%= form_for(@purchase, :url => url_for({:controller => "purchases", :action => "create"})) do |f| %>

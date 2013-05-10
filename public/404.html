@@ -1,26 +1,58 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>The page you were looking for doesn't exist (404)</title>
+  <title>This is not a thing (404)</title>
   <style type="text/css">
-    body { background-color: #fff; color: #666; text-align: center; font-family: arial, sans-serif; }
-    div.dialog {
-      width: 25em;
-      padding: 0 4em;
-      margin: 4em auto 0 auto;
-      border: 1px solid #ccc;
-      border-right-color: #999;
-      border-bottom-color: #999;
-    }
-    h1 { font-size: 100%; color: #f00; line-height: 1.5em; }
-  </style>
+  body { background-color: #242b2b; color: white; font-family: arial, sans-serif; }
+  div.dialog {
+    padding: 40px 20px 10px 0px;
+  }
+  div.bear {
+    float: left;
+    display: inline;
+    margin-right: 20px;
+    margin-bottom: 5px;
+
+  }
+
+  #bear-dialog {
+   margin-top: 80px;
+   margin-left: 10%; 
+   margin-right: 10%;
+ }
+
+ #bear-pic {
+  width: 250px;
+}
+
+#somewhere {
+  text-decoration: none;
+  color: white;
+}
+
+#somewhere:hover {
+  text-decoration: underline;
+}
+
+h1 { font-size: 600%; margin: 0; color: white; }
+p { font-size: 140%; line-height: 30px;}
+</style>
 </head>
 
 <body>
-  <!-- This file lives in public/404.html -->
-  <div class="dialog">
-    <h1>The page you were looking for doesn't exist.</h1>
-    <p>You may have mistyped the address or the page may have moved.</p>
+
+  <div id="bear-dialog">
+    <div class="bear">
+      <img id="bear-pic" src="assets/404littlebear.png" />
+   </div>
+
+   <div class="dialog">
+    <h1>Ruh roh.</h1>
+    <p>The page that maybe should be here seems to not be here. You might have mistyped something, or the page might have become lost. But, we are <em>alive</em>.</p>
+    <p><a id="somewhere" href="/">Get back to somewhere.</a></p>
   </div>
+</div>
+
+
 </body>
 </html>

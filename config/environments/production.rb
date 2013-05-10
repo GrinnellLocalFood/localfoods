@@ -78,5 +78,8 @@ Localfoods::Application.configure do
   # default path for action mailer
   config.action_mailer.default_url_options = {:host => "weiser.cs.grinnell.edu"}
 
+  # assets for ie
+  config.assets.precompile += %w(ie.css)
+
 
 end

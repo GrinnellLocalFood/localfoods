@@ -131,8 +131,6 @@ class PurchasesController < ApplicationController
 				return @purchases
 			end
 
-
-
 			def sort_column
 				["buyer", "producer", "product", "paid_for"].include?(params[:sort]) ? params[:sort] : "product"
 			end

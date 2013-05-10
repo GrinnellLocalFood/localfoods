@@ -3,49 +3,67 @@
 <head>
   <title>What is lost can be found again (404)</title>
   <style type="text/css">
-  body { background-color: #242b2b; color: white; font-family: arial, sans-serif; }
-  div.dialog {
+  body { 
+    background-color: #242b2b; 
+    color: white; 
+    font-family: arial, sans-serif; 
+  }
+
+  h1 { 
+    font-size: 600%; 
+    margin: 0; 
+    color: white; 
+  }
+
+  p { 
+    font-size: 140%; 
+    line-height: 30px;
+  }
+
+  #bear-bearrier {
+   margin-top: 80px;
+   max-width: 940px;
+   margin-left: auto; 
+   margin-right: auto;
+   padding-left: 10%;
+   padding-right: 10%;
+  }
+
+  #bear {
+  float: left;
+  display: inline;
+  margin-right: 20px;
+  margin-bottom: 5px;
+  }
+
+  #bearror-of-bad-news {
     padding: 40px 20px 10px 0px;
   }
-  div.bear {
-    float: left;
-    display: inline;
-    margin-right: 20px;
-    margin-bottom: 5px;
+
+  #andy {
+    width: 250px;
   }
 
-  #bear-dialog {
-   margin-top: 80px;
-   margin-left: 10%; 
-   margin-right: 10%;
- }
+  #somewhere {
+    text-decoration: none;
+    color: white;
+  }
 
- #andy {
-  width: 250px;
-}
+  #somewhere:hover {
+    text-decoration: underline;
+  }
 
-#somewhere {
-  text-decoration: none;
-  color: white;
-}
-
-#somewhere:hover {
-  text-decoration: underline;
-}
-
-h1 { font-size: 600%; margin: 0; color: white; }
-p { font-size: 140%; line-height: 30px;}
 </style>
 </head>
 
 <body>
 
-  <div id="bear-dialog">
-    <div class="bear">
-      <img id="andy" src="assets/404littlebear.png" />
+  <div id="bear-bearrier">
+    <div id="bear">
+     <img id="andy" src="assets/404littlebear.png" />
    </div>
 
-   <div class="dialog">
+   <div id="bearror-of-bad-news">
     <h1>Ruh roh.</h1>
     <p>The page that maybe should be here seems to not be here. You might have mistyped something, or the page might have become lost. But remember, we are <em>alive</em>.</p>
     <p><a id="somewhere" href="/">Get back to somewhere.</a></p>

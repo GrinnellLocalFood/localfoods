@@ -17,13 +17,16 @@
       </ul>
     </div>
     <% end %>
+
     <div align="center">
     <% if signed_in? && current_user.admin %>
+
       <h2>Edit Website Content</h2>
-      <section align="left" class="margin-five" style="margin-bottom: 25px;">
+      <section id="edit-content" class="margin-five">
         <p>
         Each of these text sections accepts basic html formatting tags. Please remember to open and close them properly, e.g. &lt;tag&gt;blah&lt;/tag&gt;. Be warned extra spaces can cause problems, so if you're seeing odd spacing that's likely the issue. The most useful tags are probably:
       </p>
+
       <p style="display: inline;">
          &lt;h3&gt;, &lt;h4&gt;, or &lt;h5&gt; for <h3 style="display: inline;">differently </h3> <h4 style="display: inline;">sized </h4> <h5 style="display: inline;">subheadings</h5>
           <br>
@@ -41,14 +44,15 @@
       </section>
 
       <h4 align="left" class="margin-five">Announcements</h4>
-      <%= f.text_area :announcements, :style=>"width: 90%; height: 250px; margin-bottom: 20px;" %>   
-        <h4 align="left" class="margin-five">Pickup Info</h4>
-      <%= f.text_area :pickup_info, :style=>"width: 90%; height: 250px; margin-bottom: 20px;"%>
+      <%= f.text_area :announcements, :class=>"edit-box" %>   
+
+      <h4 align="left" class="margin-five">Pickup Info</h4>
+      <%= f.text_area :pickup_info, :class=>"edit-box"%>
+      
       <h4 align="left" class="margin-five">About Us</h4>
-      <%= f.text_area :about, :style=>"width: 90%; height: 250px; margin-bottom: 20px;" %>
+      <%= f.text_area :about, :class=>"edit-box" %>
     
       
-
     <br>
     <%= f.submit "Save Changes", :class=>"btn btn-large btn-primary" %>
   </div>

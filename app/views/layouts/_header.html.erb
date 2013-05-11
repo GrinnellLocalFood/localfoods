@@ -3,7 +3,7 @@
 <script type="text/javascript">
 $(document).ready(function() {
 
-  $('#cart_link').html('Cart (<%= current_user.cart.cart_items.size %>) ');
+  $('#cart_link').html('<%= link_to_cart_text %>');
 
   $('#cart_link').click(function() {
 

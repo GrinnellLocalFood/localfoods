@@ -11,23 +11,27 @@ $('.producer_link a').click(function() {
 
 	}); // end click
 
+$('.producer_a').data('test', 'false');
+
+
 }); // end ready
 
-
 </script>
+
 
 <div class="container">
 	<div class="row-fluid">
 		<div class="tabbable tabs-left">
 
 			<ul id="inventory-sidebar" class="nav nav-tabs">
-				<li class="producer_link active"> 
+				<li id="all_link" class="producer_link active"> 
 					<%= link_to("All Products", show_all_categories_path, 
 					:remote => true)%>
 				</li>
 
 				<li class="nav-header">Producers</li>
 				
+
 				<% @producers.each do |producer| %>
 				<li class="producer_link"> 
 					<%= link_to(producer.display_name, show_in_index_inventory_path(producer), 
@@ -35,6 +39,34 @@ $('.producer_link a').click(function() {
 				</li>
 				
 				<% end %>
+
+				<!-- Fixes inability for <IE9 to load inventory partials -->
+				<!--[if lt IE 9]>
+				 <style type="text/css">
+
+				 #inventory-sidebar {
+					position: static;
+				 }
+
+				.producer_link {
+					display: none !important;
+				}
+
+				.ie-link a {
+  					padding-left: 4px !important;
+  					font-size: 13px !important;
+				}
+				 </style>
+
+				<% @producers.each do |producer| %>
+				<li class="ie-link"> 
+					<%= link_to(producer.display_name, inventory_path(producer), 
+					:remote => false)%>
+				</li>
+				<% end %>
+
+				<![endif]-->
+
 			</ul>
 
 

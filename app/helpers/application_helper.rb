@@ -51,4 +51,8 @@ def view_link(title, view = nil)
   link_to title, {:order_view => view}, {:class=> "btn btn-info"}
 end
 
+def link_to_cart_text
+  return "Cart(" + current_user.cart.cart_items.count.to_s + ")"
+end
+
 end

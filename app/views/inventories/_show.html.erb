@@ -94,22 +94,6 @@ $('.desc').append('<i class="icon-arrow-down sort-arrow"></i>');
 <!-- End modal for items -->
 
 
-<% if signed_in? && 
-    (current_user.admin || current_user.coordinator || current_user == @producer) %>
-
-
-
-
-    <div id="inventory-edit-icon" align="right">
-    <%= link_to edit_user_path(params[:id]), :class=>"link", :'data-toggle'=>"tooltip",:'data-placement'=>"left", :title=>"Edit Account" do %>
-
-    <div class="visible-desktop">
-        <i class="icon-wrench"></i>
-    </div>
-    <% end %>
-</div>
-<% end %>
-
 
 <% if !(@producer.inventory.inventory_photos.empty?) %>
 <div id="inventory-carousel" class="carousel slide" data-interval="4000">
@@ -166,6 +150,18 @@ $('.desc').append('<i class="icon-arrow-down sort-arrow"></i>');
     <%= simple_format(@producer.inventory.description) %>
 </div>
 
+<% if signed_in? && 
+    (current_user.admin || current_user.coordinator || current_user == @producer) %>
+
+    <div id="inventory-edit-icon" align="right">
+    <%= link_to edit_user_path(params[:id]), :class=>"link", :'data-toggle'=>"tooltip",:'data-placement'=>"left", :title=>"Edit Account" do %>
+
+    <div class="visible-desktop">
+        <i class="icon-wrench"></i>
+    </div>
+    <% end %>
+</div>
+<% end %>
 
 
 <h3 id="current-inventory-title">Current Inventory

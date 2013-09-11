@@ -61,6 +61,8 @@ end
 
   def destroy   
     @item = Item.find(params[:id])
+	# Over here, we can just use item.inventory_id to determine who's inventory it's in, since 
+	# it already exists in the database.
      if (current_user.admin || current_user.coordinator || current_user.id == @item.inventory_id)
         respond_to do |format|
         @cart_items = CartItem.where('item_id = ?', @item.id)
@@ -103,9 +105,12 @@ end
   def create_helper(action)
     @item = Item.new(params[:item])
     @inventory = Inventory.find(params[:inventory_id])
-
+	logger.debug "Inventory ID #{params[:inventory_id]} #{current_user.id}"
     respond_to do |format|
-      if (current_user.admin || current_user.coordinator || current_user.id == @item.inventory_id)
+	# Since the @item is created from the params[:item] hash, it has not been placed in the database yet,
+	# and so will not have an inventory_id yet. So instead we use params[:inventory_id] to figure out
+	# which inventory this item will be added to. We need to do to_i since the param comes in as a string.
+      if (current_user.admin || current_user.coordinator || current_user.id == params[:inventory_id].to_i)
         if @inventory.item << @item
           format.html { redirect_to(inventory_path(@inventory), :alert => 'Item was added successfully.',
             :class=>"alert alert-success") }

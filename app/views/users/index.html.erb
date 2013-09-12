@@ -33,9 +33,9 @@
                     <th>Name</th>
                     <th>Email</th>
                     <th>Phone</th>
+					<th style="font-size: 75%;">Admin</th>
                     <th style="font-size: 75%;">Coordinator</th>
                     <th style="font-size: 75%;">Producer</th>
-                    <th style="font-size: 75%;">Admin</th>
                     <% if current_user.admin || current_user.coordinator %>
                     <th></th>
                     <% end %>
@@ -48,6 +48,7 @@
                     <td><%= user.first_name + " " +user.last_name %></td>
                     <td><%= user.email %></td>
                     <td><%= user.phone %></td>
+					<td><%= user.admin %></td>
                     <td><%= user.coordinator %></td>
 
                     <td>
@@ -58,7 +59,6 @@
                         <% end %>
                     </td>
 
-                    <td><%= user.admin %></td>
                     <% end %>
 
                     

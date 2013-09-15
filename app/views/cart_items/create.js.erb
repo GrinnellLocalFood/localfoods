@@ -1,0 +1,3 @@
+/* This js gets called when a user adds an item to their cart. It updates the cart
+ * count in the header */
+$('#cart_link').html('Cart(<%= current_user.cart.cart_items.size %>)');

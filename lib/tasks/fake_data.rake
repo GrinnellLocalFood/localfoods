@@ -68,7 +68,7 @@ def make_items
       maxorder = minorder + rand(100)
       price = rand(100)
       totalquantity = rand(500)
-      available = (rand(2) > 1) ? true : false
+      available = (rand(2) > 1) ? true : true
       category_id = sampled_category_id
       inventory_id = user.inventory.id
       Item.create!(:name => name,

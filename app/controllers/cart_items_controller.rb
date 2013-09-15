@@ -22,8 +22,8 @@ class CartItemsController < ApplicationController
 			respond_to do |format|
         	format.html { redirect_to(cart_path(current_user))}
         	format.xml  { head :ok }
+        	format.js
         end
-
 	end
 
 	def edit

@@ -67,13 +67,14 @@ Localfoods::Application.routes.draw do
   
   resources :application_states
  
- 
   match '/register', :to => 'users#new'
   match '/login', :to => 'sessions#new'
   match '/logout', :to => 'sessions#destroy'
   match '/admin_coord_newitem', :to => 'items#admin_coord_new'
   match '/admin_coord_createitem', :to => 'items#admin_create'
   match '/editorderstate', :to => 'application_states#editorderstate'
+  match '/email', :to => 'application_states#emailusers'
+  match '/sendemail', :to => 'application_states#sendemail'
   match '/all_orders', :to => 'purchases#all_orders'
   match '/process_order', :to => 'purchases#process_order'
   match '/about', :to => 'pages#about'

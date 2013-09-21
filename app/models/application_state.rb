@@ -3,12 +3,6 @@ class ApplicationState < ActiveRecord::Base
 	attr_accessible :orders_open, :email_content, :email_users, :clear_carts, :announcements, :pickup_info, :about
 	attr_accessor :email_content, :email_users, :clear_carts
 
-	#return boolean
-	def self.orders_open?
-		create_row_if_absent
-		ApplicationState.first.orders_open
-	end
-
 	def self.get_state
 		create_row_if_absent
 		ApplicationState.first
@@ -21,6 +15,12 @@ class ApplicationState < ActiveRecord::Base
 		else
 			"No"
 		end
+	end
+
+	#return boolean
+	def self.orders_open?
+		create_row_if_absent
+		ApplicationState.first.orders_open
 	end
 
 	def self.about_text

@@ -23,31 +23,42 @@
 
     <div align="center">
 
-  
-
-     
-      <div id="email_section" style="width: 75%; margin-top: 20px; text-align: left; ">
-        <p>
-         Hi [User],
-       </p>
-
-       <div id="email_content">
-        <%= f.text_area :email_content, :placeholder=>"Write your message here", :style=>"width: 100%; height: 200px;" %>
+      <!-- Drop down for group selection -->
+      <div class="control-group">
+        <label class="control-label">
+          <%= f.label "Select Group:" %>
+        </label>
+        <div class="controls">
+         <select name="application_state[group]">
+          <option value="all" selected="selected">All Users</option>
+          <option value="producers">Producers</option>
+        </select> 
       </div>
-      <p>
-        Have a great day!
-        <br>
-        Grinnell Local Foods Admins
-      </p>
-
     </div>
 
-    <br>
-    <%= f.submit "Send Email", :class=>"btn btn-primary"%>
+
+    <div id="email_section" style="width: 75%; margin-top: 20px; text-align: left; ">
+      <p>
+       Hi [User],
+     </p>
+
+     <div id="email_content">
+      <%= f.text_area :email_content, :placeholder=>"Write your message here", :style=>"width: 100%; height: 200px;" %>
+    </div>
+    <p>
+      Have a great day!
+      <br>
+      Grinnell Local Foods Admins
+    </p>
+
   </div>
 
+  <br>
+  <%= f.submit "Send Email", :class=>"btn btn-primary"%>
+</div>
 
-  <% end %>
+
+<% end %>
 </div>
 </div>
 </div>

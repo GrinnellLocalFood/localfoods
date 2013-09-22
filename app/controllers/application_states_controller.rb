@@ -45,10 +45,23 @@ class ApplicationStatesController < ApplicationController
   end #update end
 
   def sendemail
-    User.all.each do |user|
+    group = params[:application_state][:group]
+
+    # if group was invalid, fail and redirect them back to the email page
+    if group == ''
+      redirect_to(email_path, :options => {:alert => 'Invalid Group'})
+      return
+    elsif group == 'all'
+      users = User.all
+    elsif group == 'producers'
+      users = User.where(:producer => true)
+    end
+
+    users.each do |user|
       UserMailer.email_users(user, "Subject", params[:application_state][:email_content]).deliver
     end
     redirect_to(current_user, :notice => 'Email successfully sent')
+
   end
 
   def emailusers

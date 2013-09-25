@@ -54,6 +54,7 @@ class Purchase < ActiveRecord::Base
         transaction = "unpaid"
       end
 
+      ret = true
       cart.cart_items.each do |cart_item|
         @purchase = Purchase.new(:item_id => cart_item.item_id, 
                :user_id => cart.user.id,
@@ -61,9 +62,13 @@ class Purchase < ActiveRecord::Base
                :unit_price => cart_item.item.price,
                :paid => paid,
                :order_set => transaction)
-        @purchase.save
+        #if any one of the purchases does not get created, function will return false
+        if !@purchase.save
+          ret = false
+        end
       end
       cart.clear_all_items
+      return ret
   end
 
 end

@@ -16,7 +16,6 @@ class CartItemsController < ApplicationController
 				flash[:notice] = "Updated #{@item.name} in cart"
 			end
 		end
-
 		
 		# redirect_to url_for :controller => 'cart', :action => 'show_in_modal', :id => current_user.cart
 			respond_to do |format|

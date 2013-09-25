@@ -46,6 +46,7 @@ class ApplicationStatesController < ApplicationController
 
   def sendemail
     group = params[:application_state][:group]
+    users = Array.new
 
     # if group was invalid, fail and redirect them back to the email page
     if group == ''
@@ -55,8 +56,25 @@ class ApplicationStatesController < ApplicationController
       users = User.all
     elsif group == 'producers'
       users = User.where(:producer => true)
+    elsif group == 'orderers'
+      cart_ids = CartItem.uniq.pluck(:cart_id)
+      cart_ids.each do |cart_id|
+        user = User.find(cart_id)
+        users << user
+      end
+    elsif group == 'purchasers'
+      user_ids = Purchase.uniq.pluck(:user_id)
+      user_ids.each do |user_id| 
+        user = User.find(user_id)
+        users << user
+      end
     end
 
+    if users.empty?
+      redirect_to(current_user, :notice => 'No one to email.')
+      return
+    end
+            
     users.each do |user|
       UserMailer.email_users(user, "Subject", params[:application_state][:email_content]).deliver
     end

@@ -31,4 +31,12 @@ class UserMailer < ActionMailer::Base
     @subject = subject
     mail(:to => user.email, :subject => subject)
   end
+
+  def confirmation(user, purchases)
+    @user = user
+    @purchases = purchases
+    logger.debug "USERNAME #{user.first_name} purchases #{purchases}"
+    mail(:to => user.email, :subject => "Order Confirmation - Grinnell Local Foods Coop")
+  end
+  
 end

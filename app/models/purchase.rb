@@ -62,13 +62,9 @@ class Purchase < ActiveRecord::Base
                :unit_price => cart_item.item.price,
                :paid => paid,
                :order_set => transaction)
-        #if any one of the purchases does not get created, function will return false
-        if !@purchase.save
-          ret = false
-        end
+        @purchase.save
       end
       cart.clear_all_items
-      return ret
   end
 
 end

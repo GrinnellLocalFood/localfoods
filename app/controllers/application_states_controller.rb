@@ -74,7 +74,7 @@ class ApplicationStatesController < ApplicationController
       redirect_to(current_user, :notice => 'No one to email.')
       return
     end
-            
+
     users.each do |user|
       UserMailer.email_users(user, "Subject", params[:application_state][:email_content]).deliver
     end

@@ -14,6 +14,11 @@ class PurchasesController < ApplicationController
 
 	def create
 		Purchase.create_purchases(current_user.cart, false, nil)
+		purchases = Array.new
+		Purchase.where("user_id = ?", current_user.id).each do |purchase|
+			purchases << purchase
+		end
+		UserMailer.confirmation(current_user, purchases).deliver
 		redirect_to :action => 'index'
 	end		
 
@@ -26,8 +31,6 @@ class PurchasesController < ApplicationController
 			@orders << "unpaid"
 		end
 	end
-
-	
 
 	def all_orders
 		@title = "All Orders"		

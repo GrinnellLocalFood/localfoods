@@ -56,12 +56,6 @@ class ApplicationStatesController < ApplicationController
       users = User.all
     elsif group == 'producers'
       users = User.where(:producer => true)
-    elsif group == 'orderers'
-      cart_ids = CartItem.uniq.pluck(:cart_id)
-      cart_ids.each do |cart_id|
-        user = User.find(cart_id)
-        users << user
-      end
     elsif group == 'purchasers'
       user_ids = Purchase.uniq.pluck(:user_id)
       user_ids.each do |user_id| 

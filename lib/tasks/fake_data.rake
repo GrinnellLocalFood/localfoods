@@ -31,6 +31,7 @@ def create_admin
   admin = true
   producer = true
   coordinator = true
+  phone = "1234567890"
   User.create!(:first_name => first_name,
    :last_name => last_name,
    :email => email,
@@ -38,7 +39,8 @@ def create_admin
    :password_confirmation => password,
    :admin => admin,
    :coordinator => coordinator,
-   :producer => producer)
+   :producer => producer,
+   :phone => phone)
 end
 
 def make_producers
@@ -48,13 +50,14 @@ def make_producers
     email = Faker::Internet.email
     password  = "password"
     producer = true
+    phone = "1234567890"
     @user = User.create!(:first_name => first_name,
      :last_name => last_name,
      :email => email,
      :password => password,
      :password_confirmation => password,
-     :producer => producer)
-
+     :producer => producer,
+     :phone => phone)
   end
 end
 

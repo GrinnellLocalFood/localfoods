@@ -19,13 +19,14 @@ class User < ActiveRecord::Base
   validates_format_of :email, :with => /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\Z/i
   validates :first_name, :presence => true
   validates :last_name, :presence => true
+  validates :phone, :presence => true
   validates :password, 
             :if => "should_validate_password?",
             :presence => true,
             :confirmation => true,
             :length => { :within => 6..40 }
 
-  validates_length_of :phone, :minimum => 10, :maximum => 15, :allow_blank => true
+  validates_length_of :phone, :minimum => 10, :maximum => 15
    
 
   before_save :encrypt_password, :default_values, :update_inventory

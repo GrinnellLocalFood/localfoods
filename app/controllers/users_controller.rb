@@ -1,11 +1,12 @@
 class UsersController < ApplicationController
-
+  helper_method :sort_column, :sort_direction
   skip_before_filter :require_login, :only => [:new, :create]
   # GET /users
   # GET /users.xml
   def index
     @users = User.all
-
+    @users = sorted_users
+    
     if current_user.admin || current_user.coordinator
         respond_to do |format|
         format.html # index.html.erb
@@ -190,4 +191,28 @@ class UsersController < ApplicationController
     end
    end
   end
+
+private
+  # Sorting #
+  def sort_column
+    ["name"].include?(params[:sort]) ? params[:sort] : "name"
+  end
+
+  def sort_direction
+    %w[asc desc].include?(params[:direction]) ? params[:direction] : "asc"
+  end
+
+
+  def sorted_users
+
+    if sort_column == "name"
+      if sort_direction == "asc"
+        return @users.sort_by{|i| i.name }
+      else
+        return @users.sort_by{|i| i.name }.reverse
+      end
+    end
+    return @users
+  end
+
 end

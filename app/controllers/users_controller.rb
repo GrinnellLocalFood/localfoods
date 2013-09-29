@@ -6,7 +6,7 @@ class UsersController < ApplicationController
   def index
     @users = User.all
     @users = sorted_users
-    
+
     if current_user.admin || current_user.coordinator
         respond_to do |format|
         format.html # index.html.erb
@@ -195,7 +195,7 @@ class UsersController < ApplicationController
 private
   # Sorting #
   def sort_column
-    ["name"].include?(params[:sort]) ? params[:sort] : "name"
+    ["name", "admin", "coordinator", "producer"].include?(params[:sort]) ? params[:sort] : "id"
   end
 
   def sort_direction
@@ -212,6 +212,39 @@ private
         return @users.sort_by{|i| i.name }.reverse
       end
     end
+
+    # Need the boolean comparisons to return 0 or 1, because 
+    # comparison operators (<, >) don't apply to bools. INstead we 
+    # return an integer, which can be compared
+    if sort_column == "admin"
+      if sort_direction == "asc"
+        return @users.sort_by{|i| i.admin ? 1 : 0 }
+      else
+        return @users.sort_by{|i| i.admin ? 1 : 0 }.reverse
+      end
+    end
+
+    if sort_column == "producer"
+      if sort_direction == "asc"
+        # any non producers should go to the bottom of the list. We represent them
+        # with "{" character, since its ascii code is greater than that of "Z", so
+        # it will always get put at the end of the list
+        return @users.sort_by{|i| i.producer ? i.inventory.display_name : "{" }
+      else
+        # same as above, except we want the non producers rigth at the TOP of the list
+        # so we use "@" character, for the same ascii reasons
+        return @users.sort_by{|i| i.producer ? i.inventory.display_name : "@"}.reverse
+      end
+    end
+
+    if sort_column == "coordinator"
+      if sort_direction == "asc"
+        return @users.sort_by{|i| i.coordinator ? 1 : 0 }
+      else
+        return @users.sort_by{|i| i.coordinator ? 1 : 0 }.reverse
+      end
+    end
+
     return @users
   end
 

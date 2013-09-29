@@ -33,9 +33,9 @@
                     <th class="hidden-phone hidden-tablet sort"><%= user_sortable "name" %></th>
                     <th>Email</th>
                     <th>Phone</th>
-					<th style="font-size: 75%;">Admin</th>
-                    <th style="font-size: 75%;">Coordinator</th>
-                    <th style="font-size: 75%;">Producer</th>
+					<th style="font-size: 75%;"><%= user_sortable "admin" %></th>
+                    <th style="font-size: 75%;"><%= user_sortable "coordinator" %></th>
+                    <th style="font-size: 75%;"><%= user_sortable "producer" %></th>
                     <% if current_user.admin || current_user.coordinator %>
                     <th></th>
                     <% end %>

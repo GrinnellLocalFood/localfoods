@@ -68,6 +68,8 @@ class ApplicationStatesController < ApplicationController
         user = User.find(user_id)
         users << user
       end
+    elsif group == 'members'
+      users = User.where("producer = ? AND admin = ? AND coordinator = ? ", false, false, false)
     end
 
     if users.empty?

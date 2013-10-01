@@ -38,10 +38,16 @@
       </div>
     </div>
 
-    <textarea cols="40" rows="15" id="email_subject" name="application_state[email_subject]">
-    </textarea>
 
     <div id="email_section" style="width: 75%; margin-top: 20px; text-align: left; ">
+    
+    <p>
+      Subject:
+    </p>
+     <div id="email_content">
+      <%= f.text_area :email_subject, :placeholder=>"Write your subject here", :style=>"width: 100%; height: 20px;" %>
+    </div>
+
       <p>
        Hi [User],
      </p>

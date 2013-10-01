@@ -25,11 +25,9 @@ class UserMailer < ActionMailer::Base
     mail(:to => user.email, :subject => subject)
   end
 
-  def email_users(user, subject, email_text)
-    @user = user
+  def email_users(users, subject, email_text)
     @text = email_text
-    @subject = subject
-    mail(:to => user.email, :subject => subject)
+    mail(:bcc => users, :subject => subject)
   end
 
   def confirmation(user, purchases)

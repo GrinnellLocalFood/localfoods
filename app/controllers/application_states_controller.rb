@@ -73,10 +73,14 @@ class ApplicationStatesController < ApplicationController
         redirect_to(current_user, :notice => 'No one to email.')
         return
       end
-
+      
+      user_emails = Array.new
       users.each do |user|
-        UserMailer.email_users(user, "Subject", params[:application_state][:email_content]).deliver
+        user_emails << user.email
       end
+
+      UserMailer.email_users(user_emails, params[:application_state][:email_subject], params[:application_state][:email_content]).deliver
+
       redirect_to(current_user, :notice => 'Email successfully sent')
     end
   end

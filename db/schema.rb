@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130503194625) do
+ActiveRecord::Schema.define(:version => 20131001020332) do
 
   create_table "application_states", :force => true do |t|
     t.boolean  "orders_open",   :default => false
@@ -20,6 +20,7 @@ ActiveRecord::Schema.define(:version => 20130503194625) do
     t.text     "announcements"
     t.text     "pickup_info"
     t.text     "about"
+    t.string   "email_subject"
   end
 
   create_table "cart_items", :force => true do |t|

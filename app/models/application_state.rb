@@ -1,7 +1,7 @@
 class ApplicationState < ActiveRecord::Base
 
 	attr_accessible :orders_open, :email_content, :email_users, :clear_carts, :announcements, :pickup_info, :about
-	attr_accessor :email_content, :email_users, :clear_carts
+	attr_accessor :email_content, :email_subject, :email_users, :clear_carts
 
 	def self.get_state
 		create_row_if_absent

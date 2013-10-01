@@ -47,35 +47,38 @@ class ApplicationStatesController < ApplicationController
   def sendemail
     group = params[:application_state][:group]
     users = Array.new
+    application_state = ApplicationState.get_state
 
-    # if group was invalid, fail and redirect them back to the email page
-    if group == ''
-      redirect_to(email_path, :options => {:alert => 'Invalid Group'})
-      return
-    elsif group == 'all'
-      users = User.all
-    elsif group == 'producers'
-      users = User.where(:producer => true)
-    elsif group == 'purchasers'
-      user_ids = Purchase.uniq.pluck(:user_id)
-      user_ids.each do |user_id| 
-        user = User.find(user_id)
-        users << user
+    # This update_attributes stores the greeting in the ApplicationState object
+    if application_state.update_attributes(params[:application_state])
+      # if group was invalid, fail and redirect them back to the email page
+      if group == ''
+        redirect_to(email_path, :options => {:alert => 'Invalid Group'})
+        return
+      elsif group == 'all'
+        users = User.all
+      elsif group == 'producers'
+        users = User.where(:producer => true)
+      elsif group == 'purchasers'
+        user_ids = Purchase.uniq.pluck(:user_id)
+        user_ids.each do |user_id| 
+          user = User.find(user_id)
+          users << user
+        end
+      elsif group == 'members'
+        users = User.where("producer = ? AND admin = ? AND coordinator = ? ", false, false, false)
       end
-    elsif group == 'members'
-      users = User.where("producer = ? AND admin = ? AND coordinator = ? ", false, false, false)
-    end
 
-    if users.empty?
-      redirect_to(current_user, :notice => 'No one to email.')
-      return
-    end
+      if users.empty?
+        redirect_to(current_user, :notice => 'No one to email.')
+        return
+      end
 
-    users.each do |user|
-      UserMailer.email_users(user, "Subject", params[:application_state][:email_content]).deliver
+      users.each do |user|
+        UserMailer.email_users(user, "Subject", params[:application_state][:email_content]).deliver
+      end
+      redirect_to(current_user, :notice => 'Email successfully sent')
     end
-    redirect_to(current_user, :notice => 'Email successfully sent')
-
   end
 
   def emailusers

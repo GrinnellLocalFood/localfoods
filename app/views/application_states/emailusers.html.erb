@@ -45,8 +45,8 @@
       Subject:
     </p>
      <div id="email_content">
-      <%= f.text_area :email_subject, :placeholder=>"Write your subject here", :style=>"width: 100%; height: 20px;" %>
-    </div>
+      <%= f.text_area :email_subject, :placeholder=>"Write your subject here", :style=>"width: 50%; height: 20px;" %>
+     </div>
 
       <p>
        Hi [User],
@@ -54,11 +54,11 @@
 
      <div id="email_content">
       <%= f.text_area :email_content, :placeholder=>"Write your message here", :style=>"width: 100%; height: 200px;" %>
-    </div>
+      </div>
     <p>
-      Have a great day!
-      <br>
-      Grinnell Local Foods Admins
+      <div id="email_content">
+      <%= f.text_area :email_signoff, :style=>"width: 50%; height: 60px;" %>
+      </div>
     </p>
 
   </div>

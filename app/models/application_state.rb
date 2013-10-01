@@ -1,6 +1,6 @@
 class ApplicationState < ActiveRecord::Base
 
-	attr_accessible :orders_open, :email_content, :email_users, :clear_carts, :announcements, :pickup_info, :about
+	attr_accessible :orders_open, :email_content, :email_signoff, :email_users, :clear_carts, :announcements, :pickup_info, :about
 	attr_accessor :email_content, :email_subject, :email_users, :clear_carts
 
 	def self.get_state

@@ -176,6 +176,7 @@ $('.desc').append('<i class="icon-arrow-down sort-arrow"></i>');
 
     <%= link_to 'Add Item', producer_new_inventory_items_path(params[:id]), :id=>"inventory-add-button", :class=>"btn btn-info hidden-phone" %>
 
+    <%= link_to 'Reset Availability', reset_availability_inventory_path(@producer), :id=>"multiple-add-button", :class=>"btn hidden-phone" %>
     
 
     <% end %>

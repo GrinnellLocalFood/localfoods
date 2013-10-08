@@ -97,6 +97,17 @@ skip_before_filter :require_login, :only => [:show, :index, :show_in_index, :sho
     end
   end
 
+  def reset_availability
+    items = Item.where("inventory_id = ?", params[:id])
+    Item.transaction do
+      items.each do |item|
+        item.available = false
+        item.save!
+      end
+    end
+    redirect_to(inventory_path(params[:id]))
+  end
+
 private
 
   def filtered_items

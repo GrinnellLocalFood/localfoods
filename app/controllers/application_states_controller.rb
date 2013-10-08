@@ -48,6 +48,7 @@ class ApplicationStatesController < ApplicationController
     group = params[:application_state][:group]
     users = Array.new
     application_state = ApplicationState.get_state
+    greeting = "Members"
 
     # This update_attributes stores the greeting in the ApplicationState object
     if application_state.update_attributes(params[:application_state])
@@ -59,6 +60,7 @@ class ApplicationStatesController < ApplicationController
         users = User.all
       elsif group == 'producers'
         users = User.where(:producer => true)
+        greeting = "Producers"
       elsif group == 'purchasers'
         user_ids = Purchase.uniq.pluck(:user_id)
         user_ids.each do |user_id| 
@@ -79,7 +81,7 @@ class ApplicationStatesController < ApplicationController
         user_emails << user.email
       end
 
-      UserMailer.email_users(user_emails, params[:application_state][:email_subject], params[:application_state][:email_content]).deliver
+      UserMailer.email_users(user_emails, params[:application_state][:email_subject], greeting, params[:application_state][:email_content], params[:application_state][:email_signoff]).deliver
 
       redirect_to(current_user, :notice => 'Email successfully sent')
     end

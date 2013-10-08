@@ -26,6 +26,7 @@ Localfoods::Application.routes.draw do
         get 'show_in_index'
         put 'show_in_index'
         put 'show'
+        get 'reset_availability'
       end
 
     member do

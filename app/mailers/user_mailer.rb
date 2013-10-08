@@ -25,8 +25,10 @@ class UserMailer < ActionMailer::Base
     mail(:to => user.email, :subject => subject)
   end
 
-  def email_users(users, subject, email_text)
+  def email_users(users, subject, greeting, email_text, signoff)
     @text = email_text
+    @greeting = greeting
+    @signoff = signoff
     mail(:bcc => users, :subject => subject)
   end
 

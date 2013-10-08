@@ -80,11 +80,31 @@ $('.close').click(function() {
 $('.asc').append('<i class="icon-arrow-up sort-arrow"></i>');
 $('.desc').append('<i class="icon-arrow-down sort-arrow"></i>');
 
+// onclick for reset availability button 
+$('#reset-availability-button').click(function() {
+    alert('All items will be set to "Not Available"');
+});
+
 }); // end ready
 
 </script>
 
 
+<!-- Modal for cart -->
+<div id="reset-availability-modal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+    <h3 id="myModalLabel">Reset Availability</h3>
+  </div>
+  <div class="modal-body">
+    <p>
+    <%= link_to("Yes", reset_availability_inventory_path(current_user, :reset_value => "yes"), :id=>"button-reset-availability-yes", :class => "btn") %>
+    </p>
+  </div>
+  <div class="modal-footer">
+  </div>
+</div>
+<!-- End modal for cart -->
 
 
 <!-- Modal for items -->
@@ -176,7 +196,7 @@ $('.desc').append('<i class="icon-arrow-down sort-arrow"></i>');
 
     <%= link_to 'Add Item', producer_new_inventory_items_path(params[:id]), :id=>"inventory-add-button", :class=>"btn btn-info hidden-phone" %>
 
-    <%= link_to 'Reset Availability', reset_availability_inventory_path(@producer), :id=>"multiple-add-button", :class=>"btn hidden-phone" %>
+    <%= link_to 'Reset Availability', reset_availability_inventory_path(@producer), :id=>"reset-availability-button", :class=>"btn hidden-phone" %>
     
 
     <% end %>

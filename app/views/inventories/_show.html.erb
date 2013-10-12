@@ -189,6 +189,7 @@ $('#reset-availability-button').click(function() {
 
 
     <% if signed_in? && (current_user.admin || current_user.coordinator || current_user == @producer) %>
+    <%= link_to 'Reset Availability', reset_availability_inventory_path(@producer), :id=>"reset-availability-button", :class=>"btn btn-warning btn-hidden-phone" %>
 
     <%= link_to 'Edit Items', edit_inventory_path(@producer), :id=>"multiple-edit-button",  :class=>"btn hidden-phone" %>
 
@@ -196,7 +197,6 @@ $('#reset-availability-button').click(function() {
 
     <%= link_to 'Add Item', producer_new_inventory_items_path(params[:id]), :id=>"inventory-add-button", :class=>"btn btn-info hidden-phone" %>
 
-    <%= link_to 'Reset Availability', reset_availability_inventory_path(@producer), :id=>"reset-availability-button", :class=>"btn hidden-phone" %>
     
 
     <% end %>

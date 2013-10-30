@@ -48,6 +48,8 @@ $('.add-to-cart').click(function() {
 
 });
 
+
+
 // note: concern about the delay here too
 // load the modal, but delay it slightly for time to add to cart
 setTimeout(
@@ -57,6 +59,12 @@ setTimeout(
 100)
 
  }); // end click
+
+// onclick for reset availability button 
+$('#reset-availability-button').click(function() {
+    alert('All items will be set to "Not Available"');
+});
+
 // END ADD TO CART BEHAVIOR
 
 <% end %>
@@ -80,10 +88,6 @@ $('.close').click(function() {
 $('.asc').append('<i class="icon-arrow-up sort-arrow"></i>');
 $('.desc').append('<i class="icon-arrow-down sort-arrow"></i>');
 
-// onclick for reset availability button 
-$('#reset-availability-button').click(function() {
-    alert('All items will be set to "Not Available"');
-});
 
 }); // end ready
 

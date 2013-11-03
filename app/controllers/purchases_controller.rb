@@ -94,6 +94,52 @@ class PurchasesController < ApplicationController
 				end
 			end
 
+		def report	
+			if (params[:order_view] == "Producer" || params[:order_view] == nil)
+				@title = "Order Reports > By Producer"
+				@purchases_by_producer = Hash.new
+				Purchase.uniq.pluck(:inventory_id).map {|id| @purchases_by_producer[Inventory.find(id)] = 
+					Purchase.where("inventory_id = ?", id).order("paid asc")}
+				@purchases_by_producer.keys.sort
+
+				respond_to do |format|
+					
+					format.html do
+						@markup = 0.025
+						render "producer_report"
+					end
+
+					format.pdf do
+						pdf = ReportPdf.new(params[:order_view], @purchases_by_producer, @title, "Producer")
+						send_data pdf.render, filename: "Producer Report.pdf",
+						type: "application/pdf",
+						disposition: "inline"
+					end
+				end		
+			elsif params[:order_view] == "Buyer"
+				@title = "Order Reports > By Buyer"
+				@users = Array.new
+				ids = Purchase.uniq.pluck(:user_id)
+                                
+                                for id in ids
+                                  @users << User.find(id)
+                                end
+					respond_to do |format|
+						format.html do
+                                                        @markup = 0.025
+							render "buyer_report"
+						end
+
+						format.pdf do
+							pdf = ReportPdf.new(params[:order_view], @users, @title, "Buyer")
+							send_data pdf.render, filename: "Buyer Report.pdf",
+							type: "application/pdf",
+							disposition: "inline"
+						end
+					end
+			end
+		end
+
 			def process_order
 				redirect_to :action => 'index'
 			end

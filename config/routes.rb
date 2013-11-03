@@ -77,6 +77,7 @@ Localfoods::Application.routes.draw do
   match '/email', :to => 'application_states#emailusers'
   match '/sendemail', :to => 'application_states#sendemail'
   match '/all_orders', :to => 'purchases#all_orders'
+  match '/report', :to => 'purchases#report'
   match '/process_order', :to => 'purchases#process_order'
   match '/about', :to => 'pages#about'
   match '/pickup_info', :to => 'pages#pickup_info'

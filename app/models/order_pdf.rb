@@ -9,9 +9,9 @@ class OrderPdf < Prawn::Document
     print_title
     print_purchases
     print_totals
-  else
-     buyer_or_producer(purchases,title,view)
-  end
+    else
+       buyer_or_producer(purchases,title,view)
+    end
   end
 
   def buyer_or_producer(purchases, title, view)

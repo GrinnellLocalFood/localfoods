@@ -25,8 +25,8 @@ class PurchasesController < ApplicationController
 	def index
 		@title = "Order History"
 		# Get all unpaid purchases for this user
-		@orders = Purchase.where("user_id = ? AND paid = ?", current_user.id, false).order("created_at desc").uniq.pluck(:order_set)
-		
+		#@orders = Purchase.where("user_id = ? AND paid = ?", current_user.id, false).order("created_at desc").uniq.pluck(:order_set)
+		@orders = Purchase.where("user_id = ? AND paid = ?", current_user.id, false).order("created_at desc")
 		# Aditi et al. code. We don;t know what this does - Aaltan & Mani
 		# if @orders.include?("unpaid")
 		# 	@orders.delete("unpaid")

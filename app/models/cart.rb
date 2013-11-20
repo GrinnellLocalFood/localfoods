@@ -32,7 +32,7 @@ def paypal_encrypted
     :business => APP_CONFIG[:paypal_email],
     :cmd => '_cart',
     :upload => 1,
-    :invoice => id,
+    :invoice => Purchase.count,
     :no_shipping => 1,
     :cert_id => APP_CONFIG[:paypal_cert_id]
   }

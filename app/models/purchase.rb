@@ -64,7 +64,6 @@ class Purchase < ActiveRecord::Base
                :order_set => transaction)
         @purchase.save
       end
-      cart.clear_all_items
   end
 
 end

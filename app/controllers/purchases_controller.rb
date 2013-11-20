@@ -14,22 +14,24 @@ class PurchasesController < ApplicationController
 
 	def create
 		Purchase.create_purchases(current_user.cart, false, nil)
-		purchases = Array.new
-		Purchase.where("user_id = ?", current_user.id).each do |purchase|
-			purchases << purchase
-		end
-		UserMailer.confirmation(current_user, purchases).deliver
+		# purchases = Array.new
+		# Purchase.where("user_id = ?", current_user.id).each do |purchase|
+		# 	purchases << purchase
+		# end
+		# UserMailer.confirmation(current_user, purchases).deliver
 		redirect_to :action => 'index'
 	end		
 
 	def index
 		@title = "Order History"
-		@orders = Purchase.where("user_id = ?", current_user.id).order("created_at desc").uniq.pluck(:order_set)
-
-		if @orders.include?("unpaid")
-			@orders.delete("unpaid")
-			@orders << "unpaid"
-		end
+		# Get all unpaid purchases for this user
+		@orders = Purchase.where("user_id = ? AND paid = ?", current_user.id, false).order("created_at desc").uniq.pluck(:order_set)
+		
+		# Aditi et al. code. We don;t know what this does - Aaltan & Mani
+		# if @orders.include?("unpaid")
+		# 	@orders.delete("unpaid")
+		# 	@orders << "unpaid"
+		# end
 	end
 
 	def all_orders

@@ -39,28 +39,7 @@ $('.paid').each(function() {
 
         <h2>Ordered Items</h2>
 
-
-
-        <% for order in @orders %>
-        <% purchases = Purchase.where("user_id = ? AND order_set = ?", current_user.id, order) %>
-        <% purchase_time = purchases.first.created_at.in_time_zone("Central Time (US & Canada)") %>
-
-        <table class="table table-bordered">
-          <tr>
-            <th><%= purchase_time.today? ? "Today" : purchase_time.to_date.strftime('%a, %d %b %Y') %> </th>
-            <th>Details</th>
-          </tr>       
-          <tr>
-            <td>
-              <strong>
-                <%= order == "unpaid" ? "Pay at pickup" : "Order Id:" + order %>
-              </strong>
-              <br>
-              Purchased <%= time_ago_in_words(purchase_time) %> ago
-
-            </td>
-
-            <td>          
+            <% if !@purchases.empty? %>      
               <table class="table table-bordered">
                 <tr>
                   <th></th>
@@ -68,41 +47,43 @@ $('.paid').each(function() {
                   <th>Quantity Ordered</th>
                   <th>Price</th>
                 </tr>
-                <% for purchase in purchases %>
-                <td> <% if !(purchase.item.item_photo_file_name.nil?) %>
-                  <media>
-                    <%= image_tag(purchase.item.item_photo.url(:thumb)) %>
-                  </media>
-                  <%end%></td>
-                  <td>
-                    <%= link_to purchase.item.name, inventory_item_path(purchase.item.inventory.id, purchase.item.id)%>
-                    <br>
-                    <em>
-                      <%= link_to purchase.item.inventory.display_name, inventory_path(purchase.item.inventory), :style=>"color:gray;"%>
-                    </em>
+                <% for purchase in @purchases %>
+                  <td> <% if !(purchase.item.item_photo_file_name.nil?) %>
+                    <media align="middle">
+                      <%= image_tag(purchase.item.item_photo.url(:thumb)) %>
+                    </media>
+                    <%end%></td>
+                    <td>
+                      <%= link_to purchase.item.name, inventory_item_path(purchase.item.inventory.id, purchase.item.id)%>
+                      <br>
+                      <em>
+                        <%= link_to purchase.item.inventory.display_name, inventory_path(purchase.item.inventory), :style=>"color:gray;"%>
+                      </em>
+                    </td>
+                    <td><%= purchase.quantity %></td>
+                    <td><%= number_to_currency(purchase.quantity*purchase.item.price) %></td>    
                   </td>
-                  <td><%= purchase.quantity %></td>
-                  <td><%= number_to_currency(purchase.quantity*purchase.item.price) %></td>    
-                </td>
 
-              </tr>
-              <% end %>
-            </table>
-          </td>
-        </table>
-        <% end %>
+                </tr>
+                <% end %>
+                <div align="right">
+                  <%= form_tag APP_CONFIG[:paypal_url] do %>
+                  <%= hidden_field_tag :cmd, "_s-xclick" %>
+                  <%= hidden_field_tag :encrypted, current_user.cart.paypal_encrypted %>
+                  <%= submit_tag "Pay Online", :class=>"btn btn-large btn-primary", :confirm => 'Are you sure you want to check out?'  %>
+                  <% end %>
+                </div>
+              </table>
+            <% else %>
+              <strong>You have not placed an order yet!</strong>
+            <% end %>
+          
 
 
         <% if current_user.pending_payment > 0 %>
         <h4 id="cart_total" style="text-align: right;">Total Pending: <%= number_to_currency current_user.pending_payment %></h4>
         <% end %>
-        <div align="right">
-          <%= form_tag APP_CONFIG[:paypal_url] do %>
-          <%= hidden_field_tag :cmd, "_s-xclick" %>
-          <%= hidden_field_tag :encrypted, current_user.cart.paypal_encrypted %>
-          <%= submit_tag "Pay Online", :class=>"btn btn-large btn-primary", :confirm => 'Are you sure you want to check out?'  %>
-          <% end %>
-        </div>
+        
       </div>
     </div>
   </div>

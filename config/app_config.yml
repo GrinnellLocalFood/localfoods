@@ -1,7 +1,7 @@
 development:
-  paypal_email: royaditi@grinnell.edu
+  paypal_email: localfood.seller@gmail.com
   paypal_secret: RTGFER45RT
-  paypal_cert_id: BUUXQ8VASR7XA
+  paypal_cert_id: CB6M7BGLH5CPE
   paypal_url: "https://www.sandbox.paypal.com/cgi-bin/webscr"
 
 test:

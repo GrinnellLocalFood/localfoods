@@ -1,0 +1,24 @@
+<div id="cart">
+
+Hi <%= @user.first_name %>!
+<br><br>
+Here is your order confirmation:
+<br>
+<table class="table">
+  <tr>
+    <th>Product</th>
+    <th>Qty</th>
+    <th>Unit Price</th>
+    <th>Full Price</th>
+  </tr>
+  <% for purchase in @purchases %>
+  <td><%= purchase.item.name %></td>
+  <td><%= purchase.quantity %></td>
+  <td class="cart_item_price"><%= number_to_currency(purchase.unit_price) %></td>
+  <td class="cart_full_price"><%= number_to_currency(purchase.quantity*purchase.unit_price) %></td>
+</tr>
+</tr>
+<% end %>
+</table>
+<br>
+<b>Total payment due: <%= number_to_currency @user.pending_payment %></b>

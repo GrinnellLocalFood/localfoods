@@ -8,23 +8,23 @@ class Cart < ActiveRecord::Base
   	cart_items.to_a.sum(&:full_price)
   end
 
-def paypal_url
-  values = {
-    :business => 'royaditi@grinnell.edu',
-    :cmd => '_cart',
-    :upload => 1,
-    :no_shipping => 1,
-    :invoice => id
-  }
-  cart_items.each_with_index do |item, index|
-    values.merge!({
+  def paypal_url
+    values = {
+      :business => 'localfood.seller@gmail.com',
+      :cmd => '_cart',
+      :upload => 1,
+      :no_shipping => 1,
+      :invoice => id
+    }
+    cart_items.each_with_index do |item, index|
+      values.merge!({
       "amount_#{index+1}" => item.item.price,
       "item_name_#{index+1}" => item.item.name,
       "item_number_#{index+1}" => item.item.id,
       "quantity_#{index+1}" => item.quantity.to_i
-    })
+      })
   end
-  "https://www.sandbox.paypal.com/cgi-bin/webscr?" + values.to_query
+"https://www.sandbox.paypal.com/cgi-bin/webscr?" + values.to_query
 end
 
 def paypal_encrypted
@@ -42,7 +42,7 @@ def paypal_encrypted
       "item_name_#{index+1}" => item.item.name,
       "item_number_#{index+1}" => item.item.id,
       "quantity_#{index+1}" => item.quantity.to_i
-    })
+      })
   end
   encrypt_for_paypal(values)
 end
@@ -56,35 +56,35 @@ def encrypt_for_paypal(values)
   OpenSSL::PKCS7::encrypt([OpenSSL::X509::Certificate.new(PAYPAL_CERT_PEM)], signed.to_der, OpenSSL::Cipher::Cipher::new("DES3"), OpenSSL::PKCS7::BINARY).to_s.gsub("\n", "")
 end
 
-  def clear_all_items
-    cart_items.each do |cart_item|
-      cart_item.destroy
-    end
+def clear_all_items
+  cart_items.each do |cart_item|
+    cart_item.destroy
   end
+end
 
-  def is_empty?
-    cart_items.nil? || cart_items.empty?
-  end
+def is_empty?
+  cart_items.nil? || cart_items.empty?
+end
 
-  def invalid_items
-    changed_items = Hash.new
-    cart_items.all.each do |cart_item|
-      
-      if !cart_item.still_available?
-        if cart_item.find_quantity_available > 0
-          cart_item.quantity = cart_item.find_quantity_available
-          changed_items[cart_item.item] = "Quantity available reduced"
-          cart_item.save
-        elsif cart_item.item.minorder > cart_item.quantity
-          changed_items[cart_item.item] = "The minimum order for this item was changed, re-add to cart"
-        else
-          changed_items[cart_item.item] = "Item no longer available"
-          cart_item.destroy
-        end
+def invalid_items
+  changed_items = Hash.new
+  cart_items.all.each do |cart_item|
+
+    if !cart_item.still_available?
+      if cart_item.find_quantity_available > 0
+        cart_item.quantity = cart_item.find_quantity_available
+        changed_items[cart_item.item] = "Quantity available reduced"
+        cart_item.save
+      elsif cart_item.item.minorder > cart_item.quantity
+        changed_items[cart_item.item] = "The minimum order for this item was changed, re-add to cart"
+      else
+        changed_items[cart_item.item] = "Item no longer available"
+        cart_item.destroy
       end
     end
-    return changed_items
   end
+  return changed_items
+end
 
 def self.clear_all
   Cart.all.each do |cart|

@@ -1,0 +1,12 @@
+Hi <%= @user.first_name %>!
+
+Here is your order confirmation:
+
+<% for purchase in @purchases %>
+<%= purchase.item.name %>
+ <%= purchase.quantity %>
+ <%= number_to_currency(purchase.unit_price) %>
+ <%= number_to_currency(purchase.quantity*purchase.unit_price) %>
+<% end %>
+
+Total payment due: <%= number_to_currency current_user.pending_payment %>

@@ -38,7 +38,7 @@ def paypal_encrypted
   }
   cart_items.each_with_index do |item, index|
     values.merge!({
-      "amount_#{index+1}" => item.item.price,
+      "amount_#{index+1}" => item.item.markup_price,
       "item_name_#{index+1}" => item.item.name,
       "item_number_#{index+1}" => item.item.id,
       "quantity_#{index+1}" => item.quantity.to_i

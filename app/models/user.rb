@@ -69,6 +69,14 @@ class User < ActiveRecord::Base
    return total_payment - processed_payment
   end
 
+  def markup_payment
+    return (pending_payment * 1.025).round(2)
+  end
+
+  def markup
+    return (pending_payment * 0.025).round(2)
+  end
+
   def total_payment
     total = 0.0
     Purchase.where("user_id = ? ", id).each do |purchase|

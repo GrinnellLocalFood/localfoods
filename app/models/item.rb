@@ -65,38 +65,45 @@ class Item < ActiveRecord::Base
 		totalquantity - totalordered
 	end
 
+	def markup_price
+		return BigDecimal.new((1.025 * price).to_s).round(2)
+	end
+
 	private
 
-	def format_values
-		if(self.description.nil?)
-			self.description = ""
+		def format_values
+			if(self.description.nil?)
+				self.description = ""
+			end
+			
+			if(self.units.nil? || self.units.empty?)
+				self.units = "units"
+			end
+			self.units = self.units.downcase
 		end
+
+		def order(quantity)
+			if (ApplicationState.orders_open? && (available && valid_quantity?(quantity)))
+				self.totalordered += quantity
+			end
+		end
+
+		def valid_quantity?(quantity)
+			(quantity >= minorder) && (quantity <= maxorder) && (quantity <= self.num_remaining)
+		end
+
+		def update_availability
+			self.available = (self.num_remaining >= minorder)
+	  		#must return true because before_save cancels save if this method returns false
+	  		return true
+		end
+
+
+		def reset_quantity
+			self.totalordered = 0
+			self.available = true
+		end
+
 		
-		if(self.units.nil? || self.units.empty?)
-			self.units = "units"
-		end
-		self.units = self.units.downcase
-	end
 
-	def order(quantity)
-		if (ApplicationState.orders_open? && (available && valid_quantity?(quantity)))
-			self.totalordered += quantity
-		end
-	end
-
-	def valid_quantity?(quantity)
-		(quantity >= minorder) && (quantity <= maxorder) && (quantity <= self.num_remaining)
-	end
-
-	def update_availability
-		self.available = (self.num_remaining >= minorder)
-  		#must return true because before_save cancels save if this method returns false
-  		return true
-	end
-
-
-	def reset_quantity
-		self.totalordered = 0
-		self.available = true
-	end
 end

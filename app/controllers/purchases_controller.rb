@@ -14,6 +14,7 @@ class PurchasesController < ApplicationController
 
 	def create
 		Purchase.create_purchases(current_user.cart, false, nil)
+		current_user.cart.clear_all_items
 		# purchases = Array.new
 		# Purchase.where("user_id = ?", current_user.id).each do |purchase|
 		# 	purchases << purchase

@@ -5,7 +5,8 @@ describe Item do
     @attr = { :id => -1, 
               :first_name => "Example", 
               :last_name => "User", 
-              :email => "user@example.com", 
+              :email => "user@example.com",
+              :phone => "123123123",
               :password => "password",
               :password_confirmation => "password"}
     @item = { :name => "Apple", 

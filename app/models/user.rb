@@ -26,7 +26,7 @@ class User < ActiveRecord::Base
             :confirmation => true,
             :length => { :within => 6..40 }
 
-  validates_length_of :phone, :minimum => 10, :maximum => 15
+  validates_length_of :phone, :minimum => 9, :maximum => 14
    
 
   before_save :encrypt_password, :default_values, :update_inventory

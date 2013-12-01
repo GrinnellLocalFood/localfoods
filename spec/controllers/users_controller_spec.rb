@@ -194,12 +194,7 @@ end
     describe "success for non-admins" do
 
       before(:each) do
-      @attr = { :id => -1, 
-        :first_name => "Example", 
-        :last_name => "User", 
-        :email => "user@example.com", 
-        :password => "password",
-        :password_confirmation => "password"}
+      @attr = Factory.attributes_for(:user_properties)
      end
 
       it "should create a user" do
@@ -223,12 +218,7 @@ end
     
     before(:each) do
       @admin = test_sign_in(Factory(:user, :admin => true))
-      @attr = { :id => -1, 
-        :first_name => "Example", 
-        :last_name => "User", 
-        :email => "user@example.com", 
-        :password => "password",
-        :password_confirmation => "password"}
+      @attr = Factory.attributes_for(:user_properties)
      end
       
       it "should not redirect to the created user's show page" do
@@ -245,12 +235,7 @@ end
     describe "failure" do
       
       before(:each) do
-        @attr = { :id => -1, 
-        :first_name => "Example", 
-        :last_name => "User", 
-        :email => "user@example.com", 
-        :password => "password",
-        :password_confirmation => "" }
+        @attr = Factory.attributes_for(:user_properties, password_confirmation:"")
       end
   
       it "should render the 'new' page" do

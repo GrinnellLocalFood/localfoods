@@ -21,7 +21,7 @@ class CartItem < ActiveRecord::Base
  	end
 
   def markup_price
-    item.markup_price
+    item.markup_price * quantity
   end
 
  	def quantity_greater_than_minorder

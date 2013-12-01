@@ -4,6 +4,7 @@ class PurchasesController < ApplicationController
 	
 	def new
 		# The following validates whether itams still exist
+		@cart = current_user.cart
 		@changed_items = current_user.cart.invalid_items
 		if(current_user.cart.is_empty?)
 			render "error"			

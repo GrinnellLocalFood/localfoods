@@ -109,33 +109,34 @@ class UsersController < ApplicationController
     end
   end
 
+  def after_signin(format)
+    session[:return_to] = user_path(@user) if(session[:return_to].nil?)
+
+    format.html { redirect_to(session[:return_to], :notice => 'User was successfully updated.') }
+    format.xml  { head :ok }
+  end
+
   # PUT /users/1
   # PUT /users/1.xml
   def update
     @user = User.find(params[:id])
 
-    if(session[:return_to].nil?)
-      session[:return_to] = user_path(@user)
-    end
-
     respond_to do |format|
       if @user.update_attributes(params[:user])
         if current_user != nil && (current_user.admin || current_user.coordinator)
           sign_in current_user
-          format.html { redirect_to(session[:return_to], :notice => 'User was successfully updated.') }
-          format.xml  { head :ok }
+          after_signin(format)
         else
           sign_in @user
-          format.html { redirect_to(session[:return_to], :notice => 'User was successfully updated.') }
-          format.xml  { head :ok }
+          after_signin(format)
         end
         
       else
         sign_in @user
 
-    if(!@user.inventory.nil?)
-        2.times {@user.inventory.inventory_photos.build}
-    end
+      if(!@user.inventory.nil?)
+          2.times {@user.inventory.inventory_photos.build}
+      end
 
         format.html { render :action => "edit" }
         format.xml  { render :xml => @user.errors, :status => :unprocessable_entity }
@@ -152,15 +153,12 @@ class UsersController < ApplicationController
       if @user.has_password?(params[:user][:old_password])
         if @user.update_attributes(params[:user])
           sign_in @user
-          format.html { redirect_to(@user, :alert => 'User was successfully updated.') }
-         format.xml  { head :ok }
+          after_signin(format)
        else
           sign_in @user
           format.html { render :action => "editpassword" }
           format.xml  { render :xml => @user.errors, :status => :unprocessable_entity }
         end
-
-# FIX HOW ALERTS ARE FLASHED HERE
 
       else
         flash.now[:alert] = "Old Password Incorrect."

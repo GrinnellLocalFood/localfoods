@@ -5,14 +5,14 @@
  <%= render :partial => 'cart_change' unless @changed_items.empty? %>
 
 			<div class=" margin-ten" align="center">
-				<h2>Payment Choices</h2>
+				<h2>Payment</h2>
 				<p>
-					If you pay by cash or check, you're committing to pay for the items at pick-up. If you pay online, you'll be directed to PayPal to complete the transaction.
+					By clicking this button you're committing to pay for the items at pick-up.
 				</p>
 
 				<div id="purchase-buttons">
 					<%= form_for(@purchase, :url => url_for({:controller => "purchases", :action => "create"})) do |f| %>
-					<%= f.submit "Pay Online", :class=>"btn btn-large btn-primary" %>
+					<%= f.submit "Потвърди поръчка", :class=>"btn btn-large btn-primary" %>
 					<% end %>
 				</div>
 

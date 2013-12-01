@@ -7,7 +7,7 @@ $('.paid').each(function() {
     $(this).addClass('success-cell');
   } else {
     // Will make unpaid items have red cell
-    // $(this).addClass('danger-cell');
+     $(this).addClass('danger-cell');
   }
   });
 
@@ -26,8 +26,6 @@ $('.paid').each(function() {
         </div>
 
         <h2><%= @title %></h2>
-
-        
 
         <table class="table table-bordered table-striped" >
           <tr>
@@ -52,22 +50,18 @@ $('.paid').each(function() {
       <% end %>
     </table>
 
-<!-- Divider -->
-<ul class="nav nav-list">
-<li class="divider"></li>
-</ul>
+    <!-- Divider -->
+    <ul class="nav nav-list">
+    <li class="divider"></li>
+    </ul>
 
     <div id="order-totals">
-    <h4 id="total">Total Revenue: <%= number_to_currency Purchase.total_payment %></h4>
-    <h4 id="pending-total"> Pending Payment: <%= number_to_currency  Purchase.pending_payment %></h4>
-    <h4 id="processed-total"> Processed Payment: <%= number_to_currency Purchase.processed_payment %></h4>
+      <h4 id="subtotal">Subtotal Revenue: <%= number_to_currency Purchase.subtotal_payment %></h4>
+      <h4 id="handling-fee">Handling Total: <%= number_to_currency Purchase.handling_fee %></h4>
+      <h4 id="total">Total Revenue: <%= number_to_currency Purchase.total_payment %></h4>
+      <h4 id="pending-total"> Pending Payment: <%= number_to_currency  Purchase.pending_payment %></h4>
+      <h4 id="processed-total"> Processed Payment: <%= number_to_currency Purchase.processed_payment %></h4>
     </div>
-
-
-
-
- 
-
 
   </div>
 </div>

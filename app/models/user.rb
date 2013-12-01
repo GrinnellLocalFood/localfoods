@@ -70,11 +70,11 @@ class User < ActiveRecord::Base
   end
 
   def markup_payment
-    return (pending_payment * 1.025).round(2)
+    return (pending_payment * 1.1).round(2)
   end
 
   def markup
-    return (pending_payment * 0.025).round(2)
+    return (pending_payment * 0.1).round(2)
   end
 
   def total_payment

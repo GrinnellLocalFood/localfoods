@@ -108,7 +108,7 @@ class PurchasesController < ApplicationController
 				respond_to do |format|
 					
 					format.html do
-						@markup = 0.025
+						@markup = 0.1
 						render "producer_report"
 					end
 
@@ -129,7 +129,7 @@ class PurchasesController < ApplicationController
                                 end
 					respond_to do |format|
 						format.html do
-                                                        @markup = 0.025
+              @markup = 0.1
 							render "buyer_report"
 						end
 

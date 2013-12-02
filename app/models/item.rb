@@ -66,7 +66,7 @@ class Item < ActiveRecord::Base
 	end
 
 	def markup_price
-		return BigDecimal.new((1.025 * price).to_s).round(2)
+		return BigDecimal.new((1.1 * price).to_s).round(2)
 	end
 
 	private

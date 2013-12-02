@@ -7,7 +7,7 @@ $('.paid').each(function() {
     $(this).addClass('success-cell');
   } else {
     // Will make unpaid items have red cell
-    // $(this).addClass('danger-cell');
+    $(this).addClass('danger-cell');
   }
   });
 
@@ -19,22 +19,22 @@ $('.paid').each(function() {
     <div class="span12 custom-block">
       <div id="all-orders-table" class="margin-five">
 
-     <div style="float: right; margin-top: 4px;">
-          <%= view_link "View By Buyer", "Buyer" %>
-	  <%= view_link "View By Producer", "Producer" %>
-          <%= link_to "PDF", report_path(:format => 'pdf', :order_view => 'Buyer'), :class=>"btn btn-gray" %>
-        </div>
+      <div style="float: right; margin-top: 4px;">
+        <%= view_link "View By Buyer", "Buyer" %>
+        <%= view_link "View By Producer", "Producer" %>
+        <%= link_to "PDF", report_path(:format => 'pdf', :order_view => 'Buyer'), :class=>"btn btn-gray" %>
+      </div>
 
-        <h2><%= @title %></h2>
-        <table class="table table-bordered table-striped" >
-          <tr>
-            <th>Member Name</th>
-            <th>Order Total</th>
-            <th>Handling Fee</th>
-            <th>Payment</th>
-          </tr>
+      <h2><%= @title %></h2>
+      <table class="table table-bordered table-striped" >
+        <tr>
+          <th>Member Name</th>
+          <th>Order Total</th>
+          <th>Handling Fee</th>
+          <th>Payment</th>
+        </tr>
 
-          <% for user in @users %>
+        <% for user in @users %>
           <td><%= user.name %></td>
           <td><%= number_to_currency(user.total_payment) %></td>
           <td><%= number_to_currency(user.total_payment * @markup) %></td>

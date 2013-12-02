@@ -2,13 +2,7 @@ require 'spec_helper'
 
 describe InventoriesController do
 	before(:each) do
-    @attr = { :first_name => "Example", 
-              :last_name => "User", 
-              :email => "user@example.com", 
-              :password => "password",
-              :password_confirmation => "password",
-          	  :producer => true}
-    @user = User.create!(@attr)
+    @user = Factory.create(:user_producer)
   end
 
   render_views

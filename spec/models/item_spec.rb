@@ -2,12 +2,7 @@ require 'spec_helper'
 
 describe Item do
    before(:each) do
-    @attr = { :id => -1, 
-              :first_name => "Example", 
-              :last_name => "User", 
-              :email => "user@example.com", 
-              :password => "password",
-              :password_confirmation => "password"}
+    @attr = Factory.attributes_for(:user)
     @item = { :name => "Apple", 
               :description => "blah",
               :minorder => 5, 

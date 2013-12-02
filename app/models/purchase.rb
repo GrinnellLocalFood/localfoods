@@ -1,5 +1,5 @@
 class Purchase < ActiveRecord::Base
-  attr_accessible :item_id, :quantity, :inventory_id, :unit_price, :user_id, :paid, :order_set, :created_at
+  attr_accessible :item_id, :quantity, :inventory_id, :unit_price, :user_id, :paid, :order_set, :created_at, :markup_price
 
   belongs_to :item
   belongs_to :user
@@ -27,25 +27,41 @@ class Purchase < ActiveRecord::Base
   end
 
   def full_price
- 		unit_price * quantity
+    unit_price * quantity
+  end
+
+  def self.markup_price
+    total = 0
+    Purchase.where("paid = ?", false).each {|purchase| total += purchase.item.markup_price}
+    return total
+  end 
+
+  def self.handling_fee
+    self.total_payment - self.subtotal_payment
   end
 
   def self.pending_payment
-  	total = 0
-  	Purchase.where("paid = ?", false).each {|purchase| total += purchase.full_price}
-  	return total
+    total = 0
+    Purchase.where("paid = ?", false).each {|purchase| total += purchase.item.markup_price * purchase.quantity}
+    return total
   end
 
   def self.total_payment
-  	total = 0
-  	Purchase.all.each {|purchase| total += purchase.full_price}
-  	return total
+    total = 0
+    Purchase.all.each {|purchase| total += purchase.item.markup_price* purchase.quantity}
+    return total
+  end
+
+  def self.subtotal_payment
+    total = 0
+    Purchase.all.each {|purchase| total += purchase.full_price}
+    return total
   end
 
   def self.processed_payment
-  	total = 0
-  	Purchase.where("paid = ?", true).each {|purchase| total += purchase.full_price}
-  	return total
+    total = 0
+    Purchase.where("paid = ?", true).each {|purchase| total += purchase.item.markup_price}
+    return total
   end
 
   def self.create_purchases(cart, paid, transaction)

@@ -1,0 +1,27 @@
+<table class="table table-bordered">
+  <tr>
+    <th></th>
+    <th>Item</th>
+    <th>Quantity Ordered</th>
+    <th>Price</th>
+  </tr>
+  <% for purchase in purchases %>
+    <td> <% if !(purchase.item.item_photo_file_name.nil?) %>
+      <media align="middle">
+        <%= image_tag(purchase.item.item_photo.url(:thumb)) %>
+      </media>
+      <%end%></td>
+      <td>
+        <%= link_to purchase.item.name, inventory_item_path(purchase.item.inventory.id, purchase.item.id)%>
+        <br>
+        <em>
+          <%= link_to purchase.item.inventory.display_name, inventory_path(purchase.item.inventory), :style=>"color:gray;"%>
+        </em>
+      </td>
+      <td><%= purchase.quantity %></td>
+      <td><%= number_to_currency(purchase.quantity*purchase.item.price) %></td>    
+    </td>
+
+  </tr>
+  <% end %>
+</table>

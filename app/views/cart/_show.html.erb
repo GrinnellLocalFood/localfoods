@@ -46,7 +46,10 @@ $(this).attr('disabled', true);
 </tr>
 <% end %>
 </table>
-
-<h5 id="cart_total" style="float:right; margin-right: 10px">Total: <%= number_to_currency @cart.total_price %></h5>
+<div style="float:right; margin-right: 10px; text-align: right">
+  <h4 id="subtotal">Subtotal: <%= number_to_currency @cart.subtotal_price %></h4>
+  <h4 id="handling_fee">Handling fee: <%= number_to_currency @cart.handling_price %></h5>
+  <h4 id="cart_total">Total: <%= number_to_currency @cart.total_price %></h5>
+</div>
 
 </div>

@@ -1,24 +1,31 @@
 <div class="container">
-	<div class="row-fluid">
-		<div class="span8 offset2 custom-block">
+  <div class="row-fluid">
+    <div class="span8 offset2 custom-block">
 
- <%= render :partial => 'cart_change' unless @changed_items.empty? %>
+      <%= render :partial => 'cart_change' unless @changed_items.empty? %>
 
-			<div class=" margin-ten" align="center">
-				<h2>Payment Choices</h2>
-				<p>
-					If you pay by cash or check, you're committing to pay for the items at pick-up. If you pay online, you'll be directed to PayPal to complete the transaction.
-				</p>
+      <div class=" margin-ten" align="center">
+        <h2>Payment</h2>
+        <p>
+          By clicking this button you're committing to pay for the items at pick-up.
+        </p>
 
-				<div id="purchase-buttons">
-					<%= form_for(@purchase, :url => url_for({:controller => "purchases", :action => "create"})) do |f| %>
-					<%= f.submit "Pay Online", :class=>"btn btn-large btn-primary" %>
-					<% end %>
-				</div>
+        <%= render :partial => 'purchases', :locals => { :purchases => @cart.cart_items } %>
+        <div style="float:right; margin-right: 10px; text-align: right">
+          <h4 id="subtotal">Subtotal: <%= number_to_currency @cart.subtotal_price %></h4>
+          <h4 id="handling_fee">Handling fee: <%= number_to_currency @cart.handling_price %></h5>
+          <h4 id="cart_total">Total: <%= number_to_currency @cart.total_price %></h5>
+        </div>
 
-			</div>
+        <div id="purchase-buttons">
+          <%= form_for(@purchase, :url => url_for({:controller => "purchases", :action => "create"})) do |f| %>
+          <%= f.submit "Потвърди поръчка", :class=>"btn btn-large btn-primary" %>
+          <% end %>
+        </div>
 
-		</div>
+      </div>
 
-	</div>
+    </div>
+
+  </div>
 </div>

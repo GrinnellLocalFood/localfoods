@@ -4,6 +4,7 @@ class PurchasesController < ApplicationController
 	
 	def new
 		# The following validates whether itams still exist
+		@cart = current_user.cart
 		@changed_items = current_user.cart.invalid_items
 		if(current_user.cart.is_empty?)
 			render "error"			
@@ -14,6 +15,7 @@ class PurchasesController < ApplicationController
 
 	def create
 		Purchase.create_purchases(current_user.cart, false, nil)
+		current_user.cart.clear_all_items
 		# purchases = Array.new
 		# Purchase.where("user_id = ?", current_user.id).each do |purchase|
 		# 	purchases << purchase
@@ -107,7 +109,7 @@ class PurchasesController < ApplicationController
 				respond_to do |format|
 					
 					format.html do
-						@markup = 0.025
+						@markup = 0.1
 						render "producer_report"
 					end
 
@@ -128,7 +130,7 @@ class PurchasesController < ApplicationController
                                 end
 					respond_to do |format|
 						format.html do
-                                                        @markup = 0.025
+              @markup = 0.1
 							render "buyer_report"
 						end
 

@@ -26,7 +26,7 @@ class User < ActiveRecord::Base
             :confirmation => true,
             :length => { :within => 6..40 }
 
-  validates_length_of :phone, :minimum => 10, :maximum => 15
+  validates_length_of :phone, :minimum => 9, :maximum => 14
    
 
   before_save :encrypt_password, :default_values, :update_inventory
@@ -70,11 +70,11 @@ class User < ActiveRecord::Base
   end
 
   def markup_payment
-    return (pending_payment * 1.025).round(2)
+    return (pending_payment * 1.1).round(2)
   end
 
   def markup
-    return (pending_payment * 0.025).round(2)
+    return (pending_payment * 0.1).round(2)
   end
 
   def total_payment

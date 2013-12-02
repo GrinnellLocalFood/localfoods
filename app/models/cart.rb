@@ -4,8 +4,16 @@ class Cart < ActiveRecord::Base
   belongs_to :user, :foreign_key => "user_id"
   accepts_nested_attributes_for :cart_items, :update_only => true
 
+  def subtotal_price
+    cart_items.to_a.sum(&:full_price)
+  end
+
+  def handling_price
+    total_price-subtotal_price
+  end
+
   def total_price
-  	cart_items.to_a.sum(&:full_price)
+    cart_items.to_a.sum(&:markup_price)
   end
 
   def paypal_url

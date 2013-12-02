@@ -1,0 +1,6 @@
+bg:
+  number:
+    currency:
+      format:
+        format: "%n %u"
+        unit: "лв"

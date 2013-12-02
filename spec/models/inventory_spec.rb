@@ -3,12 +3,7 @@ require 'spec_helper'
 describe Inventory do
 
   before(:each) do
-    @attr = { :id => -1, 
-              :first_name => "Example", 
-              :last_name => "User", 
-              :email => "user@example.com", 
-              :password => "password",
-              :password_confirmation => "password"}
+    @attr = Factory.attributes_for(:user)
   end
 
   it "should create a producer possessing a inventory with the correct id" do

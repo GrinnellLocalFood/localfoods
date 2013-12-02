@@ -38,12 +38,8 @@ describe SessionsController do
   describe "with valid email and password" do
 
     before(:each) do
-      @attr = { :first_name => "Example", 
-        :last_name => "User", 
-        :email => "user@example.com", 
-        :password => "password",
-        :password_confirmation => "password"}
-        @user = User.create!(@attr)
+      @attr = Factory.attributes_for(:user)
+      @user = User.create!(@attr)
       end
 
       it "should sign the user in" do

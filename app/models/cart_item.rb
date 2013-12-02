@@ -20,6 +20,10 @@ class CartItem < ActiveRecord::Base
  		item.price * quantity
  	end
 
+  def markup_price
+    item.markup_price * quantity
+  end
+
  	def quantity_greater_than_minorder
  		errors.add(:quantity, "entered is smaller than the minimum order which is  #{item.minorder}") unless item.minorder <= quantity
   end
